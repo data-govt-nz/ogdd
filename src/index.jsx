@@ -10,42 +10,48 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // hot reload for development
 import { AppContainer } from 'react-hot-loader';
-
 // redux deps
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
+// simple hash router: react-hash-route
+import {routeSetup, getHash, getHashParameters} from 'react-hash-route';
 
-import reducer from './reducers';
+import { Home, About } from './containers';
+import configureStore from './store';
+
 import App from './App';
+
+import { queryObject } from './utils/queries';
 
 import './style.scss';
 
-const middleware = [thunk];
-if (process.env.NODE_ENV !== 'production') middleware.push(logger);
-
-const store = createStore(
-  reducer,
-  applyMiddleware(...middleware),
-);
-
+const store = configureStore();
 const root = document.getElementById('root');
 
-const render = (Component, config) => {
+const componentHashMap = {
+  home: <Home />,
+  about: <About />,
+};
+
+const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
-        <Component config={config} />
+        <Component
+          component={componentHashMap[getHash() || 'home']}
+          location={{
+            path: getHash(),
+            query: queryObject(getHashParameters()),
+          }}
+        />
       </Provider>
     </AppContainer>,
     root,
   );
 };
 
-export const init = (config) => render(App, config);
+// export const init = (config) => render(App);
+routeSetup(() => render(App));
 
-// if (module.hot) {
-//   module.hot.accept('./App', () => { render(App); });
-//   module.hot.accept('./reducers', () => { store.replaceReducer(reducer); });
-// }
+if (module.hot) {
+  module.hot.accept('./App', () => { routeSetup(() => render(App)); });
+}

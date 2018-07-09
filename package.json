@@ -37,6 +37,7 @@
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "cross-env": "^5.2.0",
@@ -63,12 +64,13 @@
     "webpack-dev-server": "^2.11.2"
   },
   "dependencies": {
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-hash-route": "^1.1.0",
     "react-redux": "^5.0.7",
-    "react-router-dom": "^4.3.1",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.3.0"
+    "redux-saga": "^0.16.0"
   }
 }
