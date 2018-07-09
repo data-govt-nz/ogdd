@@ -82,9 +82,11 @@ App.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  // remember location in store
   updateLocation: (location) => {
     dispatch(actions.updateLocation(location));
   },
+  // navigate to location
   navigate: (location, args) => {
     dispatch(actions.navigate(location, args))
   }
