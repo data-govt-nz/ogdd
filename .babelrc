@@ -1,9 +1,9 @@
 { "presets": [ "react", ["env", { "modules": false }] ],
-  "plugins": [ "react-hot-loader/babel", "babel-plugin-transform-object-rest-spread", "dynamic-import-node"],
+  "plugins": [ "react-hot-loader/babel", "babel-plugin-transform-object-rest-spread", "dynamic-import-node", "babel-plugin-lodash"],
   "env": {
     "test": {
       "presets": ["react", ["env", { "modules": "commonjs" }]],
-      "plugins": ["transform-es2015-modules-commonjs"]
+      "plugins": ["transform-es2015-modules-commonjs", "lodash"]
     }
   }
 }

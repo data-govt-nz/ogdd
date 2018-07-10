@@ -1,5 +1,6 @@
-import { reduce, find } from 'lodash/collection';
-import { extend } from 'lodash/object';
+import reduce from 'lodash/reduce';
+import find from 'lodash/find';
+import extend from 'lodash/extend';
 
 // get search query in object form from params array as provided by router function
 export const queryObject = (params) => {

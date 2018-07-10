@@ -1,7 +1,7 @@
 import { call, takeEvery } from 'redux-saga/effects';
 import { route, getHash, getHashParameters } from 'react-hash-route';
 
-import { extend } from 'lodash/object';
+import extend from 'lodash/extend';
 
 import { queryObject, queryString, routeString } from 'utils/queries';
 

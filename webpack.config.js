@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const dev = process.env.NODE_ENV !== 'production' && process.argv.indexOf('-p') === -1;
 
@@ -21,9 +23,12 @@ const UglifyJsPluginConfig = new webpack.optimize.UglifyJsPlugin({
   },
   compress: {
     screw_ie8: true,
+    warnings: false,
   },
   comments: false,
 });
+
+const BundleAnalyzerPluginConfig = new BundleAnalyzerPlugin();
 
 module.exports = {
   devServer: {
@@ -42,7 +47,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         loaders: ['babel-loader'],
       },
@@ -74,5 +79,11 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
   ] :
-  [HTMLWebpackPluginConfig, DefinePluginConfig, UglifyJsPluginConfig],
+  [
+    HTMLWebpackPluginConfig,
+    DefinePluginConfig,
+    UglifyJsPluginConfig,
+    BundleAnalyzerPluginConfig,
+    new LodashModuleReplacementPlugin(),
+  ],
 };

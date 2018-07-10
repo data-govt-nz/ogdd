@@ -3,6 +3,7 @@ logs
 *.log
 npm-debug.log*
 coverage
+stats.json
 .DS_STORE
 
 # Dependency directories
