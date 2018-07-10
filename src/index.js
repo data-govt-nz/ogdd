@@ -21,7 +21,8 @@ import App from 'containers/App';
 
 import { queryObject } from 'utils/queries';
 
-import 'style.scss';
+// Import CSS reset and Global Styles
+import './global-styles';
 
 const store = configureStore();
 const root = document.getElementById('root');

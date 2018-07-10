@@ -21,11 +21,13 @@ export const queryObject = (params) => {
     : {};
 };
 
+// get search query in string form from query object
 export const queryString = (query) =>
   reduce(query, (memo, value, key) =>
     `${memo}${memo.length > 0 ? '&' : ''}${key}=${value}`
   , '');
 
+// get route in string form from path and query strings
 export const routeString = (path, query) => {
   const q = query.length > 0 ? (`/?${query}`) : '';
   return `${path}${q}`;

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Label from 'components/Label';
 
-import reactLogo from 'assets/React-icon.png';
+// import reactLogo from 'assets/React-icon.png';
+// <img alt="react logo" src={reactLogo} />
 
 import { updateLocation, navigate } from './actions';
 
@@ -13,6 +14,7 @@ import { updateLocation, navigate } from './actions';
  */
 class App extends React.Component {
 
+  // remember current hash location in store
   componentWillReceiveProps(nextProps) {
     if (nextProps.location) {
       this.props.updateLocation(nextProps.location);
@@ -20,25 +22,24 @@ class App extends React.Component {
   }
 
   render() {
-    // const { component, navigate } = this.props;
+    const { nav } = this.props;
     return (
-      <main className="container">
+      <main>
         <div>
           <h1>
             <Label id="app.title" />
           </h1>
-          <img className="container__image" alt="react logo" src={reactLogo} />
           <p><Label id="test" /></p>
         </div>
-        <ul className="left">
+        <ul>
           <li>
-            <a href="#home" onClick={() => navigate('home')}>Home</a>
+            <a href="#home" onClick={() => nav('home')}>Home</a>
           </li>
           <li>
-            <a href="#about" onClick={() => navigate('about')}>About</a>
+            <a href="#about" onClick={() => nav('about')}>About</a>
           </li>
           <li>
-            <a href="#about/?a=1" key="sdfhadf" onClick={() => navigate({ path: 'about', query: { a: 1 } }, { remove: true })}>Query test a=1</a>
+            <a href="#about/?a=1" key="sdfhadf" onClick={() => nav({ path: 'about', query: { a: 1 } }, { remove: true })}>Query test a=1</a>
           </li>
         </ul>
       </main>
@@ -50,7 +51,7 @@ class App extends React.Component {
 App.propTypes = {
   location: PropTypes.object.isRequired,
   // component: PropTypes.element.isRequired,
-  // navigate: PropTypes.func.isRequired,
+  nav: PropTypes.func.isRequired,
   updateLocation: PropTypes.func.isRequired,
 };
 
@@ -60,7 +61,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(updateLocation(location));
   },
   // navigate to location
-  navigate: (location, args) => {
+  nav: (location, args) => {
     dispatch(navigate(location, args));
   },
 });
