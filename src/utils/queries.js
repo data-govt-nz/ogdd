@@ -8,22 +8,24 @@ export const queryObject = (params) => {
     find(params, (param) => param[0] === '?');
   // convert string to array
   const currentQueryArray =
-    currentQueryString && currentQueryString.replace('?','').split('&');
+    currentQueryString && currentQueryString.replace('?', '').split('&');
   // convert array to object
   return currentQueryArray
     ? reduce(currentQueryArray, (memo, value) =>
       extend(memo, value.split('=').length > 1
-        ? {[value.split('=')[0]]: value.split('=')[1]}
-        : {[value.split('=')[0]]: true}
+        ? { [value.split('=')[0]]: value.split('=')[1] }
+        : { [value.split('=')[0]]: true }
       )
     , {})
     : {};
-}
+};
 
 export const queryString = (query) =>
   reduce(query, (memo, value, key) =>
     `${memo}${memo.length > 0 ? '&' : ''}${key}=${value}`
   , '');
 
-export const routeString = (path, query) =>
-  `${path}${query.length > 0 ? ('/?' + query) : ''}`;
+export const routeString = (path, query) => {
+  const q = query.length > 0 ? (`/?${query}`) : '';
+  return `${path}${q}`;
+};

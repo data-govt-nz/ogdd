@@ -13,7 +13,7 @@ import { AppContainer } from 'react-hot-loader';
 // redux deps
 import { Provider } from 'react-redux';
 // simple hash router: react-hash-route
-import {routeSetup, getHash, getHashParameters} from 'react-hash-route';
+import { routeSetup, getHash, getHashParameters } from 'react-hash-route';
 
 import configureStore from 'store';
 
@@ -25,10 +25,10 @@ import { DEFAULT_LOCALE } from 'containers/LanguageProvider/constants';
 
 import { queryObject } from 'utils/queries';
 
+import 'style.scss';
+
 // Import i18n messages
 import { translationMessages } from './i18n';
-
-import 'style.scss';
 
 const store = configureStore();
 const root = document.getElementById('root');

@@ -1,7 +1,4 @@
 
-import { reduce, find } from 'lodash/collection';
-import { extend } from 'lodash/object';
-
 import { LOCATION_UPDATE, NAVIGATE } from './constants';
 
 /**

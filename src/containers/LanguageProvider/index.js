@@ -30,6 +30,11 @@ LanguageProvider.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
+/**
+ * map dispatch to props
+ * @param {function} dispatch the dispatch function
+ * @return {void}
+ */
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,

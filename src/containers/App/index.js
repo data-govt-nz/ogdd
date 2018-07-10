@@ -23,7 +23,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { component, navigate } = this.props;
+    // const { component, navigate } = this.props;
     return (
       <main className="container">
         <div>
@@ -35,20 +35,20 @@ class App extends React.Component {
         </div>
         <ul className="left">
           <li>
-            <a key="home" onClick={() => navigate('home')}>Home</a>
+            <a href="#home" onClick={() => navigate('home')}>Home</a>
           </li>
           <li>
-            <a key="about" onClick={() => navigate('about')}>About</a>
+            <a href="#about" onClick={() => navigate('about')}>About</a>
           </li>
           <li>
-            <a key="sdfhadf" onClick={() => navigate({ path: 'about', query: { a: 1 } }, { remove: true })}>Query test a=1</a>
+            <a href="#about/?a=1" key="sdfhadf" onClick={() => navigate({ path: 'about', query: { a: 1 } }, { remove: true })}>Query test a=1</a>
           </li>
         </ul>
       </main>
     );
-  };
-};
-//
+  }
+}
+
 
 App.propTypes = {
   location: PropTypes.object.isRequired,
@@ -64,8 +64,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
   // navigate to location
   navigate: (location, args) => {
-    dispatch(navigate(location, args))
-  }
+    dispatch(navigate(location, args));
+  },
 });
 
 export default connect(null, mapDispatchToProps)(App);

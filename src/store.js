@@ -7,6 +7,11 @@ import reducer from 'containers/App/reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 
+/**
+ * Set up app store
+ * @param {object} initialState the initial state of the store
+ * @return {number} updated state
+ */
 export default function configureStore(initialState = {}) {
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
