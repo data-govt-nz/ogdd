@@ -1,19 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import Label from 'components/Label';
 
 import reactLogo from 'assets/React-icon.png';
 
 import { updateLocation, navigate } from './actions';
 
-import messages from './messages';
-
 /**
  *
  * @return {Component} react base component
  */
-
 class App extends React.Component {
 
   componentWillReceiveProps(nextProps) {
@@ -28,10 +25,10 @@ class App extends React.Component {
       <main className="container">
         <div>
           <h1>
-            <FormattedMessage {...messages.app.title} />
+            <Label id="app.title" />
           </h1>
           <img className="container__image" alt="react logo" src={reactLogo} />
-          <p>If you see this everything is working!</p>
+          <p><Label id="test" /></p>
         </div>
         <ul className="left">
           <li>
@@ -52,8 +49,8 @@ class App extends React.Component {
 
 App.propTypes = {
   location: PropTypes.object.isRequired,
-  component: PropTypes.element,
-  navigate: PropTypes.func.isRequired,
+  // component: PropTypes.element.isRequired,
+  // navigate: PropTypes.func.isRequired,
   updateLocation: PropTypes.func.isRequired,
 };
 

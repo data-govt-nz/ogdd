@@ -60,6 +60,10 @@ module.exports = {
         // inline all images to solve path issues
         loader: 'url-loader',
       },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
     ],
   },
   resolve: {
