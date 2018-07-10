@@ -1,4 +1,4 @@
-import * as actions from '../actions/types';
+import { LOCATION_UPDATE } from './constants';
 
 /**
  * Manages the counter value
@@ -10,9 +10,8 @@ import * as actions from '../actions/types';
  * @return {number} updated state
  */
 export default function routeReducer(state = {}, action) {
-  console.log('action', action)
   switch (action.type) {
-    case actions.LOCATION_UPDATE:
+    case LOCATION_UPDATE:
       return action.location || {};
     default:
       return state;

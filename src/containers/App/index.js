@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 
-import * as actions from './actions';
+import reactLogo from 'assets/React-icon.png';
 
-import reactLogo from './assets/React-icon.png';
+import { updateLocation, navigate } from './actions';
+
+import messages from './messages';
 
 /**
  *
@@ -24,7 +27,9 @@ class App extends React.Component {
     return (
       <main className="container">
         <div>
-          <h1>hello redux!</h1>
+          <h1>
+            <FormattedMessage {...messages.app.title} />
+          </h1>
           <img className="container__image" alt="react logo" src={reactLogo} />
           <p>If you see this everything is working!</p>
         </div>
@@ -36,39 +41,9 @@ class App extends React.Component {
             <a key="about" onClick={() => navigate('about')}>About</a>
           </li>
           <li>
-            <a
-              key="sdfhadf"
-              onClick={() => navigate({
-                path: 'about',
-                query: { a: 1 },
-              }, {
-                remove: true,
-              })}
-            >
-              Query test a=1
-            </a>
-          </li>
-          <li>
-            <a
-              key="sdfhadf"
-              onClick={() => navigate({ query: { a: 2 } })}
-            >
-              Query test a=2
-            </a>
-          </li>
-          <li>
-            <a
-              key="sdfhadf"
-              onClick={() => navigate(
-                { query: {b: true} },
-                { remove: false }
-              )}
-            >
-              Query test b=3
-            </a>
+            <a key="sdfhadf" onClick={() => navigate({ path: 'about', query: { a: 1 } }, { remove: true })}>Query test a=1</a>
           </li>
         </ul>
-        {component}
       </main>
     );
   };
@@ -77,18 +52,19 @@ class App extends React.Component {
 
 App.propTypes = {
   location: PropTypes.object.isRequired,
-  component: PropTypes.element.isRequired,
-  navigate: PropTypes.func.isRequired
+  component: PropTypes.element,
+  navigate: PropTypes.func.isRequired,
+  updateLocation: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   // remember location in store
   updateLocation: (location) => {
-    dispatch(actions.updateLocation(location));
+    dispatch(updateLocation(location));
   },
   // navigate to location
   navigate: (location, args) => {
-    dispatch(actions.navigate(location, args))
+    dispatch(navigate(location, args))
   }
 });
 

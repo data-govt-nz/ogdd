@@ -1,5 +1,5 @@
 { "presets": [ "react", ["env", { "modules": false }] ],
-  "plugins": [ "react-hot-loader/babel", "babel-plugin-transform-object-rest-spread" ],
+  "plugins": [ "react-hot-loader/babel", "babel-plugin-transform-object-rest-spread", "dynamic-import-node"],
   "env": {
     "test": {
       "presets": ["react", ["env", { "modules": "commonjs" }]],

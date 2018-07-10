@@ -1,6 +1,6 @@
 {
-  "name": "app-redux",
-  "version": "1.0.0",
+  "name": "ogdd",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -35,6 +35,8 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.4",
+    "babel-plugin-dynamic-import-node": "^2.0.0",
+    "babel-plugin-react-intl": "^2.4.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
@@ -64,13 +66,16 @@
     "webpack-dev-server": "^2.11.2"
   },
   "dependencies": {
+    "intl": "^1.2.5",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-hash-route": "^1.1.0",
+    "react-intl": "^2.4.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "reselect": "^3.0.1"
   }
 }

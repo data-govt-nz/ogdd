@@ -2,8 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 
-import appSagas from './sagas/appSagas';
-import reducer from './reducers';
+import appSagas from 'containers/App/sagas';
+import reducer from 'containers/App/reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -40,7 +40,7 @@ export default function configureStore(initialState = {}) {
   store.asyncReducers = {}; // Async reducer registry
 
   if (module.hot) {
-    module.hot.accept('./reducers', () => store.replaceReducer(reducer));
+    module.hot.accept('containers/App/reducers', () => store.replaceReducer(reducer));
   }
 
   return store;

@@ -3,9 +3,9 @@ import {route, getHash, getHashParameters} from 'react-hash-route';
 
 import { extend } from 'lodash/object';
 
-import { queryObject, queryString, routeString } from '../utils/queries';
+import { queryObject, queryString, routeString } from 'utils/queries';
 
-import { NAVIGATE } from '../actions/types';
+import { NAVIGATE } from './constants';
 
 export function* navigateSaga({ location, args }) {
 

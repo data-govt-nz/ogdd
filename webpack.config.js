@@ -37,7 +37,7 @@ module.exports = {
   entry: [
     'babel-polyfill',
     'react-hot-loader/patch',
-    path.join(__dirname, '/src/index.jsx'),
+    path.join(__dirname, '/src/index.js'),
   ],
   module: {
     loaders: [
@@ -59,6 +59,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
   output: {
     filename: 'index.js',
