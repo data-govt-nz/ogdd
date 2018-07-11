@@ -18,6 +18,8 @@ import { routeSetup, getHash, getHashParameters } from 'react-hash-route';
 import configureStore from 'store';
 
 import App from 'containers/App';
+import Page from 'containers/Page';
+import { updateLocation } from 'containers/App/actions';
 
 import { queryObject } from 'utils/queries';
 
@@ -25,24 +27,29 @@ import { queryObject } from 'utils/queries';
 import './global-styles';
 
 const store = configureStore();
-const root = document.getElementById('root');
 
-const componentHashMap = {};
+const componentHashMap = {
+  '': <Page />,
+  insights: <Page />,
+  services: <Page />,
+  assets: <Page />,
+};
 
 const render = (Component) => {
+  // remember current hash location in store
+  store.dispatch(updateLocation({
+    path: getHash(),
+    query: queryObject(getHashParameters()),
+  }));
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
         <Component
-          component={componentHashMap[getHash() || 'home']}
-          location={{
-            path: getHash(),
-            query: queryObject(getHashParameters()),
-          }}
+          component={componentHashMap[getHash() || '']}
         />
       </Provider>
     </AppContainer>,
-    root,
+    document.getElementById('root'),
   );
 };
 
@@ -52,5 +59,5 @@ const start = () => routeSetup(() => render(App));
 start();
 
 if (module.hot) {
-  module.hot.accept('containers/App/', () => start());
+  module.hot.accept('/', () => start());
 }

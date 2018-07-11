@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-// import logger from 'redux-logger';
+import logger from 'redux-logger';
 
 import appSagas from 'containers/App/sagas';
-import reducer from 'containers/App/reducers';
+import createReducer from 'containers/App/reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -17,7 +17,7 @@ export default function configureStore(initialState = {}) {
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
   const middlewares = [sagaMiddleware];
-  // if (process.env.NODE_ENV !== 'production') middlewares.push(logger);
+  if (process.env.NODE_ENV !== 'production') middlewares.push(logger);
 
   const enhancers = [
     applyMiddleware(...middlewares),
@@ -33,7 +33,7 @@ export default function configureStore(initialState = {}) {
   /* eslint-enable */
 
   const store = createStore(
-    reducer,
+    createReducer(),
     initialState,
     composeEnhancers(...enhancers)
   );
@@ -45,7 +45,7 @@ export default function configureStore(initialState = {}) {
   store.asyncReducers = {}; // Async reducer registry
 
   if (module.hot) {
-    module.hot.accept('containers/App/reducers', () => store.replaceReducer(reducer));
+    module.hot.accept('containers/App/reducers', () => store.replaceReducer(createReducer));
   }
 
   return store;

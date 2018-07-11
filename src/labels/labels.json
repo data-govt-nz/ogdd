@@ -1,4 +1,7 @@
 {
   "app.title": "Open Government Data Survey",
-  "error.label-undefined": "Error: label undefined"
+  "nav.focus-areas": "Focus Areas",
+  "nav.insights": "Key Insights",
+  "nav.services": "Data Services",
+  "nav.assets": "Data Assets"
 }

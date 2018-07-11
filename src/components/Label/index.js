@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-import labels from 'labels/labels.json';
+import getLabel from 'utils/get-label';
 
-const Label = ({ id }) => labels[id] || labels['error.label-undefined'];
+const Label = ({ id }) => getLabel(id);
 
 Label.propTypes = {
   id: PropTypes.string.isRequired,
