@@ -38,7 +38,7 @@ const Link = styled.button`
 
 const Header = ({ nav, navItems, location }) => (
   <Component>
-    <Logo alt={getLabel('app.title')} src={reactLogo} />
+    <Logo alt={getLabel('app.title')} src={reactLogo} role="presentation" />
     <Title>
       <h1><Label id="app.title" /></h1>
     </Title>

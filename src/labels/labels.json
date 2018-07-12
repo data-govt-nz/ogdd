@@ -15,5 +15,6 @@
   "component.notFound.title": "Page not found",
   "component.notFound.metaDescription": "Page not found",
   "screenreader.navActive": "Currently selected page",
-  "screenreader.navigationOccured": "Navigation occured"
+  "screenreader.navigationOccured": "Navigation occured",
+  "screenreader.skipToContent": "Skip to main content"
 }
