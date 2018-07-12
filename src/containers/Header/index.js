@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
 
 import Label from 'components/Label';
+import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 
 import { navigate } from 'containers/App/actions';
 import { selectLocation } from 'containers/App/selectors';
@@ -26,10 +27,10 @@ const Title = styled.div`
 const Menu = styled.nav`
   display: inline-block;
 `;
-const Link = styled.a`
+const Link = styled.button`
   display: inline-block;
   padding: 0 1em;
-  
+
   ${(props) => props.active && css`
     font-weight: bold;
   `}
@@ -41,15 +42,27 @@ const Header = ({ nav, navItems, location }) => (
     <Title>
       <h1><Label id="app.title" /></h1>
     </Title>
-    <Menu>
+    <Menu role="menu">
       {
         navItems.map((item) => (
-          <Link active={location.path === item.path} key={item.path} href={`#${item.path}`} onClick={() => nav(item.path)}>
+          <Link
+            role="menuitem"
+            key={item.path}
+            active={location.path === item.path}
+            onClick={() => nav(item.path)}
+            title={getLabel(item.label)}
+          >
             <Label id={item.label} />
+            { location.path === item.path &&
+              <ScreenReaderOnly id="currentItem">
+                <Label id="screenreader.navActive" />
+              </ScreenReaderOnly>
+            }
           </Link>
         ))
       }
     </Menu>
+
   </Component>
 );
 

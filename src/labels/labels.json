@@ -1,7 +1,19 @@
 {
   "app.title": "Open Government Data Survey",
   "component.focus-areas.nav": "Focus Areas",
+  "component.focus-areas.title": "Focus Areas",
+  "component.focus-areas.metaDescription": "Focus Areas component",
   "component.insights.nav": "Key Insights",
+  "component.insights.title": "Key Insights",
+  "component.insights.metaDescription": "Key Insights component",
   "component.services.nav": "Data Services",
-  "component.assets.nav": "Data Assets"
+  "component.services.title": "Data Services",
+  "component.services.metaDescription": "Data Services component",
+  "component.assets.nav": "Data Assets",
+  "component.assets.title": "Data Assets",
+  "component.assets.metaDescription": "Data Assets component",
+  "component.notFound.title": "Page not found",
+  "component.notFound.metaDescription": "Page not found",
+  "screenreader.navActive": "Currently selected page",
+  "screenreader.navigationOccured": "Navigation occured"
 }

@@ -18,7 +18,12 @@ import { routeSetup, getHash, getHashParameters } from 'react-hash-route';
 import configureStore from 'store';
 
 import App from 'containers/App';
-import Page from 'containers/Page';
+import PageFocusAreas from 'containers/PageFocusAreas';
+import PageInsights from 'containers/PageInsights';
+import PageServices from 'containers/PageServices';
+import PageAssets from 'containers/PageAssets';
+import PageNotFound from 'containers/PageNotFound';
+
 import { updateLocation } from 'containers/App/actions';
 
 import { queryObject } from 'utils/queries';
@@ -31,11 +36,11 @@ const store = configureStore();
 // map hash path to react component
 // see also containers/App/constants NAVITEMS
 const pathComponentMap = {
-  '': <Page />, // focus areas
-  insights: <Page />,
-  services: <Page />,
-  assets: <Page />,
-  'not-found': <Page />,
+  '': <PageFocusAreas />, // focus areas
+  insights: <PageInsights />,
+  services: <PageServices />,
+  assets: <PageAssets />,
+  'not-found': <PageNotFound />,
 };
 
 const render = (Component) => {
@@ -48,7 +53,9 @@ const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
-        <Component component={pathComponentMap[getHash() || ''] || pathComponentMap['not-found']} />
+        <Component
+          component={pathComponentMap[getHash() || ''] || pathComponentMap['not-found']}
+        />
       </Provider>
     </AppContainer>,
     document.getElementById('root'),
