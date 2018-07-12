@@ -28,11 +28,14 @@ import './global-styles';
 
 const store = configureStore();
 
-const componentHashMap = {
-  '': <Page />,
+// map hash path to react component
+// see also containers/App/constants NAVITEMS
+const pathComponentMap = {
+  '': <Page />, // focus areas
   insights: <Page />,
   services: <Page />,
   assets: <Page />,
+  'not-found': <Page />,
 };
 
 const render = (Component) => {
@@ -41,12 +44,11 @@ const render = (Component) => {
     path: getHash(),
     query: queryObject(getHashParameters()),
   }));
+  // render DOM
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
-        <Component
-          component={componentHashMap[getHash() || '']}
-        />
+        <Component component={pathComponentMap[getHash() || ''] || pathComponentMap['not-found']} />
       </Provider>
     </AppContainer>,
     document.getElementById('root'),

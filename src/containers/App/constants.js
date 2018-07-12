@@ -6,18 +6,23 @@ export const NAVIGATE = 'NAVIGATE';
 export const NAVITEMS = [
   {
     path: '',
-    label: 'nav.focus-areas',
+    label: 'component.focus-areas.nav',
   },
   {
     path: 'insights',
-    label: 'nav.insights',
+    label: 'component.insights.nav',
   },
   {
     path: 'services',
-    label: 'nav.services',
+    label: 'component.services.nav',
   },
   {
     path: 'assets',
-    label: 'nav.assets',
+    label: 'component.assets.nav',
   },
 ];
+
+const constants = {
+  NAVITEMS,
+};
+export default constants;

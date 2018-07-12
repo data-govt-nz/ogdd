@@ -1,7 +1,7 @@
 {
   "app.title": "Open Government Data Survey",
-  "nav.focus-areas": "Focus Areas",
-  "nav.insights": "Key Insights",
-  "nav.services": "Data Services",
-  "nav.assets": "Data Assets"
+  "component.focus-areas.nav": "Focus Areas",
+  "component.insights.nav": "Key Insights",
+  "component.services.nav": "Data Services",
+  "component.assets.nav": "Data Assets"
 }
