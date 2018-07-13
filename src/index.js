@@ -14,6 +14,8 @@ import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 // simple hash router: react-hash-route
 import { routeSetup, getHash, getHashParameters } from 'react-hash-route';
+// Theme provider
+import { ThemeProvider } from 'styled-components';
 
 import configureStore from 'store';
 
@@ -50,12 +52,23 @@ const render = (Component) => {
     query: queryObject(getHashParameters()),
   }));
   // render DOM
+  // breakpoints:
+  // < 720px (45em): small (mobile)
+  // > 720px (45em): small (tablet portrait)
+  // >= 1008px (63em): medium (tablet landscape, desktop)
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
-        <Component
-          component={pathComponentMap[getHash() || ''] || pathComponentMap['not-found']}
-        />
+        <ThemeProvider
+          theme={{
+            breakpoints: ['45em', '63em'],
+            gutter: ['4px', '6px', '8px'],
+          }}
+        >
+          <Component
+            component={pathComponentMap[getHash() || ''] || pathComponentMap['not-found']}
+          />
+        </ThemeProvider>
       </Provider>
     </AppContainer>,
     document.getElementById('root'),

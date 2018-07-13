@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { LiveAnnouncer, LiveMessage } from 'react-aria-live';
-
 import getLabel from 'utils/get-label';
 
 import Label from 'components/Label';
-import Header from 'containers/Header';
+import Header from 'components/Header';
 import SkipContent from 'styles/SkipContent';
 
 import { selectAnnouncement } from 'containers/App/selectors';
@@ -21,6 +20,9 @@ class App extends React.Component {
     super(props);
     this.container = React.createRef();
     this.main = React.createRef();
+    this.state = {
+      windowWidth: window.innerWidth,
+    };
   }
   componentDidMount() {
     this.focus();
@@ -28,7 +30,6 @@ class App extends React.Component {
   componentDidUpdate() {
     this.focus();
   }
-
   focus() {
     // Explicitly focus the app container
     // Note: we're accessing "current" to get the DOM node
