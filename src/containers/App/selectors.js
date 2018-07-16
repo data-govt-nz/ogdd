@@ -19,14 +19,15 @@ export const selectData = createSelector(
   (data, key) => data.get(key) && data.getIn([key, 'data'])
 );
 
-export const selectDataSurveys = createSelector(
+// surveys
+export const selectSurveys = createSelector(
   (state) => selectData(state, 'surveys'),
   (data) => data
 );
 
 export const selectSurvey = createSelector(
-  selectDataSurveys,
-  (state, args) => args,
+  selectSurveys,
+  (state, args) => args, // { key, value }
   (data, args) => data && data.find((item) => attributesEqual(item.get(args.key), args.value))
 );
 
@@ -36,4 +37,40 @@ export const selectAgencyCount = createSelector(
     value,
   }),
   (data) => data && data.get('agencies_total')
+);
+
+// subjects
+export const selectSubjects = createSelector(
+  (state) => selectData(state, 'subjects'),
+  (data) => data
+);
+
+export const selectSubject = createSelector(
+  selectSubjects,
+  (state, args) => args, // { key, value }
+  (data, args) => data && data.find((item) => attributesEqual(item.get(args.key), args.value))
+);
+
+// indicators
+export const selectIndicators = createSelector(
+  (state) => selectData(state, 'indicators'),
+  (data) => data
+);
+
+export const selectIndicator = createSelector(
+  selectIndicators,
+  (state, args) => args, // { key, value }
+  (data, args) => data && data.find((item) => attributesEqual(item.get(args.key), args.value))
+);
+
+// outcomes
+export const selectOutcomes = createSelector(
+  (state) => selectData(state, 'outcomes'),
+  (data) => data
+);
+
+// insights
+export const selectInsights = createSelector(
+  (state) => selectData(state, 'insights'),
+  (data) => data
 );
