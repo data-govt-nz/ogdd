@@ -41,7 +41,7 @@ export function* navigateSaga({ location, args }) {
 }
 
 export function* loadDataSaga({ key, value }) {
-  const requestedAt = yield select(selectRequestedAt, { key });
+  const requestedAt = yield select(selectRequestedAt, key);
   if (!requestedAt) {
     try {
       // First record that we are requesting
