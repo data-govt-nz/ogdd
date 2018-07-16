@@ -1,0 +1,12 @@
+[
+  {
+    "survey_id": 2017,
+    "date": 20170801,
+    "agencies_total": 29
+  },
+  {
+    "survey_id": 2018,
+    "date": 20180801,
+    "agencies_total": 38
+  }
+]

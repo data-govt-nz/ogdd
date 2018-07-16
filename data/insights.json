@@ -1,0 +1,65 @@
+[
+  {
+    "survey_id": 2017,
+    "value": 90,
+    "text": "have published open data",
+    "indicator_id": "q02",
+    "outcome_answers": "yes"
+  },
+  {
+    "survey_id": 2017,
+    "value": 72,
+    "text": "work with orther organisations in their sector to promote the value of specific datasets or open data in general",
+    "indicator_id": "q26",
+    "outcome_answers": "yes"
+  },
+  {
+    "survey_id": 2017,
+    "value": 62,
+    "text": "do not or are note sure they have a standard process to ensure they have the right to publish data provided by or derived from third parties",
+    "indicator_id": "q28",
+    "outcome_answers": "no, not_sure"
+  },
+  {
+    "survey_id": 2017,
+    "value": 34,
+    "text": "would like to develop a process to act on feedback",
+    "indicator_id": "q14",
+    "outcome_answers": "like_to"
+  },
+  {
+    "survey_id": 2017,
+    "value": 72,
+    "text": "do not or are not sure they tailor contracts or procurement activties to allow the data to be released openly",
+    "indicator_id": "q33",
+    "outcome_answers": "no, not_sure"
+  },
+  {
+    "survey_id": 2017,
+    "value": 72,
+    "text": "do not or are not sure they have a checklist or template that guides the creation of dataset documentation",
+    "indicator_id": "q23",
+    "outcome_answers": "no, not_sure"
+  },
+  {
+    "survey_id": 2017,
+    "value": 31,
+    "text": "would like to develop a catalogue of its data assets",
+    "indicator_id": "q36",
+    "outcome_answers": "like_to"
+  },
+  {
+    "survey_id": 2017,
+    "value": 86,
+    "text": "do not have open data awareness training as a standard part of staff introduction",
+    "indicator_id": "q19",
+    "outcome_answers": "no"
+  },
+  {
+    "survey_id": 2017,
+    "value": 97,
+    "text": "do not or are not sure they track financial benefits of open data publication and reuse",
+    "indicator_id": "q30",
+    "outcome_answers": "no, not_sure"
+  }
+]

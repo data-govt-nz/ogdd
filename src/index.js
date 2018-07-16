@@ -35,6 +35,13 @@ import './global-styles';
 
 const store = configureStore();
 
+// [
+//   {
+//     source: 'json',
+//     filename:
+//   },
+// ]
+
 // map hash path to react component
 // see also containers/App/constants NAVITEMS
 const pathComponentMap = {

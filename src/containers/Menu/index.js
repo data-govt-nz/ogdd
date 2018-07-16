@@ -64,12 +64,12 @@ const Menu = ({ nav, navItems, location, visibleMin, hiddenMin }) => (
         <Link
           role="menuitem"
           key={item.path}
-          active={location.path === item.path}
+          active={location.get('path') === item.path}
           onClick={() => nav(item.path)}
           title={getLabel(item.label)}
         >
           <Label id={item.label} />
-          { location.path === item.path &&
+          { location.get('path') === item.path &&
             <ScreenReaderOnly id="currentItem">
               <Label id="screenreader.navActive" />
             </ScreenReaderOnly>

@@ -1,11 +1,14 @@
-import { call, takeEvery } from 'redux-saga/effects';
+import { call, takeEvery, select, put } from 'redux-saga/effects';
 import { route, getHash, getHashParameters } from 'react-hash-route';
+import 'whatwg-fetch';
 
 import extend from 'lodash/extend';
 
 import { queryObject, queryString, routeString } from 'utils/queries';
 
-import { NAVIGATE } from './constants';
+import { NAVIGATE, LOAD_DATA } from './constants';
+import { selectRequestedAt } from './selectors';
+import { dataRequested, loadError, dataLoaded } from './actions';
 
 /**
  * Navigate to location, calls router
@@ -37,6 +40,36 @@ export function* navigateSaga({ location, args }) {
   yield call(route, routeString(path, query));
 }
 
+export function* loadDataSaga({ key, value }) {
+  const requestedAt = yield select(selectRequestedAt, { key });
+  if (!requestedAt) {
+    try {
+      // First record that we are requesting
+      yield put(dataRequested(key, Date.now()));
+      if (value.source === 'json') {
+        // fetch json file
+        const path = `${value.path}${value.filename}`;
+        const response = yield fetch(
+          window.global.OGDD_JS_PATH
+          ? `${window.global.OGDD_JS_PATH}${path}`
+          : path
+        );
+        const responseBody = yield response.json();
+        if (responseBody) {
+          yield put(dataLoaded(key, responseBody));
+        }
+      }
+      if (value.source === 'api') {
+        // TODO: fetch data from data.govt api
+      }
+    } catch (err) {
+      // Whoops Save error
+      yield put(loadError(err, key));
+      // Clear the request time on error, This will cause us to try again next time, which we probably want to do?
+      yield put(dataRequested(key, null));
+    }
+  }
+}
 
 /**
  * Root saga manages watcher lifecycle
@@ -44,4 +77,5 @@ export function* navigateSaga({ location, args }) {
  */
 export default function* rootSaga() {
   yield takeEvery(NAVIGATE, navigateSaga);
+  yield takeEvery(LOAD_DATA, loadDataSaga);
 }

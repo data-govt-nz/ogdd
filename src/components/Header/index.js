@@ -7,7 +7,6 @@ import Label from 'components/Label';
 import { BREAKPOINTS } from 'containers/App/constants';
 import Menu from 'containers/Menu';
 
-
 import getLabel from 'utils/get-label';
 
 import reactLogo from 'assets/React-icon.png';

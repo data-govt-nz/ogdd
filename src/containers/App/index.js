@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { LiveAnnouncer, LiveMessage } from 'react-aria-live';
+
 import getLabel from 'utils/get-label';
 
 import Label from 'components/Label';
@@ -9,7 +10,8 @@ import Header from 'components/Header';
 import SkipContent from 'styles/SkipContent';
 
 import { selectAnnouncement } from 'containers/App/selectors';
-import { NAVITEMS } from './constants';
+import { NAVITEMS, DATA } from './constants';
+import { loadData } from './actions';
 
 /**
  *
@@ -26,6 +28,7 @@ class App extends React.Component {
   }
   componentDidMount() {
     this.focus();
+    this.props.loadData();
   }
   componentDidUpdate() {
     this.focus();
@@ -74,10 +77,19 @@ class App extends React.Component {
 App.propTypes = {
   component: PropTypes.element.isRequired,
   announcement: PropTypes.string,
+  loadData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   announcement: selectAnnouncement(state),
 });
 
-export default connect(mapStateToProps, null)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    loadData: () => {
+      Object.keys(DATA).forEach((key) => dispatch(loadData(key, DATA[key])));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
