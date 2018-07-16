@@ -22,7 +22,13 @@ export const NAVITEMS = [
   },
 ];
 
+export const BREAKPOINTS = {
+  SMALL: 0,
+  MEDIUM: 1,
+};
+
 const constants = {
   NAVITEMS,
+  BREAKPOINTS,
 };
 export default constants;

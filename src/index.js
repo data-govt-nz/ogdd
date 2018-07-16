@@ -53,8 +53,8 @@ const render = (Component) => {
   }));
   // render DOM
   // breakpoints:
-  // < 720px (45em): small (mobile)
-  // > 720px (45em): small (tablet portrait)
+  // < 720px (45em): extra-small (mobile)
+  // > XXXpx (63em): small (tablet portrait)
   // >= 1008px (63em): medium (tablet landscape, desktop)
   ReactDOM.render(
     <AppContainer>
@@ -63,6 +63,18 @@ const render = (Component) => {
           theme={{
             breakpoints: ['45em', '63em'],
             gutter: ['4px', '6px', '8px'],
+            colors: {
+              white: '#fff',
+              light: '#E7E9EB',
+              dark: '#8B969D',
+              black: '#202326',
+              fa1: '#491C8B',
+              fa2: '#AD9300',
+              fa3: '#00A2C7',
+              fa4: '#199F8B',
+              fa5: '#2956D1',
+              fa6: '#FC6128',
+            },
           }}
         >
           <Component
