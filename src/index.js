@@ -30,8 +30,13 @@ import { updateLocation } from 'containers/App/actions';
 
 import { queryObject } from 'utils/queries';
 
+// import react-vis styles
+import 'react-vis/dist/styles/legends.scss';
+import 'react-vis/dist/styles/plot.scss';
+
 // Import CSS reset and Global Styles
 import './global-styles';
+
 
 const store = configureStore();
 
