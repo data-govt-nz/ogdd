@@ -30,6 +30,10 @@ const UglifyJsPluginConfig = new webpack.optimize.UglifyJsPlugin({
 
 const BundleAnalyzerPluginConfig = new BundleAnalyzerPlugin();
 
+const LodashModuleReplacementPluginConfig = new LodashModuleReplacementPlugin({
+  collections: true,
+});
+
 module.exports = {
   devServer: {
     host: 'localhost',
@@ -86,8 +90,8 @@ module.exports = {
   [
     HTMLWebpackPluginConfig,
     DefinePluginConfig,
+    LodashModuleReplacementPluginConfig,
     UglifyJsPluginConfig,
     BundleAnalyzerPluginConfig,
-    new LodashModuleReplacementPlugin(),
   ],
 };
