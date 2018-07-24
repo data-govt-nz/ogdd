@@ -1,5 +1,6 @@
 import { call, takeEvery, select, put } from 'redux-saga/effects';
 import { route, getHash, getHashParameters } from 'react-hash-route';
+import { csvParse } from 'd3-dsv';
 import 'whatwg-fetch';
 
 import extend from 'lodash/extend';
@@ -61,6 +62,18 @@ export function* loadDataSaga({ key, value }) {
       }
       if (value.source === 'api') {
         // TODO: fetch data from data.govt api
+      }
+      if (value.source === 'csv') {
+        const path = `${value.path}${value.filename}`;
+        const response = yield fetch(
+          window.global.OGDD_JS_PATH
+          ? `${window.global.OGDD_JS_PATH}${path}`
+          : path
+        );
+        const responseBody = yield response.text();
+        if (responseBody) {
+          yield put(dataLoaded(key, csvParse(responseBody)));
+        }
       }
     } catch (err) {
       // Whoops Save error

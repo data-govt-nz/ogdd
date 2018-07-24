@@ -11,37 +11,37 @@ export const DATA = {
   surveys: {
     data: [],
     requested: null,
-    source: 'json',
+    source: 'csv',
     path: 'data/',
-    filename: 'surveys.json',
+    filename: 'surveys.csv',
   },    // id,survey_id,date,agencies_total
   subjects: {
     data: [],
     requested: null,
-    source: 'json',
+    source: 'csv',
     path: 'data/',
-    filename: 'subjects.json',
+    filename: 'subjects.csv',
   },   // id,title
   indicators: {
     data: [],
     requested: null,
-    source: 'json',
+    source: 'csv',
     path: 'data/',
-    filename: 'indicators.json',
+    filename: 'indicators.csv',
   }, // id,indicator_id,type,question_no,title,description
   insights: {
     data: [],
     requested: null,
-    source: 'json',
+    source: 'csv',
     path: 'data/',
-    filename: 'insights.json',
+    filename: 'insights.csv',
   },   // id,survey_id,value,text,indicator_id,outcome_answers
   outcomes: {
     data: [],
     requested: null,
-    source: 'json',
+    source: 'csv',
     path: 'data/',
-    filename: 'outcomes.json',
+    filename: 'outcomes.csv',
   },   // id,survey_id,subject_id,indicator_id,value,answer,answer_text
 };
 
