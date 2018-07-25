@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const marked = require('marked');
+const renderer = new marked.Renderer();
 
 const dev = process.env.NODE_ENV !== 'production' && process.argv.indexOf('-p') === -1;
 
@@ -67,6 +69,21 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json-loader',
+      },
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: 'html-loader',
+          },
+          {
+            loader: 'markdown-loader',
+            options: {
+              pedantic: true,
+              renderer,
+            },
+          },
+        ],
       },
     ],
   },

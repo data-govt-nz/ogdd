@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import { fromJS } from 'immutable';
 
 import appSagas from 'containers/App/sagas';
@@ -18,7 +18,7 @@ export default function configureStore(initialState = {}) {
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
   const middlewares = [sagaMiddleware];
-  if (process.env.NODE_ENV !== 'production') middlewares.push(logger);
+  // if (process.env.NODE_ENV !== 'production') middlewares.push(logger);
 
   const enhancers = [
     applyMiddleware(...middlewares),

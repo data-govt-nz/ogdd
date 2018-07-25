@@ -9,35 +9,35 @@ export const LOAD_ERROR = 'action.LOAD_ERROR';
 
 export const DATA = {
   surveys: {
-    data: [],
+    data: null,
     requested: null,
     source: 'csv',
     path: 'data/',
     filename: 'surveys.csv',
   },    // id,survey_id,date,agencies_total
   subjects: {
-    data: [],
+    data: null,
     requested: null,
     source: 'csv',
     path: 'data/',
     filename: 'subjects.csv',
   },   // id,title
   indicators: {
-    data: [],
+    data: null,
     requested: null,
     source: 'csv',
     path: 'data/',
     filename: 'indicators.csv',
   }, // id,indicator_id,type,question_no,title,description
   insights: {
-    data: [],
+    data: null,
     requested: null,
     source: 'csv',
     path: 'data/',
     filename: 'insights.csv',
   },   // id,survey_id,value,text,indicator_id,outcome_answers
   outcomes: {
-    data: [],
+    data: null,
     requested: null,
     source: 'csv',
     path: 'data/',
@@ -63,6 +63,12 @@ export const NAVITEMS = [
     label: 'component.assets.nav',
   },
 ];
+
+export const FOCUSAREA_INDICATOR_IDS = [
+  'fa1', 'fa2', 'fa3', 'fa4', 'fa5', 'fa6',
+];
+
+export const DEFAULT_SUBJECT_ID = 'all';
 
 export const BREAKPOINTS = {
   SMALL: 0,

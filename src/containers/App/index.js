@@ -1,17 +1,32 @@
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { LiveAnnouncer, LiveMessage } from 'react-aria-live';
+import styled from 'styled-components';
 
+// utils
 import getLabel from 'utils/get-label';
 
+// components
 import Label from 'components/Label';
 import Header from 'components/Header';
+
+// simple styles
 import SkipContent from 'styles/SkipContent';
 
-import { selectAnnouncement } from 'containers/App/selectors';
-import { NAVITEMS, DATA } from './constants';
+// App actions, selectors, constants
 import { loadData } from './actions';
+import { selectAnnouncement } from './selectors';
+import { NAVITEMS, DATA } from './constants';
+
+// component styles
+const Styled = styled.div`
+  &:focus { outline: none; }
+`;
+const Main = styled.main`
+  &:focus { outline: none; }
+`;
 
 /**
  *
@@ -46,10 +61,10 @@ class App extends React.Component {
   render() {
     const { component, announcement } = this.props;
     return (
-      <div
+      <Styled
         tabIndex="-1"
         aria-labelledby="pageTitle"
-        ref={this.container}
+        innerRef={this.container}
       >
         <LiveAnnouncer>
           <LiveMessage message={announcement} aria-live="polite" />
@@ -60,16 +75,16 @@ class App extends React.Component {
             <Label id="screenreader.skipToContent" />
           </SkipContent>
           <Header navItems={NAVITEMS} />
-          <main
+          <Main
             role="main"
-            ref={this.main}
+            innerRef={this.main}
             tabIndex="-1"
             aria-labelledby="pageTitle"
           >
             { component }
-          </main>
+          </Main>
         </LiveAnnouncer>
-      </div>
+      </Styled>
     );
   }
 }
