@@ -99,7 +99,10 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
     this.setState({ focusAreaSelected });
   }
   onFAMouseLeave() {
-    this.setState({ focusAreaSelected: null });
+    this.setState({
+      focusAreaSelected: null,
+      surveyHighlightedId: null,
+    });
   }
   onFATouch(focusAreaSelected) {
     this.setState({ focusAreaSelected, showModal: true });
@@ -140,6 +143,12 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
   render() {
     const { focusAreaIndicators, surveys, subjects } = this.props;
 
+    const surveyHighlightedId = this.state.surveyHighlightedId || (
+      this.props.surveys
+      ? this.props.surveys.last().get('survey_id')
+      : null
+    );
+
     return (
       <PageContainer>
         <Helmet>
@@ -173,7 +182,7 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
             <Row>
-              { focusAreaIndicators && subjects && surveys &&
+              { focusAreaIndicators && subjects && surveys && surveyHighlightedId &&
                 focusAreaIndicators.map((focusArea) => (
                   <Column
                     width={[1, 1 / 2, 1 / 3]}
@@ -184,8 +193,8 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
                       focusAreaIcon={FOCUSAREA_COLORICONS[focusArea.get('indicator_id')]}
                       surveys={surveys}
                       subject={subjects.find((item) => attributesEqual(item.get('subject_id'), this.state.subjectSelectedId))}
-                      surveyHighlightedId={this.state.surveyHighlightedId}
-                      onHighlightSurvey={this.onHighlightSurvey}
+                      surveyHighlightedId={surveyHighlightedId}
+                      onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
                       onFAMouseEnter={() => this.onFAMouseEnter(focusArea)}
                       onFAMouseLeave={() => this.onFAMouseLeave()}
                       onFATouch={() => this.onFATouch(focusArea)}

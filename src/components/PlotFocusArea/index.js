@@ -1,17 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-import { withTheme } from 'styled-components'
+import styled, { withTheme } from 'styled-components';
 import { FlexibleWidthXYPlot, XAxis, YAxis, GridLines, AreaSeries, Hint } from 'react-vis';
-import { timeFormat } from 'd3-time-format';
+  import { timeFormat } from 'd3-time-format';
 
 import getLabel from 'utils/get-label';
 import attributesEqual from 'utils/attributes-equal';
 
 import CardTitle from 'components/CardTitle';
+import Label from 'components/Label';
+import ScreenReaderDataTable from 'components/ScreenReaderDataTable';
 
 import Card from 'styles/Card';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
+
+const HintInner = styled.div`
+  background: red;
+`;
 
 class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -22,7 +27,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
       surveyHighlightedId,
       surveys,
       subject,
-      // onHighlightSurvey,
+      onHighlightSurvey,
       onFAMouseEnter,
       onFAMouseLeave,
       onFATouch,
@@ -37,7 +42,8 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
         return memo.concat([{
           x: new Date(survey.get('date')).getTime(),
           y: outcome.get('value'),
-          surveyID: survey.get('survey_id'),
+          column: survey.get('survey_id'),
+          row: subject.get('subject_id'),
         }]);
       }, []);
 
@@ -63,45 +69,70 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
         <ScreenReaderOnly>
           {focusArea.get('description')}
         </ScreenReaderOnly>
-        <FlexibleWidthXYPlot
-          height={160}
-          xType="time"
-        >
-          <AreaSeries data={dataXYRange} style={{ fill: '#F4F5F5', strokeWidth: 0 }} />
-          <AreaSeries data={dataYRange} style={{ opacity: 0 }} />
-          <GridLines
-            direction="horizontal"
-            attr="y"
-            tickValues={[50]}
-          />
-          <AreaSeries
+        <figure>
+          <figcaption>
+            <Label id="screenreader.focus-areas.chart-caption" />
+          </figcaption>
+          <ScreenReaderDataTable
             data={data}
-            style={{
-              fill: theme.colors[focusArea.get('indicator_id')],
-              strokeWidth: 0,
-            }}
+            columns={Object.values(surveys.map((item) => ({
+              id: item.get('survey_id'),
+              label: timeFormat('%Y')(new Date(item.get('date')).getTime()),
+            })).toJS())}
+            rows={[{
+              id: subject.get('subject_id'),
+              label: subject.get('title'),
+            }]}
+            caption={getLabel('screenreader.focus-areas.chart-table-caption')}
           />
-          <XAxis
-            tickValues={[firstDate, lastDate]}
-            tickFormat={timeFormat('%Y')}
-          />
-          <YAxis
-            tickValues={[50]}
-            tickFormat={(value) => `${value}%`}
-          />
-          { hintValue &&
-            <Hint value={hintValue} orientation="topleft">
-              { `${hintValue.y}%` }
-            </Hint>
-          }
-        </FlexibleWidthXYPlot>
+          <FlexibleWidthXYPlot
+            height={160}
+            xType="time"
+            aria-hidden="true"
+            role="presentation"
+          >
+            <AreaSeries data={dataXYRange} style={{ fill: '#F4F5F5', strokeWidth: 0 }} />
+            <AreaSeries data={dataYRange} style={{ opacity: 0 }} />
+            <GridLines
+              direction="horizontal"
+              attr="y"
+              tickValues={[50]}
+            />
+            <AreaSeries
+              data={data}
+              style={{
+                fill: theme.colors[focusArea.get('indicator_id')],
+                strokeWidth: 0,
+              }}
+              onNearestX={(value) =>
+                onHighlightSurvey(value.column)
+              }
+            />
+            <XAxis
+              tickValues={[firstDate, lastDate]}
+              tickFormat={timeFormat('%Y')}
+            />
+            <YAxis
+              tickValues={[50]}
+              tickFormat={(value) => `${value}%`}
+            />
+            { hintValue &&
+              <Hint
+                value={hintValue}
+                align={{ vertical: 'top', horizontal: 'left' }}
+                style={{ transform: 'translateX(50%)' }}
+              >
+                <HintInner>
+                  { `${hintValue.y}%` }
+                </HintInner>
+              </Hint>
+            }
+          </FlexibleWidthXYPlot>
+        </figure>
       </Card>
     );
   }
 }
-// onNearestX={(value, { index }) =>
-//   console.log(value, index)
-// }
 
 PlotFocusArea.propTypes = {
   focusArea: PropTypes.object.isRequired,
@@ -109,7 +140,7 @@ PlotFocusArea.propTypes = {
   surveyHighlightedId: PropTypes.string.isRequired,
   surveys: PropTypes.object.isRequired,
   subject: PropTypes.object.isRequired,
-  // onHighlightSurvey: PropTypes.func.isRequired,
+  onHighlightSurvey: PropTypes.func.isRequired,
   onFAMouseEnter: PropTypes.func.isRequired,
   onFAMouseLeave: PropTypes.func.isRequired,
   onFATouch: PropTypes.func.isRequired,
@@ -117,16 +148,3 @@ PlotFocusArea.propTypes = {
 };
 
 export default withTheme(PlotFocusArea);
-
-// {indicator
-//   .get('outcomes')
-//   .filter((outcome) => attributesEqual(outcome.get('subject_id'), subjects.first().get('subject_id')))
-//   .filter((outcome) => attributesEqual(outcome.get('survey_id'), surveys.last().get('survey_id')))
-//   .first()
-//   .get('value')
-// }
-// const data = [
-//   { x: new Date('May 23 2017').getTime(), y: 10 },
-//   { x: new Date('May 23 2018').getTime(), y: 15 },
-// ];
-//
