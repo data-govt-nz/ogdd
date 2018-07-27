@@ -1,7 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { withTheme } from 'styled-components';
-import { FlexibleWidthXYPlot, XAxis, YAxis, GridLines, AreaSeries, Hint } from 'react-vis';
+import { withTheme } from 'styled-components';
+import {
+  FlexibleWidthXYPlot,
+  XAxis,
+  YAxis,
+  GridLines,
+  AreaSeries,
+  LineSeries,
+  MarkSeries,
+  Hint,
+} from 'react-vis';
 import { timeFormat } from 'd3-time-format';
 
 import getLabel from 'utils/get-label';
@@ -15,49 +24,11 @@ import Card from 'styles/Card';
 import CardBody from 'styles/CardBody';
 import CardHeader from 'styles/CardHeader';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
-
-const HintInner = styled.div`
-  color: ${(props) => props.theme.colors.white};
-  background-color: ${(props) => props.theme.colors[props.background]};
-  padding: 5px 10px;
-  border-radius: 9999px;
-  margin-bottom: 6px;
-  font-size: ${(props) => props.theme.sizes[1]};
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-
-  &:after {
-    content:'';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    margin: -6px auto 0;
-    width: 0;
-    height: 0;
-    border-top: solid 4px ${(props) => props.theme.colors[props.background]};
-    border-left: solid 4px transparent;
-    border-right: solid 4px transparent;
-}
-`;
+import PlotHint from 'styles/PlotHint';
 
 class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
-  render() {
-    const {
-      focusArea,
-      focusAreaIcon,
-      surveyHighlightedId,
-      surveys,
-      subject,
-      onHighlightSurvey,
-      onFAMouseEnter,
-      onFAMouseLeave,
-      onFATouch,
-      theme,
-    } = this.props;
-
-    // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
-    const data = focusArea
+  prepareData(subject, { focusArea, surveys }) {
+    return focusArea
       .get('outcomes') // we are shoing outcomes
       .filter((outcome) => attributesEqual(outcome.get('subject_id'), subject.get('subject_id'))) // for the current subject
       .reduce((memo, outcome) => {
@@ -70,6 +41,27 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
           row: subject.get('subject_id'),
         }]);
       }, []);
+  }
+
+  render() {
+    const {
+      focusArea,
+      focusAreaIcon,
+      surveyHighlightedId,
+      surveys,
+      subject,
+      referenceSubject,
+      onHighlightSurvey,
+      onFAMouseEnter,
+      onFAMouseLeave,
+      onFATouch,
+      theme,
+    } = this.props;
+
+    // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
+    const data = this.prepareData(subject, this.props);
+
+    const dataReference = referenceSubject && this.prepareData(referenceSubject, this.props);
 
     // set hint value from highlighted survey
     const hintValue = data.find((d) => attributesEqual(d.column, surveyHighlightedId));
@@ -137,23 +129,54 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                 tickValues={[50]}
                 tickFormat={(value) => formatValue(value, focusArea.get('type'))}
               />
-              <AreaSeries
-                data={data}
-                style={{
-                  fill: theme.colors[focusArea.get('indicator_id')],
-                  strokeWidth: 0,
-                }}
-                onNearestX={(value) => onHighlightSurvey(value.column)}
-              />
+              { !referenceSubject &&
+                <AreaSeries
+                  data={data}
+                  style={{
+                    fill: theme.colors[focusArea.get('indicator_id')],
+                    strokeWidth: 0,
+                  }}
+                  onNearestX={(value) => onHighlightSurvey(value.column)}
+                />
+              }
+              { referenceSubject &&
+                <AreaSeries
+                  data={dataReference}
+                  style={{
+                    fill: theme.colors.faReference,
+                    strokeWidth: 0,
+                  }}
+                />
+              }
+              { referenceSubject && data.length > 1 &&
+                <LineSeries
+                  data={data}
+                  style={{
+                    stroke: theme.colors[focusArea.get('indicator_id')],
+                  }}
+                  onNearestX={(value) => onHighlightSurvey(value.column)}
+                />
+              }
+              { referenceSubject && data.length === 1 &&
+                <MarkSeries
+                  data={data}
+                  size={3}
+                  style={{
+                    fill: theme.colors[focusArea.get('indicator_id')],
+                    strokeWidth: 0,
+                  }}
+                  onNearestX={(value) => onHighlightSurvey(value.column)}
+                />
+              }
               { hintValue &&
                 <Hint
                   value={hintValue}
                   align={{ vertical: 'top', horizontal: 'left' }}
                   style={{ transform: 'translateX(50%)' }}
                 >
-                  <HintInner background={focusArea.get('indicator_id')}>
+                  <PlotHint background={focusArea.get('indicator_id')}>
                     { formatValue(hintValue.y, focusArea.get('type')) }
-                  </HintInner>
+                  </PlotHint>
                 </Hint>
               }
             </FlexibleWidthXYPlot>
@@ -170,6 +193,7 @@ PlotFocusArea.propTypes = {
   surveyHighlightedId: PropTypes.string.isRequired,
   surveys: PropTypes.object.isRequired,
   subject: PropTypes.object.isRequired,
+  referenceSubject: PropTypes.object,
   onHighlightSurvey: PropTypes.func.isRequired,
   onFAMouseEnter: PropTypes.func.isRequired,
   onFAMouseLeave: PropTypes.func.isRequired,

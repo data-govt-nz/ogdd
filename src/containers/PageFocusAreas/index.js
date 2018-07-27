@@ -14,7 +14,9 @@ import {
   selectFocusAreaIndicatorsWithOutcomes,
   selectSurveys,
   selectSubjects,
+  selectSubjectIdFromLocation,
 } from 'containers/App/selectors';
+import { navigate } from 'containers/App/actions';
 
 import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
 
@@ -59,7 +61,6 @@ const INITIAL_STATE = {
   showModal: false,
   focusAreaSelected: null,
   surveyHighlightedId: null, // set from surveys
-  subjectSelectedId: DEFAULT_SUBJECT_ID,
 };
 
 const PageTitleWrapper = styled.div`
@@ -70,6 +71,22 @@ const ReadMoreWrapper = styled.div`
   position: absolute;
   right: 0;
   top: 0;
+`;
+
+const ReferenceHint = styled.div`
+  color: ${(props) => props.theme.colors.referenceLabel};
+  font-size: 13px;
+  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+    position: absolute;
+    right: 0;
+    top: 4px;
+  }
+`;
+
+const PageSelect = styled.div`
+  min-height: 40px;
+  position: relative;
+  width: 100%;
 `;
 
 class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -112,6 +129,10 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
     this.setState({ surveyHighlightedId });
   }
 
+  onSubjectChange(e) {
+    this.props.nav({ query: { subject: e.target.value } });
+  }
+
   renderPageTitle() {
     return (
       <PageTitle labelId="component.focus-areas.title" iconSrc={titleIcon} />
@@ -141,13 +162,20 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
   }
 
   render() {
-    const { focusAreaIndicators, surveys, subjects } = this.props;
+    const { focusAreaIndicators, surveys, subjects, subjectSelectedId } = this.props;
 
     const surveyHighlightedId = this.state.surveyHighlightedId || (
       this.props.surveys
       ? this.props.surveys.last().get('survey_id')
       : null
     );
+
+    const ready = focusAreaIndicators && subjects && surveys && surveyHighlightedId;
+
+    const subjectSelected = ready && subjects.find((item) => attributesEqual(item.get('subject_id'), subjectSelectedId));
+    const subjectReference = ready && subjectSelectedId !== DEFAULT_SUBJECT_ID
+      ? subjects.find((item) => attributesEqual(item.get('subject_id'), DEFAULT_SUBJECT_ID))
+      : null;
 
     return (
       <PageContainer>
@@ -175,6 +203,42 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
           <Label id="component.focus-areas.longTitle" />
         </PageLongTitle>
         <Row>
+          <Column width={[1, 3 / 4]}>
+            <PageSelect>
+              { ready && subjects.size > 1 &&
+                <div>
+                  <label htmlFor="subject-select" >
+                    <Label id="component.focus-areas.selectSubjectLabel" />
+                  </label>
+                  <select
+                    id="subject-select"
+                    value={subjectSelectedId}
+                    onChange={((e) => this.onSubjectChange(e))}
+                  >
+                    { subjects.map((item) => (
+                      <option key={item.get('subject_id')} value={item.get('subject_id')} >
+                        { item.get('title') }
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              }
+              { ready && subjects.size === 0 &&
+                <div>
+                  <Label id="component.focus-areas.selectSubjectLabel" />
+                  { subjectSelected.get('title')}
+                </div>
+              }
+              { subjectReference &&
+                <ReferenceHint>
+                  <Label id="component.focus-areas.subjectReference" />
+                  { subjectReference.get('title')}
+                </ReferenceHint>
+              }
+            </PageSelect>
+          </Column>
+        </Row>
+        <Row>
           <Column width={[1, 1 / 4]} order={2}>
             <Visible min={0} >
               { this.renderAsideContent() }
@@ -182,7 +246,7 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
             <Row>
-              { focusAreaIndicators && subjects && surveys && surveyHighlightedId &&
+              { ready &&
                 focusAreaIndicators.map((focusArea) => (
                   <Column
                     width={[1, 1 / 2, 1 / 3]}
@@ -192,7 +256,8 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
                       focusArea={focusArea}
                       focusAreaIcon={FOCUSAREA_COLORICONS[focusArea.get('indicator_id')]}
                       surveys={surveys}
-                      subject={subjects.find((item) => attributesEqual(item.get('subject_id'), this.state.subjectSelectedId))}
+                      subject={subjectSelected}
+                      referenceSubject={subjectReference}
                       surveyHighlightedId={surveyHighlightedId}
                       onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
                       onFAMouseEnter={() => this.onFAMouseEnter(focusArea)}
@@ -214,12 +279,22 @@ PageFocusAreas.propTypes = {
   focusAreaIndicators: PropTypes.object,
   surveys: PropTypes.object,
   subjects: PropTypes.object,
+  nav: PropTypes.func,
+  subjectSelectedId: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   focusAreaIndicators: selectFocusAreaIndicatorsWithOutcomes(state),
   surveys: selectSurveys(state),
   subjects: selectSubjects(state),
+  subjectSelectedId: selectSubjectIdFromLocation(state),
 });
 
-export default connect(mapStateToProps)(PageFocusAreas);
+const mapDispatchToProps = (dispatch) => ({
+  // navigate to location
+  nav: (location) => {
+    dispatch(navigate(location));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageFocusAreas);

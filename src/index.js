@@ -88,6 +88,8 @@ const render = (Component) => {
               fa5: '#2956D1',
               fa6: '#FC6128',
               faPlotBackground: '#F4F5F5',
+              faReference: '#D4D7D9',
+              referenceLabel: '#4D5E65',
             },
           }}
         >

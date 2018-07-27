@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import attributesEqual from 'utils/attributes-equal';
 
-import { FOCUSAREA_INDICATOR_IDS } from './constants';
+import { FOCUSAREA_INDICATOR_IDS, DEFAULT_SUBJECT_ID } from './constants';
 
 // const getState = (state) => state;
 
@@ -51,6 +51,11 @@ export const selectSubject = createSelector(
   selectSubjects,
   (state, args) => args, // { key, value }
   (data, args) => data && data.find((item) => attributesEqual(item.get(args.key), args.value))
+);
+
+export const selectSubjectIdFromLocation = createSelector(
+  selectLocation,
+  (location) => location.getIn(['query', 'subject']) || DEFAULT_SUBJECT_ID
 );
 
 // indicators
