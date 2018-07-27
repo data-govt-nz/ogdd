@@ -7,7 +7,50 @@ export const DATA_REQUESTED = 'action.DATA_REQUESTED';
 export const DATA_LOADED = 'action.DATA_LOADED';
 export const LOAD_ERROR = 'action.LOAD_ERROR';
 
-export const DATA = {
+
+const API_PATH = 'https://uat.data.govt.nz/api/3/action/datastore_search';
+
+const API = false;
+
+export const DATA = API
+? {
+  surveys: {
+    data: null,
+    requested: null,
+    source: 'api',
+    path: API_PATH,
+    resourceId: 'e964dae4-f912-4ad1-9c90-eeefed2d0168',
+  },    // id,survey_id,date,agencies_total
+  subjects: {
+    data: null,
+    requested: null,
+    source: 'api',
+    path: API_PATH,
+    resourceId: '178581f7-695f-4b77-8890-f8ed38f9f26b',
+  },   // id,title
+  indicators: {
+    data: null,
+    requested: null,
+    source: 'api',
+    path: API_PATH,
+    resourceId: '317118dc-be21-46d6-972c-1363512e7faa',
+  }, // id,indicator_id,type,question_no,title,description
+  insights: {
+    data: null,
+    requested: null,
+    source: 'api',
+    path: API_PATH,
+    resourceId: 'b1ff7522-a783-45db-b802-bd270d95a889',
+  },   // id,survey_id,value,text,indicator_id,outcome_answers
+  outcomes: {
+    data: null,
+    requested: null,
+    source: 'api',
+    path: API_PATH,
+    resourceId: '668680cc-903c-4420-a6a7-60b150cb68c8',
+  },   // id,survey_id,subject_id,indicator_id,value,answer,answer_text
+}
+: {
   surveys: {
     data: null,
     requested: null,

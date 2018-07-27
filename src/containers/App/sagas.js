@@ -2,6 +2,7 @@ import { call, takeEvery, select, put } from 'redux-saga/effects';
 import { route, getHash, getHashParameters } from 'react-hash-route';
 import { csvParse } from 'd3-dsv';
 import 'whatwg-fetch';
+import fetchJsonp from 'fetch-jsonp';
 
 import extend from 'lodash/extend';
 
@@ -61,7 +62,13 @@ export function* loadDataSaga({ key, value }) {
         }
       }
       if (value.source === 'api') {
-        // TODO: fetch data from data.govt api
+        // fetch data from data.govt api
+        const path = `${value.path}?resource_id=${value.resourceId}`;
+        const response = yield fetchJsonp(path);
+        const responseBody = yield response.json();
+        if (responseBody) {
+          yield put(dataLoaded(key, responseBody.result.records));
+        }
       }
       if (value.source === 'csv') {
         const path = `${value.path}${value.filename}`;

@@ -21,10 +21,24 @@ export const selectData = createSelector(
   (data, key) => data.get(key) && data.getIn([key, 'data'])
 );
 
+const insertAt = (s, x, at) => [s.slice(0, at), x, s.slice(at)].join('');
+
 // surveys
 export const selectSurveys = createSelector(
   (state) => selectData(state, 'surveys'),
-  (data) => data
+  (data) => {
+    if (data) {
+      if (isNaN(Date.parse(data.get('date')))) {
+        // assume YYYYMMDD and convert to YYYY-MM-DD (initially suggested date format)
+        return data.map((d) => {
+          const updated = insertAt(insertAt(d.get('date'), '-', 6), '-', 4);
+          return isNaN(Date.parse(updated)) ? d : d.set('date', updated);
+        });
+      }
+      return data;
+    }
+    return null;
+  }
 );
 
 export const selectSurvey = createSelector(
