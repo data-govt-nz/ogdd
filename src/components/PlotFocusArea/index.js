@@ -2,20 +2,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
 import { FlexibleWidthXYPlot, XAxis, YAxis, GridLines, AreaSeries, Hint } from 'react-vis';
-  import { timeFormat } from 'd3-time-format';
+import { timeFormat } from 'd3-time-format';
 
 import getLabel from 'utils/get-label';
 import attributesEqual from 'utils/attributes-equal';
+import formatValue from 'utils/format-value';
 
 import CardTitle from 'components/CardTitle';
-import Label from 'components/Label';
-import ScreenReaderDataTable from 'components/ScreenReaderDataTable';
+import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 
 import Card from 'styles/Card';
+import CardBody from 'styles/CardBody';
+import CardHeader from 'styles/CardHeader';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 
 const HintInner = styled.div`
-  background: red;
+  color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors[props.background]};
+  padding: 5px 10px;
+  border-radius: 9999px;
+  margin-bottom: 6px;
+  font-size: ${(props) => props.theme.sizes[1]};
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+
+  &:after {
+    content:'';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: -6px auto 0;
+    width: 0;
+    height: 0;
+    border-top: solid 4px ${(props) => props.theme.colors[props.background]};
+    border-left: solid 4px transparent;
+    border-right: solid 4px transparent;
+}
 `;
 
 class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -34,11 +56,13 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
       theme,
     } = this.props;
 
+    // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
     const data = focusArea
-      .get('outcomes')
-      .filter((outcome) => attributesEqual(outcome.get('subject_id'), subject.get('subject_id')))
+      .get('outcomes') // we are shoing outcomes
+      .filter((outcome) => attributesEqual(outcome.get('subject_id'), subject.get('subject_id'))) // for the current subject
       .reduce((memo, outcome) => {
         const survey = surveys.find((item) => attributesEqual(outcome.get('survey_id'), item.get('survey_id')));
+        // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
         return memo.concat([{
           x: new Date(survey.get('date')).getTime(),
           y: outcome.get('value'),
@@ -47,14 +71,20 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
         }]);
       }, []);
 
-    const hintValue = data.find((d) => attributesEqual(d.surveyID, surveyHighlightedId));
+    // set hint value from highlighted survey
+    const hintValue = data.find((d) => attributesEqual(d.column, surveyHighlightedId));
 
-    const firstDate = new Date(surveys.first().get('date')).getTime();
-    const lastDate = new Date(surveys.last().get('date')).getTime();
+    // axis ranges
+    const xAxisRange = [
+      new Date(surveys.first().get('date')).getTime(),
+      new Date(surveys.last().get('date')).getTime(),
+    ];
+    const yAxisRange = [0, 100];
 
     // dummy data to force the area plot from 0 to 100%
-    const dataYRange = [{ x: firstDate, y: 0 }, { x: firstDate, y: 100 }];
-    const dataXYRange = [{ x: firstDate, y: 100 }, { x: lastDate, y: 100 }];
+    const dataForceYRange = [{ x: xAxisRange[0], y: yAxisRange[0] }, { x: xAxisRange[0], y: yAxisRange[1] }];
+    // dummy data to produce background
+    const dataBackground = [{ x: xAxisRange[0], y: yAxisRange[1] }, { x: xAxisRange[1], y: yAxisRange[1] }];
 
     return (
       <Card
@@ -62,73 +92,73 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
         onMouseLeave={onFAMouseLeave}
         onTouchStart={onFATouch}
       >
-        <ScreenReaderOnly>
-          {getLabel('component.focus-areas.focus-area')}
-        </ScreenReaderOnly>
-        <CardTitle title={focusArea.get('title')} iconSrc={focusAreaIcon} />
-        <ScreenReaderOnly>
-          {focusArea.get('description')}
-        </ScreenReaderOnly>
-        <figure>
-          <figcaption>
-            <Label id="screenreader.focus-areas.chart-caption" />
-          </figcaption>
-          <ScreenReaderDataTable
-            data={data}
-            columns={Object.values(surveys.map((item) => ({
-              id: item.get('survey_id'),
-              label: timeFormat('%Y')(new Date(item.get('date')).getTime()),
-            })).toJS())}
-            rows={[{
-              id: subject.get('subject_id'),
-              label: subject.get('title'),
-            }]}
-            caption={getLabel('screenreader.focus-areas.chart-table-caption')}
-          />
-          <FlexibleWidthXYPlot
-            height={160}
-            xType="time"
-            aria-hidden="true"
-            role="presentation"
+        <CardHeader>
+          <ScreenReaderOnly>
+            {getLabel('component.focus-areas.focus-area')}
+          </ScreenReaderOnly>
+          <CardTitle title={focusArea.get('title')} iconSrc={focusAreaIcon} />
+          <ScreenReaderOnly>
+            {focusArea.get('description')}
+          </ScreenReaderOnly>
+        </CardHeader>
+        <CardBody>
+          <ScreenReaderWrapPlot
+            figCaption={getLabel('screenreader.focus-areas.chart-caption')}
+            tableCaption={getLabel('screenreader.focus-areas.chart-table-caption')}
+            tableData={{
+              data,
+              columns: Object.values(surveys.map((item) => ({
+                id: item.get('survey_id'),
+                label: timeFormat('%Y')(new Date(item.get('date')).getTime()),
+              })).toJS()),
+              rows: [{
+                id: subject.get('subject_id'),
+                label: subject.get('title'),
+              }],
+            }}
+            formatValue={(datum) => formatValue(datum.y, focusArea.get('type'))}
           >
-            <AreaSeries data={dataXYRange} style={{ fill: '#F4F5F5', strokeWidth: 0 }} />
-            <AreaSeries data={dataYRange} style={{ opacity: 0 }} />
-            <GridLines
-              direction="horizontal"
-              attr="y"
-              tickValues={[50]}
-            />
-            <AreaSeries
-              data={data}
-              style={{
-                fill: theme.colors[focusArea.get('indicator_id')],
-                strokeWidth: 0,
-              }}
-              onNearestX={(value) =>
-                onHighlightSurvey(value.column)
+            <FlexibleWidthXYPlot
+              height={160}
+              xType="time"
+            >
+              <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
+              <AreaSeries data={dataBackground} style={{ fill: theme.colors.faPlotBackground, strokeWidth: 0 }} />
+              <GridLines
+                direction="horizontal"
+                attr="y"
+                tickValues={[50]}
+              />
+              <XAxis
+                tickValues={xAxisRange}
+                tickFormat={timeFormat('%Y')}
+              />
+              <YAxis
+                tickValues={[50]}
+                tickFormat={(value) => formatValue(value, focusArea.get('type'))}
+              />
+              <AreaSeries
+                data={data}
+                style={{
+                  fill: theme.colors[focusArea.get('indicator_id')],
+                  strokeWidth: 0,
+                }}
+                onNearestX={(value) => onHighlightSurvey(value.column)}
+              />
+              { hintValue &&
+                <Hint
+                  value={hintValue}
+                  align={{ vertical: 'top', horizontal: 'left' }}
+                  style={{ transform: 'translateX(50%)' }}
+                >
+                  <HintInner background={focusArea.get('indicator_id')}>
+                    { formatValue(hintValue.y, focusArea.get('type')) }
+                  </HintInner>
+                </Hint>
               }
-            />
-            <XAxis
-              tickValues={[firstDate, lastDate]}
-              tickFormat={timeFormat('%Y')}
-            />
-            <YAxis
-              tickValues={[50]}
-              tickFormat={(value) => `${value}%`}
-            />
-            { hintValue &&
-              <Hint
-                value={hintValue}
-                align={{ vertical: 'top', horizontal: 'left' }}
-                style={{ transform: 'translateX(50%)' }}
-              >
-                <HintInner>
-                  { `${hintValue.y}%` }
-                </HintInner>
-              </Hint>
-            }
-          </FlexibleWidthXYPlot>
-        </figure>
+            </FlexibleWidthXYPlot>
+          </ScreenReaderWrapPlot>
+        </CardBody>
       </Card>
     );
   }

@@ -22,6 +22,6 @@
   "screenreader.navigationOccured": "Navigation occured",
   "screenreader.skipToContent": "Skip to main content",
   "screenreader.fsModal.button.dismiss": "Close",
-  "screenreader.focus-areas.chart-caption": "A chart showing progress to date",
+  "screenreader.focus-areas.chart-caption": "A chart showing focus area progress to date",
   "screenreader.focus-areas.chart-table-caption": "Table listing chart values"
 }
