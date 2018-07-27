@@ -61,7 +61,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
     // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
     const data = this.prepareData(subject, this.props);
 
-    const dataReference = referenceSubject && this.prepareData(referenceSubject, this.props);
+    const referenceData = referenceSubject && this.prepareData(referenceSubject, this.props);
 
     // set hint value from highlighted survey
     const hintValue = data.find((d) => attributesEqual(d.column, surveyHighlightedId));
@@ -98,15 +98,19 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
             figCaption={getLabel('screenreader.focus-areas.chart-caption')}
             tableCaption={getLabel('screenreader.focus-areas.chart-table-caption')}
             tableData={{
-              data,
+              data: referenceSubject ? data.concat(referenceData) : data,
               columns: Object.values(surveys.map((item) => ({
                 id: item.get('survey_id'),
                 label: timeFormat('%Y')(new Date(item.get('date')).getTime()),
               })).toJS()),
-              rows: [{
-                id: subject.get('subject_id'),
-                label: subject.get('title'),
-              }],
+              rows: [{ id: subject.get('subject_id'), label: subject.get('title') }].concat(
+                referenceSubject
+                ? [{
+                  id: referenceSubject.get('subject_id'),
+                  label: `${referenceSubject.get('title')} ${getLabel('screenreader.focus-areas.chart-table-reference-hint')}`,
+                }]
+                : []
+              ),
             }}
             formatValue={(datum) => formatValue(datum.y, focusArea.get('type'))}
           >
@@ -141,7 +145,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
               }
               { referenceSubject &&
                 <AreaSeries
-                  data={dataReference}
+                  data={referenceData}
                   style={{
                     fill: theme.colors.faReference,
                     strokeWidth: 0,
