@@ -26,23 +26,25 @@ import CardHeader from 'styles/CardHeader';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 import PlotHint from 'styles/PlotHint';
 
-class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  prepareData(subject, { focusArea, surveys }) {
-    return focusArea
-      .get('outcomes') // we are shoing outcomes
-      .filter((outcome) => attributesEqual(outcome.get('subject_id'), subject.get('subject_id'))) // for the current subject
-      .reduce((memo, outcome) => {
-        const survey = surveys.find((item) => attributesEqual(outcome.get('survey_id'), item.get('survey_id')));
-        // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
-        return memo.concat([{
+const prepareData = (subject, { focusArea, surveys }) =>
+  focusArea
+    .get('outcomes') // we are shoing outcomes
+    .filter((outcome) => attributesEqual(outcome.get('subject_id'), subject.get('subject_id'))) // for the current subject
+    .reduce((memo, outcome) => {
+      const survey = surveys.find((item) => attributesEqual(outcome.get('survey_id'), item.get('survey_id')));
+      // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
+      return survey
+        ? memo.concat([{
           x: new Date(survey.get('date')).getTime(),
           y: outcome.get('value'),
           column: survey.get('survey_id'),
           row: subject.get('subject_id'),
-        }]);
-      }, []);
-  }
+        }])
+        : memo;
+    }, [])
+;
 
+class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     const {
       focusArea,
@@ -57,20 +59,24 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
       onFATouch,
       theme,
     } = this.props;
-
     // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
-    const data = this.prepareData(subject, this.props);
+    const data = prepareData(subject, this.props);
 
-    const referenceData = referenceSubject && this.prepareData(referenceSubject, this.props);
+    const referenceData = referenceSubject && prepareData(referenceSubject, this.props);
 
     // set hint value from highlighted survey
     const hintValue = data.find((d) => attributesEqual(d.column, surveyHighlightedId));
 
     // axis ranges
-    const xAxisRange = [
+    let xAxisRange = [
       new Date(surveys.first().get('date')).getTime(),
       new Date(surveys.last().get('date')).getTime(),
     ];
+    const surveyHighlighted = surveys.find((item) => attributesEqual(item.get('survey_id'), surveyHighlightedId));
+    if (surveyHighlighted && xAxisRange.indexOf(new Date(surveyHighlighted.get('date')).getTime()) < 0) {
+      xAxisRange = xAxisRange.concat(new Date(surveyHighlighted.get('date')).getTime());
+    }
+
     const yAxisRange = [0, 100];
 
     // dummy data to force the area plot from 0 to 100%
@@ -133,25 +139,14 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                 tickValues={[50]}
                 tickFormat={(value) => formatValue(value, focusArea.get('type'))}
               />
-              { !referenceSubject &&
-                <AreaSeries
-                  data={data}
-                  style={{
-                    fill: theme.colors[focusArea.get('indicator_id')],
-                    strokeWidth: 0,
-                  }}
-                  onNearestX={(value) => onHighlightSurvey(value.column)}
-                />
-              }
-              { referenceSubject &&
-                <AreaSeries
-                  data={referenceData}
-                  style={{
-                    fill: theme.colors.faReference,
-                    strokeWidth: 0,
-                  }}
-                />
-              }
+              <AreaSeries
+                data={referenceSubject ? referenceData : data}
+                style={{
+                  fill: theme.colors[referenceSubject ? 'faReference' : focusArea.get('indicator_id')],
+                  strokeWidth: 0,
+                }}
+                onNearestX={(value) => referenceSubject ? false : onHighlightSurvey(value.column)}
+              />
               { referenceSubject && data.length > 1 &&
                 <LineSeries
                   data={data}
