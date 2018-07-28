@@ -22,6 +22,7 @@ import ReadMore from 'components/ReadMore';
 import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotServices from 'components/PlotServices';
+import PlotServicesMultiples from 'components/PlotServicesMultiples';
 
 // simple styles (styled components)
 import Row from 'styles/Row';
@@ -170,8 +171,15 @@ class PageServices extends React.PureComponent { // eslint-disable-line react/pr
             }
             { ready &&
               <Row>
-                <Column>
+                <Column width={[1]}>
                   <PlotTitle>{servicesIndicator.get('title')}</PlotTitle>
+                  <PlotServicesMultiples
+                    indicator={servicesIndicator}
+                    surveys={surveys}
+                    surveyHighlightedId={surveyHighlightedId}
+                    onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
+                    onCardMouseLeave={() => this.onCardMouseLeave()}
+                  />
                 </Column>
               </Row>
             }

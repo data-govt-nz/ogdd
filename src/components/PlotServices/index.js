@@ -170,11 +170,6 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
       </Card>
     );
   }
-//   <KeyEntry
-//   key={index}
-//   color="fa3"
-//   title={group.get(0).toJS().answer_text}
-//   />
 }
 
 PlotServices.propTypes = {
