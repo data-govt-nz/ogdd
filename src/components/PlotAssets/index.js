@@ -86,14 +86,14 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
       >
         <CardBody withoutTitle>
           <ScreenReaderWrapPlot
-            figCaption={getLabel('screenreader.focus-areas.chart-caption')}
-            tableCaption={getLabel('screenreader.focus-areas.chart-table-caption')}
+            figCaption={getLabel('screenreader.assets.chart-caption')}
+            tableCaption={getLabel('screenreader.assets.chart-table-caption')}
             tableData={{
               data: data.concat(referenceData),
-              columns: Object.values(surveys.map((item) => ({
+              columns: surveys.reduce((memo, item) => memo.concat([{
                 id: item.get('survey_id'),
                 label: timeFormat('%Y')(new Date(item.get('date')).getTime()),
-              })).toJS()),
+              }]), []),
               rows: [
                 { id: indicator.get('indicator_id'), label: indicator.get('title') },
                 { id: referenceIndicator.get('indicator_id'), label: referenceIndicator.get('title') },

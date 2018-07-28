@@ -27,5 +27,9 @@
   "screenreader.fsModal.button.dismiss": "Close",
   "screenreader.focus-areas.chart-caption": "A chart showing focus area progress to date",
   "screenreader.focus-areas.chart-table-caption": "Table listing chart values",
-  "screenreader.focus-areas.chart-table-reference-hint": "for comparison"
+  "screenreader.focus-areas.chart-table-reference-hint": "for comparison",
+  "screenreader.assets.chart-caption": "A chart showing available open data assets over time",
+  "screenreader.assets.chart-table-caption": "Table listing chart values",
+  "screenreader.services.chart-caption": "A time series chart showing how open data are made available ",
+  "screenreader.services.chart-table-caption": "Table listing chart values"
 }

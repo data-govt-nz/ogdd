@@ -20,6 +20,18 @@ const DotCell = styled(Cell)`
   padding: 5px 2px;
 `;
 
+const LineCell = styled(Cell)`
+  width: 14px;
+  padding: 9px 7px 5px 0px;
+`;
+
+const Line = styled.div`
+  width: 100%;
+  border-bottom-width: 2px;
+  border-bottom-style: ${(props) => props.dashed ? 'dashed' : 'solid'};
+  border-bottom-color: ${(props) => props.theme.colors[props.color]};
+`;
+
 const Dot = styled.div`
   width: 10px;
   height: 10px;
@@ -27,11 +39,18 @@ const Dot = styled.div`
   background-color: ${(props) => props.theme.colors[props.color]};
 `;
 
-const KeyEntry = ({ color, title }) => (
+const KeyEntry = ({ color, title, line, dashed }) => (
   <Styled>
-    <DotCell>
-      <Dot color={color} role="presentation" />
-    </DotCell>
+    { line &&
+      <LineCell>
+        <Line color={color} dashed={dashed} role="presentation" />
+      </LineCell>
+    }
+    { !line &&
+      <DotCell>
+        <Dot color={color} role="presentation" />
+      </DotCell>
+    }
     <Cell>
       { title }
     </Cell>
@@ -41,6 +60,8 @@ const KeyEntry = ({ color, title }) => (
 KeyEntry.propTypes = {
   color: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  line: PropTypes.bool,
+  dashed: PropTypes.bool,
 };
 
 export default KeyEntry;

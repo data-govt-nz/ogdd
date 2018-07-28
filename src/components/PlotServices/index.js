@@ -57,16 +57,24 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
 
     const data = groups
       .toList()
-      .map((group) =>
-        prepareData(group, this.props)
-      );
-    const keyItems = groups.map((group) => group.get(0).get('answer_text'));
-    console.log(keyItems.toList().toJS())
+      .reduce((memo, group) => memo.concat({
+        data: prepareData(group, this.props),
+        id: group.first().get('answer'),
+      }), []);
+
+    const keyItems = groups.reduce((memo, group) => memo.concat({
+      title: group.first().get('answer_text'),
+      id: group.first().get('answer'),
+    }), []);
 
     // set hint value from highlighted survey
-    const hintValues = data.map((series) => series.find((d) => attributesEqual(d.column, surveyHighlightedId)));
+    const hintValues = data.reduce((memo, series) => memo.concat([{
+      value: series.data.find((d) => attributesEqual(d.column, surveyHighlightedId)),
+      id: series.id,
+    }]), []);
+
     const hintValueRange = hintValues.reduce((memo, hintValue) =>
-      [Math.min(hintValue.y, memo[0]), Math.max(hintValue.y, memo[1])]
+      [Math.min(hintValue.value.y, memo[0]), Math.max(hintValue.value.y, memo[1])]
     , [100, 0]);
 
     // axis ranges
@@ -88,58 +96,76 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
         onMouseLeave={onCardMouseLeave}
       >
         <CardBody withoutTitle>
-          <FlexibleWidthXYPlot
-            height={240}
-            xType="time"
+          <ScreenReaderWrapPlot
+            figCaption={getLabel('screenreader.services.chart-caption')}
+            tableCaption={getLabel('screenreader.services.chart-table-caption')}
+            tableData={{
+              data: data.reduce((memo, series) => memo.concat(series.data), []),
+              columns: surveys.reduce((memo, item) => memo.concat([{
+                id: item.get('survey_id'),
+                label: timeFormat('%Y')(new Date(item.get('date')).getTime()),
+              }]), []),
+              rows: groups.reduce((memo, item) => memo.concat([
+                { id: item.first().get('answer'), label: item.first().get('answer_text') },
+              ]), []),
+            }}
+            formatValue={(datum) => formatValue(datum.y, indicator.get('type'))}
           >
-            <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
-            <XAxis
-              tickValues={xAxisRange}
-              tickFormat={timeFormat('%Y')}
-            />
-            <YAxis
-              tickFormat={(value) => formatValue(value, indicator.get('type'))}
-            />
-            { data && data.map((series, index) => (
-              <LineSeries
-                key={index}
-                data={series}
-                style={{
-                  stroke: theme.colors.fa1,
-                  strokeWidth: 2,
-                  strokeDasharray: index === 0 ? 8 : 'none',
-                }}
-                onNearestX={(value) => index === 0 ? onHighlightSurvey(value.column) : false}
+            <FlexibleWidthXYPlot
+              height={240}
+              xType="time"
+            >
+              <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
+              <XAxis
+                tickValues={xAxisRange}
+                tickFormat={timeFormat('%Y')}
               />
-            ))}
-            { hintValues && hintValues.map((hintValue, index) => (
-              <Hint
-                key={index}
-                value={hintValue}
-                align={{
-                  vertical: parseFloat(hintValue.y, 10) === parseFloat(hintValueRange[0]) ? 'bottom' : 'top',
-                  horizontal: 'left',
-                }}
-                style={{ transform: 'translateX(50%)' }}
-              >
-                <PlotHint
-                  background={'fa1'}
-                  bottom={parseFloat(hintValue.y, 10) === parseFloat(hintValueRange[0])}
+              <YAxis
+                tickFormat={(value) => formatValue(value, indicator.get('type'))}
+              />
+              { data && data.map((series, index) => (
+                <LineSeries
+                  key={series.id}
+                  data={series.data}
+                  style={{
+                    stroke: theme.colors.fa1,
+                    strokeWidth: 2,
+                    strokeDasharray: index === 0 ? 8 : 'none',
+                  }}
+                  onNearestX={(value) => index === 0 ? onHighlightSurvey(value.column) : false}
+                />
+              ))}
+              { hintValues && hintValues.map((hintValue) => (
+                <Hint
+                  key={hintValue.id}
+                  value={hintValue.value}
+                  align={{
+                    vertical: parseFloat(hintValue.value.y, 10) === parseFloat(hintValueRange[0]) ? 'bottom' : 'top',
+                    horizontal: 'left',
+                  }}
+                  style={{ transform: 'translateX(50%)' }}
                 >
-                  { formatValue(hintValue.y, indicator.get('type')) }
-                </PlotHint>
-              </Hint>
-            ))}
-          </FlexibleWidthXYPlot>
-          <Key>
-            { keyItems.toList().map((item, index) => (
-              <KeyEntry
-                key={index}
-                color="fa1"
-                title={item}
-              />
-            ))}
-          </Key>
+                  <PlotHint
+                    background={'fa1'}
+                    bottom={parseFloat(hintValue.value.y, 10) === parseFloat(hintValueRange[0])}
+                  >
+                    { formatValue(hintValue.value.y, indicator.get('type')) }
+                  </PlotHint>
+                </Hint>
+              ))}
+            </FlexibleWidthXYPlot>
+            <Key>
+              { keyItems.map((item, index) => (
+                <KeyEntry
+                  key={item.id}
+                  color="fa1"
+                  title={item.title}
+                  dashed={index === 0}
+                  line
+                />
+              ))}
+            </Key>
+          </ScreenReaderWrapPlot>
         </CardBody>
       </Card>
     );

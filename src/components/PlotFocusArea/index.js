@@ -105,10 +105,10 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
             tableCaption={getLabel('screenreader.focus-areas.chart-table-caption')}
             tableData={{
               data: referenceSubject ? data.concat(referenceData) : data,
-              columns: Object.values(surveys.map((item) => ({
+              columns: surveys.reduce((memo, item) => memo.concat([{
                 id: item.get('survey_id'),
                 label: timeFormat('%Y')(new Date(item.get('date')).getTime()),
-              })).toJS()),
+              }]), []),
               rows: [{ id: subject.get('subject_id'), label: subject.get('title') }].concat(
                 referenceSubject
                 ? [{
