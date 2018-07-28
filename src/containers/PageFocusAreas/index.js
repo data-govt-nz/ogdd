@@ -18,7 +18,11 @@ import {
 } from 'containers/App/selectors';
 import { navigate } from 'containers/App/actions';
 
-import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
+import {
+  DEFAULT_SUBJECT_ID,
+  FOCUSAREA_ICONS,
+  FOCUSAREA_COLORICONS,
+} from 'containers/App/constants';
 
 // components
 import Label from 'components/Label';
@@ -40,29 +44,6 @@ import Visible from 'styles/Visible';
 import titleIcon from 'assets/React-icon.png';
 import description from 'labels/focus-areas.md'; // loaded as HTML from markdown
 
-const FOCUSAREA_ICONS = {
-  fa1: titleIcon,
-  fa2: titleIcon,
-  fa3: titleIcon,
-  fa4: titleIcon,
-  fa5: titleIcon,
-  fa6: titleIcon,
-};
-const FOCUSAREA_COLORICONS = {
-  fa1: titleIcon,
-  fa2: titleIcon,
-  fa3: titleIcon,
-  fa4: titleIcon,
-  fa5: titleIcon,
-  fa6: titleIcon,
-};
-
-const INITIAL_STATE = {
-  showModal: false,
-  focusAreaSelected: null,
-  surveyHighlightedId: null, // set from surveys
-};
-
 const PageTitleWrapper = styled.div`
   position: relative;
 `;
@@ -83,24 +64,22 @@ const ReferenceHint = styled.div`
   }
 `;
 
-const PageSelect = styled.div`
+const SubjectSelect = styled.div`
   min-height: 40px;
   position: relative;
   width: 100%;
 `;
 
+const INITIAL_STATE = {
+  showModal: false,
+  focusAreaSelected: null,
+  surveyHighlightedId: null, // set from surveys
+};
+
 class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.surveys && this.props.surveys !== prevProps.surveys) {
-      this.setState({ // eslint-disable-line react/no-did-update-set-state
-        surveyHighlightedId: this.props.surveys.last().get('survey_id'),
-      });
-    }
   }
 
   onReadMore(showModal = true) {
@@ -164,11 +143,9 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
   render() {
     const { focusAreaIndicators, surveys, subjects, subjectSelectedId } = this.props;
 
-    const surveyHighlightedId = this.state.surveyHighlightedId || (
-      this.props.surveys
-      ? this.props.surveys.last().get('survey_id')
-      : null
-    );
+    // default to last (most recent) survey
+    const surveyHighlightedId = this.state.surveyHighlightedId
+      || (surveys ? surveys.last().get('survey_id') : null);
 
     const ready = focusAreaIndicators && subjects && surveys && surveyHighlightedId;
 
@@ -204,7 +181,7 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
         </PageLongTitle>
         <Row>
           <Column width={[1, 3 / 4]}>
-            <PageSelect>
+            <SubjectSelect>
               { ready && subjects.size > 1 &&
                 <div>
                   <label htmlFor="subject-select" >
@@ -235,7 +212,7 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
                   { subjectReference.get('title')}
                 </ReferenceHint>
               }
-            </PageSelect>
+            </SubjectSelect>
           </Column>
         </Row>
         <Row>

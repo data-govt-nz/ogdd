@@ -1,0 +1,183 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withTheme } from 'styled-components';
+import {
+  FlexibleWidthXYPlot,
+  XAxis,
+  YAxis,
+  GridLines,
+  AreaSeries,
+  Hint,
+} from 'react-vis';
+import { timeFormat } from 'd3-time-format';
+
+import getLabel from 'utils/get-label';
+import attributesEqual from 'utils/attributes-equal';
+import formatValue from 'utils/format-value';
+
+import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
+
+import Card from 'styles/Card';
+import CardBody from 'styles/CardBody';
+import CardFooter from 'styles/CardFooter';
+import PlotHint from 'styles/PlotHint';
+import Key from 'styles/Key';
+import KeyEntry from 'components/KeyEntry';
+
+const getYAxisMax = (yMax) => {
+  const order = Math.floor((Math.log(yMax) / Math.LN10) + 0.000000001);
+  const factor = 10 ** order;
+  // axis should have a relative buffer of 2+
+  return ((2 * Math.ceil(Math.floor(yMax / factor) / 2)) + 2) * factor;
+};
+
+const prepareData = (indicator, { surveys }) =>
+  indicator
+    .get('outcomes') // we are shoing outcomes
+    .reduce((memo, outcome) => {
+      const survey = surveys.find((item) => attributesEqual(outcome.get('survey_id'), item.get('survey_id')));
+      // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
+      return survey
+        ? memo.concat([{
+          x: new Date(survey.get('date')).getTime(),
+          y: outcome.get('value'),
+          column: survey.get('survey_id'),
+          row: indicator.get('indicator_id'),
+        }])
+        : memo;
+    }, [])
+;
+
+class PlotAssets extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  render() {
+    const {
+      indicator,
+      referenceIndicator,
+      surveyHighlightedId,
+      surveys,
+      onHighlightSurvey,
+      onCardMouseLeave,
+      theme,
+    } = this.props;
+    // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
+    const data = prepareData(indicator, this.props);
+    const referenceData = prepareData(referenceIndicator, this.props);
+
+    // set hint value from highlighted survey
+    const hintValue = data.find((d) => attributesEqual(d.column, surveyHighlightedId));
+    const hintReferenceValue = referenceData.find((d) => attributesEqual(d.column, surveyHighlightedId));
+
+    // axis ranges
+    let xAxisRange = [
+      new Date(surveys.first().get('date')).getTime(),
+      new Date(surveys.last().get('date')).getTime(),
+    ];
+    const surveyHighlighted = surveys.find((item) => attributesEqual(item.get('survey_id'), surveyHighlightedId));
+    if (surveyHighlighted && xAxisRange.indexOf(new Date(surveyHighlighted.get('date')).getTime()) < 0) {
+      xAxisRange = xAxisRange.concat(new Date(surveyHighlighted.get('date')).getTime());
+    }
+    const yAxisRange = [0, getYAxisMax(Math.max(...data.concat(referenceData).map((d) => d.y)))];
+
+    // dummy data to force the area plot from 0
+    const dataForceYRange = [{ x: xAxisRange[0], y: yAxisRange[0] }, { x: xAxisRange[0], y: yAxisRange[1] }];
+
+    return (
+      <Card
+        onMouseLeave={onCardMouseLeave}
+      >
+        <CardBody withoutTitle>
+          <ScreenReaderWrapPlot
+            figCaption={getLabel('screenreader.focus-areas.chart-caption')}
+            tableCaption={getLabel('screenreader.focus-areas.chart-table-caption')}
+            tableData={{
+              data: data.concat(referenceData),
+              columns: Object.values(surveys.map((item) => ({
+                id: item.get('survey_id'),
+                label: timeFormat('%Y')(new Date(item.get('date')).getTime()),
+              })).toJS()),
+              rows: [
+                { id: indicator.get('indicator_id'), label: indicator.get('title') },
+                { id: referenceIndicator.get('indicator_id'), label: referenceIndicator.get('title') },
+              ],
+            }}
+            formatValue={(datum) => formatValue(datum.y, indicator.get('type'))}
+          >
+            <FlexibleWidthXYPlot
+              height={240}
+              xType="time"
+            >
+              <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
+              <GridLines
+                direction="horizontal"
+                attr="y"
+                tickValues={[50]}
+              />
+              <XAxis
+                tickValues={xAxisRange}
+                tickFormat={timeFormat('%Y')}
+              />
+              <YAxis
+                tickFormat={(value) => formatValue(value, indicator.get('type'), yAxisRange[1] > 10000)}
+              />
+              <AreaSeries
+                data={referenceData}
+                style={{
+                  fill: theme.colors.assetReference,
+                  strokeWidth: 0,
+                }}
+              />
+              <AreaSeries
+                data={data}
+                style={{
+                  fill: theme.colors.fa3,
+                  strokeWidth: 0,
+                }}
+                onNearestX={(value) => onHighlightSurvey(value.column)}
+              />
+              { hintValue &&
+                <Hint
+                  value={hintValue}
+                  align={{ vertical: 'bottom', horizontal: 'left' }}
+                  style={{ transform: 'translateX(50%)' }}
+                >
+                  <PlotHint background={'fa3'} bottom>
+                    { formatValue(hintValue.y, indicator.get('type')) }
+                  </PlotHint>
+                </Hint>
+              }
+              { hintReferenceValue &&
+                <Hint
+                  value={hintReferenceValue}
+                  align={{ vertical: 'top', horizontal: 'left' }}
+                  style={{ transform: 'translateX(50%)' }}
+                >
+                  <PlotHint background={'assetReferenceHint'}>
+                    { formatValue(hintReferenceValue.y, indicator.get('type')) }
+                  </PlotHint>
+                </Hint>
+              }
+            </FlexibleWidthXYPlot>
+          </ScreenReaderWrapPlot>
+        </CardBody>
+        <CardFooter>
+          <Key>
+            <KeyEntry color="fa3" title={indicator.get('title')} />
+            <KeyEntry color="assetReference" title={referenceIndicator.get('title')} />
+          </Key>
+        </CardFooter>
+      </Card>
+    );
+  }
+}
+
+PlotAssets.propTypes = {
+  indicator: PropTypes.object.isRequired,
+  referenceIndicator: PropTypes.object.isRequired,
+  surveyHighlightedId: PropTypes.string.isRequired,
+  surveys: PropTypes.object.isRequired,
+  onHighlightSurvey: PropTypes.func.isRequired,
+  onCardMouseLeave: PropTypes.func.isRequired,
+  theme: PropTypes.object.isRequired,
+};
+
+export default withTheme(PlotAssets);

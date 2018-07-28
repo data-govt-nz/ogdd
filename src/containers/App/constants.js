@@ -1,3 +1,5 @@
+import titleIcon from 'assets/React-icon.png';
+
 // update location in store
 export const LOCATION_UPDATE = 'action.LOCATION_UPDATE';
 // update location in URL
@@ -111,15 +113,26 @@ export const FOCUSAREA_INDICATOR_IDS = [
   'fa1', 'fa2', 'fa3', 'fa4', 'fa5', 'fa6',
 ];
 
+export const FOCUSAREA_ICONS = {
+  fa1: titleIcon,
+  fa2: titleIcon,
+  fa3: titleIcon,
+  fa4: titleIcon,
+  fa5: titleIcon,
+  fa6: titleIcon,
+};
+export const FOCUSAREA_COLORICONS = {
+  fa1: titleIcon,
+  fa2: titleIcon,
+  fa3: titleIcon,
+  fa4: titleIcon,
+  fa5: titleIcon,
+  fa6: titleIcon,
+};
+
 export const DEFAULT_SUBJECT_ID = 'all';
 
 export const BREAKPOINTS = {
   SMALL: 0,
   MEDIUM: 1,
 };
-
-const constants = {
-  NAVITEMS,
-  BREAKPOINTS,
-};
-export default constants;

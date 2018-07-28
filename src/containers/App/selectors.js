@@ -1,7 +1,10 @@
 import { createSelector } from 'reselect';
 import attributesEqual from 'utils/attributes-equal';
 
-import { FOCUSAREA_INDICATOR_IDS, DEFAULT_SUBJECT_ID } from './constants';
+import {
+  FOCUSAREA_INDICATOR_IDS,
+  DEFAULT_SUBJECT_ID,
+} from './constants';
 
 // const getState = (state) => state;
 
@@ -103,6 +106,15 @@ export const selectInsights = createSelector(
 
 export const selectFocusAreaIndicatorsWithOutcomes = createSelector(
   selectFocusAreaIndicators,
+  selectOutcomes,
+  (indicators, outcomes) => indicators && outcomes && indicators.map((item) => item.set(
+    'outcomes',
+    outcomes.filter((outcome) => attributesEqual(outcome.get('indicator_id'), item.get('indicator_id')))
+  ))
+);
+
+export const selectIndicatorsWithOutcomes = createSelector(
+  selectIndicators,
   selectOutcomes,
   (indicators, outcomes) => indicators && outcomes && indicators.map((item) => item.set(
     'outcomes',

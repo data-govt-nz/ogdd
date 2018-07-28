@@ -17,6 +17,7 @@
   "component.assets.nav": "Data Assets",
   "component.assets.title": "Data Assets",
   "component.assets.metaDescription": "Data Assets component",
+  "component.assets.longTitle": "What open data assets are available on data.govt.nz?",
   "component.notFound.title": "Page not found",
   "component.notFound.metaDescription": "Page not found",
   "screenreader.navActive": "Currently selected page",

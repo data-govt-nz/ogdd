@@ -89,6 +89,8 @@ const render = (Component) => {
               fa6: '#FC6128',
               faPlotBackground: '#F4F5F5',
               faReference: '#D4D7D9',
+              assetReference: '#DCDEE0',
+              assetReferenceHint: '#68777D',
               referenceLabel: '#4D5E65',
             },
           }}
