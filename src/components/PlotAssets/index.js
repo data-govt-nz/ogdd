@@ -5,7 +5,6 @@ import {
   FlexibleWidthXYPlot,
   XAxis,
   YAxis,
-  GridLines,
   AreaSeries,
   Hint,
 } from 'react-vis';
@@ -14,12 +13,11 @@ import { timeFormat } from 'd3-time-format';
 import getLabel from 'utils/get-label';
 import attributesEqual from 'utils/attributes-equal';
 import formatValue from 'utils/format-value';
-
+import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 
 import Card from 'styles/Card';
 import CardBody from 'styles/CardBody';
-import CardFooter from 'styles/CardFooter';
 import PlotHint from 'styles/PlotHint';
 import Key from 'styles/Key';
 import KeyEntry from 'components/KeyEntry';
@@ -34,6 +32,7 @@ const getYAxisMax = (yMax) => {
 const prepareData = (indicator, { surveys }) =>
   indicator
     .get('outcomes') // we are shoing outcomes
+    .filter((outcome) => attributesEqual(outcome.get('subject_id'), DEFAULT_SUBJECT_ID)) // for the current subject
     .reduce((memo, outcome) => {
       const survey = surveys.find((item) => attributesEqual(outcome.get('survey_id'), item.get('survey_id')));
       // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
@@ -107,11 +106,6 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
               xType="time"
             >
               <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
-              <GridLines
-                direction="horizontal"
-                attr="y"
-                tickValues={[50]}
-              />
               <XAxis
                 tickValues={xAxisRange}
                 tickFormat={timeFormat('%Y')}
@@ -157,14 +151,12 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
                 </Hint>
               }
             </FlexibleWidthXYPlot>
+            <Key>
+              <KeyEntry color="fa3" title={indicator.get('title')} />
+              <KeyEntry color="assetReference" title={referenceIndicator.get('title')} />
+            </Key>
           </ScreenReaderWrapPlot>
         </CardBody>
-        <CardFooter>
-          <Key>
-            <KeyEntry color="fa3" title={indicator.get('title')} />
-            <KeyEntry color="assetReference" title={referenceIndicator.get('title')} />
-          </Key>
-        </CardFooter>
       </Card>
     );
   }

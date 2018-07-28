@@ -14,6 +14,7 @@
   "component.services.nav": "Data Services",
   "component.services.title": "Data Services",
   "component.services.metaDescription": "Data Services component",
+  "component.services.longTitle": "How are agencies making their open data assets available?",
   "component.assets.nav": "Data Assets",
   "component.assets.title": "Data Assets",
   "component.assets.metaDescription": "Data Assets component",
