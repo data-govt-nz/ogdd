@@ -75,6 +75,11 @@ export const selectSubjectIdFromLocation = createSelector(
   (location) => location.getIn(['query', 'subject']) || DEFAULT_SUBJECT_ID
 );
 
+export const selectSurveyIdFromLocation = createSelector(
+  selectLocation,
+  (location) => location.getIn(['query', 'survey']) || null
+);
+
 // indicators
 export const selectIndicators = createSelector(
   (state) => selectData(state, 'indicators'),

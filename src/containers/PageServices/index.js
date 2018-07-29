@@ -15,6 +15,8 @@ import {
   selectSurveys,
 } from 'containers/App/selectors';
 
+import { SERVICES_INDICATOR_ID_MAP } from 'containers/App/constants';
+
 // components
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
@@ -55,10 +57,6 @@ const INITIAL_STATE = {
   showModal: false,
   surveyHighlightedId: null, // set from surveys
 };
-
-const HOW_ID = 'q03';
-const STANDARDS_ID = 'q05';
-const SERVICES_ID = 'q04';
 
 class PageServices extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -107,11 +105,11 @@ class PageServices extends React.PureComponent { // eslint-disable-line react/pr
       : null
     );
 
-    const ready = indicators && surveys && surveyHighlightedId;
+    const ready = indicators && surveys && surveyHighlightedId !== null;
 
-    const howIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), HOW_ID));
-    const standardsIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), STANDARDS_ID));
-    const servicesIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), SERVICES_ID));
+    const howIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.HOW_ID));
+    const standardsIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.STANDARDS_ID));
+    const servicesIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.SERVICES_ID));
 
     return (
       <PageContainer>

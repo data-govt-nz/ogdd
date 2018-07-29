@@ -7,7 +7,7 @@ const Styled = styled.div`
   table-layout: fixed;
   width: 100%;
   line-height: 20px;
-  height: 40px;
+  min-height: ${(props) => props.hasTitle ? '40px' : 0};
 `;
 
 const Cell = styled.div`
@@ -26,7 +26,7 @@ const Icon = styled.img`
 `;
 
 const CardTitle = ({ iconSrc, title }) => (
-  <Styled>
+  <Styled hasTitle={title !== ''}>
     <IconCell>
       <Icon alt="" src={iconSrc} role="presentation" />
     </IconCell>
@@ -39,6 +39,10 @@ const CardTitle = ({ iconSrc, title }) => (
 CardTitle.propTypes = {
   title: PropTypes.string,
   iconSrc: PropTypes.string,
+};
+
+CardTitle.defaultProps = {
+  title: '',
 };
 
 export default CardTitle;

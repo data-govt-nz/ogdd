@@ -11,6 +11,8 @@
   "component.insights.nav": "Key Insights",
   "component.insights.title": "Key Insights",
   "component.insights.metaDescription": "Key Insights component",
+  "component.insights.longTitle": "What are some of the key insights?",
+  "component.insights.selectSurveyLabel": "Key insights for survey ",
   "component.services.nav": "Data Services",
   "component.services.title": "Data Services",
   "component.services.metaDescription": "Data Services component",

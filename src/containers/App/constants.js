@@ -113,6 +113,18 @@ export const FOCUSAREA_INDICATOR_IDS = [
   'fa1', 'fa2', 'fa3', 'fa4', 'fa5', 'fa6',
 ];
 
+export const SERVICES_INDICATOR_ID_MAP = {
+  HOW_ID: 'q03',
+  STANDARDS_ID: 'q05',
+  SERVICES_ID: 'q04',
+};
+
+export const ASSETS_INDICATOR_ID_MAP = {
+  ASSETS_ID: 'assets',
+  MACHINEREADABLE_ID: 'assets_machinereadable',
+  NZGOAL_ID: 'assets_nzgoal',
+};
+
 export const FOCUSAREA_ICONS = {
   fa1: titleIcon,
   fa2: titleIcon,

@@ -15,6 +15,8 @@ import {
   selectSurveys,
 } from 'containers/App/selectors';
 
+import { ASSETS_INDICATOR_ID_MAP } from 'containers/App/constants';
+
 // components
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
@@ -54,10 +56,6 @@ const INITIAL_STATE = {
   showModal: false,
   surveyHighlightedId: null, // set from surveys
 };
-
-const MACHINEREADABLE_ID = 'assets_machinereadable';
-const NZGOAL_ID = 'assets_nzgoal';
-const ASSETS_ID = 'assets';
 
 class PageAssets extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -106,11 +104,14 @@ class PageAssets extends React.PureComponent { // eslint-disable-line react/pref
       : null
     );
 
-    const ready = indicators && surveys && surveyHighlightedId;
+    const ready = indicators && surveys && surveyHighlightedId !== null;
 
-    const machineReadableIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), MACHINEREADABLE_ID));
-    const nzgoalIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), NZGOAL_ID));
-    const assetsIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), ASSETS_ID));
+    const machineReadableIndicator = ready &&
+      indicators.find((item) => attributesEqual(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.MACHINEREADABLE_ID));
+    const nzgoalIndicator = ready &&
+      indicators.find((item) => attributesEqual(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.NZGOAL_ID));
+    const assetsIndicator = ready &&
+      indicators.find((item) => attributesEqual(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.ASSETS_ID));
 
     return (
       <PageContainer>
