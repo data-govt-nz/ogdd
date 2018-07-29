@@ -136,7 +136,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                 tickFormat={timeFormat('%Y')}
               />
               <YAxis
-                tickValues={[50]}
+                tickValues={yAxisRange}
                 tickFormat={(value) => formatValue(value, focusArea.get('type'))}
               />
               <AreaSeries
