@@ -75,7 +75,7 @@ const render = (Component) => {
           theme={{
             breakpoints: ['45em', '63em'],
             gutter: ['4px', '6px', '8px'],
-            sizes: ['14px', '18px'],
+            sizes: ['12px', '14px', '18px'],
             colors: {
               white: '#fff',
               light: '#E7E9EB',

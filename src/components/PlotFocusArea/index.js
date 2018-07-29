@@ -45,6 +45,15 @@ const prepareData = (subject, { focusArea, surveys }) =>
 ;
 
 class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = { refHighlightedId: null };
+  }
+
+  onHighlightReference(refHighlightedId) {
+    this.setState({ refHighlightedId: refHighlightedId || null });
+  }
+
   render() {
     const {
       focusArea,
@@ -58,14 +67,21 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
       onFAMouseLeave,
       onFATouch,
       theme,
+      onSelectReference,
     } = this.props;
+
+    const { refHighlightedId } = this.state;
+
     // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
     const data = prepareData(subject, this.props);
 
     const referenceData = referenceSubject && prepareData(referenceSubject, this.props);
 
     // set hint value from highlighted survey
-    const hintValue = data.find((d) => attributesEqual(d.column, surveyHighlightedId));
+
+    const hintValue = refHighlightedId
+      ? referenceData.find((d) => attributesEqual(d.column, surveyHighlightedId) && attributesEqual(d.row, refHighlightedId))
+      : data.find((d) => attributesEqual(d.column, surveyHighlightedId));
 
     // axis ranges
     let xAxisRange = [
@@ -142,16 +158,20 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
               <AreaSeries
                 data={referenceSubject ? referenceData : data}
                 style={{
-                  fill: theme.colors[referenceSubject ? 'faReference' : focusArea.get('indicator_id')],
+                  fill: theme.colors[referenceSubject && !refHighlightedId ? 'faReference' : focusArea.get('indicator_id')],
                   strokeWidth: 0,
+                  cursor: referenceSubject ? 'pointer' : 'auto',
                 }}
+                onSeriesClick={() => referenceSubject ? onSelectReference(referenceSubject) : false}
+                onSeriesMouseOver={() => referenceSubject ? this.onHighlightReference(referenceSubject.get('subject_id')) : false}
+                onSeriesMouseOut={() => referenceSubject ? this.onHighlightReference(false) : false}
                 onNearestX={(value) => referenceSubject ? false : onHighlightSurvey(value.column)}
               />
               { referenceSubject && data.length > 1 &&
                 <LineSeries
                   data={data}
                   style={{
-                    stroke: theme.colors[focusArea.get('indicator_id')],
+                    stroke: theme.colors[refHighlightedId ? 'faReference' : focusArea.get('indicator_id')],
                   }}
                   onNearestX={(value) => onHighlightSurvey(value.column)}
                 />
@@ -166,6 +186,11 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                   }}
                   onNearestX={(value) => onHighlightSurvey(value.column)}
                 />
+              }
+              { refHighlightedId &&
+                <PlotHint color="referenceLabel" secondary>
+                  { referenceSubject.get('title') }
+                </PlotHint>
               }
               { hintValue &&
                 <Hint
@@ -197,6 +222,7 @@ PlotFocusArea.propTypes = {
   onFAMouseEnter: PropTypes.func.isRequired,
   onFAMouseLeave: PropTypes.func.isRequired,
   onFATouch: PropTypes.func.isRequired,
+  onSelectReference: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
 };
 

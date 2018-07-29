@@ -108,6 +108,10 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
     this.setState({ surveyHighlightedId });
   }
 
+  onSelectReference(subjectReference) {
+    this.props.nav({ query: { subject: subjectReference } });
+  }
+
   onSubjectChange(e) {
     this.props.nav({ query: { subject: e.target.value } });
   }
@@ -235,6 +239,7 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
                       surveys={surveys}
                       subject={subjectSelected}
                       referenceSubject={subjectReference}
+                      onSelectReference={() => subjectReference ? this.onSelectReference(subjectReference.get('subject_id')) : null}
                       surveyHighlightedId={surveyHighlightedId}
                       onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
                       onFAMouseEnter={() => this.onFAMouseEnter(focusArea)}
