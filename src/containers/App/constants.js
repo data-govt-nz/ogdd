@@ -181,10 +181,11 @@ export const FOCUSAREA_WHITEICONS = {
 export const BREAKPOINTS = {
   SMALL: 0,
   MEDIUM: 1,
+  LARGE: 2,
 };
 
 export const THEME = {
-  breakpoints: ['45em', '63em'],
+  breakpoints: ['45em', '63em', '72em'],
   gutter: ['4px', '6px', '8px'],
   sizes: ['12px', '14px', '18px', '34px'],
   colors: {

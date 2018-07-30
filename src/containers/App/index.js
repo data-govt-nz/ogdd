@@ -10,7 +10,7 @@ import getLabel from 'utils/get-label';
 
 // components
 import Label from 'components/Label';
-import Header from 'components/Header';
+import Header from 'containers/Header';
 
 // simple styles
 import SkipContent from 'styles/SkipContent';

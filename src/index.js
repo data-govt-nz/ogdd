@@ -24,6 +24,7 @@ import PageFocusAreas from 'containers/PageFocusAreas';
 import PageInsights from 'containers/PageInsights';
 import PageServices from 'containers/PageServices';
 import PageAssets from 'containers/PageAssets';
+import PageAbout from 'containers/PageAbout';
 import PageNotFound from 'containers/PageNotFound';
 
 import { updateLocation } from 'containers/App/actions';
@@ -55,6 +56,7 @@ const pathComponentMap = {
   insights: <PageInsights />,
   services: <PageServices />,
   assets: <PageAssets />,
+  about: <PageAbout />,
   'not-found': <PageNotFound />,
 };
 

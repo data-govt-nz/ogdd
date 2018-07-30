@@ -31,15 +31,20 @@ const Styled = styled.nav`
 
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     padding-top: 1.5em;
+    margin-left: 120px;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.LARGE]}) {
+    margin-left: 0;
   }
 `;
 const Link = styled.button`
   display: inline-block;
-  padding: 3px 5px;
+  padding: 3px 10px;
   margin: 0 2px;
   text-align: center;
   border-radius: 99999px;
   font-size: 0.8em;
+  font-weight: 600;
   max-width: 75px;
   background-color: ${(props) => props.theme.colors.white};
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
@@ -50,9 +55,9 @@ const Link = styled.button`
   `}
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     font-size: 0.9em;
-    width: 130px;
+    min-width: 100px;
     max-width: none;
-    padding: 7px 5px;
+    padding: 7px 20px;
     margin: 0 5px;
   }
 `;
