@@ -38,6 +38,7 @@ const Styled = styled.nav`
   }
 `;
 const Link = styled.button`
+  cursor: pointer;
   display: inline-block;
   padding: 3px 10px;
   margin: 0 2px;

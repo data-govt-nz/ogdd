@@ -23,11 +23,15 @@ const Styled = styled.header`
   }
 `;
 
-const Brand = styled.div`
+const Brand = styled.button`
   position: absolute;
   top: 0;
   left: 0;
   text-align: left;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 `;
 
 const Logo = styled.img`
@@ -62,6 +66,7 @@ const NavBar = styled.div`
 `;
 
 const AboutLink = styled.button`
+  cursor: pointer;
   position: absolute;
   padding: 3px 10px;
   top: 10px;
@@ -86,17 +91,17 @@ const AboutLink = styled.button`
   }
 `;
 
-
 const Header = ({ navItems, location, nav }) => (
   <Styled role="banner">
     <NavBar>
-      <Brand>
+      <Brand onClick={() => nav('')} title={getLabel('screenreader.header.homeLink')}>
         <Logo alt={getLabel('app.title')} src={logo} />
       </Brand>
       <Menu navItems={navItems} visibleMin={BREAKPOINTS.MEDIUM} />
       <AboutLink
         active={location.get('path') === 'about'}
         onClick={() => nav('about')}
+        title={getLabel('component.about.nav')}
       >
         <Label id="component.about.nav" />
         { location.get('path') === 'about' &&
