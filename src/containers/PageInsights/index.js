@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
+import { List } from 'immutable';
 import styled from 'styled-components';
 
 import { timeFormat } from 'd3-time-format';
@@ -21,8 +22,9 @@ import {
 import { navigate } from 'containers/App/actions';
 
 import {
-  FOCUSAREA_COLORICONS,
+  FOCUSAREA_WHITEICONS,
 } from 'containers/App/constants';
+import SurveyInformation from 'containers/SurveyInformation';
 
 // components
 import Label from 'components/Label';
@@ -31,6 +33,7 @@ import ReadMore from 'components/ReadMore';
 import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotInsight from 'components/PlotInsight';
+import FAKeyEntry from 'components/FAKeyEntry';
 
 // simple styles (styled components)
 import Row from 'styles/Row';
@@ -41,7 +44,7 @@ import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 
 // assets
-import titleIcon from 'assets/React-icon.png';
+import titleIcon from 'assets/key-insights.svg';
 import description from 'labels/insights.md'; // loaded as HTML from markdown
 
 const PageTitleWrapper = styled.div`
@@ -59,6 +62,8 @@ const SurveySelect = styled.div`
   position: relative;
   width: 100%;
 `;
+
+const FAKey = styled.div``;
 
 const INITIAL_STATE = {
   showModal: false,
@@ -88,18 +93,27 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
     );
   }
 
-  renderAsideContent() {
+  renderAsideContent(focusAreas, surveyID) {
     return (
       <AsideContent
         title={this.renderPageTitle()}
         html={description}
       >
-        <p>
-          TODO: focus area key
-        </p>
-        <p>
-          TODO: participating hint
-        </p>
+        <FAKey role="presentation">
+          {
+            focusAreas && focusAreas.map((fa) => (
+              <FAKeyEntry
+                key={fa.get('indicator_id')}
+                title={fa.get('title')}
+                color={fa.get('indicator_id')}
+                iconSrc={FOCUSAREA_WHITEICONS[fa.get('indicator_id')]}
+              />
+            ))
+          }
+        </FAKey>
+        { surveyID &&
+          <SurveyInformation surveySelectedId={surveyID} />
+        }
       </AsideContent>
     );
   }
@@ -120,6 +134,14 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
       )))
       .sortBy((insight) => insight.getIn(['indicator', 'parent_indicator_id']));
 
+    const relevantFocusAreas = ready && relevantInsights
+      .reduce((memo, insight) => {
+        const faID = insight.getIn(['indicator', 'parent_indicator_id']);
+        return memo.find((item) => attributesEqual(item.get('indicator_id'), faID))
+          ? memo
+          : memo.push(indicators.find((item) => attributesEqual(item.get('indicator_id'), faID)));
+      }, List());
+
     return (
       <PageContainer>
         <Helmet>
@@ -139,7 +161,7 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
         </Hidden>
         { this.state.showModal &&
           <FSModal dismiss={() => this.onFSModalDismiss()}>
-            { this.renderAsideContent() }
+            { this.renderAsideContent(relevantFocusAreas, surveyID) }
           </FSModal>
         }
         <PageLongTitle id="pageTitle">
@@ -172,7 +194,7 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
         <Row>
           <Column width={[1, 1 / 4]} order={2}>
             <Visible min={0} >
-              { this.renderAsideContent() }
+              { this.renderAsideContent(relevantFocusAreas, surveyID) }
             </Visible>
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
@@ -191,7 +213,13 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
                       )
                     )}
                     agenciesTotal={parseInt(survey.get('agencies_total'), 10)}
-                    focusAreaIcon={FOCUSAREA_COLORICONS[insight.getIn(['indicator', 'parent_indicator_id'])]}
+                    focusArea={indicators.find((item) =>
+                        attributesEqual(
+                          item.get('indicator_id'),
+                          insight.getIn(['indicator', 'parent_indicator_id'])
+                        )
+                      )
+                    }
                   />
                 </Column>
               ))}

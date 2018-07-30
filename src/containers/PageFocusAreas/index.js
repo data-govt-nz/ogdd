@@ -18,10 +18,12 @@ import {
 } from 'containers/App/selectors';
 import { navigate } from 'containers/App/actions';
 
+import SurveyInformation from 'containers/SurveyInformation';
+
 import {
   DEFAULT_SUBJECT_ID,
   FOCUSAREA_ICONS,
-  FOCUSAREA_COLORICONS,
+  FOCUSAREA_DARKICONS,
 } from 'containers/App/constants';
 
 // components
@@ -41,7 +43,7 @@ import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 
 // assets
-import titleIcon from 'assets/React-icon.png';
+import titleIcon from 'assets/focus-areas.svg';
 import description from 'labels/focus-areas.md'; // loaded as HTML from markdown
 
 const PageTitleWrapper = styled.div`
@@ -129,7 +131,7 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
           title={
             <PageTitle
               title={this.state.focusAreaSelected.get('title')}
-              iconSrc={FOCUSAREA_ICONS[this.state.focusAreaSelected.get('indicator_id')]}
+              iconSrc={FOCUSAREA_DARKICONS[this.state.focusAreaSelected.get('indicator_id')]}
             />
           }
           text={this.state.focusAreaSelected.get('description')}
@@ -140,7 +142,9 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
       <AsideContent
         title={this.renderPageTitle()}
         html={description}
-      />
+      >
+        <SurveyInformation />
+      </AsideContent>
     );
   }
 
@@ -234,7 +238,7 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
                 >
                   <PlotFocusArea
                     focusArea={focusArea}
-                    focusAreaIcon={FOCUSAREA_COLORICONS[focusArea.get('indicator_id')]}
+                    focusAreaIcon={FOCUSAREA_ICONS[focusArea.get('indicator_id')]}
                     surveys={surveys}
                     subject={subjectSelected}
                     referenceSubject={subjectReference}

@@ -16,6 +16,7 @@ import {
 } from 'containers/App/selectors';
 
 import { SERVICES_INDICATOR_ID_MAP } from 'containers/App/constants';
+import SurveyInformation from 'containers/SurveyInformation';
 
 // components
 import Label from 'components/Label';
@@ -35,7 +36,7 @@ import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 
 // assets
-import titleIcon from 'assets/React-icon.png';
+import titleIcon from 'assets/data-services.svg';
 import description from 'labels/data-services.md'; // loaded as HTML from markdown
 
 const PageTitleWrapper = styled.div`
@@ -92,7 +93,9 @@ class PageServices extends React.PureComponent { // eslint-disable-line react/pr
       <AsideContent
         title={this.renderPageTitle()}
         html={description}
-      />
+      >
+        <SurveyInformation />
+      </AsideContent>
     );
   }
 

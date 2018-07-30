@@ -94,7 +94,9 @@ export const selectIndicator = createSelector(
 
 export const selectFocusAreaIndicators = createSelector(
   selectIndicators,
-  (data) => data && data.filter((item) => FOCUSAREA_INDICATOR_IDS.indexOf(item.get('indicator_id')) >= 0)
+  (data) => data && data
+    .filter((item) => FOCUSAREA_INDICATOR_IDS.indexOf(item.get('indicator_id')) >= 0)
+    .sortBy((item) => item.get('indicator_id'))
 );
 
 // outcomes

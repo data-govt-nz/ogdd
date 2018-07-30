@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 38 38">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-fa1-dark);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #202326;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-fa1-dark">
+      <rect width="38" height="38"/>
+    </clipPath>
+  </defs>
+  <g id="fa1-dark" class="cls-1">
+    <rect class="cls-3" width="38" height="38"/>
+    <path id="Path_1" data-name="Path 1" class="cls-2" d="M16.763,13.4l-.711-2.167A2.31,2.31,0,0,0,13.921,9.5H7.053A2.2,2.2,0,0,0,5,11.753V33.247A2.2,2.2,0,0,0,7.053,35.5H32.947A2.2,2.2,0,0,0,35,33.247V16.867c0-1.907-2.211-3.467-3.947-3.467Z" transform="translate(-1 -3.5)"/>
+    <circle id="Ellipse_1" data-name="Ellipse 1" class="cls-2" cx="2.5" cy="2.5" r="2.5" transform="translate(10 14)"/>
+    <circle id="Ellipse_2" data-name="Ellipse 2" class="cls-2" cx="2.5" cy="2.5" r="2.5" transform="translate(10.5 23)"/>
+    <rect id="Rectangle_2" data-name="Rectangle 2" class="cls-2" width="3" height="7" transform="translate(24.542 17.5)"/>
+    <path id="Path_2" data-name="Path 2" class="cls-2" d="M19,21h2.455a1.577,1.577,0,0,1,1.636,1.5h0A1.577,1.577,0,0,0,24.727,24H28" transform="translate(-3.958 -4.5)"/>
+    <path id="Path_3" data-name="Path 3" class="cls-2" d="M28,28H25.545a1.577,1.577,0,0,0-1.636,1.5h0A1.577,1.577,0,0,1,22.273,31H19" transform="translate(-3.958 -5.5)"/>
+  </g>
+</svg>

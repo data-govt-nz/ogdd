@@ -1,4 +1,21 @@
-import titleIcon from 'assets/React-icon.png';
+import iconFA1 from 'assets/fa1.svg';
+import iconFA2 from 'assets/fa2.svg';
+import iconFA3 from 'assets/fa3.svg';
+import iconFA4 from 'assets/fa4.svg';
+import iconFA5 from 'assets/fa5.svg';
+import iconFA6 from 'assets/fa6.svg';
+import iconFA1dark from 'assets/fa1-dark.svg';
+import iconFA2dark from 'assets/fa2-dark.svg';
+import iconFA3dark from 'assets/fa3-dark.svg';
+import iconFA4dark from 'assets/fa4-dark.svg';
+import iconFA5dark from 'assets/fa5-dark.svg';
+import iconFA6dark from 'assets/fa6-dark.svg';
+import iconFA1white from 'assets/fa1-white.svg';
+import iconFA2white from 'assets/fa2-white.svg';
+import iconFA3white from 'assets/fa3-white.svg';
+import iconFA4white from 'assets/fa4-white.svg';
+import iconFA5white from 'assets/fa5-white.svg';
+import iconFA6white from 'assets/fa6-white.svg';
 
 // App actions
 // update location in store
@@ -136,20 +153,28 @@ export const NAVITEMS = [
 
 // assets
 export const FOCUSAREA_ICONS = {
-  fa1: titleIcon,
-  fa2: titleIcon,
-  fa3: titleIcon,
-  fa4: titleIcon,
-  fa5: titleIcon,
-  fa6: titleIcon,
+  fa1: iconFA1,
+  fa2: iconFA2,
+  fa3: iconFA3,
+  fa4: iconFA4,
+  fa5: iconFA5,
+  fa6: iconFA6,
 };
-export const FOCUSAREA_COLORICONS = {
-  fa1: titleIcon,
-  fa2: titleIcon,
-  fa3: titleIcon,
-  fa4: titleIcon,
-  fa5: titleIcon,
-  fa6: titleIcon,
+export const FOCUSAREA_DARKICONS = {
+  fa1: iconFA1dark,
+  fa2: iconFA2dark,
+  fa3: iconFA3dark,
+  fa4: iconFA4dark,
+  fa5: iconFA5dark,
+  fa6: iconFA6dark,
+};
+export const FOCUSAREA_WHITEICONS = {
+  fa1: iconFA1white,
+  fa2: iconFA2white,
+  fa3: iconFA3white,
+  fa4: iconFA4white,
+  fa5: iconFA5white,
+  fa6: iconFA6white,
 };
 
 // theme

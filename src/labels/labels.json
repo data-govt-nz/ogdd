@@ -24,6 +24,8 @@
   "component.assets.longTitle": "What open data assets are available on data.govt.nz?",
   "component.notFound.title": "Page not found",
   "component.notFound.metaDescription": "Page not found",
+  "component.surveyInformation.title": "Open Data Maturity Surveys",
+  "component.surveyInformation.current": "agencies participated in",
   "screenreader.navActive": "Currently selected page",
   "screenreader.navigationOccured": "Navigation occured",
   "screenreader.skipToContent": "Skip to main content",
@@ -34,5 +36,6 @@
   "screenreader.assets.chart-caption": "A chart showing available open data assets over time",
   "screenreader.assets.chart-table-caption": "Table listing chart values",
   "screenreader.services.chart-caption": "A time series chart showing how open data are made available ",
-  "screenreader.services.chart-table-caption": "Table listing chart values"
+  "screenreader.services.chart-table-caption": "Table listing chart values",
+  "screenreader.insights.focus-area-label": "Key insight for focus area: "
 }

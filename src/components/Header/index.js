@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Label from 'components/Label';
+// import Label from 'components/Label';
 
 import { BREAKPOINTS } from 'containers/App/constants';
 import Menu from 'containers/Menu';
 
 import getLabel from 'utils/get-label';
 
-import reactLogo from 'assets/React-icon.png';
+import reactLogo from 'assets/logo.svg';
 
 const Styled = styled.header`
   height: 100px;
@@ -35,18 +35,18 @@ const Logo = styled.img`
   }
 `;
 
-const Title = styled.div`
-  display: inline-block;
-  text-transform: uppercase;
-  font-weight: bold;
-  vertical-align: middle;
-  font-size: 0.8em;
-  width: 140px;
-  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
-    font-size: 1em;
-    width: 170px;
-  }
-`;
+// const Title = styled.div`
+//   display: inline-block;
+//   text-transform: uppercase;
+//   font-weight: bold;
+//   vertical-align: middle;
+//   font-size: 0.8em;
+//   width: 140px;
+//   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
+//     font-size: 1em;
+//     width: 170px;
+//   }
+// `;
 
 const NavBar = styled.div`
   position: relative;
@@ -62,9 +62,6 @@ const Header = ({ navItems }) => (
     <NavBar>
       <Brand>
         <Logo alt={getLabel('app.title')} src={reactLogo} role="presentation" />
-        <Title>
-          <Label id="app.title" />
-        </Title>
       </Brand>
       <Menu navItems={navItems} visibleMin={BREAKPOINTS.MEDIUM} />
     </NavBar>

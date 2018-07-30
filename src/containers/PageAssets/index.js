@@ -34,7 +34,7 @@ import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 
 // assets
-import titleIcon from 'assets/React-icon.png';
+import titleIcon from 'assets/data-assets.svg';
 import description from 'labels/data-assets.md'; // loaded as HTML from markdown
 
 const PageTitleWrapper = styled.div`

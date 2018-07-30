@@ -15,16 +15,23 @@ const Styled = styled.div`
 const Cell = styled.div`
   display: table-cell;
   vertical-align: top;
+  padding-top: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
 `;
 
-const IconCell = styled(Cell)`
-  width: 20px;
+const IconCell = styled.div`
+  display: table-cell;
+  vertical-align: top;
+  width: 38px;
 `;
 
 const Icon = styled.img`
   position: relative;
   left: -7px
-  height: 20px;
+  height: 38px;
+  width: 38px;
 `;
 
 const PageTitle = ({ labelId, iconSrc, title }) => (

@@ -10,6 +10,7 @@ injectGlobal`
     height: 100%;
     width: 100%;
     color: #202326;
+    font-size: 14px;
   }
   #root {
     font-family: 'Barlow', sans-serif;

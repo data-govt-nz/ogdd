@@ -7,28 +7,32 @@ const Styled = styled.div`
   table-layout: fixed;
   width: 100%;
   line-height: 20px;
-  min-height: ${(props) => props.hasTitle ? '40px' : 0};
+  min-height: ${(props) => props.hasTitle ? '49px' : 0};
 `;
 
 const Cell = styled.div`
   display: table-cell;
   vertical-align: top;
+  padding-top: 8px;
+  font-size: 15px;
 `;
 
-const IconCell = styled(Cell)`
-  width: 20px;
+const IconCell = styled.div`
+  display: table-cell;
+  vertical-align: top;
+  width: 38px;
 `;
 
 const Icon = styled.img`
   position: relative;
-  left: -7px
-  height: 20px;
+  left: -5px
+  height: 38px;
 `;
 
-const CardTitle = ({ iconSrc, title }) => (
+const CardTitle = ({ iconSrc, title, altTitle }) => (
   <Styled hasTitle={title !== ''}>
     <IconCell>
-      <Icon alt="" src={iconSrc} role="presentation" />
+      <Icon alt={altTitle || ''} src={iconSrc} role={altTitle ? null : 'presentation'} />
     </IconCell>
     <Cell>
       { title }
@@ -38,6 +42,7 @@ const CardTitle = ({ iconSrc, title }) => (
 
 CardTitle.propTypes = {
   title: PropTypes.string,
+  altTitle: PropTypes.string,
   iconSrc: PropTypes.string,
 };
 

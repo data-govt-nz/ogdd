@@ -6,7 +6,7 @@ import { fromJS } from 'immutable';
 import getLabel from 'utils/get-label';
 import formatValue from 'utils/format-value';
 
-import { ANSWERS } from 'containers/App/constants';
+import { ANSWERS, FOCUSAREA_ICONS } from 'containers/App/constants';
 
 import CardTitle from 'components/CardTitle';
 import KeyEntry from 'components/KeyEntry';
@@ -77,7 +77,7 @@ const getColorValue = (answer, indicatorID, theme) => {
 
 class PlotInsight extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { insight, focusAreaIcon, theme, agenciesTotal } = this.props;
+    const { insight, focusArea, theme, agenciesTotal } = this.props;
 
     const outcomeAnswers = insight.get('outcome_answers').split(',');
     const markedTotal = outcomeAnswers.length;
@@ -111,7 +111,10 @@ class PlotInsight extends React.PureComponent { // eslint-disable-line react/pre
     return (
       <Card>
         <div>
-          <CardTitle iconSrc={focusAreaIcon} />
+          <CardTitle
+            iconSrc={FOCUSAREA_ICONS[focusArea.get('indicator_id')]}
+            altTitle={`${getLabel('screenreader.insights.focus-area-label')} ${focusArea.get('title')}`}
+          />
         </div>
         <CardBody>
           <InsightValue
@@ -163,7 +166,7 @@ class PlotInsight extends React.PureComponent { // eslint-disable-line react/pre
 
 PlotInsight.propTypes = {
   insight: PropTypes.object.isRequired,
-  focusAreaIcon: PropTypes.string.isRequired,
+  focusArea: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   agenciesTotal: PropTypes.number,
 };

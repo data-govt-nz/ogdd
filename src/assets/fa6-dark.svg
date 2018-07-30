@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 38 38">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-fa6-dark);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #202326;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .cls-3 {
+        fill: #202326;
+      }
+
+      .cls-4 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-fa6-dark">
+      <rect width="38" height="38"/>
+    </clipPath>
+  </defs>
+  <g id="fa6-dark" class="cls-1">
+    <rect class="cls-4" width="38" height="38"/>
+    <ellipse id="Ellipse_5" data-name="Ellipse 5" class="cls-2" cx="8" cy="4.75" rx="8" ry="4.75" transform="translate(17 5)"/>
+    <circle id="Ellipse_6" data-name="Ellipse 6" class="cls-2" cx="4" cy="4" r="4" transform="translate(21 6)"/>
+    <circle id="Ellipse_7" data-name="Ellipse 7" class="cls-3" cx="1.5" cy="1.5" r="1.5" transform="translate(23.5 8.5)"/>
+    <path id="Path_580" data-name="Path 580" class="cls-2" d="M5.56,1A1.452,1.452,0,0,1,6.8,1.846L7.184,3h8.039A1.745,1.745,0,0,1,17,4.769V13H1V2.231A1.2,1.2,0,0,1,2.159,1Z" transform="translate(4 21)"/>
+    <path id="Path_581" data-name="Path 581" class="cls-2" d="M14.633,13H18V4.794a1.808,1.808,0,0,0-1.889-1.781H7.57L7.159,1.852A1.446,1.446,0,0,0,5.845,1H2.232A1.229,1.229,0,0,0,1,2.161V4.406" transform="translate(7 18)"/>
+    <path id="Path_582" data-name="Path 582" class="cls-2" d="M14.633,13H18V4.794a1.808,1.808,0,0,0-1.889-1.781H7.57L7.159,1.852A1.446,1.446,0,0,0,5.845,1H2.232A1.229,1.229,0,0,0,1,2.161V4.406" transform="translate(10 15)"/>
+  </g>
+</svg>
