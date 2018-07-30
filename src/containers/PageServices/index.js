@@ -36,7 +36,7 @@ import Visible from 'styles/Visible';
 
 // assets
 import titleIcon from 'assets/React-icon.png';
-import description from 'labels/data-assets.md'; // loaded as HTML from markdown
+import description from 'labels/data-services.md'; // loaded as HTML from markdown
 
 const PageTitleWrapper = styled.div`
   position: relative;
