@@ -25,6 +25,7 @@ import CardBody from 'styles/CardBody';
 import CardHeader from 'styles/CardHeader';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 import PlotHint from 'styles/PlotHint';
+import WrapPlot from 'styles/WrapPlot';
 
 const prepareData = (subject, { focusArea, surveys }) =>
   focusArea
@@ -136,74 +137,76 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
             }}
             formatValue={(datum) => formatValue(datum.y, focusArea.get('type'))}
           >
-            <FlexibleWidthXYPlot
-              height={160}
-              xType="time"
-            >
-              <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
-              <AreaSeries data={dataBackground} style={{ fill: theme.colors.faPlotBackground, strokeWidth: 0 }} />
-              <GridLines
-                direction="horizontal"
-                attr="y"
-                tickValues={[50]}
-              />
-              <XAxis
-                tickValues={xAxisRange}
-                tickFormat={timeFormat('%Y')}
-              />
-              <YAxis
-                tickValues={yAxisRange}
-                tickFormat={(value) => formatValue(value, focusArea.get('type'))}
-              />
-              <AreaSeries
-                data={referenceSubject ? referenceData : data}
-                style={{
-                  fill: theme.colors[referenceSubject && !refHighlightedId ? 'faReference' : focusArea.get('indicator_id')],
-                  strokeWidth: 0,
-                  cursor: referenceSubject ? 'pointer' : 'auto',
-                }}
-                onSeriesClick={() => referenceSubject ? onSelectReference(referenceSubject) : false}
-                onSeriesMouseOver={() => referenceSubject ? this.onHighlightReference(referenceSubject.get('subject_id')) : false}
-                onSeriesMouseOut={() => referenceSubject ? this.onHighlightReference(false) : false}
-                onNearestX={(value) => referenceSubject ? false : onHighlightSurvey(value.column)}
-              />
-              { referenceSubject && data.length > 1 &&
-                <LineSeries
-                  data={data}
-                  style={{
-                    stroke: theme.colors[refHighlightedId ? 'faReference' : focusArea.get('indicator_id')],
-                  }}
-                  onNearestX={(value) => onHighlightSurvey(value.column)}
+            <WrapPlot>
+              <FlexibleWidthXYPlot
+                height={160}
+                xType="time"
+              >
+                <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
+                <AreaSeries data={dataBackground} style={{ fill: theme.colors.faPlotBackground, strokeWidth: 0 }} />
+                <GridLines
+                  direction="horizontal"
+                  attr="y"
+                  tickValues={[50]}
                 />
-              }
-              { referenceSubject && data.length === 1 &&
-                <MarkSeries
-                  data={data}
-                  size={3}
+                <XAxis
+                  tickValues={xAxisRange}
+                  tickFormat={timeFormat('%Y')}
+                />
+                <YAxis
+                  tickValues={yAxisRange}
+                  tickFormat={(value) => formatValue(value, focusArea.get('type'))}
+                />
+                <AreaSeries
+                  data={referenceSubject ? referenceData : data}
                   style={{
-                    fill: theme.colors[focusArea.get('indicator_id')],
+                    fill: theme.colors[referenceSubject && !refHighlightedId ? 'faReference' : focusArea.get('indicator_id')],
                     strokeWidth: 0,
+                    cursor: referenceSubject ? 'pointer' : 'auto',
                   }}
-                  onNearestX={(value) => onHighlightSurvey(value.column)}
+                  onSeriesClick={() => referenceSubject ? onSelectReference(referenceSubject) : false}
+                  onSeriesMouseOver={() => referenceSubject ? this.onHighlightReference(referenceSubject.get('subject_id')) : false}
+                  onSeriesMouseOut={() => referenceSubject ? this.onHighlightReference(false) : false}
+                  onNearestX={(value) => referenceSubject ? false : onHighlightSurvey(value.column)}
                 />
-              }
-              { refHighlightedId &&
-                <PlotHint color="referenceLabel" secondary>
-                  { referenceSubject.get('title') }
-                </PlotHint>
-              }
-              { hintValue &&
-                <Hint
-                  value={hintValue}
-                  align={{ vertical: 'top', horizontal: 'left' }}
-                  style={{ transform: 'translateX(50%)' }}
-                >
-                  <PlotHint background={focusArea.get('indicator_id')}>
-                    { formatValue(hintValue.y, focusArea.get('type')) }
+                { referenceSubject && data.length > 1 &&
+                  <LineSeries
+                    data={data}
+                    style={{
+                      stroke: theme.colors[refHighlightedId ? 'faReference' : focusArea.get('indicator_id')],
+                    }}
+                    onNearestX={(value) => onHighlightSurvey(value.column)}
+                  />
+                }
+                { referenceSubject && data.length === 1 &&
+                  <MarkSeries
+                    data={data}
+                    size={3}
+                    style={{
+                      fill: theme.colors[focusArea.get('indicator_id')],
+                      strokeWidth: 0,
+                    }}
+                    onNearestX={(value) => onHighlightSurvey(value.column)}
+                  />
+                }
+                { refHighlightedId &&
+                  <PlotHint color="referenceLabel" secondary>
+                    { referenceSubject.get('title') }
                   </PlotHint>
-                </Hint>
-              }
-            </FlexibleWidthXYPlot>
+                }
+                { hintValue &&
+                  <Hint
+                    value={hintValue}
+                    align={{ vertical: 'top', horizontal: 'left' }}
+                    style={{ transform: 'translateX(50%)' }}
+                  >
+                    <PlotHint background={focusArea.get('indicator_id')}>
+                      { formatValue(hintValue.y, focusArea.get('type')) }
+                    </PlotHint>
+                  </Hint>
+                }
+              </FlexibleWidthXYPlot>
+            </WrapPlot>
           </ScreenReaderWrapPlot>
         </CardBody>
       </Card>

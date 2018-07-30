@@ -27,6 +27,7 @@ import PageAssets from 'containers/PageAssets';
 import PageNotFound from 'containers/PageNotFound';
 
 import { updateLocation } from 'containers/App/actions';
+import { THEME } from 'containers/App/constants';
 
 import { queryObject } from 'utils/queries';
 
@@ -72,28 +73,7 @@ const render = (Component) => {
     <AppContainer>
       <Provider store={store}>
         <ThemeProvider
-          theme={{
-            breakpoints: ['45em', '63em'],
-            gutter: ['4px', '6px', '8px'],
-            sizes: ['12px', '14px', '18px'],
-            colors: {
-              white: '#fff',
-              light: '#E7E9EB',
-              dark: '#8B969D',
-              black: '#202326',
-              fa1: '#491C8B',
-              fa2: '#AD9300',
-              fa3: '#00A2C7',
-              fa4: '#199F8B',
-              fa5: '#2956D1',
-              fa6: '#FC6128',
-              faPlotBackground: '#F4F5F5',
-              faReference: '#D4D7D9',
-              assetReference: '#DCDEE0',
-              assetReferenceHint: '#68777D',
-              referenceLabel: '#4D5E65',
-            },
-          }}
+          theme={THEME}
         >
           <Component
             component={pathComponentMap[getHash() || ''] || pathComponentMap['not-found']}

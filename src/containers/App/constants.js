@@ -1,5 +1,6 @@
 import titleIcon from 'assets/React-icon.png';
 
+// App actions
 // update location in store
 export const LOCATION_UPDATE = 'action.LOCATION_UPDATE';
 // update location in URL
@@ -9,11 +10,9 @@ export const DATA_REQUESTED = 'action.DATA_REQUESTED';
 export const DATA_LOADED = 'action.DATA_LOADED';
 export const LOAD_ERROR = 'action.LOAD_ERROR';
 
-
+// App data sources
 const API_PATH = 'https://uat.data.govt.nz/api/3/action/datastore_search';
-
 const API = false;
-
 export const DATA = API
 ? {
   surveys: {
@@ -89,7 +88,33 @@ export const DATA = API
     filename: 'outcomes.csv',
   },   // id,survey_id,subject_id,indicator_id,value,answer,answer_text
 };
+// values
+export const DEFAULT_SUBJECT_ID = 'all';
+export const FOCUSAREA_INDICATOR_IDS = [
+  'fa1', 'fa2', 'fa3', 'fa4', 'fa5', 'fa6',
+];
+export const SERVICES_INDICATOR_ID_MAP = {
+  HOW_ID: 'q03',
+  STANDARDS_ID: 'q05',
+  SERVICES_ID: 'q04',
+};
+export const ASSETS_INDICATOR_ID_MAP = {
+  ASSETS_ID: 'assets',
+  MACHINEREADABLE_ID: 'assets_machinereadable',
+  NZGOAL_ID: 'assets_nzgoal',
+};
+export const ANSWERS = [
+  'yes',
+  'developing',
+  'like_to',
+  'not_sure',
+  'not_warranted',
+  'no',
+  'not_stated',
+];
 
+// config
+// header
 export const NAVITEMS = [
   {
     path: '',
@@ -109,22 +134,7 @@ export const NAVITEMS = [
   },
 ];
 
-export const FOCUSAREA_INDICATOR_IDS = [
-  'fa1', 'fa2', 'fa3', 'fa4', 'fa5', 'fa6',
-];
-
-export const SERVICES_INDICATOR_ID_MAP = {
-  HOW_ID: 'q03',
-  STANDARDS_ID: 'q05',
-  SERVICES_ID: 'q04',
-};
-
-export const ASSETS_INDICATOR_ID_MAP = {
-  ASSETS_ID: 'assets',
-  MACHINEREADABLE_ID: 'assets_machinereadable',
-  NZGOAL_ID: 'assets_nzgoal',
-};
-
+// assets
 export const FOCUSAREA_ICONS = {
   fa1: titleIcon,
   fa2: titleIcon,
@@ -142,9 +152,45 @@ export const FOCUSAREA_COLORICONS = {
   fa6: titleIcon,
 };
 
-export const DEFAULT_SUBJECT_ID = 'all';
-
+// theme
 export const BREAKPOINTS = {
   SMALL: 0,
   MEDIUM: 1,
+};
+
+export const THEME = {
+  breakpoints: ['45em', '63em'],
+  gutter: ['4px', '6px', '8px'],
+  sizes: ['12px', '14px', '18px', '34px'],
+  colors: {
+    white: '#fff',
+    light: '#E7E9EB',
+    dark: '#8B969D',
+    black: '#202326',
+    fa1: '#491C8B',
+    fa2: '#AD9300',
+    fa3: '#00A2C7',
+    fa4: '#199F8B',
+    fa5: '#2956D1',
+    fa6: '#FC6128',
+    not_stated: '#fff',
+    not_stated_outline: '#E7E9EB',
+    no: '#E7E9EB',
+    not_warranted: '#E7E9EB',
+    not_sure: '#C4CACD',
+    like_to: '#C4CACD',
+    developing: {
+      fa1: '#9176B9',
+      fa2: '#CDBE65',
+      fa3: '#65C7DD',
+      fa4: '#74C5B9',
+      fa5: '#7E99E3',
+      fa6: '#FDBFA8',
+    },
+    faPlotBackground: '#F4F5F5',
+    faReference: '#D4D7D9',
+    assetReference: '#DCDEE0',
+    assetReferenceHint: '#68777D',
+    referenceLabel: '#4D5E65',
+  },
 };

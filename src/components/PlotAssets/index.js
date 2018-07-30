@@ -15,12 +15,13 @@ import attributesEqual from 'utils/attributes-equal';
 import formatValue from 'utils/format-value';
 import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
+import KeyEntry from 'components/KeyEntry';
 
 import Card from 'styles/Card';
 import CardBody from 'styles/CardBody';
 import PlotHint from 'styles/PlotHint';
 import Key from 'styles/Key';
-import KeyEntry from 'components/KeyEntry';
+import WrapPlot from 'styles/WrapPlot';
 
 const getYAxisMax = (yMax) => {
   const order = Math.floor((Math.log(yMax) / Math.LN10) + 0.000000001);
@@ -101,56 +102,58 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
             }}
             formatValue={(datum) => formatValue(datum.y, indicator.get('type'))}
           >
-            <FlexibleWidthXYPlot
-              height={240}
-              xType="time"
-            >
-              <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
-              <XAxis
-                tickValues={xAxisRange}
-                tickFormat={timeFormat('%Y')}
-              />
-              <YAxis
-                tickFormat={(value) => formatValue(value, indicator.get('type'), yAxisRange[1] > 10000)}
-              />
-              <AreaSeries
-                data={referenceData}
-                style={{
-                  fill: theme.colors.assetReference,
-                  strokeWidth: 0,
-                }}
-              />
-              <AreaSeries
-                data={data}
-                style={{
-                  fill: theme.colors.fa3,
-                  strokeWidth: 0,
-                }}
-                onNearestX={(value) => onHighlightSurvey(value.column)}
-              />
-              { hintValue &&
-                <Hint
-                  value={hintValue}
-                  align={{ vertical: 'bottom', horizontal: 'left' }}
-                  style={{ transform: 'translateX(50%)' }}
-                >
-                  <PlotHint background={'fa3'} bottom>
-                    { formatValue(hintValue.y, indicator.get('type')) }
-                  </PlotHint>
-                </Hint>
-              }
-              { hintReferenceValue &&
-                <Hint
-                  value={hintReferenceValue}
-                  align={{ vertical: 'top', horizontal: 'left' }}
-                  style={{ transform: 'translateX(50%)' }}
-                >
-                  <PlotHint background={'assetReferenceHint'}>
-                    { formatValue(hintReferenceValue.y, indicator.get('type')) }
-                  </PlotHint>
-                </Hint>
-              }
-            </FlexibleWidthXYPlot>
+            <WrapPlot>
+              <FlexibleWidthXYPlot
+                height={240}
+                xType="time"
+              >
+                <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
+                <XAxis
+                  tickValues={xAxisRange}
+                  tickFormat={timeFormat('%Y')}
+                />
+                <YAxis
+                  tickFormat={(value) => formatValue(value, indicator.get('type'), yAxisRange[1] > 10000)}
+                />
+                <AreaSeries
+                  data={referenceData}
+                  style={{
+                    fill: theme.colors.assetReference,
+                    strokeWidth: 0,
+                  }}
+                />
+                <AreaSeries
+                  data={data}
+                  style={{
+                    fill: theme.colors.fa3,
+                    strokeWidth: 0,
+                  }}
+                  onNearestX={(value) => onHighlightSurvey(value.column)}
+                />
+                { hintValue &&
+                  <Hint
+                    value={hintValue}
+                    align={{ vertical: 'bottom', horizontal: 'left' }}
+                    style={{ transform: 'translateX(50%)' }}
+                  >
+                    <PlotHint background={'fa3'} bottom>
+                      { formatValue(hintValue.y, indicator.get('type')) }
+                    </PlotHint>
+                  </Hint>
+                }
+                { hintReferenceValue &&
+                  <Hint
+                    value={hintReferenceValue}
+                    align={{ vertical: 'top', horizontal: 'left' }}
+                    style={{ transform: 'translateX(50%)' }}
+                  >
+                    <PlotHint background={'assetReferenceHint'}>
+                      { formatValue(hintReferenceValue.y, indicator.get('type')) }
+                    </PlotHint>
+                  </Hint>
+                }
+              </FlexibleWidthXYPlot>
+            </WrapPlot>
             <Key>
               <KeyEntry color="fa3" title={indicator.get('title')} />
               <KeyEntry color="assetReference" title={referenceIndicator.get('title')} />

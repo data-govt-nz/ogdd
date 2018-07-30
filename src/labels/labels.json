@@ -1,6 +1,7 @@
 {
   "app.title": "Open Government Data Survey",
   "button.readMore": "Read more",
+  "answers.not_stated": "Not stated",
   "component.focus-areas.nav": "Focus Areas",
   "component.focus-areas.title": "Focus Areas",
   "component.focus-areas.focus-area": "Focus Area",

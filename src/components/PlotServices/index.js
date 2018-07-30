@@ -17,11 +17,13 @@ import formatValue from 'utils/format-value';
 import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 
+import KeyEntry from 'components/KeyEntry';
+
 import Card from 'styles/Card';
 import CardBody from 'styles/CardBody';
 import PlotHint from 'styles/PlotHint';
 import Key from 'styles/Key';
-import KeyEntry from 'components/KeyEntry';
+import WrapPlot from 'styles/WrapPlot';
 
 const prepareData = (outcomes, { surveys }) =>
   outcomes
@@ -111,49 +113,51 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
             }}
             formatValue={(datum) => formatValue(datum.y, indicator.get('type'))}
           >
-            <FlexibleWidthXYPlot
-              height={240}
-              xType="time"
-            >
-              <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
-              <XAxis
-                tickValues={xAxisRange}
-                tickFormat={timeFormat('%Y')}
-              />
-              <YAxis
-                tickFormat={(value) => formatValue(value, indicator.get('type'))}
-              />
-              { data && data.map((series, index) => (
-                <LineSeries
-                  key={series.id}
-                  data={series.data}
-                  style={{
-                    stroke: theme.colors.fa1,
-                    strokeWidth: 2,
-                    strokeDasharray: index === 0 ? 8 : 'none',
-                  }}
-                  onNearestX={(value) => index === 0 ? onHighlightSurvey(value.column) : false}
+            <WrapPlot>
+              <FlexibleWidthXYPlot
+                height={240}
+                xType="time"
+              >
+                <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
+                <XAxis
+                  tickValues={xAxisRange}
+                  tickFormat={timeFormat('%Y')}
                 />
-              ))}
-              { hintValues && hintValues.map((hintValue) => (
-                <Hint
-                  key={hintValue.id}
-                  value={hintValue.value}
-                  align={{
-                    vertical: parseFloat(hintValue.value.y, 10) === parseFloat(hintValueRange[0]) ? 'bottom' : 'top',
-                    horizontal: 'left',
-                  }}
-                  style={{ transform: 'translateX(50%)' }}
-                >
-                  <PlotHint
-                    background={'fa1'}
-                    bottom={parseFloat(hintValue.value.y, 10) === parseFloat(hintValueRange[0])}
+                <YAxis
+                  tickFormat={(value) => formatValue(value, indicator.get('type'))}
+                />
+                { data && data.map((series, index) => (
+                  <LineSeries
+                    key={series.id}
+                    data={series.data}
+                    style={{
+                      stroke: theme.colors.fa1,
+                      strokeWidth: 2,
+                      strokeDasharray: index === 0 ? 8 : 'none',
+                    }}
+                    onNearestX={(value) => index === 0 ? onHighlightSurvey(value.column) : false}
+                  />
+                ))}
+                { hintValues && hintValues.map((hintValue) => (
+                  <Hint
+                    key={hintValue.id}
+                    value={hintValue.value}
+                    align={{
+                      vertical: parseFloat(hintValue.value.y, 10) === parseFloat(hintValueRange[0]) ? 'bottom' : 'top',
+                      horizontal: 'left',
+                    }}
+                    style={{ transform: 'translateX(50%)' }}
                   >
-                    { formatValue(hintValue.value.y, indicator.get('type')) }
-                  </PlotHint>
-                </Hint>
-              ))}
-            </FlexibleWidthXYPlot>
+                    <PlotHint
+                      background={'fa1'}
+                      bottom={parseFloat(hintValue.value.y, 10) === parseFloat(hintValueRange[0])}
+                    >
+                      { formatValue(hintValue.value.y, indicator.get('type')) }
+                    </PlotHint>
+                  </Hint>
+                ))}
+              </FlexibleWidthXYPlot>
+            </WrapPlot>
             <Key>
               { keyItems.map((item, index) => (
                 <KeyEntry

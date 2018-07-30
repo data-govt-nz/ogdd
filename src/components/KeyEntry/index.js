@@ -12,7 +12,7 @@ const Styled = styled.div`
 const Cell = styled.div`
   display: table-cell;
   vertical-align: top;
-  font-size: 14px;
+  font-size: ${(props) => props.small ? props.theme.sizes[0] : props.theme.sizes[1]};
 `;
 
 const DotCell = styled(Cell)`
@@ -29,39 +29,57 @@ const Line = styled.div`
   width: 100%;
   border-bottom-width: 2px;
   border-bottom-style: ${(props) => props.dashed ? 'dashed' : 'solid'};
-  border-bottom-color: ${(props) => props.theme.colors[props.color]};
+  border-bottom-color: ${(props) => props.colorValue
+    ? props.colorValue
+    : props.theme.colors[props.color]
+  };
 `;
 
 const Dot = styled.div`
-  width: 10px;
-  height: 10px;
+  width: ${(props) => props.small ? 8 : 10}px;
+  height: ${(props) => props.small ? 8 : 10}px;
   border-radius: 9999px;
-  background-color: ${(props) => props.theme.colors[props.color]};
+  background-color: ${(props) => props.colorValue
+    ? props.colorValue
+    : props.theme.colors[props.color]
+  };
+  border: 1px solid;
+  border-color: ${(props) => {
+    if (props.outline) {
+      return props.outline;
+    }
+    return props.colorValue
+      ? props.colorValue
+      : props.theme.colors[props.color];
+  }};
 `;
 
-const KeyEntry = ({ color, title, line, dashed }) => (
+const KeyEntry = ({ color, colorValue, title, line, dashed, outline, small }) => (
   <Styled>
     { line &&
       <LineCell>
-        <Line color={color} dashed={dashed} role="presentation" />
+        <Line color={color} colorValue={colorValue} dashed={dashed} role="presentation" />
       </LineCell>
     }
     { !line &&
-      <DotCell>
-        <Dot color={color} role="presentation" />
+      <DotCell small={small}>
+        <Dot color={color} colorValue={colorValue} outline={outline} role="presentation" />
       </DotCell>
     }
-    <Cell>
+    <Cell small={small}>
       { title }
     </Cell>
   </Styled>
 );
 
 KeyEntry.propTypes = {
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  colorValue: PropTypes.string,
+  outline: PropTypes.string,
   title: PropTypes.string.isRequired,
   line: PropTypes.bool,
   dashed: PropTypes.bool,
+  small: PropTypes.bool,
 };
 
 export default KeyEntry;

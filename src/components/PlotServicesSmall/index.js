@@ -18,6 +18,7 @@ import formatValue from 'utils/format-value';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 
 import PlotHint from 'styles/PlotHint';
+import WrapPlot from 'styles/WrapPlot';
 
 const Styled = styled.div`
   padding: 0 15px 30px;
@@ -26,6 +27,7 @@ const Styled = styled.div`
 const Caption = styled.div`
   text-align: center;
   padding-left: 40px;
+  padding-right: 40px;
 `;
 
 const prepareData = (outcomes, { surveys }) =>
@@ -96,44 +98,46 @@ class PlotServicesSmall extends React.PureComponent { // eslint-disable-line rea
           }}
           formatValue={(datum) => formatValue(datum.y, indicatorType)}
         >
-          <FlexibleWidthXYPlot
-            height={160}
-            xType="time"
-          >
-            <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
-            <GridLines
-              direction="horizontal"
-              attr="y"
-              tickValues={[0, 50, 100]}
-            />
-            <XAxis
-              tickValues={xAxisRange}
-              tickFormat={timeFormat('%Y')}
-            />
-            <YAxis
-              tickValues={yAxisRange}
-              tickFormat={(value) => formatValue(value, indicatorType)}
-            />
-            <AreaSeries
-              data={data}
-              style={{
-                fill: theme.colors.fa1,
-                strokeWidth: 0,
-              }}
-              onNearestX={(value) => onHighlightSurvey(value.column)}
-            />
-            { hintValue &&
-              <Hint
-                value={hintValue}
-                align={{ vertical: 'top', horizontal: 'left' }}
-                style={{ transform: 'translateX(50%)' }}
-              >
-                <PlotHint background={'fa1'}>
-                  { formatValue(hintValue.y, indicatorType) }
-                </PlotHint>
-              </Hint>
-            }
-          </FlexibleWidthXYPlot>
+          <WrapPlot>
+            <FlexibleWidthXYPlot
+              height={160}
+              xType="time"
+            >
+              <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
+              <GridLines
+                direction="horizontal"
+                attr="y"
+                tickValues={[0, 50, 100]}
+              />
+              <XAxis
+                tickValues={xAxisRange}
+                tickFormat={timeFormat('%Y')}
+              />
+              <YAxis
+                tickValues={yAxisRange}
+                tickFormat={(value) => formatValue(value, indicatorType)}
+              />
+              <AreaSeries
+                data={data}
+                style={{
+                  fill: theme.colors.fa1,
+                  strokeWidth: 0,
+                }}
+                onNearestX={(value) => onHighlightSurvey(value.column)}
+              />
+              { hintValue &&
+                <Hint
+                  value={hintValue}
+                  align={{ vertical: 'top', horizontal: 'left' }}
+                  style={{ transform: 'translateX(50%)' }}
+                >
+                  <PlotHint background={'fa1'}>
+                    { formatValue(hintValue.y, indicatorType) }
+                  </PlotHint>
+                </Hint>
+              }
+            </FlexibleWidthXYPlot>
+          </WrapPlot>
           <Caption>
             {outcomes.first().get('answer_text')}
           </Caption>

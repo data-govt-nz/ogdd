@@ -69,6 +69,15 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
     super(props);
     this.state = INITIAL_STATE;
   }
+
+  onReadMore(showModal = true) {
+    this.setState({ showModal });
+  }
+  onFSModalDismiss() {
+    this.setState({
+      showModal: false,
+    });
+  }
   onSurveyChange(e) {
     this.props.nav({ query: { survey: e.target.value } });
   }
@@ -101,6 +110,8 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
     const ready = indicators && surveys && outcomes && insights !== null;
 
     const surveyID = surveySelectedId || (ready && surveys.last().get('survey_id'));
+
+    const survey = ready && surveys.find((item) => attributesEqual(item.get('survey_id'), surveyID));
 
     const relevantInsights = ready && insights
       .filter((insight) => attributesEqual(insight.get('survey_id'), surveyID))
@@ -179,6 +190,7 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
                         && attributesEqual(outcome.get('indicator_id'), insight.get('indicator_id'))
                       )
                     )}
+                    agenciesTotal={parseInt(survey.get('agencies_total'), 10)}
                     focusAreaIcon={FOCUSAREA_COLORICONS[insight.getIn(['indicator', 'parent_indicator_id'])]}
                   />
                 </Column>
