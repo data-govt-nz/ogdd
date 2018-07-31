@@ -67,6 +67,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
       onFAMouseEnter,
       onFAMouseLeave,
       onFATouch,
+      onFAClick,
       theme,
       onSelectReference,
     } = this.props;
@@ -103,9 +104,12 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
 
     return (
       <Card
-        onMouseEnter={onFAMouseEnter}
+        onMouseEnter={onFAMouseEnter || (() => true)}
         onMouseLeave={onFAMouseLeave}
         onTouchStart={onFATouch}
+        onClick={onFAClick}
+        role={onFAClick ? 'button' : null}
+        title={onFAClick ? focusArea.get('title') : null}
       >
         <CardHeader>
           <ScreenReaderOnly>
@@ -189,11 +193,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                     onNearestX={(value) => onHighlightSurvey(value.column)}
                   />
                 }
-                { refHighlightedId &&
-                  <PlotHint color="referenceLabel" secondary>
-                    { referenceSubject.get('title') }
-                  </PlotHint>
-                }
+
                 { hintValue &&
                   <Hint
                     value={hintValue}
@@ -222,9 +222,10 @@ PlotFocusArea.propTypes = {
   subject: PropTypes.object.isRequired,
   referenceSubject: PropTypes.object,
   onHighlightSurvey: PropTypes.func.isRequired,
-  onFAMouseEnter: PropTypes.func.isRequired,
-  onFAMouseLeave: PropTypes.func.isRequired,
-  onFATouch: PropTypes.func.isRequired,
+  onFAMouseEnter: PropTypes.func,
+  onFAMouseLeave: PropTypes.func,
+  onFATouch: PropTypes.func,
+  onFAClick: PropTypes.func,
   onSelectReference: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
 };

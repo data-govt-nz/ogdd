@@ -21,6 +21,7 @@ import configureStore from 'store';
 
 import App from 'containers/App';
 import PageFocusAreas from 'containers/PageFocusAreas';
+import PageFocusAreaSingle from 'containers/PageFocusAreaSingle';
 import PageInsights from 'containers/PageInsights';
 import PageServices from 'containers/PageServices';
 import PageAssets from 'containers/PageAssets';
@@ -53,6 +54,7 @@ const store = configureStore();
 // see also containers/App/constants NAVITEMS
 const pathComponentMap = {
   '': <PageFocusAreas />, // focus areas
+  focusarea: <PageFocusAreaSingle />,
   insights: <PageInsights />,
   services: <PageServices />,
   assets: <PageAssets />,

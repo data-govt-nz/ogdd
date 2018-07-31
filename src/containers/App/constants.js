@@ -81,7 +81,7 @@ export const DATA = API
     requested: null,
     source: 'csv',
     path: 'data/',
-    filename: 'subjects.csv',
+    filename: 'subjects30.csv',
   },   // id,title
   indicators: {
     data: null,
@@ -102,7 +102,7 @@ export const DATA = API
     requested: null,
     source: 'csv',
     path: 'data/',
-    filename: 'outcomes.csv',
+    filename: 'outcomes30.csv',
   },   // id,survey_id,subject_id,indicator_id,value,answer,answer_text
 };
 // values

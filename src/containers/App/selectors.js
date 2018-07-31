@@ -99,6 +99,11 @@ export const selectFocusAreaIndicators = createSelector(
     .sortBy((item) => item.get('indicator_id'))
 );
 
+export const selectFocusAreaIdFromLocation = createSelector(
+  selectLocation,
+  (location) => location.getIn(['query', 'fa']) || null
+);
+
 // outcomes
 export const selectOutcomes = createSelector(
   (state) => selectData(state, 'outcomes'),
