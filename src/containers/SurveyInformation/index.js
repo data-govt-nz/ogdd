@@ -22,8 +22,17 @@ const Title = styled.div`
 `;
 
 const CurrentSurveyInfo = styled.div``;
+const AboutLinkWrapper = styled.div``;
 
-const SurveyInformation = ({ surveys, surveySelectedId }) => {
+const AboutLink = styled.button`
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  text-decoration: underline;
+`;
+
+const SurveyInformation = ({ surveys, surveySelectedId, nav }) => {
   const firstSurvey = surveys && surveys.first();
   const lastSurvey = surveys && surveys.last();
   const currentSurvey = surveys && (surveySelectedId
@@ -53,6 +62,16 @@ const SurveyInformation = ({ surveys, surveySelectedId }) => {
           }`
         }
       </CurrentSurveyInfo>
+      <AboutLinkWrapper>
+        <Label id="component.surveyInformation.aboutLink.before" />
+        <AboutLink
+          onClick={() => nav('about')}
+          title={getLabel('component.about.nav')}
+        >
+          <Label id="component.about.nav" />
+        </AboutLink>
+        <Label id="component.surveyInformation.aboutLink.after" />
+      </AboutLinkWrapper>
     </Styled>
   );
 };
@@ -60,7 +79,7 @@ const SurveyInformation = ({ surveys, surveySelectedId }) => {
 SurveyInformation.propTypes = {
   surveys: PropTypes.object,
   surveySelectedId: PropTypes.string,
-  // nav: PropTypes.func,
+  nav: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

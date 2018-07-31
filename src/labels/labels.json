@@ -30,6 +30,8 @@
   "component.notFound.metaDescription": "Page not found",
   "component.surveyInformation.title": "Open Data Maturity Surveys",
   "component.surveyInformation.current": "agencies participated in",
+  "component.surveyInformation.aboutLink.before": "See ",
+  "component.surveyInformation.aboutLink.after": " for details",
   "screenreader.navActive": "Currently selected page",
   "screenreader.navigationOccured": "Navigation occured",
   "screenreader.skipToContent": "Skip to main content",
