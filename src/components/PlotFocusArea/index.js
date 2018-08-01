@@ -181,8 +181,11 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                     cursor: referenceSubject ? 'pointer' : 'inherit',
                   }}
                   onSeriesClick={({ event }) => {
-                    if (event) event.stopPropagation();
-                    return referenceSubject ? onSelectReference(referenceSubject) : false;
+                    if (referenceSubject) {
+                      if (event) event.stopPropagation();
+                      return onSelectReference(referenceSubject);
+                    }
+                    return false;
                   }}
                   onSeriesMouseOver={() => referenceSubject ? this.onHighlightReference(referenceSubject.get('subject_id')) : false}
                   onSeriesMouseOut={() => referenceSubject ? this.onHighlightReference(false) : false}
