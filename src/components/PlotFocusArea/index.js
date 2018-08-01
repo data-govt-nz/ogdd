@@ -33,6 +33,7 @@ const ReferenceHint = styled.div`
   left: 0;
   width: 100%;
   text-align: center;
+  color: ${(props) => props.theme.colors.referenceLabel}
   font-size: ${(props) => props.theme.sizes[0]}
 `;
 
