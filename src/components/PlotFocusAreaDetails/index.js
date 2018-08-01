@@ -15,6 +15,7 @@ import { timeFormat } from 'd3-time-format';
 
 import attributesEqual from 'utils/attributes-equal';
 import formatValue from 'utils/format-value';
+import getLabel from 'utils/get-label';
 
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 import KeyEntry from 'components/KeyEntry';
@@ -166,205 +167,233 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
         onMouseLeave={() => this.onHighlightSubject(false)}
       >
         <CardBody>
-          <WrapPlot>
-            <FlexibleWidthXYPlot
-              height={300}
-              xType="time"
-              onMouseLeave={() => this.onHighlightSubject(false)}
-            >
-              <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
-              <XAxis
-                tickValues={xAxisRange}
-                tickFormat={timeFormat('%Y')}
-              />
-              <YAxis
-                tickValues={[0, 25, 50, 75, 100]}
-                tickFormat={(value) => formatValue(value, focusArea.get('type'))}
-              />
-              { otherSubjects && otherData.map((d) => d.length > 1
-                ? (
+          <ScreenReaderWrapPlot
+            figCaption={getLabel('screenreader.focus-areas.chart-caption')}
+            tableCaption={getLabel('screenreader.focus-areas.chart-table-caption')}
+            tableData={{
+              data: referenceSubject
+                ? data.concat(referenceData).concat(otherData.reduce((memo, d) => memo.concat(d)))
+                : data.concat(otherData.reduce((memo, d) => memo.concat(d))),
+              columns: surveys.reduce((memo, item) => memo.concat([{
+                id: item.get('survey_id'),
+                label: timeFormat('%Y')(new Date(item.get('date')).getTime()),
+              }]), []),
+              rows: [{ id: subject.get('subject_id'), label: subject.get('title') }].concat(
+                referenceSubject
+                ? [{
+                  id: referenceSubject.get('subject_id'),
+                  label: `${referenceSubject.get('title')} ${getLabel('screenreader.focus-areas.chart-table-reference-hint')}`,
+                }]
+                : []
+              ).concat(otherSubjects.reduce((memo, item) =>
+                memo.concat([{
+                  id: item.get('subject_id'),
+                  label: `${item.get('title')} ${getLabel('screenreader.focus-areas.chart-table-reference-hint')}`,
+                }])
+              , [])),
+            }}
+            formatValue={(datum) => formatValue(datum.y, focusArea.get('type'))}
+          >
+            <WrapPlot>
+              <FlexibleWidthXYPlot
+                height={300}
+                xType="time"
+                onMouseLeave={() => this.onHighlightSubject(false)}
+              >
+                <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
+                <XAxis
+                  tickValues={xAxisRange}
+                  tickFormat={timeFormat('%Y')}
+                />
+                <YAxis
+                  tickValues={[0, 25, 50, 75, 100]}
+                  tickFormat={(value) => formatValue(value, focusArea.get('type'))}
+                />
+                { otherSubjects && otherData.map((d) => d.length > 1
+                  ? (
+                    <LineSeries
+                      key={d[0].row}
+                      data={d}
+                      style={{
+                        stroke: theme.colors.faReference,
+                        strokeWidth: 1,
+                      }}
+                    />
+                  )
+                  : (
+                    <MarkSeries
+                      key={d[0].row}
+                      data={d}
+                      size={3}
+                      style={{
+                        fill: theme.colors.faReference,
+                        strokeWidth: 0,
+                      }}
+                    />
+                  )
+                )}
+                { otherDataHighlighted && (otherDataHighlighted.length > 1
+                  ? (
+                    <LineSeries
+                      data={otherDataHighlighted}
+                      style={{
+                        stroke: theme.colors.developing[focusArea.get('indicator_id')],
+                        strokeWidth: 2,
+                      }}
+                    />
+                  )
+                  : (
+                    <MarkSeries
+                      data={otherDataHighlighted}
+                      size={3}
+                      style={{
+                        fill: theme.colors.developing[focusArea.get('indicator_id')],
+                        strokeWidth: 0,
+                      }}
+                    />
+                  )
+                )}
+                <LineMarkSeries
+                  data={data}
+                  size={3}
+                  style={{
+                    fill: theme.colors[focusArea.get('indicator_id')],
+                    stroke: theme.colors[focusArea.get('indicator_id')],
+                  }}
+                  onNearestX={(value) => onHighlightSurvey(value.column)}
+                />
+                { otherSubjects && otherData.map((d) => (
                   <LineSeries
                     key={d[0].row}
                     data={d}
                     style={{
-                      stroke: theme.colors.faReference,
-                      strokeWidth: 1,
+                      stroke: 'rgba(0,0,0,0)',
+                      strokeWidth: 10,
+                      cursor: 'pointer',
                     }}
+                    onSeriesMouseOver={() => this.onHighlightSubject(d[0].row)}
+                    onSeriesMouseOut={() => this.onHighlightSubject(false)}
+                    onSeriesClick={() => onSelectSubject(d[0].row)}
                   />
-                )
-                : (
-                  <MarkSeries
-                    key={d[0].row}
-                    data={d}
-                    size={3}
-                    style={{
-                      fill: theme.colors.faReference,
-                      strokeWidth: 0,
-                    }}
-                  />
-                )
-              )}
-              { otherDataHighlighted && (otherDataHighlighted.length > 1
-                ? (
+                ))}
+                { otherDataHighlighted &&
                   <LineSeries
                     data={otherDataHighlighted}
                     style={{
-                      stroke: theme.colors.developing[focusArea.get('indicator_id')],
-                      strokeWidth: 2,
+                      stroke: 'rgba(0,0,0,0)',
+                      strokeWidth: 10,
+                      cursor: 'pointer',
                     }}
+                    onSeriesMouseOver={() => this.onHighlightSubject(otherDataHighlighted[0].row)}
+                    onSeriesMouseOut={() => this.onHighlightSubject(false)}
+                    onSeriesClick={() => onSelectSubject(otherDataHighlighted[0].row)}
                   />
-                )
-                : (
-                  <MarkSeries
-                    data={otherDataHighlighted}
-                    size={3}
+                }
+                { referenceSubject &&
+                  <LineSeries
+                    data={referenceData}
                     style={{
-                      fill: theme.colors.developing[focusArea.get('indicator_id')],
-                      strokeWidth: 0,
+                      stroke: subjectHighlightedId === referenceSubject.get('subject_id')
+                        ? theme.colors[focusArea.get('indicator_id')]
+                        : theme.colors.black,
+                      strokeWidth: subjectHighlightedId === referenceSubject.get('subject_id')
+                        ? 2
+                        : 1,
                     }}
                   />
-                )
-              )}
-              <LineMarkSeries
-                data={data}
-                size={3}
-                style={{
-                  fill: theme.colors[focusArea.get('indicator_id')],
-                  stroke: theme.colors[focusArea.get('indicator_id')],
-                }}
-                onNearestX={(value) => onHighlightSurvey(value.column)}
-              />
-              { otherSubjects && otherData.map((d) => (
-                <LineSeries
-                  key={d[0].row}
-                  data={d}
-                  style={{
-                    stroke: 'rgba(0,0,0,0)',
-                    strokeWidth: 10,
-                    cursor: 'pointer',
-                  }}
-                  onSeriesMouseOver={() => this.onHighlightSubject(d[0].row)}
-                  onSeriesMouseOut={() => this.onHighlightSubject(false)}
-                  onSeriesClick={() => onSelectSubject(d[0].row)}
-                />
-              ))}
-              { otherDataHighlighted &&
-                <LineSeries
-                  data={otherDataHighlighted}
-                  style={{
-                    stroke: 'rgba(0,0,0,0)',
-                    strokeWidth: 10,
-                    cursor: 'pointer',
-                  }}
-                  onSeriesMouseOver={() => this.onHighlightSubject(otherDataHighlighted[0].row)}
-                  onSeriesMouseOut={() => this.onHighlightSubject(false)}
-                  onSeriesClick={() => onSelectSubject(otherDataHighlighted[0].row)}
-                />
-              }
+                }
+                { referenceSubject &&
+                  <LineSeries
+                    data={referenceData}
+                    style={{
+                      stroke: 'rgba(0,0,0,0)',
+                      strokeWidth: 10,
+                      cursor: 'pointer',
+                    }}
+                    onSeriesMouseOver={() => this.onHighlightSubject(referenceSubject.get('subject_id'))}
+                    onSeriesMouseOut={() => this.onHighlightSubject(false)}
+                    onSeriesClick={() => onSelectSubject(referenceSubject.get('subject_id'))}
+                  />
+                }
+                { labelHintValue &&
+                  <Hint
+                    value={labelHintValue}
+                    align={{ vertical: 'bottom', horizontal: 'rightEdge' }}
+                    style={{ transform: 'translate(100%, -50%)' }}
+                  >
+                    <PlotHintLabel>
+                      {subject.get('title')}
+                    </PlotHintLabel>
+                  </Hint>
+                }
+                { labelHintReference &&
+                  <Hint
+                    value={labelHintReference}
+                    align={{ vertical: 'bottom', horizontal: 'rightEdge' }}
+                    style={{ transform: 'translate(100%, -50%)' }}
+                  >
+                    <PlotHintLabel>
+                      {referenceSubject.get('title')}
+                    </PlotHintLabel>
+                  </Hint>
+                }
+                { labelHintOther &&
+                  <Hint
+                    value={labelHintOther}
+                    align={{ vertical: 'bottom', horizontal: 'rightEdge' }}
+                    style={{ transform: 'translate(100%, -50%)' }}
+                  >
+                    <PlotHintLabel>
+                      {otherSubjectHighlighted.get('title')}
+                    </PlotHintLabel>
+                  </Hint>
+                }
+                { hintValue &&
+                  <Hint
+                    value={hintValue}
+                    align={{ vertical: 'top', horizontal: 'left' }}
+                    style={{ transform: 'translateX(50%)' }}
+                  >
+                    <PlotHint background={focusArea.get('indicator_id')}>
+                      { formatValue(hintValue.y, focusArea.get('type')) }
+                    </PlotHint>
+                  </Hint>
+                }
+                { hintReference &&
+                  <Hint
+                    value={hintReference}
+                    align={{ vertical: 'top', horizontal: 'left' }}
+                    style={{ transform: 'translateX(50%)' }}
+                  >
+                    <PlotHint background={focusArea.get('indicator_id')}>
+                      { formatValue(hintReference.y, focusArea.get('type')) }
+                    </PlotHint>
+                  </Hint>
+                }
+                { hintOther &&
+                  <Hint
+                    value={hintOther}
+                    align={{ vertical: 'top', horizontal: 'left' }}
+                    style={{ transform: 'translateX(50%)' }}
+                  >
+                    <PlotHint background={focusArea.get('indicator_id')}>
+                      { formatValue(hintOther.y, focusArea.get('type')) }
+                    </PlotHint>
+                  </Hint>
+                }
+              </FlexibleWidthXYPlot>
               { referenceSubject &&
-                <LineSeries
-                  data={referenceData}
-                  style={{
-                    stroke: subjectHighlightedId === referenceSubject.get('subject_id')
-                      ? theme.colors[focusArea.get('indicator_id')]
-                      : theme.colors.black,
-                    strokeWidth: subjectHighlightedId === referenceSubject.get('subject_id')
-                      ? 2
-                      : 1,
-                  }}
-                />
+                <Key>
+                  <KeyEntry
+                    line
+                    small
+                    color="black"
+                    title={referenceSubject.get('title')}
+                  />
+                </Key>
               }
-              { referenceSubject &&
-                <LineSeries
-                  data={referenceData}
-                  style={{
-                    stroke: 'rgba(0,0,0,0)',
-                    strokeWidth: 10,
-                    cursor: 'pointer',
-                  }}
-                  onSeriesMouseOver={() => this.onHighlightSubject(referenceSubject.get('subject_id'))}
-                  onSeriesMouseOut={() => this.onHighlightSubject(false)}
-                  onSeriesClick={() => onSelectSubject(referenceSubject.get('subject_id'))}
-                />
-              }
-              { labelHintValue &&
-                <Hint
-                  value={labelHintValue}
-                  align={{ vertical: 'bottom', horizontal: 'rightEdge' }}
-                  style={{ transform: 'translate(100%, -50%)' }}
-                >
-                  <PlotHintLabel>
-                    {subject.get('title')}
-                  </PlotHintLabel>
-                </Hint>
-              }
-              { labelHintReference &&
-                <Hint
-                  value={labelHintReference}
-                  align={{ vertical: 'bottom', horizontal: 'rightEdge' }}
-                  style={{ transform: 'translate(100%, -50%)' }}
-                >
-                  <PlotHintLabel>
-                    {referenceSubject.get('title')}
-                  </PlotHintLabel>
-                </Hint>
-              }
-              { labelHintOther &&
-                <Hint
-                  value={labelHintOther}
-                  align={{ vertical: 'bottom', horizontal: 'rightEdge' }}
-                  style={{ transform: 'translate(100%, -50%)' }}
-                >
-                  <PlotHintLabel>
-                    {otherSubjectHighlighted.get('title')}
-                  </PlotHintLabel>
-                </Hint>
-              }
-              { hintValue &&
-                <Hint
-                  value={hintValue}
-                  align={{ vertical: 'top', horizontal: 'left' }}
-                  style={{ transform: 'translateX(50%)' }}
-                >
-                  <PlotHint background={focusArea.get('indicator_id')}>
-                    { formatValue(hintValue.y, focusArea.get('type')) }
-                  </PlotHint>
-                </Hint>
-              }
-              { hintReference &&
-                <Hint
-                  value={hintReference}
-                  align={{ vertical: 'top', horizontal: 'left' }}
-                  style={{ transform: 'translateX(50%)' }}
-                >
-                  <PlotHint background={focusArea.get('indicator_id')}>
-                    { formatValue(hintReference.y, focusArea.get('type')) }
-                  </PlotHint>
-                </Hint>
-              }
-              { hintOther &&
-                <Hint
-                  value={hintOther}
-                  align={{ vertical: 'top', horizontal: 'left' }}
-                  style={{ transform: 'translateX(50%)' }}
-                >
-                  <PlotHint background={focusArea.get('indicator_id')}>
-                    { formatValue(hintOther.y, focusArea.get('type')) }
-                  </PlotHint>
-                </Hint>
-              }
-            </FlexibleWidthXYPlot>
-            { referenceSubject &&
-              <Key>
-                <KeyEntry
-                  line
-                  small
-                  color="black"
-                  title={referenceSubject.get('title')}
-                />
-              </Key>
-            }
-          </WrapPlot>
+            </WrapPlot>
+          </ScreenReaderWrapPlot>
         </CardBody>
       </Card>
     );
