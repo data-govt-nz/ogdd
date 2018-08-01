@@ -34,6 +34,7 @@ import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotInsight from 'components/PlotInsight';
 import FAKeyEntry from 'components/FAKeyEntry';
+import SelectWrapper from 'components/SelectWrapper';
 
 // simple styles (styled components)
 import Row from 'styles/Row';
@@ -42,26 +43,13 @@ import PageLongTitle from 'styles/PageLongTitle';
 import PageContainer from 'styles/PageContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
+import PageTitleWrapper from 'styles/PageTitleWrapper';
+import ReadMoreWrapper from 'styles/ReadMoreWrapper';
+import AbovePlots from 'styles/AbovePlots';
 
 // assets
 import titleIcon from 'assets/key-insights.svg';
 import description from 'labels/insights.md'; // loaded as HTML from markdown
-
-const PageTitleWrapper = styled.div`
-  position: relative;
-`;
-
-const ReadMoreWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-`;
-
-const SurveySelect = styled.div`
-  min-height: 40px;
-  position: relative;
-  width: 100%;
-`;
 
 const FAKey = styled.div``;
 
@@ -83,8 +71,8 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
       showModal: false,
     });
   }
-  onSurveyChange(e) {
-    this.props.nav({ query: { survey: e.target.value } });
+  onSurveyChange(survey) {
+    this.props.nav({ query: { survey } });
   }
 
   renderPageTitle() {
@@ -169,26 +157,18 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
         </PageLongTitle>
         <Row>
           <Column width={[1, 3 / 4]}>
-            <SurveySelect>
+            <AbovePlots>
               { ready &&
-                <div>
-                  <label htmlFor="survey-select" >
-                    <Label id="component.insights.selectSurveyLabel" />
-                  </label>
-                  <select
-                    id="survey-select"
-                    value={surveyID}
-                    onChange={((e) => this.onSurveyChange(e))}
-                  >
-                    { surveys.map((item) => (
-                      <option key={item.get('survey_id')} value={item.get('survey_id')} >
-                        { timeFormat('%Y')(new Date(item.get('date')).getTime()) }
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <SelectWrapper
+                  labelID="component.insights.selectSurveyLabel"
+                  value={surveyID}
+                  options={surveys}
+                  onChange={(newValue) => this.onSurveyChange(newValue)}
+                  valueKey={'survey_id'}
+                  formatOption={(option) => timeFormat('%Y')(new Date(option.get('date')).getTime())}
+                />
               }
-            </SurveySelect>
+            </AbovePlots>
           </Column>
         </Row>
         <Row>

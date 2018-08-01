@@ -5,6 +5,8 @@ import styled from 'styled-components';
 // utils
 import getLabel from 'utils/get-label';
 
+import Close from 'components/Close';
+
 // simple styles
 import PageContainer from 'styles/PageContainer';
 
@@ -19,15 +21,20 @@ const Styled = styled.div`
   z-index: 99999;
 `;
 
-const Dismiss = styled.button`
-  float: right;
+const Dismiss = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
 `;
 
 const FSModal = ({ dismiss, children }) => (
   <Styled>
     <PageContainer>
-      <Dismiss onClick={dismiss} title={getLabel('screenreader.fsModal.button.dismiss')}>
-        X
+      <Dismiss>
+        <Close
+          onClick={dismiss}
+          altTitle={getLabel('screenreader.fsModal.button.dismiss')}
+        />
       </Dismiss>
       { children }
     </PageContainer>

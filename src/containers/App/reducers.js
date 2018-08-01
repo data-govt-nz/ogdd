@@ -42,6 +42,7 @@ function announcementReducer(state = '', action) {
   if (action.type === NAVIGATE) {
     const path = action.location.path || action.location;
     const navItem = find(NAVITEMS, (i) => i.path === path);
+    // TODO get about label
     return state !== action.location.path
       ? `${getLabel('screenreader.navigationOccured')}: ${navItem ? getLabel(navItem.label) : action.location.path}`
       : '';

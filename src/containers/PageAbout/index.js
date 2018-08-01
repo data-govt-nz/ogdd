@@ -1,6 +1,5 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import styled from 'styled-components';
 
 // utils
 import getLabel from 'utils/get-label';
@@ -19,21 +18,13 @@ import PageLongTitle from 'styles/PageLongTitle';
 import PageContainer from 'styles/PageContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
+import PageTitleWrapper from 'styles/PageTitleWrapper';
+import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 
 // assets
 import titleIcon from 'assets/open-data.svg';
 import main from 'labels/about.md'; // loaded as HTML from markdown
 import description from 'labels/about-aside.md'; // loaded as HTML from markdown
-
-const PageTitleWrapper = styled.div`
-  position: relative;
-`;
-
-const ReadMoreWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-`;
 
 const INITIAL_STATE = {
   showModal: false,

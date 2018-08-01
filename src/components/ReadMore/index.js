@@ -6,6 +6,7 @@ import Label from 'components/Label';
 
 const Styled = styled.button`
   text-decoration: underline;
+  cursor: pointer;
 `;
 
 const ReadMore = ({ onClick }) => (

@@ -3,12 +3,17 @@ import { Box } from 'grid-styled';
 import styled from 'styled-components';
 
 const Column = styled(Box)`
-  padding: 0 ${(props) => props.theme.gutter[0]}
+  padding-top:${(props) => props.paddingtop || 0}px;
+  padding-right:${(props) => props.theme.gutter[0]};
+  padding-left:${(props) => props.theme.gutter[0]};
+  padding-bottom: 0;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    padding: 0 ${(props) => props.theme.gutter[1]};
+    padding-right:${(props) => props.theme.gutter[1]};
+    padding-left:${(props) => props.theme.gutter[1]};
   }
-  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
-    padding: 0 ${(props) => props.theme.gutter[2]};
+  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {    
+    padding-right:${(props) => props.theme.gutter[2]}
+    padding-left:${(props) => props.theme.gutter[2]}
   }
   position: relative;
 `;

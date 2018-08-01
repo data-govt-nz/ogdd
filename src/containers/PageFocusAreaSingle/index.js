@@ -31,6 +31,7 @@ import ReadMore from 'components/ReadMore';
 import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotFocusAreaDetails from 'components/PlotFocusAreaDetails';
+import Close from 'components/Close';
 
 // simple styles (styled components)
 import Row from 'styles/Row';
@@ -39,19 +40,11 @@ import PageLongTitle from 'styles/PageLongTitle';
 import PageContainer from 'styles/PageContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
+import PageTitleWrapper from 'styles/PageTitleWrapper';
+import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 
 // assets
 import titleIcon from 'assets/focus-areas.svg';
-
-const PageTitleWrapper = styled.div`
-  position: relative;
-`;
-
-const ReadMoreWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-`;
 
 const SubjectSelect = styled.div`
   min-height: 40px;
@@ -59,20 +52,42 @@ const SubjectSelect = styled.div`
   width: 100%;
 `;
 
+const PageLongTitleStyled = styled(PageLongTitle)`
+  display: table;
+`;
+
+const PageLongTitleIcon = styled.img`
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  height: 24px;
+  width: 24px;
+  margin-right: 4px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    height: 38px;
+    width: 38px;
+  }
+`;
+const PageLongTitleText = styled.div`
+  display: table-cell;
+  vertical-align: middle;
+`;
+
+const Dismiss = styled.div`
+  position: absolute;
+  right: 0;
+  top: 50px;
+  margin-top: 9px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    margin-top: -13px;
+    top: 0;
+  }
+`;
+
 const INITIAL_STATE = {
   showModal: false,
   surveyHighlightedId: null, // set from surveys
 };
-
-const Icon = styled.img`
-  position: relative;
-  height: 38px;
-  width: 38px;
-`;
-
-const Dismiss = styled.button`
-  float: right;
-`;
 
 class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -105,6 +120,14 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
       fa: this.props.faSelectedId,
     } });
   }
+  onFAClose() {
+    this.props.nav({
+      path: '',
+      query: {
+        subject: this.props.subjectSelectedId,
+      },
+    });
+  }
 
   renderPageTitle() {
     return (
@@ -112,11 +135,11 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
     );
   }
 
-  renderAsideContent(text) {
+  renderAsideContent(focusArea) {
     return (
       <AsideContent
         title={this.renderPageTitle()}
-        text={text}
+        text={focusArea && `${focusArea.get('title')}: ${focusArea.get('description')}`}
       />
     );
   }
@@ -157,9 +180,6 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
             content={getLabel('component.focus-area.metaDescription')}
           />
         </Helmet>
-        <Dismiss onClick={() => false} title={getLabel('screenreader.fsModal.button.dismiss')}>
-          X
-        </Dismiss>
         <Hidden min={0}>
           <PageTitleWrapper>
             { this.renderPageTitle() }
@@ -170,14 +190,14 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
         </Hidden>
         { this.state.showModal &&
           <FSModal dismiss={() => this.onFSModalDismiss()}>
-            { this.renderAsideContent(ready && focusArea.get('description')) }
+            { this.renderAsideContent(ready && focusArea) }
           </FSModal>
         }
         {ready &&
-          <PageLongTitle id="pageTitle">
-            <Icon alt="" src={FOCUSAREA_ICONS[faSelectedId]} role="presentation" />
-            {focusArea.get('title')}
-          </PageLongTitle>
+          <PageLongTitleStyled id="pageTitle">
+            <PageLongTitleIcon alt="" src={FOCUSAREA_ICONS[faSelectedId]} role="presentation" />
+            <PageLongTitleText>{focusArea.get('title')}</PageLongTitleText>
+          </PageLongTitleStyled>
         }
         <Row>
           <Column width={[1, 3 / 4]}>
@@ -212,7 +232,7 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
         <Row>
           <Column width={[1, 1 / 4]} order={2}>
             <Visible min={0} >
-              { this.renderAsideContent(ready && focusArea.get('description')) }
+              { this.renderAsideContent(ready && focusArea) }
             </Visible>
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
@@ -234,6 +254,12 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
             </Row>
           </Column>
         </Row>
+        <Dismiss>
+          <Close
+            onClick={() => this.onFAClose()}
+            altTitle={getLabel('screenreader.focus-area.button.dismiss')}
+          />
+        </Dismiss>
       </PageContainer>
     );
   }

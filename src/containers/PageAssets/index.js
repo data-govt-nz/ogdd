@@ -32,20 +32,12 @@ import PageLongTitle from 'styles/PageLongTitle';
 import PageContainer from 'styles/PageContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
+import PageTitleWrapper from 'styles/PageTitleWrapper';
+import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 
 // assets
 import titleIcon from 'assets/data-assets.svg';
 import description from 'labels/data-assets.md'; // loaded as HTML from markdown
-
-const PageTitleWrapper = styled.div`
-  position: relative;
-`;
-
-const ReadMoreWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-`;
 
 const PlotTitle = styled.div`
   margin-bottom: 15px;
@@ -139,7 +131,7 @@ class PageAssets extends React.PureComponent { // eslint-disable-line react/pref
           <Label id="component.assets.longTitle" />
         </PageLongTitle>
         <Row>
-          <Column width={[1, 1 / 4]} order={2}>
+          <Column width={[1, 1 / 4]} order={2} paddingtop={10}>
             <Visible min={0} >
               { this.renderAsideContent() }
             </Visible>

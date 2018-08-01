@@ -17,10 +17,10 @@ import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 import KeyEntry from 'components/KeyEntry';
 
+import Key from 'styles/Key';
 import Card from 'styles/Card';
 import CardBody from 'styles/CardBody';
 import PlotHint from 'styles/PlotHint';
-import Key from 'styles/Key';
 import WrapPlot from 'styles/WrapPlot';
 
 const getYAxisMax = (yMax) => {

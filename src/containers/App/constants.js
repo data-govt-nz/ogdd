@@ -187,7 +187,7 @@ export const BREAKPOINTS = {
 export const THEME = {
   breakpoints: ['45em', '63em', '72em'],
   gutter: ['4px', '6px', '8px'],
-  sizes: ['12px', '14px', '18px', '34px'],
+  sizes: ['12px', '14px', '18px', '28px', '34px'],
   colors: {
     white: '#fff',
     light: '#E7E9EB',

@@ -5,7 +5,7 @@ export default styled.div`
 
 
   ${(props) => props.secondary
-    ? css`        
+    ? css`
         color: ${() => props.theme.colors[props.color]};
         padding: 3px 5px;
         font-size: ${() => props.theme.sizes[0]};
@@ -21,7 +21,7 @@ export default styled.div`
       color: ${() => props.theme.colors.white};
       padding: 5px 10px;
       border-radius: 9999px;
-      margin: ${() => props.bottom ? '8px 0 0' : '0 0 6px'};
+      margin: ${() => props.bottom ? '8px 0 0' : '0 0 8px'};
       font-size: ${() => props.theme.sizes[2]};
       box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
       &:after {
@@ -31,7 +31,7 @@ export default styled.div`
         left: 0;
         right: 0;
         bottom: ${() => props.bottom ? '100%' : 'auto'};
-        margin: ${() => props.bottom ? '0 auto -8px' : '-6px auto 0'};
+        margin: ${() => props.bottom ? '0 auto -8px' : '-8px auto 0'};
         width: 0;
         height: 0;
         border-top: solid ${() => props.bottom ? '0' : '4px'} ${() => props.theme.colors[props.background]};

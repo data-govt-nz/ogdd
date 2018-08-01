@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTheme } from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import {
   FlexibleWidthXYPlot,
   XAxis,
@@ -26,6 +26,15 @@ import CardHeader from 'styles/CardHeader';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 import PlotHint from 'styles/PlotHint';
 import WrapPlot from 'styles/WrapPlot';
+
+const ReferenceHint = styled.div`
+  position: absolute;
+  bottom: 35px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: ${(props) => props.theme.sizes[0]}
+`;
 
 const prepareData = (subject, { focusArea, surveys }) =>
   focusArea
@@ -92,7 +101,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
     ];
     const surveyHighlighted = surveys.find((item) => attributesEqual(item.get('survey_id'), surveyHighlightedId));
     if (surveyHighlighted && xAxisRange.indexOf(new Date(surveyHighlighted.get('date')).getTime()) < 0) {
-      xAxisRange = xAxisRange.concat(new Date(surveyHighlighted.get('date')).getTime());
+      xAxisRange = xAxisRange.concat([new Date(surveyHighlighted.get('date')).getTime()]);
     }
 
     const yAxisRange = [0, 100];
@@ -110,6 +119,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
         onClick={onFAClick}
         role={onFAClick ? 'button' : null}
         title={onFAClick ? focusArea.get('title') : null}
+        tabIndex={0}
       >
         <CardHeader>
           <ScreenReaderOnly>
@@ -208,6 +218,11 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
               </FlexibleWidthXYPlot>
             </WrapPlot>
           </ScreenReaderWrapPlot>
+          { referenceSubject && refHighlightedId === referenceSubject.get('subject_id') &&
+            <ReferenceHint>
+              {referenceSubject.get('title')}
+            </ReferenceHint>
+          }
         </CardBody>
       </Card>
     );

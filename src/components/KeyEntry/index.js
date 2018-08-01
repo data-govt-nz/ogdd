@@ -22,12 +22,12 @@ const DotCell = styled(Cell)`
 
 const LineCell = styled(Cell)`
   width: 14px;
-  padding: 9px 7px 5px 0px;
+  padding: 10px 7px 5px 0px;
 `;
 
 const Line = styled.div`
   width: 100%;
-  border-bottom-width: 2px;
+  border-bottom-width: ${(props) => props.small ? 1 : 2}px;
   border-bottom-style: ${(props) => props.dashed ? 'dashed' : 'solid'};
   border-bottom-color: ${(props) => props.colorValue
     ? props.colorValue
@@ -58,7 +58,7 @@ const KeyEntry = ({ color, colorValue, title, line, dashed, outline, small }) =>
   <Styled>
     { line &&
       <LineCell>
-        <Line color={color} colorValue={colorValue} dashed={dashed} role="presentation" />
+        <Line small={small} color={color} colorValue={colorValue} dashed={dashed} role="presentation" />
       </LineCell>
     }
     { !line &&

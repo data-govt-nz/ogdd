@@ -33,6 +33,7 @@ import ReadMore from 'components/ReadMore';
 import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotFocusArea from 'components/PlotFocusArea';
+import SelectWrapper from 'components/SelectWrapper';
 
 // simple styles (styled components)
 import Row from 'styles/Row';
@@ -41,36 +42,29 @@ import PageLongTitle from 'styles/PageLongTitle';
 import PageContainer from 'styles/PageContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
+import PageTitleWrapper from 'styles/PageTitleWrapper';
+import ReadMoreWrapper from 'styles/ReadMoreWrapper';
+import AbovePlots from 'styles/AbovePlots';
 
 // assets
 import titleIcon from 'assets/focus-areas.svg';
 import description from 'labels/focus-areas.md'; // loaded as HTML from markdown
 
-const PageTitleWrapper = styled.div`
-  position: relative;
-`;
-
-const ReadMoreWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-`;
-
 const ReferenceHint = styled.div`
   color: ${(props) => props.theme.colors.referenceLabel};
   font-size: 13px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+    margin-top: 0;
+    margin-bottom: 0;
     position: absolute;
     right: 0;
     top: 4px;
   }
 `;
 
-const SubjectSelect = styled.div`
-  min-height: 40px;
-  position: relative;
-  width: 100%;
-`;
+const NonSelectWrapper = styled.div``;
 
 const INITIAL_STATE = {
   showModal: false,
@@ -123,8 +117,8 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
     this.props.nav({ query: { subject: subjectReference } });
   }
 
-  onSubjectChange(e) {
-    this.props.nav({ query: { subject: e.target.value } });
+  onSubjectChange(subject) {
+    this.props.nav({ query: { subject } });
   }
 
   renderPageTitle() {
@@ -198,30 +192,22 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
         </PageLongTitle>
         <Row>
           <Column width={[1, 3 / 4]}>
-            <SubjectSelect>
+            <AbovePlots>
               { ready && subjects.size > 1 &&
-                <div>
-                  <label htmlFor="subject-select" >
-                    <Label id="component.focus-areas.selectSubjectLabel" />
-                  </label>
-                  <select
-                    id="subject-select"
-                    value={subjectSelectedId}
-                    onChange={((e) => this.onSubjectChange(e))}
-                  >
-                    { subjects.map((item) => (
-                      <option key={item.get('subject_id')} value={item.get('subject_id')} >
-                        { item.get('title') }
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <SelectWrapper
+                  labelID="component.focus-areas.selectSubjectLabel"
+                  value={subjectSelectedId}
+                  options={subjects}
+                  onChange={(newValue) => this.onSubjectChange(newValue)}
+                  valueKey={'subject_id'}
+                  formatOption={(option) => option.get('title')}
+                />
               }
               { ready && subjects.size === 0 &&
-                <div>
+                <NonSelectWrapper>
                   <Label id="component.focus-areas.selectSubjectLabel" />
                   { subjectSelected.get('title')}
-                </div>
+                </NonSelectWrapper>
               }
               { subjectReference &&
                 <ReferenceHint>
@@ -229,7 +215,7 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
                   { subjectReference.get('title')}
                 </ReferenceHint>
               }
-            </SubjectSelect>
+            </AbovePlots>
           </Column>
         </Row>
         <Row>

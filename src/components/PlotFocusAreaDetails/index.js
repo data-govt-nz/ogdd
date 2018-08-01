@@ -5,7 +5,6 @@ import {
   FlexibleWidthXYPlot,
   XAxis,
   YAxis,
-  GridLines,
   AreaSeries,
   LineSeries,
   LineMarkSeries,
@@ -14,23 +13,41 @@ import {
 } from 'react-vis';
 import { timeFormat } from 'd3-time-format';
 
-import getLabel from 'utils/get-label';
 import attributesEqual from 'utils/attributes-equal';
 import formatValue from 'utils/format-value';
 
-import CardTitle from 'components/CardTitle';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
+import KeyEntry from 'components/KeyEntry';
 
+import Key from 'styles/Key';
 import Card from 'styles/Card';
 import CardBody from 'styles/CardBody';
-import CardHeader from 'styles/CardHeader';
-import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 import PlotHint from 'styles/PlotHint';
+
+const PlotHintLabel = styled.div`
+  color: ${(props) => props.reference
+    ? props.theme.colors.dark
+    : props.theme.colors.black
+  };
+  left: 5px;
+  top: -7px;
+  width: 70px;
+  position: absolute;
+  font-size: ${(props) => props.theme.sizes[0]};
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    width: 110px;
+    left: 10px;
+  }
+`;
 
 const WrapPlot = styled.div`
   padding-top: 30px;
-  padding-left: 100px;
-  padding-right: 130px;
+  padding-left: 0px;
+  padding-right: 80px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    padding-left: 100px;
+    padding-right: 130px;
+  }
 `;
 
 const prepareData = (subject, { focusArea, surveys }) =>
@@ -92,38 +109,68 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
       && (!referenceSubject || referenceSubject.get('subject_id') !== subjectHighlightedId)
         ? otherSubjects.find((item) => item.get('subject_id') === subjectHighlightedId)
         : null;
-    const otherDataHighlighted = otherSubjectHighlighted && prepareData(otherSubjectHighlighted, this.props)
+    const otherDataHighlighted = otherSubjectHighlighted && prepareData(otherSubjectHighlighted, this.props);
 
-    // set hint value from highlighted survey
+    // set hint value for current subject and highlighted survey
+    const hintValue =
+      !subjectHighlightedId
+      || subjectHighlightedId === subject.get('subject_id')
+        ? data.find((d) => attributesEqual(d.column, surveyHighlightedId))
+        : null;
+    // set hint value for current subject and highlighted survey
+    const labelHintValue =
+      !subjectHighlightedId
+      || subjectHighlightedId === subject.get('subject_id')
+        ? data.find((d) => attributesEqual(d.column, surveys.last().get('survey_id')))
+        : null;
 
-    // const hintValue =
-    // // subjectHighlightedId
-    //   // ? referenceData.find((d) => attributesEqual(d.column, surveyHighlightedId) && attributesEqual(d.row, subjectHighlightedId))
-    //   // :
-    //   data.find((d) => attributesEqual(d.column, surveyHighlightedId));
+    // set hint value for reference subject and highlighted survey
+    const hintReference = !hintValue
+      && ((referenceData && !subjectHighlightedId)
+        || (referenceSubject && subjectHighlightedId === referenceSubject.get('subject_id'))
+      )
+        ? referenceData.find((d) => attributesEqual(d.column, surveyHighlightedId))
+        : null;
+
+    const labelHintReference = referenceData
+      && referenceSubject
+      && subjectHighlightedId === referenceSubject.get('subject_id')
+        ? referenceData.find((d) => attributesEqual(d.column, surveys.last().get('survey_id')))
+        : null;
+
+    // set hint value for other highlighted subject and highlighted survey
+    const hintOther = otherData && subjectHighlightedId && otherDataHighlighted
+      ? otherDataHighlighted.find((d) => attributesEqual(d.column, surveyHighlightedId))
+      : null;
+    const labelHintOther = otherData && subjectHighlightedId && otherDataHighlighted
+      ? otherDataHighlighted.find((d) => attributesEqual(d.column, surveys.last().get('survey_id')))
+      : null;
 
     // axis ranges
-    const xAxisRange = [
+    let xAxisRange = [
       new Date(surveys.first().get('date')).getTime(),
       new Date(surveys.last().get('date')).getTime(),
     ];
-    // const surveyHighlighted = surveys.find((item) => attributesEqual(item.get('survey_id'), surveyHighlightedId));
-    // if (surveyHighlighted && xAxisRange.indexOf(new Date(surveyHighlighted.get('date')).getTime()) < 0) {
-    //   xAxisRange = xAxisRange.concat(new Date(surveyHighlighted.get('date')).getTime());
-    // }
-
     const yAxisRange = [0, 100];
 
     // dummy data to force the area plot from 0 to 100%
     const dataForceYRange = [{ x: xAxisRange[0], y: yAxisRange[0] }, { x: xAxisRange[0], y: yAxisRange[1] }];
 
+    const surveyHighlighted = surveys.find((item) => attributesEqual(item.get('survey_id'), surveyHighlightedId));
+    if (surveyHighlighted && xAxisRange.indexOf(new Date(surveyHighlighted.get('date')).getTime()) < 0) {
+      xAxisRange = [new Date(surveyHighlighted.get('date')).getTime()];
+    }
+
     return (
-      <Card>
+      <Card
+        onMouseLeave={() => this.onHighlightSubject(false)}
+      >
         <CardBody>
           <WrapPlot>
             <FlexibleWidthXYPlot
               height={300}
               xType="time"
+              onMouseLeave={() => this.onHighlightSubject(false)}
             >
               <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
               <XAxis
@@ -240,7 +287,83 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
                   onSeriesClick={() => onSelectSubject(referenceSubject.get('subject_id'))}
                 />
               }
+              { labelHintValue &&
+                <Hint
+                  value={labelHintValue}
+                  align={{ vertical: 'bottom', horizontal: 'rightEdge' }}
+                  style={{ transform: 'translate(100%, -50%)' }}
+                >
+                  <PlotHintLabel>
+                    {subject.get('title')}
+                  </PlotHintLabel>
+                </Hint>
+              }
+              { labelHintReference &&
+                <Hint
+                  value={labelHintReference}
+                  align={{ vertical: 'bottom', horizontal: 'rightEdge' }}
+                  style={{ transform: 'translate(100%, -50%)' }}
+                >
+                  <PlotHintLabel>
+                    {referenceSubject.get('title')}
+                  </PlotHintLabel>
+                </Hint>
+              }
+              { labelHintOther &&
+                <Hint
+                  value={labelHintOther}
+                  align={{ vertical: 'bottom', horizontal: 'rightEdge' }}
+                  style={{ transform: 'translate(100%, -50%)' }}
+                >
+                  <PlotHintLabel>
+                    {otherSubjectHighlighted.get('title')}
+                  </PlotHintLabel>
+                </Hint>
+              }
+              { hintValue &&
+                <Hint
+                  value={hintValue}
+                  align={{ vertical: 'top', horizontal: 'left' }}
+                  style={{ transform: 'translateX(50%)' }}
+                >
+                  <PlotHint background={focusArea.get('indicator_id')}>
+                    { formatValue(hintValue.y, focusArea.get('type')) }
+                  </PlotHint>
+                </Hint>
+              }
+              { hintReference &&
+                <Hint
+                  value={hintReference}
+                  align={{ vertical: 'top', horizontal: 'left' }}
+                  style={{ transform: 'translateX(50%)' }}
+                >
+                  <PlotHint background={focusArea.get('indicator_id')}>
+                    { formatValue(hintReference.y, focusArea.get('type')) }
+                  </PlotHint>
+                </Hint>
+              }
+              { hintOther &&
+                <Hint
+                  value={hintOther}
+                  align={{ vertical: 'top', horizontal: 'left' }}
+                  style={{ transform: 'translateX(50%)' }}
+                >
+                  <PlotHint background={focusArea.get('indicator_id')}>
+                    { formatValue(hintOther.y, focusArea.get('type')) }
+                  </PlotHint>
+                </Hint>
+              }
             </FlexibleWidthXYPlot>
+            { referenceSubject &&
+              <Key>
+                <KeyEntry
+                  line
+                  small
+                  color="black"
+                  title={referenceSubject.get('title')}
+                />
+              </Key>
+            }
           </WrapPlot>
         </CardBody>
       </Card>

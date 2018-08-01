@@ -27,7 +27,15 @@ export function* navigateSaga({ location, args }) {
   }, args || {});
 
   // update path: replace or keep if not provided
-  const path = typeof location === 'string' ? location : (location.path || hash);
+  let path = '';
+  if (typeof location === 'string') {
+    path = location;
+  } else if (typeof location.path !== 'undefined') {
+    path = location.path;
+  } else {
+    path = hash;
+  }
+
   // update search query
   let query = '';
   if (location.query) {

@@ -26,6 +26,13 @@ const Styled = styled.div`
 `;
 const Main = styled.main`
   &:focus { outline: none; }
+  padding-top: 10px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    padding-top: 20px;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+    padding-top: 40px;
+  }
 `;
 
 /**
