@@ -125,7 +125,7 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
     const surveyHighlightedId = this.state.surveyHighlightedId
       || (surveys ? surveys.last().get('survey_id') : null);
 
-    const ready = focusAreaIndicators && subjects && surveys && surveyHighlightedId !== null;
+    const ready = focusAreaIndicators && faSelectedId && subjects && surveys && surveyHighlightedId !== null;
 
     const focusArea = ready && (faSelectedId
       ? focusAreaIndicators.find((item) => attributesEqual(item.get('indicator_id'), faSelectedId))
