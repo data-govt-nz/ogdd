@@ -176,7 +176,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                   style={{
                     fill: theme.colors[referenceSubject && !refHighlightedId ? 'faReference' : focusArea.get('indicator_id')],
                     strokeWidth: 0,
-                    cursor: referenceSubject ? 'pointer' : 'auto',
+                    cursor: referenceSubject ? 'pointer' : 'inherit',
                   }}
                   onSeriesClick={() => referenceSubject ? onSelectReference(referenceSubject) : false}
                   onSeriesMouseOver={() => referenceSubject ? this.onHighlightReference(referenceSubject.get('subject_id')) : false}

@@ -6,6 +6,7 @@ export default styled.h1`
   margin-top: 0;
   margin-bottom: 20px;
   margin-right: 45px;
+  min-height: 38px;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
     font-size: ${(props) => props.theme.sizes[3]};
     margin-bottom: 40px;
