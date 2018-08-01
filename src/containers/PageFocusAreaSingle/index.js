@@ -31,6 +31,7 @@ import ReadMore from 'components/ReadMore';
 import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotFocusAreaDetails from 'components/PlotFocusAreaDetails';
+import SelectWrapper from 'components/SelectWrapper';
 
 // simple styles (styled components)
 import Row from 'styles/Row';
@@ -41,16 +42,12 @@ import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
+import AbovePlots from 'styles/AbovePlots';
 
 // assets
 import titleIcon from 'assets/focus-areas.svg';
 
-const SubjectSelect = styled.div`
-  min-height: 40px;
-  position: relative;
-  width: 100%;
-`;
-
+const NonSelectWrapper = styled.div``;
 
 const INITIAL_STATE = {
   showModal: false,
@@ -76,9 +73,9 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
     this.setState({ surveyHighlightedId });
   }
 
-  onSubjectChange(e) {
+  onSubjectChange(subject) {
     this.props.nav({ query: {
-      subject: e.target.value,
+      subject,
       fa: this.props.faSelectedId,
     } });
   }
@@ -168,32 +165,24 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
         }
         <Row>
           <Column width={[1, 3 / 4]}>
-            <SubjectSelect>
+            <AbovePlots>
               { ready && subjects.size > 1 &&
-                <div>
-                  <label htmlFor="subject-select" >
-                    <Label id="component.focus-area.selectSubjectLabel" />
-                  </label>
-                  <select
-                    id="subject-select"
-                    value={subjectSelectedId}
-                    onChange={((e) => this.onSubjectChange(e))}
-                  >
-                    { subjects.map((item) => (
-                      <option key={item.get('subject_id')} value={item.get('subject_id')} >
-                        { item.get('title') }
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <SelectWrapper
+                  labelID="component.focus-area.selectSubjectLabel"
+                  value={subjectSelectedId}
+                  options={subjects}
+                  onChange={(newValue) => this.onSubjectChange(newValue)}
+                  valueKey={'subject_id'}
+                  formatOption={(option) => option.get('title')}
+                />
               }
               { ready && subjects.size === 0 &&
-                <div>
-                  <Label id="component.focus-area.selectSubjectLabel" />
+                <NonSelectWrapper>
+                  <Label id="component.focus-areas.selectSubjectLabel" />
                   { subjectSelected.get('title')}
-                </div>
+                </NonSelectWrapper>
               }
-            </SubjectSelect>
+            </AbovePlots>
           </Column>
         </Row>
         <Row>
