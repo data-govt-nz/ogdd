@@ -19,11 +19,15 @@ import getLabel from 'utils/get-label';
 
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 import KeyEntry from 'components/KeyEntry';
+import CardTitle from 'components/CardTitle';
+import Close from 'components/Close';
 
 import Key from 'styles/Key';
 import Card from 'styles/Card';
+import CardHeader from 'styles/CardHeader';
 import CardBody from 'styles/CardBody';
 import PlotHint from 'styles/PlotHint';
+import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 
 const PlotHintLabel = styled.div`
   color: ${(props) => props.reference
@@ -50,7 +54,16 @@ const WrapPlot = styled.div`
     padding-right: 130px;
   }
 `;
-
+const Dismiss = styled.div`
+  position: absolute;
+  right: 0;
+  top: 50px;
+  margin-top: 9px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    margin-top: 0;
+    top: 0;
+  }
+`;
 const prepareData = (subject, { focusArea, surveys }) =>
   focusArea
     .get('outcomes') // we are shoing outcomes
@@ -90,6 +103,8 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
       onHighlightSurvey,
       theme,
       onSelectSubject,
+      focusAreaIcon,
+      onDismiss,
     } = this.props;
 
     const { subjectHighlightedId } = this.state;
@@ -166,6 +181,18 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
       <Card
         onMouseLeave={() => this.onHighlightSubject(false)}
       >
+        <CardHeader>
+          <ScreenReaderOnly>
+            {getLabel('component.focus-areas.focus-area')}
+          </ScreenReaderOnly>
+          <CardTitle title={focusArea.get('title')} iconSrc={focusAreaIcon} />
+          <Dismiss>
+            <Close
+              onClick={onDismiss}
+              altTitle={getLabel('screenreader.focus-area.button.dismiss')}
+            />
+          </Dismiss>
+        </CardHeader>
         <CardBody>
           <ScreenReaderWrapPlot
             figCaption={getLabel('screenreader.focus-areas.chart-caption')}
@@ -412,6 +439,8 @@ PlotFocusAreaDetails.propTypes = {
   otherSubjects: PropTypes.object,
   onHighlightSurvey: PropTypes.func.isRequired,
   onSelectSubject: PropTypes.func.isRequired,
+  onDismiss: PropTypes.func.isRequired,
+  focusAreaIcon: PropTypes.string.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
