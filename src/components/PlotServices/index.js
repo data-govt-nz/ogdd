@@ -117,6 +117,9 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
               <FlexibleWidthXYPlot
                 height={240}
                 xType="time"
+                onMouseLeave={() => {
+                  onHighlightSurvey(surveys.last().get('survey_id'));
+                }}
               >
                 <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
                 <XAxis

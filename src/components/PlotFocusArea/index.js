@@ -154,6 +154,9 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
               <FlexibleWidthXYPlot
                 height={160}
                 xType="time"
+                onMouseLeave={() => {
+                  onHighlightSurvey(surveys.last().get('survey_id'));
+                }}
               >
                 <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
                 <AreaSeries data={dataBackground} style={{ fill: theme.colors.faPlotBackground, strokeWidth: 0 }} />
