@@ -85,12 +85,10 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
 
     // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
     const data = prepareData(subject, this.props);
-
     const referenceData = referenceSubject && prepareData(referenceSubject, this.props);
 
     // set hint value from highlighted survey
-
-    const hintValue = refHighlightedId
+    const hintValue = refHighlightedId && referenceData
       ? referenceData.find((d) => attributesEqual(d.column, surveyHighlightedId) && attributesEqual(d.row, refHighlightedId))
       : data.find((d) => attributesEqual(d.column, surveyHighlightedId));
 
@@ -99,6 +97,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
       new Date(surveys.first().get('date')).getTime(),
       new Date(surveys.last().get('date')).getTime(),
     ];
+
     const surveyHighlighted = surveys.find((item) => attributesEqual(item.get('survey_id'), surveyHighlightedId));
     if (surveyHighlighted && xAxisRange.indexOf(new Date(surveyHighlighted.get('date')).getTime()) < 0) {
       xAxisRange = xAxisRange.concat([new Date(surveyHighlighted.get('date')).getTime()]);
@@ -178,7 +177,10 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                     strokeWidth: 0,
                     cursor: referenceSubject ? 'pointer' : 'inherit',
                   }}
-                  onSeriesClick={() => referenceSubject ? onSelectReference(referenceSubject) : false}
+                  onSeriesClick={({ event }) => {
+                    if (event) event.stopPropagation();
+                    return referenceSubject ? onSelectReference(referenceSubject) : false;
+                  }}
                   onSeriesMouseOver={() => referenceSubject ? this.onHighlightReference(referenceSubject.get('subject_id')) : false}
                   onSeriesMouseOut={() => referenceSubject ? this.onHighlightReference(false) : false}
                   onNearestX={(value) => referenceSubject ? false : onHighlightSurvey(value.column)}
