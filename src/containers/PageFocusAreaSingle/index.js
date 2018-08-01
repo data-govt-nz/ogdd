@@ -31,7 +31,6 @@ import ReadMore from 'components/ReadMore';
 import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotFocusAreaDetails from 'components/PlotFocusAreaDetails';
-import Close from 'components/Close';
 
 // simple styles (styled components)
 import Row from 'styles/Row';
@@ -52,37 +51,6 @@ const SubjectSelect = styled.div`
   width: 100%;
 `;
 
-const PageLongTitleStyled = styled(PageLongTitle)`
-  display: table;
-`;
-
-const PageLongTitleIcon = styled.img`
-  position: relative;
-  display: table-cell;
-  vertical-align: middle;
-  height: 24px;
-  width: 24px;
-  margin-right: 4px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    height: 38px;
-    width: 38px;
-  }
-`;
-const PageLongTitleText = styled.div`
-  display: table-cell;
-  vertical-align: middle;
-`;
-
-const Dismiss = styled.div`
-  position: absolute;
-  right: 0;
-  top: 50px;
-  margin-top: 9px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    margin-top: -13px;
-    top: 0;
-  }
-`;
 
 const INITIAL_STATE = {
   showModal: false,
@@ -136,10 +104,10 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
   }
 
   renderAsideContent(focusArea) {
-    return (
+    return focusArea && (
       <AsideContent
         title={this.renderPageTitle()}
-        text={focusArea && `${focusArea.get('title')}: ${focusArea.get('description')}`}
+        text={`${focusArea.get('title').trim()}: ${focusArea.get('description')}`}
       />
     );
   }
@@ -194,10 +162,9 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
           </FSModal>
         }
         {ready &&
-          <PageLongTitleStyled id="pageTitle">
-            <PageLongTitleIcon alt="" src={FOCUSAREA_ICONS[faSelectedId]} role="presentation" />
-            <PageLongTitleText>{focusArea.get('title')}</PageLongTitleText>
-          </PageLongTitleStyled>
+          <PageLongTitle id="pageTitle">
+            <Label id="component.focus-areas.longTitle" />
+          </PageLongTitle>
         }
         <Row>
           <Column width={[1, 3 / 4]}>
@@ -248,18 +215,14 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
                     onSelectSubject={(subjectID) => this.onSelectSubject(subjectID)}
                     surveyHighlightedId={surveyHighlightedId}
                     onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
+                    onDismiss={() => this.onFAClose()}
+                    focusAreaIcon={FOCUSAREA_ICONS[faSelectedId]}
                   />
                 </Column>
               }
             </Row>
           </Column>
         </Row>
-        <Dismiss>
-          <Close
-            onClick={() => this.onFAClose()}
-            altTitle={getLabel('screenreader.focus-area.button.dismiss')}
-          />
-        </Dismiss>
       </PageContainer>
     );
   }

@@ -14,25 +14,25 @@ const Styled = styled.button`
   border: 0;
   position: relative;
   cursor: pointer;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    height: 60px
-    width: 60px;
-  }
 `;
 
+// @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+//   height: 60px
+//   width: 60px;
+// }
 const Icon = styled.img`
   height: 18px;
   width: 18px;
   position: absolute;
   top: 11px;
   left: 11px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    height: 26px;
-    width: 26px;
-    top: 17px;
-    left: 17px;
-  }
 `;
+// @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+//   height: 26px;
+//   width: 26px;
+//   top: 17px;
+//   left: 17px;
+// }
 
 const Close = ({ altTitle, onClick }) => (
   <Styled onClick={onClick}>
