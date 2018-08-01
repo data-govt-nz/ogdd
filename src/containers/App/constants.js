@@ -136,6 +136,7 @@ export const NAVITEMS = [
   {
     path: '',
     label: 'component.focus-areas.nav',
+    activePaths: ['focusarea'],
   },
   {
     path: 'insights',

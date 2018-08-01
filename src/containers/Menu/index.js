@@ -70,7 +70,9 @@ const Menu = ({ nav, navItems, location, visibleMin, hiddenMin }) => (
         <Link
           role="menuitem"
           key={item.path}
-          active={location.get('path') === item.path}
+          active={location.get('path') === item.path
+            || (item.activePaths && item.activePaths.indexOf(location.get('path')) > -1)
+          }
           onClick={() => nav(item.path)}
           title={getLabel(item.label)}
         >
