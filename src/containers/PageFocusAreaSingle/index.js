@@ -22,7 +22,6 @@ import { navigate } from 'containers/App/actions';
 import {
   DEFAULT_SUBJECT_ID,
   FOCUSAREA_ICONS,
-  FOCUSAREA_DARKICONS,
 } from 'containers/App/constants';
 
 // components
@@ -100,20 +99,15 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
 
   renderPageTitle() {
     return (
-      <PageTitle title="component.focus-area.title" iconSrc={titleIcon} />
+      <PageTitle labelId="component.focus-area.title" iconSrc={titleIcon} />
     );
   }
 
   renderAsideContent(focusArea) {
     return focusArea && (
       <AsideContent
-        title={
-          <PageTitle
-            title={focusArea.get('title')}
-            iconSrc={FOCUSAREA_DARKICONS[focusArea.get('indicator_id')]}
-          />
-        }
-        text={focusArea.get('description')}
+        title={this.renderPageTitle()}
+        text={`${focusArea.get('title').trim()}: ${focusArea.get('description')}`}
       />
     );
   }
