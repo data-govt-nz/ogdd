@@ -20,16 +20,6 @@ survey_id,subject_id,indicator_id,value,answer,answer_text
 2017,all,assets,5123,,
 2017,all,assets_nzgoal,4888,,
 2017,all,assets_machinereadable,3980,,
-2017,all,q03,37.93,download,Files for download on agency website
-2017,all,q03,6.9,api,We use API
-2017,all,q04,12,data_govt,data.govt
-2017,all,q04,15,koordinates,Koordinates
-2017,all,q04,0,amazon,Amazon
-2017,all,q04,0,qlik,Qlik
-2017,all,q04,0,tableau,Tableau
-2017,all,q04,0,esri,ESRI
-2017,all,q05,15,proprietary,Proprietary API
-2017,all,q05,5,open,Open standard API
 2017,all,q02,89.7,yes,Have
 2017,all,q02,10.3,no,Have not
 2017,all,q14,37.9,yes,Have
