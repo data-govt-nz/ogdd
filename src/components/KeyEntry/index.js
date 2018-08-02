@@ -11,11 +11,12 @@ const Styled = styled.div`
 
 const Cell = styled.div`
   display: table-cell;
-  vertical-align: top;
+  vertical-align: ${(props) => props.dot ? 'middle' : 'top'};
   font-size: ${(props) => props.small ? props.theme.sizes[0] : props.theme.sizes[1]};
 `;
 
 const DotCell = styled(Cell)`
+  vertical-align: middle;
   width: 14px;
   padding: 5px 2px;
 `;
@@ -39,22 +40,30 @@ const Dot = styled.div`
   width: ${(props) => props.small ? 8 : 10}px;
   height: ${(props) => props.small ? 8 : 10}px;
   border-radius: 9999px;
-  background-color: ${(props) => props.colorValue
-    ? props.colorValue
-    : props.theme.colors[props.color]
-  };
-  border: 1px solid;
-  border-color: ${(props) => {
+  background-color: ${(props) => {
     if (props.outline) {
-      return props.outline;
+      return 'transparent';
     }
     return props.colorValue
       ? props.colorValue
       : props.theme.colors[props.color];
   }};
+  border: 1px solid;
+  border-color: ${(props) => props.colorValue
+    ? props.colorValue
+    : props.theme.colors[props.color]
+  };
 `;
 
-const KeyEntry = ({ color, colorValue, title, line, dashed, outline, small }) => (
+const KeyEntry = ({
+  color,
+  colorValue,
+  title,
+  line,
+  dashed,
+  small,
+  outline,
+}) => (
   <Styled>
     { line &&
       <LineCell>
@@ -66,7 +75,7 @@ const KeyEntry = ({ color, colorValue, title, line, dashed, outline, small }) =>
         <Dot color={color} colorValue={colorValue} outline={outline} role="presentation" />
       </DotCell>
     }
-    <Cell small={small}>
+    <Cell small={small} dot={!line}>
       { title }
     </Cell>
   </Styled>
@@ -75,11 +84,11 @@ const KeyEntry = ({ color, colorValue, title, line, dashed, outline, small }) =>
 KeyEntry.propTypes = {
   color: PropTypes.string,
   colorValue: PropTypes.string,
-  outline: PropTypes.string,
   title: PropTypes.string.isRequired,
   line: PropTypes.bool,
   dashed: PropTypes.bool,
   small: PropTypes.bool,
+  outline: PropTypes.bool,
 };
 
 export default KeyEntry;

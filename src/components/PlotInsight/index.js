@@ -37,11 +37,11 @@ const IndicatorBar = styled.div`
 const OutcomeBar = styled.div`
   float: left;
   height: 30px;
-  background-color: ${(props) => props.colorValue};
+  background-color: ${(props) => props.outline ? 'transparent' : props.colorValue};
   width: ${(props) => props.value}%;
   margin: 0 -1px;
   border: 1px solid;
-  border-color: ${(props) => props.outline || props.colorValue};
+  border-color: ${(props) => props.colorValue};
   position: relative;
 
   ${(props) => props.marked && css`
@@ -61,9 +61,7 @@ const OutcomeBar = styled.div`
 `;
 const IndicatorOutcomes = styled.div``;
 
-const getOutline = (answer, theme) => answer === ANSWERS[6] // not stated
-  ? theme.colors.not_stated_outline
-  : null;
+const hasOutline = (answer) => answer === ANSWERS[6]; // not stated
 
 const getColorValue = (answer, indicatorID, theme) => {
   if (answer === ANSWERS[0]) { // yes
@@ -138,7 +136,7 @@ class PlotInsight extends React.PureComponent { // eslint-disable-line react/pre
                     markedFirst={item.get('markedFirst')}
                     markedLast={item.get('markedLast')}
                     value={(item.get('value') / totalValue) * 100}
-                    outline={getOutline(item.get('answer'), theme)}
+                    outline={hasOutline(item.get('answer'))}
                     colorValue={getColorValue(item.get('answer'), insight.getIn(['indicator', 'parent_indicator_id']), theme)}
                   />
                 ))
@@ -151,7 +149,7 @@ class PlotInsight extends React.PureComponent { // eslint-disable-line react/pre
                     small
                     key={item.get('answer')}
                     title={`${formatValue(item.get('value'), insight.getIn(['indicator', 'type']))} ${item.get('answer_text')}`}
-                    outline={getOutline(item.get('answer'), theme)}
+                    outline={hasOutline(item.get('answer'))}
                     colorValue={getColorValue(item.get('answer'), insight.getIn(['indicator', 'parent_indicator_id']), theme)}
                   />
                 ))

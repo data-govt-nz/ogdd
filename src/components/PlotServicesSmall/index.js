@@ -7,6 +7,7 @@ import {
   YAxis,
   GridLines,
   AreaSeries,
+  MarkSeries,
   Hint,
 } from 'react-vis';
 import { timeFormat } from 'd3-time-format';
@@ -120,14 +121,28 @@ class PlotServicesSmall extends React.PureComponent { // eslint-disable-line rea
                 tickValues={yAxisRange}
                 tickFormat={(value) => formatValue(value, indicatorType)}
               />
-              <AreaSeries
-                data={data}
-                style={{
-                  fill: theme.colors.fa1,
-                  strokeWidth: 0,
-                }}
-                onNearestX={(value) => onHighlightSurvey(value.column)}
-              />
+              { data.length > 1
+                ? (
+                  <AreaSeries
+                    data={data}
+                    style={{
+                      fill: theme.colors.fa1,
+                      strokeWidth: 0,
+                    }}
+                    onNearestX={(value) => onHighlightSurvey(value.column)}
+                  />
+                )
+                : (
+                  <MarkSeries
+                    data={data}
+                    size={3}
+                    style={{
+                      fill: theme.colors.fa1,
+                      strokeWidth: 0,
+                    }}
+                  />
+                )
+              }
               { hintValue &&
                 <Hint
                   value={hintValue}

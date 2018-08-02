@@ -7,6 +7,7 @@ import {
   YAxis,
   AreaSeries,
   LineSeries,
+  MarkSeries,
   Hint,
 } from 'react-vis';
 import { timeFormat } from 'd3-time-format';
@@ -61,13 +62,14 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
       .toList()
       .reduce((memo, group) => memo.concat({
         data: prepareData(group, this.props),
+        title: group.first().get('answer_text'),
         id: group.first().get('answer'),
       }), []);
 
-    const keyItems = groups.reduce((memo, group) => memo.concat({
-      title: group.first().get('answer_text'),
-      id: group.first().get('answer'),
-    }), []);
+    // const keyItems = groups.reduce((memo, group) => memo.concat({
+    //   title: group.first().get('answer_text'),
+    //   id: group.first().get('answer'),
+    // }), []);
 
     // set hint value from highlighted survey
     const hintValues = data.reduce((memo, series) => memo.concat([{
@@ -129,18 +131,31 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
                 <YAxis
                   tickFormat={(value) => formatValue(value, indicator.get('type'))}
                 />
-                { data && data.map((series, index) => (
-                  <LineSeries
-                    key={series.id}
-                    data={series.data}
-                    style={{
-                      stroke: theme.colors.fa1,
-                      strokeWidth: 2,
-                      strokeDasharray: index === 0 ? 8 : 'none',
-                    }}
-                    onNearestX={(value) => index === 0 ? onHighlightSurvey(value.column) : false}
-                  />
-                ))}
+                { data && data.map((series, index) => series.data.length > 1
+                  ? (
+                    <LineSeries
+                      key={series.id}
+                      data={series.data}
+                      style={{
+                        stroke: theme.colors.fa1,
+                        strokeWidth: 2,
+                        strokeDasharray: index === 0 ? 8 : 'none',
+                      }}
+                      onNearestX={(value) => index === 0 ? onHighlightSurvey(value.column) : false}
+                    />
+                  )
+                  : (
+                    <MarkSeries
+                      key={series.id}
+                      data={series.data}
+                      size={3}
+                      style={{
+                        fill: index === 0 ? theme.colors.fa1 : 'none',
+                        strokeWidth: index === 0 ? 0 : 1,
+                      }}
+                    />
+                  )
+                )}
                 { hintValues && hintValues.map((hintValue) => (
                   <Hint
                     key={hintValue.id}
@@ -162,15 +177,25 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
               </FlexibleWidthXYPlot>
             </WrapPlot>
             <Key>
-              { keyItems.map((item, index) => (
-                <KeyEntry
-                  key={item.id}
-                  color="fa1"
-                  title={item.title}
-                  dashed={index === 0}
-                  line
-                />
-              ))}
+              { data.map((series, index) => series.data.length > 1
+                ? (
+                  <KeyEntry
+                    key={series.id}
+                    color="fa1"
+                    title={series.title}
+                    dashed={index === 0}
+                    line
+                  />
+                )
+                : (
+                  <KeyEntry
+                    key={series.id}
+                    color="fa1"
+                    title={series.title}
+                    outline={index !== 0}
+                  />
+                )
+              )}
             </Key>
           </ScreenReaderWrapPlot>
         </CardBody>
