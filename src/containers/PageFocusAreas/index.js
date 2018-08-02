@@ -203,16 +203,16 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
                   formatOption={(option) => option.get('title')}
                 />
               }
-              { ready && subjects.size === 0 &&
+              { ready && subjects.size === 1 &&
                 <NonSelectWrapper>
                   <Label id="component.focus-areas.selectSubjectLabel" />
-                  { subjectSelected.get('title')}
+                  <strong>{ subjectSelected.get('title')}</strong>
                 </NonSelectWrapper>
               }
               { subjectReference &&
                 <ReferenceHint>
                   <Label id="component.focus-areas.subjectReference" />
-                  { subjectReference.get('title')}
+                  <strong>{ subjectReference.get('title')}</strong>
                 </ReferenceHint>
               }
             </AbovePlots>
