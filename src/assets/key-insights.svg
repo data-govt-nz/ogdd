@@ -5,15 +5,13 @@
         clip-path: url(#clip-key-insights);
       }
 
-      .cls-2 {
+      .cls-2, .cls-5 {
         fill: none;
-        stroke: #202326;
-        stroke-miterlimit: 10;
-        stroke-width: 2px;
       }
 
-      .cls-2, .cls-3 {
-        fill-rule: evenodd;
+      .cls-2 {
+        stroke: #202326;
+        stroke-width: 2px;
       }
 
       .cls-3 {
@@ -21,7 +19,7 @@
       }
 
       .cls-4 {
-        fill: #fff;
+        stroke: none;
       }
     </style>
     <clipPath id="clip-key-insights">
@@ -29,14 +27,15 @@
     </clipPath>
   </defs>
   <g id="key-insights" class="cls-1">
-    <rect class="cls-4" width="38" height="38"/>
-    <g id="Group_2482" data-name="Group 2482" transform="translate(-3 3)">
-      <path id="Path_8" data-name="Path 8" class="cls-2" d="M12,7.5v24H30V12.809L24.525,7.5Z" transform="translate(-3 -1.5)"/>
-      <path id="Path_9" data-name="Path 9" class="cls-3" d="M28,7.7l5.914,5.841H28Z" transform="translate(-7.15 -1.615)"/>
-    </g>
-    <g id="Group_2483" data-name="Group 2483" transform="translate(4 -1)">
-      <path id="Path_8-2" data-name="Path 8" class="cls-2" d="M12,7.5v24H30V12.809L24.525,7.5Z" transform="translate(-3 -1.5)"/>
-      <path id="Path_9-2" data-name="Path 9" class="cls-3" d="M28,7.7l5.914,5.841H28Z" transform="translate(-7.15 -1.615)"/>
+    <g id="Group_2489" data-name="Group 2489">
+      <g id="Ellipse_348" data-name="Ellipse 348" class="cls-2" transform="translate(3 4)">
+        <circle class="cls-4" cx="14" cy="14" r="14"/>
+        <circle class="cls-5" cx="14" cy="14" r="13"/>
+      </g>
+      <path id="Path_586" data-name="Path 586" class="cls-2" d="M17.016,15.278a9.152,9.152,0,0,1-7.507,3.686,9.88,9.88,0,0,1-5.941-2.1,9.235,9.235,0,0,1-3.557-7.4A9.785,9.785,0,0,1,2.165,3.437" transform="translate(20.256 4.929) rotate(60)"/>
+      <path id="Path_587" data-name="Path 587" class="cls-2" d="M-2680.608-16370.853l6.161,6.161,3.312-3.312-6.226-6.227" transform="translate(2705 16400)"/>
+      <line id="Line_666" data-name="Line 666" class="cls-2" y1="4" x2="4" transform="translate(25.5 27.5)"/>
+      <path id="Path_589" data-name="Path 589" class="cls-3" d="M-2654.884-16435.332l-14.4,13.83h5.507l-3.536,9.7,12.432-12.609h-4.16Z" transform="translate(2684.419 16439.893)"/>
     </g>
   </g>
 </svg>

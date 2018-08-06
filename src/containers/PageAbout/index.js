@@ -22,7 +22,7 @@ import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 
 // assets
-import titleIcon from 'assets/page.svg';
+import titleIcon from 'assets/about.svg';
 import main from 'labels/about.md'; // loaded as HTML from markdown
 import description from 'labels/about-aside.md'; // loaded as HTML from markdown
 
