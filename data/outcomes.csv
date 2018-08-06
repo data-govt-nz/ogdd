@@ -64,5 +64,5 @@ survey_id,subject_id,indicator_id,value,answer,answer_text
 2018,all,q34,41,no,Do not
 2017,all,q36,24,yes,Have
 2017,all,q36,41,developing,Under development
-2017,all,q36,3,like_to,Would like to
+2017,all,q36,31,like_to,Would like to
 2017,all,q36,3,not_warranted,Not warranted
