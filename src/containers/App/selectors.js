@@ -31,14 +31,14 @@ export const selectSurveys = createSelector(
   (state) => selectData(state, 'surveys'),
   (data) => {
     if (data) {
-      if (isNaN(Date.parse(data.get('date')))) {
-        // assume YYYYMMDD and convert to YYYY-MM-DD (initially suggested date format)
-        return data.map((d) => {
-          const updated = insertAt(insertAt(d.get('date'), '-', 6), '-', 4);
+      // assume YYYYMMDD and convert to YYYY-MM-DD (initially suggested date format)
+      return data.map((d) => {
+        if (isNaN(Date.parse(d.get('date')))) {
+          const updated = insertAt(insertAt(String(d.get('date')), '-', 6), '-', 4);
           return isNaN(Date.parse(updated)) ? d : d.set('date', updated);
-        });
-      }
-      return data;
+        }
+        return d;
+      });
     }
     return null;
   }
