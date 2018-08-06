@@ -20,3 +20,6 @@ q28,fa4,percentage,28,Do you have a standard process to ensure you have the righ
 q30,fa5,percentage,30,Does your organisation track the financial costs and benefits of open data publication & reuse?,
 q33,fa5,percentage,33,Do you tailor contracts or procurement activities to allow the data to be released openly?,
 q36,fa6,percentage,36,Does your organisation have a catalogue of its data assets?,
+q15,fa1,percentage,15,Dp you conduct risk assessments on sensitivity datasets prior to release?,
+q16,fa1,percentage,16,Do you conduct Privacy Impact Assessments on sensitive datasets prior to release?,
+q34,fa5,percentage,34,Do you consider a supplier's ability to return data requested in your procurement selection process?,
