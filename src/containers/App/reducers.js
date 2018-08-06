@@ -50,12 +50,16 @@ function announcementReducer(state = '', action) {
   return state;
 }
 
+function convertToString(data) {
+  return data.map((d) => d.map((v) => v === null ? v : String(v)));
+}
+
 function dataReducer(state = fromJS(DATA), action) {
   switch (action.type) {
     case DATA_REQUESTED:
       return state.setIn([action.key, 'requested'], action.timestamp);
     case DATA_LOADED:
-      return state.setIn([action.key, 'data'], fromJS(action.data));
+      return state.setIn([action.key, 'data'], convertToString(fromJS(action.data)));
     default:
       return state;
   }
