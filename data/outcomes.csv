@@ -44,7 +44,7 @@ survey_id,subject_id,indicator_id,value,answer,answer_text
 2018,all,q19,21,developing,Under development
 2017,all,q23,24,yes,Have
 2017,all,q23,3,not_sure,Are not sure
-2017,all,q23,69,no,Have not
+2017,all,q23,72,no,Have not
 2017,all,q26,72,yes,Work with others
 2017,all,q26,7,not_sure,Are not sure
 2017,all,q26,21,no,Do not
@@ -53,7 +53,7 @@ survey_id,subject_id,indicator_id,value,answer,answer_text
 2017,all,q28,31,no,Have not
 2017,all,q30,3,yes,Track
 2017,all,q30,7,not_sure,Are not sure
-2017,all,q30,86,no,Do not track
+2017,all,q30,90,no,Do not track
 2017,all,q33,28,yes,Tailor
 2017,all,q33,28,not_sure,Are not sure
 2017,all,q33,45,no,Do not tailor
