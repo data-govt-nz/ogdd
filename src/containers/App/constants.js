@@ -29,7 +29,7 @@ export const LOAD_ERROR = 'action.LOAD_ERROR';
 
 // App data sources
 const API_PATH = 'https://uat.data.govt.nz/api/3/action/datastore_search';
-const API = false;
+const API = true;
 export const DATA = API
 ? {
   surveys: {
