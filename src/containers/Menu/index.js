@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
+import { Map } from 'immutable';
 
 import Label from 'components/Label';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
@@ -68,7 +69,7 @@ const Menu = ({ nav, navItems, location, visibleMin, hiddenMin }) => (
 Menu.propTypes = {
   nav: PropTypes.func.isRequired,
   navItems: PropTypes.array,
-  location: PropTypes.object,
+  location: PropTypes.instanceOf(Map),
   visibleMin: PropTypes.number,
   hiddenMin: PropTypes.number,
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Map, List } from 'immutable';
 
 import attributesEqual from 'utils/attributes-equal';
 import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
@@ -55,9 +56,9 @@ class PlotServicesMultiples extends React.PureComponent { // eslint-disable-line
 
 // indicator={indicator}
 PlotServicesMultiples.propTypes = {
-  indicator: PropTypes.object.isRequired,
+  indicator: PropTypes.instanceOf(Map).isRequired,
   surveyHighlightedId: PropTypes.string.isRequired,
-  surveys: PropTypes.object.isRequired,
+  surveys: PropTypes.instanceOf(List).isRequired,
   onHighlightSurvey: PropTypes.func.isRequired,
   onCardMouseLeave: PropTypes.func.isRequired,
 };

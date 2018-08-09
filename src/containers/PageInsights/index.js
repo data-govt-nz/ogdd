@@ -212,10 +212,10 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
 }
 
 PageInsights.propTypes = {
-  indicators: PropTypes.object,
-  surveys: PropTypes.object,
-  insights: PropTypes.object,
-  outcomes: PropTypes.object,
+  indicators: PropTypes.instanceOf(List),
+  surveys: PropTypes.instanceOf(List),
+  insights: PropTypes.instanceOf(List),
+  outcomes: PropTypes.instanceOf(List),
   nav: PropTypes.func,
   surveySelectedId: PropTypes.string,
 };

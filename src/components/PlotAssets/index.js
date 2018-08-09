@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
+import { Map, List } from 'immutable';
+
 import {
   FlexibleWidthXYPlot,
   XAxis,
@@ -169,10 +171,10 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
 }
 
 PlotAssets.propTypes = {
-  indicator: PropTypes.object.isRequired,
-  referenceIndicator: PropTypes.object.isRequired,
+  indicator: PropTypes.instanceOf(Map).isRequired,
+  referenceIndicator: PropTypes.instanceOf(Map).isRequired,
+  surveys: PropTypes.instanceOf(List).isRequired,
   surveyHighlightedId: PropTypes.string.isRequired,
-  surveys: PropTypes.object.isRequired,
   onHighlightSurvey: PropTypes.func.isRequired,
   onCardMouseLeave: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,

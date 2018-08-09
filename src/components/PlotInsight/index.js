@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme, css } from 'styled-components';
-import { fromJS } from 'immutable';
+import { fromJS, Map } from 'immutable';
 
 import getLabel from 'utils/get-label';
 import formatValue from 'utils/format-value';
@@ -163,8 +163,8 @@ class PlotInsight extends React.PureComponent { // eslint-disable-line react/pre
 }
 
 PlotInsight.propTypes = {
-  insight: PropTypes.object.isRequired,
-  focusArea: PropTypes.object.isRequired,
+  insight: PropTypes.instanceOf(Map).isRequired,
+  focusArea: PropTypes.instanceOf(Map).isRequired,
   theme: PropTypes.object.isRequired,
   agenciesTotal: PropTypes.number,
 };

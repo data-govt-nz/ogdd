@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { List } from 'immutable';
 
 import Label from 'components/Label';
 
@@ -37,7 +38,7 @@ const SelectWrapper = ({ labelID, value, options, onChange, valueKey, formatOpti
 SelectWrapper.propTypes = {
   labelID: PropTypes.string,
   value: PropTypes.string,
-  options: PropTypes.object,
+  options: PropTypes.instanceOf(List),
   onChange: PropTypes.func,
   formatOption: PropTypes.func,
   valueKey: PropTypes.string,

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { List } from 'immutable';
 
 // utils
 import getLabel from 'utils/get-label';
@@ -175,8 +176,8 @@ class PageAssets extends React.PureComponent { // eslint-disable-line react/pref
 }
 
 PageAssets.propTypes = {
-  indicators: PropTypes.object,
-  surveys: PropTypes.object,
+  indicators: PropTypes.instanceOf(List),
+  surveys: PropTypes.instanceOf(List),
 };
 
 const mapStateToProps = (state) => ({

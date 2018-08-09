@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
+import { Map, List } from 'immutable';
+
 import {
   FlexibleWidthXYPlot,
   XAxis,
@@ -431,12 +433,12 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
 }
 
 PlotFocusAreaDetails.propTypes = {
-  focusArea: PropTypes.object.isRequired,
+  focusArea: PropTypes.instanceOf(Map).isRequired,
   surveyHighlightedId: PropTypes.string.isRequired,
-  surveys: PropTypes.object.isRequired,
-  subject: PropTypes.object.isRequired,
-  referenceSubject: PropTypes.object,
-  otherSubjects: PropTypes.object,
+  surveys: PropTypes.instanceOf(List).isRequired,
+  subject: PropTypes.instanceOf(Map).isRequired,
+  referenceSubject: PropTypes.instanceOf(Map),
+  otherSubjects: PropTypes.instanceOf(List),
   onHighlightSurvey: PropTypes.func.isRequired,
   onSelectSubject: PropTypes.func.isRequired,
   onDismiss: PropTypes.func.isRequired,

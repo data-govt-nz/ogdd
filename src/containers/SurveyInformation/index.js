@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { List } from 'immutable';
 import { timeFormat } from 'd3-time-format';
 
 import getLabel from 'utils/get-label';
@@ -73,7 +74,7 @@ const SurveyInformation = ({ surveys, surveySelectedId, nav }) => {
 };
 
 SurveyInformation.propTypes = {
-  surveys: PropTypes.object,
+  surveys: PropTypes.instanceOf(List),
   surveySelectedId: PropTypes.string,
   nav: PropTypes.func,
 };

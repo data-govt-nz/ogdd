@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
+import { Map } from 'immutable';
 
 import { navigate } from 'containers/App/actions';
 import { selectLocation } from 'containers/App/selectors';
@@ -107,7 +108,7 @@ const Header = ({ navItems, location, nav }) => (
 Header.propTypes = {
   navItems: PropTypes.array,
   nav: PropTypes.func.isRequired,
-  location: PropTypes.object,
+  location: PropTypes.instanceOf(Map),
 };
 const mapStateToProps = (state) => ({
   location: selectLocation(state),

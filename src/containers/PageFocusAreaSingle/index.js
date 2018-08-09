@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { List } from 'immutable';
 
 // utils
 import getLabel from 'utils/get-label';
@@ -218,9 +219,9 @@ class PageFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
 }
 
 PageFocusAreaSingle.propTypes = {
-  focusAreaIndicators: PropTypes.object,
-  surveys: PropTypes.object,
-  subjects: PropTypes.object,
+  focusAreaIndicators: PropTypes.instanceOf(List),
+  surveys: PropTypes.instanceOf(List),
+  subjects: PropTypes.instanceOf(List),
   nav: PropTypes.func,
   subjectSelectedId: PropTypes.string.isRequired,
   faSelectedId: PropTypes.string,
