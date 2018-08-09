@@ -49,7 +49,7 @@ import AbovePlots from 'styles/AbovePlots';
 
 // assets
 import titleIcon from 'assets/key-insights.svg';
-import description from 'labels/insights.md'; // loaded as HTML from markdown
+import description from 'text/insights.md'; // loaded as HTML from markdown
 
 const FAKey = styled.div``;
 

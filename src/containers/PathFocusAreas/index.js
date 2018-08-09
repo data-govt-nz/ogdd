@@ -49,7 +49,7 @@ import AbovePlots from 'styles/AbovePlots';
 
 // assets
 import titleIcon from 'assets/focus-areas.svg';
-import description from 'labels/focus-areas.md'; // loaded as HTML from markdown
+import description from 'text/focus-areas.md'; // loaded as HTML from markdown
 
 const ReferenceHint = styled.div`
   color: ${(props) => props.theme.colors.referenceLabel};

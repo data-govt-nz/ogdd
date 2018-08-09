@@ -40,7 +40,7 @@ import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 
 // assets
 import titleIcon from 'assets/data-services.svg';
-import description from 'labels/data-services.md'; // loaded as HTML from markdown
+import description from 'text/data-services.md'; // loaded as HTML from markdown
 
 const PlotTitle = styled.div`
   margin-bottom: 15px;

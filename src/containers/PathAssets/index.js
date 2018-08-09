@@ -38,7 +38,7 @@ import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 
 // assets
 import titleIcon from 'assets/data-assets.svg';
-import description from 'labels/data-assets.md'; // loaded as HTML from markdown
+import description from 'text/data-assets.md'; // loaded as HTML from markdown
 
 const PlotTitle = styled.div`
   margin-bottom: 15px;
