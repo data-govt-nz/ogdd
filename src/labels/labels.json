@@ -37,6 +37,7 @@
   "component.surveyInformation.aboutLink.after": " for details",
   "screenreader.navActive": "Currently selected page",
   "screenreader.navigationOccured": "Navigation occured",
+  "screenreader.navigationQueryUpdated": "View updated",
   "screenreader.skipToContent": "Skip to main content",
   "screenreader.fsModal.button.dismiss": "Close",
   "screenreader.focus-area.button.dismiss": "Back to all Focus Areas",

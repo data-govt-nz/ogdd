@@ -9,7 +9,7 @@ import {
 // const getState = (state) => state;
 
 export const selectLocation = (state) => state.get('location');
-export const selectAnnouncement = (state) => state.get('announcement');
+export const selectAnnouncement = (state) => state.getIn(['announcement', 'msg']);
 const selectDataState = (state) => state.get('data');
 
 export const selectRequestedAt = createSelector(

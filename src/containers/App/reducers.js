@@ -34,17 +34,30 @@ function locationReducer(state = initialLocationState, action) {
 
 /**
  * Set announcement message
- * @param {string} state current announcement
+ * @param {string} state current announcement and location
  * @param {string} action the action id
- * @return {number} updated state
+ * @return {object} updated state
  */
-function announcementReducer(state = '', action) {
+function announcementReducer(state = fromJS({ msg: '', path: '', query: '' }), action) {
   if (action.type === NAVIGATION_OCCURED) {
-    const navItem = find(NAVITEMS, (i) => i.path === action.path);
-    const locationLabel = navItem
-      ? getLabel(navItem.label)
-      : getLabel(`component.${action.path}.titldfjfde`) || action.path;
-    return `${getLabel('screenreader.navigationOccured')}: ${locationLabel}`;
+    if (action.path !== state.get('path')) {
+      const navItem = find(NAVITEMS, (i) => i.path === action.path);
+      const locationLabel = navItem
+        ? getLabel(navItem.label)
+        : getLabel(`component.${action.path}.title`) || action.path;
+
+      return fromJS({
+        msg: `${getLabel('screenreader.navigationOccured')}: ${locationLabel}`,
+        path: action.path,
+        query: action.query,
+      });
+    }
+    if (action.query !== state.get('query')) {
+      return state
+        .set('query', action.query)
+        .set('msg', getLabel('screenreader.navigationQueryUpdated'));
+    }
+    return state;
   }
   return state;
 }
