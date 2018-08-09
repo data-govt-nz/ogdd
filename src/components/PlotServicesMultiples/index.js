@@ -8,7 +8,7 @@ import PlotServicesSmall from 'components/PlotServicesSmall';
 
 import Row from 'styles/Row';
 import Column from 'styles/Column';
-import Card from 'styles/Card';
+import Card from 'components/Card';
 import CardBody from 'styles/CardBody';
 
 class PlotServicesMultiples extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

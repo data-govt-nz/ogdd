@@ -10,6 +10,8 @@ import attributesEqual from 'utils/attributes-equal';
 import { selectSurveys } from 'containers/App/selectors';
 import { navigate } from 'containers/App/actions';
 
+import Link from 'styles/Link';
+
 // components
 import Label from 'components/Label';
 
@@ -24,13 +26,7 @@ const Title = styled.div`
 const CurrentSurveyInfo = styled.div``;
 const AboutLinkWrapper = styled.div``;
 
-const AboutLink = styled.button`
-  cursor: pointer;
-  padding: 0;
-  border: 0;
-  margin: 0;
-  text-decoration: underline;
-`;
+const AboutLink = styled(Link)``;
 
 const SurveyInformation = ({ surveys, surveySelectedId, nav }) => {
   const firstSurvey = surveys && surveys.first();

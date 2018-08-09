@@ -11,7 +11,7 @@ import { ANSWERS, FOCUSAREA_ICONS } from 'containers/App/constants';
 import CardTitle from 'components/CardTitle';
 import KeyEntry from 'components/KeyEntry';
 
-import Card from 'styles/Card';
+import Card from 'components/Card';
 import CardBody from 'styles/CardBody';
 
 const InsightValue = styled.div`

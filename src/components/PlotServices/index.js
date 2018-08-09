@@ -20,7 +20,7 @@ import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 
 import KeyEntry from 'components/KeyEntry';
 
-import Card from 'styles/Card';
+import Card from 'components/Card';
 import CardBody from 'styles/CardBody';
 import PlotHint from 'styles/PlotHint';
 import Key from 'styles/Key';

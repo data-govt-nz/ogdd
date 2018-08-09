@@ -19,8 +19,8 @@ import formatValue from 'utils/format-value';
 
 import CardTitle from 'components/CardTitle';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
+import Card from 'components/Card';
 
-import Card from 'styles/Card';
 import CardBody from 'styles/CardBody';
 import CardHeader from 'styles/CardHeader';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
@@ -117,9 +117,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
         onMouseLeave={onFAMouseLeave}
         onTouchStart={onFATouch}
         onClick={onFAClick}
-        role={onFAClick ? 'button' : null}
-        title={onFAClick ? focusArea.get('title') : null}
-        tabIndex={0}
+        title={focusArea.get('title')}
       >
         <CardHeader>
           <ScreenReaderOnly>

@@ -10,6 +10,8 @@ import Menu from 'containers/Menu';
 
 import Label from 'components/Label';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
+import Button from 'styles/Button';
+import NavLink from 'styles/NavLink';
 
 import getLabel from 'utils/get-label';
 
@@ -23,15 +25,11 @@ const Styled = styled.header`
   }
 `;
 
-const Brand = styled.button`
+const Brand = styled(Button)`
   position: absolute;
   top: 0;
   left: 0;
   text-align: left;
-  border: 0;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
 `;
 
 const Logo = styled.img`
@@ -65,26 +63,17 @@ const NavBar = styled.div`
   }
 `;
 
-const AboutLink = styled.button`
-  cursor: pointer;
+const AboutLink = styled(NavLink)`
   position: absolute;
-  padding: 3px 10px;
   top: 10px;
   right: 30px;
-  text-align: center;
-  border: 0;
-  border-radius: 99999px;
-  background-color: ${(props) => props.theme.colors.white};
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-  font-size: 0.8em;
+  box-shadow: none;
+  min-width: 0;
   ${(props) => props.active && css`
-    color: ${props.theme.colors.white};
-    background-color: ${props.theme.colors.black};
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   `}
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
-    padding: 7px 20px;
     right: 50px;
-    font-size: 0.9em;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     top: 20px;

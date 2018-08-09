@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 
 import Label from 'components/Label';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
+import NavLink from 'styles/NavLink';
 
 import { navigate } from 'containers/App/actions';
 import { selectLocation } from 'containers/App/selectors';
@@ -37,31 +38,7 @@ const Styled = styled.nav`
     margin-left: 0;
   }
 `;
-const Link = styled.button`
-  cursor: pointer;
-  display: inline-block;
-  padding: 3px 10px;
-  margin: 0 2px;
-  text-align: center;
-  border-radius: 99999px;
-  font-size: 0.8em;
-  font-weight: 600;
-  max-width: 75px;
-  background-color: ${(props) => props.theme.colors.white};
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-  border: 0;
-  ${(props) => props.active && css`
-    color: ${props.theme.colors.white};
-    background-color: ${props.theme.colors.black};
-  `}
-  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
-    font-size: 0.9em;
-    min-width: 100px;
-    max-width: none;
-    padding: 7px 20px;
-    margin: 0 5px;
-  }
-`;
+const Link = styled(NavLink)``;
 
 const Menu = ({ nav, navItems, location, visibleMin, hiddenMin }) => (
   <Styled role="menu" visibleMin={visibleMin} hiddenMin={hiddenMin}>

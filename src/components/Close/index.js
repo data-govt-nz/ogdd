@@ -2,18 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Button from 'styles/Button';
+
 import iconSrc from 'assets/close.svg';
 
-const Styled = styled.button`
+const Styled = styled(Button)`
   height: 40px
   width: 40px;
   border-radius: 99999px;
   background-color: ${(props) => props.theme.colors.black};
   margin: 5px;
-  padding: 0;
-  border: 0;
-  position: relative;
-  cursor: pointer;
 `;
 
 // @media (min-width: ${(props) => props.theme.breakpoints[0]}) {

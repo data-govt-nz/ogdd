@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Label from 'components/Label';
+import Link from 'styles/Link';
 
-const Styled = styled.button`
-  text-decoration: underline;
-  cursor: pointer;
-`;
+const Styled = styled(Link)``;
 
 const ReadMore = ({ onClick }) => (
   <Styled onClick={onClick}>

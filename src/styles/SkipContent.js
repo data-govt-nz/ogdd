@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export default styled.button`
+import Button from 'styles/Button';
+
+export default styled(Button)`
   position: absolute;
   left: -10000px;
   top: auto;
@@ -10,6 +12,7 @@ export default styled.button`
   &:focus{
     position: absolute;
     left: 0;
+    padding: 2px 5px;
     width: auto;
     height: auto;
     background-color: #fff;

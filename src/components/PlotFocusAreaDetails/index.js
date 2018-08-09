@@ -23,7 +23,7 @@ import CardTitle from 'components/CardTitle';
 import Close from 'components/Close';
 
 import Key from 'styles/Key';
-import Card from 'styles/Card';
+import Card from 'components/Card';
 import CardHeader from 'styles/CardHeader';
 import CardBody from 'styles/CardBody';
 import PlotHint from 'styles/PlotHint';
