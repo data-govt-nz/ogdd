@@ -12,6 +12,14 @@ const Styled = styled(Button)`
   border-radius: 99999px;
   background-color: ${(props) => props.theme.colors.black};
   margin: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  &:hover{
+    background-color: ${(props) => props.theme.colors.dark};
+  }
+  &:focus{
+    outline: 0;
+    background-color: ${(props) => props.theme.colors.dark};
+  }
 `;
 
 // @media (min-width: ${(props) => props.theme.breakpoints[0]}) {

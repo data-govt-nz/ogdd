@@ -33,4 +33,9 @@ export default styled(Button)`
     color: ${(props) => props.theme.colors.white};
     background-color: ${(props) => props.theme.colors.black};
   }
+  &:focus{
+    outline: 0;
+    color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.dark};
+  }
 `;

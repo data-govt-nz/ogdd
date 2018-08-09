@@ -15,4 +15,16 @@ injectGlobal`
   #root {
     font-family: 'Barlow', sans-serif;
   }
+  a {
+    text-decoration: underline;
+    color: #202326;
+    &:hover{
+      color: #2956D1;
+    }
+    &:focus{
+      outline: 0;
+      color: #2956D1;
+    }
+  }
 `;
+// 'a' same as styles/Link

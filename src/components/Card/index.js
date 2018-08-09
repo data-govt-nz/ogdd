@@ -9,7 +9,11 @@ const Styled = styled(Button)`
   padding: 4px 10px 10px;
   text-align: left;
   &:hover {
-    ${(props) => props.onMouseEnter ? 'box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.6);' : ''}
+    ${(props) => props.hover ? 'box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.6);' : ''}
+  }
+  &:focus{
+    outline: 0;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.6);
   }
 `;
 
@@ -21,6 +25,7 @@ const Card = ({ onMouseEnter, onMouseLeave, onTouchStart, onClick, children, tit
 ? (
   <Styled
     onMouseEnter={onMouseEnter || (() => true)}
+    hover={onMouseEnter || false}
     onMouseLeave={onMouseLeave}
     onTouchStart={onTouchStart}
     onClick={onClick}
