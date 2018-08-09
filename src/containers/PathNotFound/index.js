@@ -5,7 +5,7 @@ import getLabel from 'utils/get-label';
 
 import Label from 'components/Label';
 
-class PageNotFound extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class PathNotFound extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     const key = 'notFound';
     return (
@@ -25,4 +25,4 @@ class PageNotFound extends React.PureComponent { // eslint-disable-line react/pr
   }
 }
 
-export default PageNotFound;
+export default PathNotFound;

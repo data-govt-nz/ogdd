@@ -31,7 +31,7 @@ const INITIAL_STATE = {
   showModal: false,
 };
 
-class PageAbout extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class PathAbout extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
@@ -104,4 +104,4 @@ class PageAbout extends React.PureComponent { // eslint-disable-line react/prefe
   /* eslint-enable react/no-danger */
 }
 
-export default PageAbout;
+export default PathAbout;

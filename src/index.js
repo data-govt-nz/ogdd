@@ -20,13 +20,13 @@ import { ThemeProvider } from 'styled-components';
 import configureStore from 'store';
 
 import App from 'containers/App';
-import PageFocusAreas from 'containers/PageFocusAreas';
-import PageFocusAreaSingle from 'containers/PageFocusAreaSingle';
-import PageInsights from 'containers/PageInsights';
-import PageServices from 'containers/PageServices';
-import PageAssets from 'containers/PageAssets';
-import PageAbout from 'containers/PageAbout';
-import PageNotFound from 'containers/PageNotFound';
+import PathFocusAreas from 'containers/PathFocusAreas';
+import PathFocusAreaSingle from 'containers/PathFocusAreaSingle';
+import PathInsights from 'containers/PathInsights';
+import PathServices from 'containers/PathServices';
+import PathAssets from 'containers/PathAssets';
+import PathAbout from 'containers/PathAbout';
+import PathNotFound from 'containers/PathNotFound';
 
 import { updateLocation } from 'containers/App/actions';
 import { THEME } from 'containers/App/constants';
@@ -53,13 +53,13 @@ const store = configureStore();
 // map hash path to react component
 // see also containers/App/constants NAVITEMS
 const pathComponentMap = {
-  '': <PageFocusAreas />, // focus areas
-  'focus-area': <PageFocusAreaSingle />,
-  insights: <PageInsights />,
-  services: <PageServices />,
-  assets: <PageAssets />,
-  about: <PageAbout />,
-  'not-found': <PageNotFound />,
+  '': <PathFocusAreas />, // focus areas
+  'focus-area': <PathFocusAreaSingle />,
+  insights: <PathInsights />,
+  services: <PathServices />,
+  assets: <PathAssets />,
+  about: <PathAbout />,
+  'not-found': <PathNotFound />,
 };
 
 const render = (Component) => {

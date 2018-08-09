@@ -52,7 +52,7 @@ const INITIAL_STATE = {
   surveyHighlightedId: null, // set from surveys
 };
 
-class PageServices extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class PathServices extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
@@ -184,7 +184,7 @@ class PageServices extends React.PureComponent { // eslint-disable-line react/pr
   }
 }
 
-PageServices.propTypes = {
+PathServices.propTypes = {
   indicators: PropTypes.instanceOf(List),
   surveys: PropTypes.instanceOf(List),
 };
@@ -194,4 +194,4 @@ const mapStateToProps = (state) => ({
   surveys: selectSurveys(state),
 });
 
-export default connect(mapStateToProps)(PageServices);
+export default connect(mapStateToProps)(PathServices);

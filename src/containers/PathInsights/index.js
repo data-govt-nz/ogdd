@@ -57,7 +57,7 @@ const INITIAL_STATE = {
   showModal: false,
 };
 
-class PageInsights extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class PathInsights extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
@@ -211,7 +211,7 @@ class PageInsights extends React.Component { // eslint-disable-line react/prefer
   }
 }
 
-PageInsights.propTypes = {
+PathInsights.propTypes = {
   indicators: PropTypes.instanceOf(List),
   surveys: PropTypes.instanceOf(List),
   insights: PropTypes.instanceOf(List),
@@ -235,4 +235,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageInsights);
+export default connect(mapStateToProps, mapDispatchToProps)(PathInsights);

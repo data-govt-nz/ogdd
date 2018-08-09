@@ -73,7 +73,7 @@ const INITIAL_STATE = {
   surveyHighlightedId: null, // set from surveys
 };
 
-class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
@@ -256,7 +256,7 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
   }
 }
 
-PageFocusAreas.propTypes = {
+PathFocusAreas.propTypes = {
   focusAreaIndicators: PropTypes.instanceOf(List),
   surveys: PropTypes.instanceOf(List),
   subjects: PropTypes.instanceOf(List),
@@ -278,4 +278,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageFocusAreas);
+export default connect(mapStateToProps, mapDispatchToProps)(PathFocusAreas);
