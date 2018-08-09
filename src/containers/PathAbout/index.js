@@ -24,8 +24,8 @@ import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 
 // assets
 import titleIcon from 'assets/about.svg';
-import main from 'labels/about.md'; // loaded as HTML from markdown
-import description from 'labels/about-aside.md'; // loaded as HTML from markdown
+import main from 'text/about.md'; // loaded as HTML from markdown
+import description from 'text/about-aside.md'; // loaded as HTML from markdown
 
 const INITIAL_STATE = {
   showModal: false,
