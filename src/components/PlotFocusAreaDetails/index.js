@@ -199,8 +199,8 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
             tableCaption={getLabel('screenreader.focus-areas.chart-table-caption')}
             tableData={{
               data: referenceSubject
-                ? data.concat(referenceData).concat(otherData.reduce((memo, d) => memo.concat(d)))
-                : data.concat(otherData.reduce((memo, d) => memo.concat(d))),
+                ? data.concat(referenceData).concat(otherData.reduce((memo, d) => memo.concat(d), []))
+                : data.concat(otherData.reduce((memo, d) => memo.concat(d), [])),
               columns: surveys.reduce((memo, item) => memo.concat([{
                 id: item.get('survey_id'),
                 label: timeFormat('%Y')(new Date(item.get('date')).getTime()),
