@@ -54,7 +54,7 @@ const store = configureStore();
 // see also containers/App/constants NAVITEMS
 const pathComponentMap = {
   '': <PageFocusAreas />, // focus areas
-  focusarea: <PageFocusAreaSingle />,
+  'focus-area': <PageFocusAreaSingle />,
   insights: <PageInsights />,
   services: <PageServices />,
   assets: <PageAssets />,

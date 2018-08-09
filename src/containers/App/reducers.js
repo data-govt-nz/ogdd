@@ -7,7 +7,7 @@ import { NAVITEMS } from 'containers/App/constants';
 
 import {
   LOCATION_UPDATE,
-  NAVIGATE,
+  NAVIGATION_OCCURED,
   DATA,
   DATA_REQUESTED,
   DATA_LOADED,
@@ -39,13 +39,12 @@ function locationReducer(state = initialLocationState, action) {
  * @return {number} updated state
  */
 function announcementReducer(state = '', action) {
-  if (action.type === NAVIGATE) {
-    const path = action.location.path || action.location;
-    const navItem = find(NAVITEMS, (i) => i.path === path);
-    // TODO get about label
-    return state !== action.location.path
-      ? `${getLabel('screenreader.navigationOccured')}: ${navItem ? getLabel(navItem.label) : action.location.path}`
-      : '';
+  if (action.type === NAVIGATION_OCCURED) {
+    const navItem = find(NAVITEMS, (i) => i.path === action.path);
+    const locationLabel = navItem
+      ? getLabel(navItem.label)
+      : getLabel(`component.${action.path}.titldfjfde`) || action.path;
+    return `${getLabel('screenreader.navigationOccured')}: ${locationLabel}`;
   }
   return state;
 }

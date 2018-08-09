@@ -101,7 +101,7 @@ class PageFocusAreas extends React.PureComponent { // eslint-disable-line react/
   }
   onFAClick(fa) {
     this.props.nav({
-      path: 'focusarea',
+      path: 'focus-area',
       query: {
         fa,
         subject: this.props.subjectSelectedId || DEFAULT_SUBJECT_ID,

@@ -2,6 +2,7 @@
 import {
   LOCATION_UPDATE,
   NAVIGATE,
+  NAVIGATION_OCCURED,
   LOAD_DATA,
   DATA_REQUESTED,
   DATA_LOADED,
@@ -28,6 +29,13 @@ export function navigate(location, args) {
     type: NAVIGATE,
     location,
     args,
+  };
+}
+export function navigationOccured(path, query) {
+  return {
+    type: NAVIGATION_OCCURED,
+    path,
+    query,
   };
 }
 

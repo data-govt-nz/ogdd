@@ -10,7 +10,7 @@ import { queryObject, queryString, routeString } from 'utils/queries';
 
 import { NAVIGATE, LOAD_DATA } from './constants';
 import { selectRequestedAt } from './selectors';
-import { dataRequested, loadError, dataLoaded } from './actions';
+import { dataRequested, loadError, dataLoaded, navigationOccured } from './actions';
 
 /**
  * Navigate to location, calls router
@@ -48,6 +48,7 @@ export function* navigateSaga({ location, args }) {
   }
   // combine path and query if present
   yield call(route, routeString(path, query));
+  yield put(navigationOccured(path, query));
 }
 
 export function* loadDataSaga({ key, value }) {
