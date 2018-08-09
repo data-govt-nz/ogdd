@@ -38,4 +38,7 @@ export default styled(Button)`
     color: ${(props) => props.theme.colors.white};
     background-color: ${(props) => props.theme.colors.dark};
   }
+  &:hover:focus{
+    background-color: ${(props) => props.theme.colors.black};
+  }
 `;
