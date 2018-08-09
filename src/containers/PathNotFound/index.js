@@ -5,22 +5,27 @@ import getLabel from 'utils/get-label';
 
 import Label from 'components/Label';
 
+import PageLongTitle from 'styles/PageLongTitle';
+import PageContainer from 'styles/PageContainer';
+
 class PathNotFound extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const key = 'notFound';
     return (
-      <div>
+      <PageContainer>
         <Helmet>
-          <title>{getLabel(`component.${key}.title`)}</title>
+          <title>{getLabel('component.notFound.title')}</title>
           <meta
             name="description"
-            content={getLabel(`component.${key}.metaDescription`)}
+            content={getLabel('component.notFound.metaDescription')}
           />
         </Helmet>
-        <h2 id="pageTitle">
-          <Label id={`component.${key}.title`} />
-        </h2>
-      </div>
+        <PageLongTitle id="pageTitle">
+          <Label id="component.notFound.title" />
+        </PageLongTitle>
+        <p>
+          <Label id="component.notFound.text" />
+        </p>
+      </PageContainer>
     );
   }
 }
