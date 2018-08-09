@@ -71,8 +71,9 @@ export function* loadDataSaga({ key, value }) {
         }
       }
       if (value.source === 'api') {
-        // fetch data from data.govt api
-        const path = `${value.path}?resource_id=${value.resourceId}`;
+        // fetch data from data.govt api (CKAN, see http://docs.ckan.org/en/latest/maintaining/datastore.html#api-reference)
+        // limit parameter defaults to 100, setting high number to practically turn limits off - after 10 years we should not have more than 1000 rows
+        const path = `${value.path}?resource_id=${value.resourceId}&limit=999999`;
         const response = yield fetchJsonp(path);
         const responseBody = yield response.json();
         if (responseBody) {
