@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import setLinkTarget from 'utils/set-link-target';
 
 const Styled = styled.div`
   padding: 10px;
@@ -11,7 +12,7 @@ const AsideContent = ({ title, html, text, children }) => (
   <Styled>
     { title }
     { html &&
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div dangerouslySetInnerHTML={{ __html: setLinkTarget(html) }} />
     }
     { text &&
       <p>{text}</p>

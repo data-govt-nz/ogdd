@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 
 // utils
 import getLabel from 'utils/get-label';
+import setLinkTarget from 'utils/set-link-target';
 
 // components
 import Label from 'components/Label';
@@ -94,7 +95,7 @@ class PageAbout extends React.PureComponent { // eslint-disable-line react/prefe
             </Visible>
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
-            <div dangerouslySetInnerHTML={{ __html: main }} />
+            <div dangerouslySetInnerHTML={{ __html: setLinkTarget(main) }} />
           </Column>
         </Row>
       </PageContainer>
