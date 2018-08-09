@@ -185,7 +185,10 @@ export const BREAKPOINTS = {
   MEDIUM: 1,
   LARGE: 2,
 };
-
+// breakpoints:
+// < 720px (45em): extra-small (mobile)
+// > XXXpx (63em): small (tablet portrait)
+// >= 1008px (63em): medium (tablet landscape, desktop)
 export const THEME = {
   breakpoints: ['45em', '63em', '72em'],
   gutter: ['4px', '6px', '8px'],

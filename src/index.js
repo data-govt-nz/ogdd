@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /*
-  issue with redux-logger and react-hot-loader
-  even tho those 2 deps are only used in development
+  issue with and react-hot-loader
+  even tho only used in development
   eslint has no way to tell that and outputs an error
 */
 
@@ -69,10 +69,6 @@ const render = (Component) => {
     query: queryObject(getHashParameters()),
   }));
   // render DOM
-  // breakpoints:
-  // < 720px (45em): extra-small (mobile)
-  // > XXXpx (63em): small (tablet portrait)
-  // >= 1008px (63em): medium (tablet landscape, desktop)
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
