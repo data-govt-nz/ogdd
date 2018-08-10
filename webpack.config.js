@@ -62,14 +62,9 @@ module.exports = {
         loader: 'style-loader!css-loader!sass-loader',
       },
       {
-        test: /\.(jpe?g|png|gif)$/i,
+        test: /\.(jpe?g|png|gif|svg)$/i,
         // inline all images to solve path issues
         loader: 'url-loader',
-      },
-      {
-        test: /\.svg$/,
-        // inline all images to solve path issues
-        loader: 'svg-url-loader',
       },
       {
         test: /\.json$/,
