@@ -1,6 +1,11 @@
 /**
-  * Description
+  * The 'data services' component.
+  * Shows description and displays plots for services indicators:
+  * - How are assets published?
+  * - Is API open standards based?
+  * - What API services are used?
   *
+  * @return {Component} Data services component
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
 // vendor
@@ -10,20 +15,16 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { List } from 'immutable';
-
 // utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
-
 // containers, app selectors, metaDescription
 import {
   selectIndicatorsWithOutcomes,
   selectSurveys,
 } from 'containers/App/selectors';
-
 import { SERVICES_INDICATOR_ID_MAP } from 'containers/App/constants';
 import SurveyInformation from 'containers/SurveyInformation';
-
 // components
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
@@ -32,7 +33,6 @@ import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotServices from 'components/PlotServices';
 import PlotServicesMultiples from 'components/PlotServicesMultiples';
-
 // simple styles (styled components)
 import Row from 'styles/Row';
 import Column from 'styles/Column';
@@ -42,50 +42,70 @@ import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
-
-// assets
+// assets: icon and description
 import titleIcon from 'assets/data-services.svg';
 import description from 'text/data-services.md'; // loaded as HTML from markdown
 
+// own styles
 const PlotTitle = styled.div`
   margin-bottom: 15px;
   font-weight: 600;
 `;
 
+// initial component state
 const INITIAL_STATE = {
-  showModal: false,
-  surveyHighlightedId: null, // set from surveys
+  showModal: false, // show/hide modal
+  surveyHighlightedId: null, // highlighted survey
 };
 
 class PathServices extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  /**
+    * Component constructor, sets initial state
+    * @param {object} props component props
+    */
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
   }
-
+  /**
+    * 'Read more' button handler - shows/hides modal
+    * @param {boolean} [showModal=true] show or hide modal
+    */
   onReadMore(showModal = true) {
     this.setState({ showModal });
   }
+  /**
+    * 'Modal dismiss' button handler - hides modal
+    */
   onFSModalDismiss() {
-    this.setState({
-      showModal: false,
-    });
+    this.setState({ showModal: false });
   }
-
+  /**
+    * 'Highlight survey' handler - highlights survey in plot
+    * @param {string} surveyHighlightedId the survey to highlight
+    */
   onHighlightSurvey(surveyHighlightedId) {
     this.setState({ surveyHighlightedId });
   }
+  /**
+    * 'Card' mouse leave handler - resets highlighted survey, defaults to last
+    */
   onCardMouseLeave() {
-    this.setState({
-      surveyHighlightedId: null,
-    });
+    this.setState({ surveyHighlightedId: null });
   }
+  /**
+    * Render page title
+    * @return {Component} Page title component
+    */
   renderPageTitle() {
     return (
       <PageTitle labelId="component.services.title" iconSrc={titleIcon} />
     );
   }
-
+  /**
+    * Render sidebar content
+    * @return {Component} Aside component
+    */
   renderAsideContent() {
     return (
       <AsideContent
@@ -100,16 +120,21 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
   render() {
     const { indicators, surveys } = this.props;
 
+    // figure out highlighted survey from state or default to last survey
     const surveyHighlightedId = this.state.surveyHighlightedId || (
       this.props.surveys
       ? this.props.surveys.last().get('survey_id')
       : null
     );
 
+    // check if all data is available
     const ready = indicators && surveys && surveyHighlightedId !== null;
 
+    // Plot 1 indicator: how are assets published
     const howIndicator = ready && indicators.find((item) => quasiEquals(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.HOW_ID));
+    // Plot 2 indicator: is API open standards based
     const standardsIndicator = ready && indicators.find((item) => quasiEquals(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.STANDARDS_ID));
+    // Plot 3 indicator: what API servicfes are being used
     const servicesIndicator = ready && indicators.find((item) => quasiEquals(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.SERVICES_ID));
 
     return (
@@ -190,7 +215,9 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
 }
 
 PathServices.propTypes = {
+  /** list of all indicators joined with outcomes from state */
   indicators: PropTypes.instanceOf(List),
+  /** list of all surveys from state */
   surveys: PropTypes.instanceOf(List),
 };
 

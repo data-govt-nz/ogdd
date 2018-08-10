@@ -1,18 +1,18 @@
 /**
-  * Description
+  * Application sagas to trigger side effects in repsonse to actions
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import { call, takeEvery, select, put } from 'redux-saga/effects';
 import { route, getHash, getHashParameters } from 'react-hash-route';
 import { csvParse } from 'd3-dsv';
 import 'whatwg-fetch';
 import fetchJsonp from 'fetch-jsonp';
-
 import extend from 'lodash/extend';
-
+// utils
 import { queryObject, queryString, routeString } from 'utils/queries';
-
+// app constants, selectors, actions
 import { NAVIGATE, LOAD_DATA } from './constants';
 import { selectRequestedAt } from './selectors';
 import { dataRequested, loadError, dataLoaded, navigationOccured } from './actions';
@@ -20,10 +20,11 @@ import { dataRequested, loadError, dataLoaded, navigationOccured } from './actio
 /**
  * Navigate to location, calls router
  * @param {object} payload location: the new location, args: query arguments
- * @return {void}
  */
 export function* navigateSaga({ location, args }) {
+  // get route hash
   const hash = yield getHash();
+  // get query from route params
   const params = yield queryObject(getHashParameters());
 
   // default args
@@ -55,13 +56,18 @@ export function* navigateSaga({ location, args }) {
   yield call(route, routeString(path, query));
   yield put(navigationOccured(path, query));
 }
-
+/**
+ * Load data from API or files
+ * @param {object} payload key: data set key, value: data set definition
+ */
 export function* loadDataSaga({ key, value }) {
+  // check if already loaded
   const requestedAt = yield select(selectRequestedAt, key);
   if (!requestedAt) {
     try {
       // First record that we are requesting
       yield put(dataRequested(key, Date.now()));
+      // load from JSON file
       if (value.source === 'json') {
         // fetch json file
         const path = `${value.path}${value.filename}`;
@@ -75,6 +81,7 @@ export function* loadDataSaga({ key, value }) {
           yield put(dataLoaded(key, responseBody));
         }
       }
+      // load from API
       if (value.source === 'api') {
         // fetch data from data.govt api (CKAN, see http://docs.ckan.org/en/latest/maintaining/datastore.html#api-reference)
         // limit parameter defaults to 100, setting high number to practically turn limits off - after 10 years we should not have more than 1000 rows
@@ -85,6 +92,7 @@ export function* loadDataSaga({ key, value }) {
           yield put(dataLoaded(key, responseBody.result.records));
         }
       }
+      // load from CSV file
       if (value.source === 'csv') {
         const path = `${value.path}${value.filename}`;
         const response = yield fetch(

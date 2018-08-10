@@ -1,5 +1,5 @@
 /**
-  * Description
+  * The single focus area component - only available when results for multiple agencies published
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
@@ -10,11 +10,9 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { List } from 'immutable';
-
 // utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
-
 // containers, app selectors, metaDescription
 import {
   selectFocusAreaIndicatorsWithOutcomes,
@@ -24,12 +22,10 @@ import {
   selectFocusAreaIdFromLocation,
 } from 'containers/App/selectors';
 import { navigate } from 'containers/App/actions';
-
 import {
   DEFAULT_SUBJECT_ID,
   FOCUSAREA_ICONS,
 } from 'containers/App/constants';
-
 // components
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
@@ -38,7 +34,6 @@ import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotFocusAreaDetails from 'components/PlotFocusAreaDetails';
 import SelectWrapper from 'components/SelectWrapper';
-
 // simple styles (styled components)
 import Row from 'styles/Row';
 import Column from 'styles/Column';
@@ -49,48 +44,63 @@ import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import AbovePlots from 'styles/AbovePlots';
-
 // assets
 import titleIcon from 'assets/focus-areas.svg';
 
+// own styles
 const NonSelectWrapper = styled.div``;
 
+// initial component state
 const INITIAL_STATE = {
-  showModal: false,
-  surveyHighlightedId: null, // set from surveys
+  showModal: false, // show/hide modal
+  surveyHighlightedId: null, // highlighted survey
 };
 
 class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  /**
+    * Component constructor, sets initial state
+    * @param {object} props component props
+    */
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
   }
-
+  /**
+    * 'Read more' button handler - shows/hides modal
+    * @param {boolean} [showModal=true] show or hide modal
+    */
   onReadMore(showModal = true) {
     this.setState({ showModal });
   }
+  /**
+    * 'Modal dismiss' button handler - hides modal
+    */
   onFSModalDismiss() {
     this.setState({
       showModal: false,
     });
   }
-
+  /**
+    * 'Highlight survey' handler - highlights survey in plot
+    * @param {string} surveyHighlightedId the survey to highlight
+    */
   onHighlightSurvey(surveyHighlightedId) {
     this.setState({ surveyHighlightedId });
   }
-
+  /**
+    * 'Subject change' select handler - adds subject id to router query
+    * @param {string} subject subject id
+    */
   onSubjectChange(subject) {
     this.props.nav({ query: {
       subject,
       fa: this.props.faSelectedId,
     } });
   }
-  onSelectSubject(subjectID) {
-    this.props.nav({ query: {
-      subject: subjectID,
-      fa: this.props.faSelectedId,
-    } });
-  }
+  /**
+    * 'Close component' handler - triggers navigation to focus area overview
+    * Retains selected subject.
+    */
   onFAClose() {
     this.props.nav({
       path: '',
@@ -99,13 +109,20 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
       },
     });
   }
-
+  /**
+    * Render page title
+    * @return {Component} Page title component
+    */
   renderPageTitle() {
     return (
       <PageTitle labelId="component.focus-area.title" iconSrc={titleIcon} />
     );
   }
-
+  /**
+    * Render sidebar content
+    * @param {object} focusArea the current focus area
+    * @return {Component} Aside component
+    */
   renderAsideContent(focusArea) {
     return focusArea && (
       <AsideContent
@@ -120,22 +137,24 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
 
     // default to last (most recent) survey
     const surveyHighlightedId = this.state.surveyHighlightedId
-      || (surveys ? surveys.last().get('survey_id') : null);
-
+    || (surveys ? surveys.last().get('survey_id') : null);
+    // check if all data is available
     const ready = focusAreaIndicators && faSelectedId && subjects && surveys && surveyHighlightedId !== null;
-
+    // figure out current focus area
     const focusArea = ready && (faSelectedId
       ? focusAreaIndicators.find((item) => quasiEquals(item.get('indicator_id'), faSelectedId))
       : focusAreaIndicators.first()
     );
-
+    // find current subject/agency
     const subjectSelected = ready && subjects.find((item) =>
       quasiEquals(item.get('subject_id'), subjectSelectedId)
     );
+    // all other subjects/agencies for comparison
     const subjectsOther = ready && subjects.filter((item) =>
       !quasiEquals(item.get('subject_id'), subjectSelectedId)
       && !quasiEquals(item.get('subject_id'), DEFAULT_SUBJECT_ID)
     );
+    // the reference subject "All of Government"
     const subjectReference = ready && subjectSelectedId !== DEFAULT_SUBJECT_ID
       ? subjects.find((item) => quasiEquals(item.get('subject_id'), DEFAULT_SUBJECT_ID))
       : null;
@@ -207,7 +226,7 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
                     subject={subjectSelected}
                     otherSubjects={subjectsOther}
                     referenceSubject={subjectReference}
-                    onSelectSubject={(subjectID) => this.onSelectSubject(subjectID)}
+                    onSelectSubject={(subjectID) => this.onSubjectChange(subjectID)}
                     surveyHighlightedId={surveyHighlightedId}
                     onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
                     onDismiss={() => this.onFAClose()}
@@ -224,11 +243,17 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
 }
 
 PathFocusAreaSingle.propTypes = {
+  /** list of focus area indicators joined with outcomes from state */
   focusAreaIndicators: PropTypes.instanceOf(List),
+  /** list of all surveys from state */
   surveys: PropTypes.instanceOf(List),
+  /** list of all subjects/agencies from state */
   subjects: PropTypes.instanceOf(List),
-  nav: PropTypes.func,
+  /** Navigation action */
+  nav: PropTypes.func.isRequired,
+  /** selected survey id from state */
   subjectSelectedId: PropTypes.string.isRequired,
+  /** selected focuas area id from state */
   faSelectedId: PropTypes.string,
 };
 

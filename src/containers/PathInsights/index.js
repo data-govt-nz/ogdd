@@ -1,5 +1,6 @@
 /**
-  * Description
+  * The 'key insights' component.
+  * Shows description and key insights, including associated survey question indicators
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
@@ -10,12 +11,10 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { List } from 'immutable';
 import styled from 'styled-components';
-
 import { timeFormat } from 'd3-time-format';
-
+// utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
-
 // containers, app selectors, metaDescription
 import {
   selectIndicators,
@@ -25,12 +24,10 @@ import {
   selectSurveyIdFromLocation,
 } from 'containers/App/selectors';
 import { navigate } from 'containers/App/actions';
-
 import {
   FOCUSAREA_WHITEICONS,
 } from 'containers/App/constants';
 import SurveyInformation from 'containers/SurveyInformation';
-
 // components
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
@@ -40,7 +37,6 @@ import AsideContent from 'components/AsideContent';
 import PlotInsight from 'components/PlotInsight';
 import FAKeyEntry from 'components/FAKeyEntry';
 import SelectWrapper from 'components/SelectWrapper';
-
 // simple styles (styled components)
 import Row from 'styles/Row';
 import Column from 'styles/Column';
@@ -51,41 +47,64 @@ import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import AbovePlots from 'styles/AbovePlots';
-
 // assets
 import titleIcon from 'assets/key-insights.svg';
 import description from 'text/insights.md'; // loaded as HTML from markdown
 
+// own styles
 const FAKey = styled.div``;
 
+// initial component state
 const INITIAL_STATE = {
-  showModal: false,
+  showModal: false, // show/hide modal
 };
 
 class PathInsights extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  /**
+    * Component constructor, sets initial state
+    * @param {object} props component props
+    */
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
   }
-
+  /**
+    * 'Read more' button handler - shows/hides modal
+    * @param {boolean} [showModal=true] show or hide modal
+    */
   onReadMore(showModal = true) {
     this.setState({ showModal });
   }
+  /**
+    * 'Modal dismiss' button handler - hides modal
+    */
   onFSModalDismiss() {
     this.setState({
       showModal: false,
     });
   }
+  /**
+    * 'Survey change' select handler - adds survey to router query by dispatching navigation action
+    * @param {string} survey survey id
+    */
   onSurveyChange(survey) {
     this.props.nav({ query: { survey } });
   }
-
+  /**
+    * Render page title
+    * @return {Component} Page title component
+    */
   renderPageTitle() {
     return (
       <PageTitle labelId="component.insights.title" iconSrc={titleIcon} />
     );
   }
-
+  /**
+    * Render sidebar content
+    * @param {object} focusAreas list of focus areas
+    * @param {object} surveyID current survey id
+    * @return {Component} Aside component
+    */
   renderAsideContent(focusAreas, surveyID) {
     return (
       <AsideContent
@@ -114,12 +133,14 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
   render() {
     const { insights, surveys, indicators, surveySelectedId, outcomes } = this.props;
 
+    // check if all data is available
     const ready = indicators && surveys && outcomes && insights !== null;
-
+    // figure out current survey, default to last
     const surveyID = surveySelectedId || (ready && surveys.last().get('survey_id'));
-
     const survey = ready && surveys.find((item) => quasiEquals(item.get('survey_id'), surveyID));
 
+    // prepare relevant insights for current survey,
+    // join with question indicator, and sort by parent indicator (focus area)
     const relevantInsights = ready && insights
       .filter((insight) => quasiEquals(insight.get('survey_id'), surveyID))
       .map((insight) => insight.set('indicator', indicators.find((indicator) =>
@@ -127,6 +148,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
       )))
       .sortBy((insight) => insight.getIn(['indicator', 'parent_indicator_id']));
 
+    // figure out relevant focus areas for insights
     const relevantFocusAreas = ready && relevantInsights
       .reduce((memo, insight) => {
         const faID = insight.getIn(['indicator', 'parent_indicator_id']);
@@ -217,11 +239,17 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
 }
 
 PathInsights.propTypes = {
+  /** list of all indicators from state */
   indicators: PropTypes.instanceOf(List),
+  /** list of all surveys from state */
   surveys: PropTypes.instanceOf(List),
+  /** list of all insights from state */
   insights: PropTypes.instanceOf(List),
+  /** list of all outcomes from state */
   outcomes: PropTypes.instanceOf(List),
-  nav: PropTypes.func,
+  /** Navigation action */
+  nav: PropTypes.func.isRequired,
+  /** selected survey id from state */
   surveySelectedId: PropTypes.string,
 };
 

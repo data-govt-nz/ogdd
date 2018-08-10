@@ -1,5 +1,8 @@
 /**
-  * Description
+  * The 'data assets' component
+  * Shows compenet description and displays plots for assets indicators:
+  * - Data assets published in machine readable formats vs all assets
+  * - Data assets published using NZGOAL vs all assets
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
@@ -10,19 +13,15 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { List } from 'immutable';
-
 // utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
-
 // containers, app selectors, metaDescription
 import {
   selectIndicatorsWithOutcomes,
   selectSurveys,
 } from 'containers/App/selectors';
-
 import { ASSETS_INDICATOR_ID_MAP } from 'containers/App/constants';
-
 // components
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
@@ -30,7 +29,6 @@ import ReadMore from 'components/ReadMore';
 import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotAssets from 'components/PlotAssets';
-
 // simple styles (styled components)
 import Row from 'styles/Row';
 import Column from 'styles/Column';
@@ -40,50 +38,73 @@ import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
-
 // assets
 import titleIcon from 'assets/data-assets.svg';
 import description from 'text/data-assets.md'; // loaded as HTML from markdown
 
+// own styles
 const PlotTitle = styled.div`
   margin-bottom: 15px;
   font-weight: 600;
 `;
 
+// initial component state
 const INITIAL_STATE = {
-  showModal: false,
-  surveyHighlightedId: null, // set from surveys
+  showModal: false, // show/hide modal
+  surveyHighlightedId: null, // highlighted survey
 };
 
 class PathAssets extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  /**
+    * Component constructor, sets initial state
+    * @param {object} props component props
+    */
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
   }
-
+  /**
+    * 'Read more' button handler - shows/hides modal
+    * @param {boolean} [showModal=true] show or hide modal
+    */
   onReadMore(showModal = true) {
     this.setState({ showModal });
   }
+  /**
+    * 'Modal dismiss' button handler - hides modal
+    */
   onFSModalDismiss() {
     this.setState({
       showModal: false,
     });
   }
-
+  /**
+    * 'Highlight survey' handler - highlights survey in plot
+    * @param {string} surveyHighlightedId the survey to highlight
+    */
   onHighlightSurvey(surveyHighlightedId) {
     this.setState({ surveyHighlightedId });
   }
+  /**
+    * 'Card' mouse out handler - rests highlighted survey
+    */
   onCardMouseLeave() {
     this.setState({
       surveyHighlightedId: null,
     });
   }
+  /**
+    * Render page title
+    * @return {Component} Page title component
+    */
   renderPageTitle() {
     return (
       <PageTitle labelId="component.assets.title" iconSrc={titleIcon} />
     );
   }
-
+  /**
+    * Render sidebar content
+    */
   renderAsideContent() {
     return (
       <AsideContent
@@ -96,18 +117,19 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
   render() {
     const { indicators, surveys } = this.props;
 
-    const surveyHighlightedId = this.state.surveyHighlightedId || (
-      this.props.surveys
-      ? this.props.surveys.last().get('survey_id')
-      : null
-    );
-
+    // default to last (most recent) survey
+    const surveyHighlightedId = this.state.surveyHighlightedId
+      || (surveys ? surveys.last().get('survey_id') : null);
+    // check if all data is available
     const ready = indicators && surveys && surveyHighlightedId !== null;
 
+    // Plot 1 indicator: machine readable formats
     const machineReadableIndicator = ready &&
       indicators.find((item) => quasiEquals(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.MACHINEREADABLE_ID));
+    // Plot 2 indicator: NZGOAL licenses
     const nzgoalIndicator = ready &&
       indicators.find((item) => quasiEquals(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.NZGOAL_ID));
+    // Reference indicator for comparison in both plots
     const assetsIndicator = ready &&
       indicators.find((item) => quasiEquals(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.ASSETS_ID));
 
@@ -181,7 +203,9 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
 }
 
 PathAssets.propTypes = {
+  /** list of all indicators joined with outcomes from state */
   indicators: PropTypes.instanceOf(List),
+  /** list of all surveys from state */
   surveys: PropTypes.instanceOf(List),
 };
 

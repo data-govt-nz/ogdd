@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Application actions
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
@@ -15,7 +15,8 @@ import {
 
 /**
  * remember location in store
- * @return {location}
+ * @param {object} location new location
+ * @return {object} type: action id, location: new location
  */
 export function updateLocation(location) {
   return {
@@ -26,7 +27,9 @@ export function updateLocation(location) {
 
 /**
  * navigate to new location
- * @return {location}
+ * @param {object} location new location
+ * @param {object} args navigation arguments
+ * @return {object} type: action id, location: new location, args: navigation arguments
  */
 export function navigate(location, args) {
   return {
@@ -35,6 +38,12 @@ export function navigate(location, args) {
     args,
   };
 }
+/**
+ * navigation occured
+ * @param {string} path new path
+ * @param {string} query new query
+ * @return {object} type: action id, path, query
+ */
 export function navigationOccured(path, query) {
   return {
     type: NAVIGATION_OCCURED,
@@ -44,8 +53,10 @@ export function navigationOccured(path, query) {
 }
 
 /**
- * load data for key
- * @return {key, value}
+ * load data for table
+ * @param {string} key key of data table to load
+ * @param {object} value empty data object
+ * @return {object} type: action id, key, value
  */
 export function loadData(key, value) {
   return {
@@ -56,8 +67,9 @@ export function loadData(key, value) {
 }
 
 /**
- * load data for key
- * @return {key, value}
+ * load error for table
+ * @param {string} key key of data table failed loading
+ * @return {object} type: action id, key
  */
 export function loadError(key) {
   return {
@@ -67,8 +79,10 @@ export function loadError(key) {
 }
 
 /**
- * load data for key
- * @return {key, value}
+ * request data for table
+ * @param {string} key key of data table to load
+ * @param {object} timestamp timestamp of request
+ * @return {object} type: action id, key, timestamp
  */
 export function dataRequested(key, timestamp) {
   return {
@@ -79,8 +93,10 @@ export function dataRequested(key, timestamp) {
 }
 
 /**
- * store data for key
- * @return {key, data}
+ * data loaded for table
+ * @param {string} key key of data table to load
+ * @param {object} data loaded data
+ * @return {object} type: action id, key, data
  */
 export function dataLoaded(key, data) {
   return {

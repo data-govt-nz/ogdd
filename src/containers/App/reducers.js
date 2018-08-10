@@ -1,15 +1,17 @@
 /**
-  * Description
+  * Application reducers to update application store in repsonse to actions
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import find from 'lodash/find';
-
+// utils
 import getLabel from 'utils/get-label';
+// containers
 import { NAVITEMS } from 'containers/App/constants';
-
+// App constants
 import {
   LOCATION_UPDATE,
   NAVIGATION_OCCURED,
@@ -18,20 +20,21 @@ import {
   DATA_LOADED,
 } from './constants';
 
+// initial location state
 const initialLocationState = fromJS({
   path: '',
   query: {},
 });
 /**
  * Update location in store
- * @param {object} state current location
- * @param {string} action the action id
- * @return {number} updated state
+ * @param {object} [state] current location
+ * @param {object} action the action id
+ * @return {object} updated state
  */
 function locationReducer(state = initialLocationState, action) {
   switch (action.type) {
     case LOCATION_UPDATE:
-      return fromJS(action.location) || initialLocationState;
+      return action.location ? fromJS(action.location) : initialLocationState;
     default:
       return state;
   }
@@ -39,12 +42,13 @@ function locationReducer(state = initialLocationState, action) {
 
 /**
  * Set announcement message
- * @param {string} state current announcement and location
- * @param {string} action the action id
+ * @param {object} [state] current announcement and location
+ * @param {object} action the action
  * @return {object} updated state
  */
 function announcementReducer(state = fromJS({ msg: '', path: '', query: '' }), action) {
   if (action.type === NAVIGATION_OCCURED) {
+    // announce path if changed
     if (action.path !== state.get('path')) {
       const navItem = find(NAVITEMS, (i) => i.path === action.path);
       const locationLabel = navItem
@@ -57,6 +61,7 @@ function announcementReducer(state = fromJS({ msg: '', path: '', query: '' }), a
         query: action.query,
       });
     }
+    // announce query if changed
     if (action.query !== state.get('query')) {
       return state
         .set('query', action.query)
@@ -67,15 +72,27 @@ function announcementReducer(state = fromJS({ msg: '', path: '', query: '' }), a
   return state;
 }
 
+/**
+  * Convert all data fields to string
+  * @param {object} data the loaded data object
+  */
 function convertToString(data) {
   return data.map((d) => d.map((v) => v === null ? v : String(v)));
 }
 
+/**
+ * Record data request, store loaded data
+ * @param {object} [state] current data state
+ * @param {object} action the action
+ * @return {object} updated state
+ */
 function dataReducer(state = fromJS(DATA), action) {
   switch (action.type) {
     case DATA_REQUESTED:
+      // remember request time
       return state.setIn([action.key, 'requested'], action.timestamp);
     case DATA_LOADED:
+      // remember data
       return state.setIn([action.key, 'data'], convertToString(fromJS(action.data)));
     default:
       return state;
@@ -85,11 +102,10 @@ function dataReducer(state = fromJS(DATA), action) {
 /**
  * Creates the main reducer with the asynchronously loaded ones
  */
-export default function createReducer(asyncReducers) {
+export default function createReducer() {
   return combineReducers({
     location: locationReducer,
     announcement: announcementReducer,
     data: dataReducer,
-    ...asyncReducers,
   });
 }

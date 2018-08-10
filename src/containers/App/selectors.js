@@ -1,37 +1,71 @@
 /**
-  * Description
+  * Application store selectors
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import { createSelector } from 'reselect';
+// utils
 import quasiEquals from 'utils/quasi-equals';
-
+// constants
 import {
   FOCUSAREA_INDICATOR_IDS,
   DEFAULT_SUBJECT_ID,
 } from './constants';
 
-// const getState = (state) => state;
-
+/**
+ * Select location from store
+ * @param {object} state current state
+ * @return {object} location
+ */
 export const selectLocation = (state) => state.get('location');
+/**
+ * Select announcement message from store
+ * @param {object} state current state
+ * @return {object} announcement message
+ */
 export const selectAnnouncement = (state) => state.getIn(['announcement', 'msg']);
+/**
+ * Select data from store
+ * @param {object} state current state
+ * @return {object} data
+ */
 const selectDataState = (state) => state.get('data');
-
+/**
+ * Select requested time for data table
+ * @param {object} state current state
+ * @param {string} key data table name
+ * @return {object} data table request time
+ */
 export const selectRequestedAt = createSelector(
   selectDataState,
   (state, key) => key,
   (data, key) => data.get(key) && data.getIn([key, 'requested'])
 );
-
+/**
+ * Select data table content
+ * @param {object} state current state
+ * @param {string} key data table name
+ * @return {object} data table content
+ */
 export const selectData = createSelector(
   selectDataState,
   (state, key) => key,
   (data, key) => data.get(key) && data.getIn([key, 'data'])
 );
-
+/**
+ * Insert at string into string at position
+ * @param {string} s original string
+ * @param {string} x string to insert
+ * @param {number} at position to insert
+ * @return {string} updated string
+ */
 const insertAt = (s, x, at) => [s.slice(0, at), x, s.slice(at)].join('');
-
-// surveys
+/**
+ * Select 'surveys' data table, converts dates to allow for handling different date formats
+ * @param {object} state current state
+ * @return {object} list of 'surveys'
+ */
 export const selectSurveys = createSelector(
   (state) => selectData(state, 'surveys'),
   (data) => {
@@ -48,13 +82,23 @@ export const selectSurveys = createSelector(
     return null;
   }
 );
-
+/**
+ * Select single survey from 'surveys' data table by attribute
+ * @param {object} state current state
+ * @param {object} args key: attribute key, value: attribute value
+ * @return {object} the survey
+ */
 export const selectSurvey = createSelector(
   selectSurveys,
   (state, args) => args, // { key, value }
   (data, args) => data && data.find((item) => quasiEquals(item.get(args.key), args.value))
 );
-
+/**
+ * Select agency count for single survey
+ * @param {object} state current state
+ * @param {object} value survey id
+ * @return {string} number of agencies for given survey
+ */
 export const selectAgencyCount = createSelector(
   (state, value) => selectSurvey(state, {
     key: 'survey_id',
@@ -62,65 +106,85 @@ export const selectAgencyCount = createSelector(
   }),
   (data) => data && data.get('agencies_total')
 );
-
-// subjects
+/**
+ * Select 'subjects'
+ * @param {object} state current state
+ * @return {object} list of subjects
+ */
 export const selectSubjects = createSelector(
   (state) => selectData(state, 'subjects'),
   (data) => data
 );
-
-export const selectSubject = createSelector(
-  selectSubjects,
-  (state, args) => args, // { key, value }
-  (data, args) => data && data.find((item) => quasiEquals(item.get(args.key), args.value))
-);
-
+/**
+ * Select subject id from query
+ * @param {object} state current state
+ * @return {string} subject id
+ */
 export const selectSubjectIdFromLocation = createSelector(
   selectLocation,
   (location) => location.getIn(['query', 'subject']) || DEFAULT_SUBJECT_ID
 );
-
+/**
+ * Select survey id from query
+ * @param {object} state current state
+ * @return {string} survey id
+ */
 export const selectSurveyIdFromLocation = createSelector(
   selectLocation,
   (location) => location.getIn(['query', 'survey']) || null
 );
-
-// indicators
+/**
+ * Select 'indicators'
+ * @param {object} state current state
+ * @return {object} list of indicators
+ */
 export const selectIndicators = createSelector(
   (state) => selectData(state, 'indicators'),
   (data) => data
 );
-
-export const selectIndicator = createSelector(
-  selectIndicators,
-  (state, args) => args, // { key, value }
-  (data, args) => data && data.find((item) => quasiEquals(item.get(args.key), args.value))
-);
-
+/**
+ * Select 'focus area indicators'
+ * @param {object} state current state
+ * @return {object} list of focus area indicators
+ */
 export const selectFocusAreaIndicators = createSelector(
   selectIndicators,
   (data) => data && data
     .filter((item) => FOCUSAREA_INDICATOR_IDS.indexOf(item.get('indicator_id')) >= 0)
     .sortBy((item) => item.get('indicator_id'))
 );
-
+/**
+ * Select focus area id from query
+ * @param {object} state current state
+ * @return {string} focus area id
+ */
 export const selectFocusAreaIdFromLocation = createSelector(
   selectLocation,
   (location) => location.getIn(['query', 'fa']) || null
 );
-
-// outcomes
+/**
+ * Select 'outcomes'
+ * @param {object} state current state
+ * @return {object} list of outcomes
+ */
 export const selectOutcomes = createSelector(
   (state) => selectData(state, 'outcomes'),
   (data) => data
 );
-
-// insights
+/**
+ * Select 'insights'
+ * @param {object} state current state
+ * @return {object} list of insights
+ */
 export const selectInsights = createSelector(
   (state) => selectData(state, 'insights'),
   (data) => data
 );
-
+/**
+ * Select 'focus area indicators' joined with 'outcomes'
+ * @param {object} state current state
+ * @return {object} list of focus area indicators with outcomes
+ */
 export const selectFocusAreaIndicatorsWithOutcomes = createSelector(
   selectFocusAreaIndicators,
   selectOutcomes,
@@ -129,7 +193,11 @@ export const selectFocusAreaIndicatorsWithOutcomes = createSelector(
     outcomes.filter((outcome) => quasiEquals(outcome.get('indicator_id'), item.get('indicator_id')))
   ))
 );
-
+/**
+ * Select 'indicators' joined with 'outcomes'
+ * @param {object} state current state
+ * @return {object} list of indicators with outcomes
+ */
 export const selectIndicatorsWithOutcomes = createSelector(
   selectIndicators,
   selectOutcomes,

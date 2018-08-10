@@ -1,27 +1,28 @@
 /**
-  * Description
+  * Displays survey information (used for sidebar)
   *
+  * @return {Component} Survey Information component
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { List } from 'immutable';
 import { timeFormat } from 'd3-time-format';
-
+// utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
-
+// containers
 import { selectSurveys } from 'containers/App/selectors';
 import { navigate } from 'containers/App/actions';
-
-import Link from 'styles/Link';
-
 // components
 import Label from 'components/Label';
+// styles
+import Link from 'styles/Link';
 
-
+// own styles
 const Styled = styled.div`
   margin-top: 30px;
 `;
@@ -35,6 +36,7 @@ const AboutLink = styled(Link)``;
 const SurveyInformation = ({ surveys, surveySelectedId, nav }) => {
   const firstSurvey = surveys && surveys.first();
   const lastSurvey = surveys && surveys.last();
+  // find current survey, defaults to last survey
   const currentSurvey = surveys && (surveySelectedId
     ? surveys.find((item) => quasiEquals(item.get('survey_id'), surveySelectedId))
     : lastSurvey);
@@ -77,11 +79,11 @@ const SurveyInformation = ({ surveys, surveySelectedId, nav }) => {
 };
 
 SurveyInformation.propTypes = {
-  /** Description */
+  /** List of all surveys from state */
   surveys: PropTypes.instanceOf(List),
-  /** Description */
+  /** Currently selected survey, optional */
   surveySelectedId: PropTypes.string,
-  /** Description */
+  /** Navigation action */
   nav: PropTypes.func,
 };
 

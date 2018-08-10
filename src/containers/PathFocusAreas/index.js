@@ -1,5 +1,7 @@
 /**
-  * Description
+  * 'All focus areas' overview component
+  * Shows focus area details on hover when only 1 subject (all of governemnt present) -
+  * otherwise allows selecting focus area for detailed view
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
@@ -10,11 +12,9 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { List } from 'immutable';
-
 // utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
-
 // containers, app selectors, metaDescription
 import {
   selectFocusAreaIndicatorsWithOutcomes,
@@ -23,15 +23,12 @@ import {
   selectSubjectIdFromLocation,
 } from 'containers/App/selectors';
 import { navigate } from 'containers/App/actions';
-
 import SurveyInformation from 'containers/SurveyInformation';
-
 import {
   DEFAULT_SUBJECT_ID,
   FOCUSAREA_ICONS,
   FOCUSAREA_DARKICONS,
 } from 'containers/App/constants';
-
 // components
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
@@ -40,7 +37,6 @@ import FSModal from 'components/FSModal';
 import AsideContent from 'components/AsideContent';
 import PlotFocusArea from 'components/PlotFocusArea';
 import SelectWrapper from 'components/SelectWrapper';
-
 // simple styles (styled components)
 import Row from 'styles/Row';
 import Column from 'styles/Column';
@@ -51,11 +47,11 @@ import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import AbovePlots from 'styles/AbovePlots';
-
 // assets
 import titleIcon from 'assets/focus-areas.svg';
 import description from 'text/focus-areas.md'; // loaded as HTML from markdown
 
+// own styles
 const ReferenceHint = styled.div`
   color: ${(props) => props.theme.colors.referenceLabel};
   font-size: 13px;
@@ -69,42 +65,71 @@ const ReferenceHint = styled.div`
     top: 4px;
   }
 `;
-
 const NonSelectWrapper = styled.div``;
 
+// initial component state
 const INITIAL_STATE = {
-  showModal: false,
-  focusAreaSelected: null,
-  surveyHighlightedId: null, // set from surveys
+  showModal: false, // show/hide modal
+  focusAreaSelected: null, // highlighted focus area
+  surveyHighlightedId: null, // highlighted survey
 };
 
 class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  /**
+    * Component constructor, sets initial state
+    * @param {object} props component props
+    */
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
   }
-
+  /**
+    * 'Read more' button handler - shows/hides modal
+    * @param {boolean} [showModal=true] show or hide modal
+    */
   onReadMore(showModal = true) {
     this.setState({ showModal });
   }
+  /**
+    * 'Modal dismiss' button handler - hides modal
+    */
   onFSModalDismiss() {
     this.setState({
       focusAreaSelected: null,
       showModal: false,
     });
   }
+  /**
+    * 'Focus area' mouse enter handler - displays focus area information in sidebar
+    * only available for single subject
+    * @param {string} focusAreaSelected the focus area to highlight and show
+    */
   onFAMouseEnter(focusAreaSelected) {
     this.setState({ focusAreaSelected });
   }
+  /**
+    * 'Focus area' mouse leave handler - displays component information in sidebar
+    * only available for single subject
+    */
   onFAMouseLeave() {
     this.setState({
       focusAreaSelected: null,
       surveyHighlightedId: null,
     });
   }
+  /**
+    * 'Focus area' touch handler - displays focus area information in modal
+    * only available for single subject
+    * @param {string} focusAreaSelected the focus area to highlight and show
+    */
   onFATouch(focusAreaSelected) {
     this.setState({ focusAreaSelected, showModal: true });
   }
+  /**
+    * 'Focus area' click handler - opens focus area detail view, retains current subject
+    * only available for multiple subjects
+    * @param {string} fa the focus area to navigate to
+    */
   onFAClick(fa) {
     this.props.nav({
       path: 'focus-area',
@@ -114,25 +139,33 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
       },
     });
   }
-
+  /**
+    * 'Highlight survey' handler - highlights survey in plot
+    * @param {string} surveyHighlightedId the survey to highlight
+    */
   onHighlightSurvey(surveyHighlightedId) {
     this.setState({ surveyHighlightedId });
   }
-
-  onSelectReference(subjectReference) {
-    this.props.nav({ query: { subject: subjectReference } });
-  }
-
+  /**
+    * 'Subject change' handler - adds subject to query
+    * only available for multiple subjects
+    * @param {string} subject the selected subject
+    */
   onSubjectChange(subject) {
     this.props.nav({ query: { subject } });
   }
-
+  /**
+    * Render page title
+    * @return {Component} Page title component
+    */
   renderPageTitle() {
     return (
       <PageTitle labelId="component.focus-areas.title" iconSrc={titleIcon} />
     );
   }
-
+  /**
+    * Render sidebar content
+    */
   renderAsideContent() {
     if (this.state.focusAreaSelected) {
       return (
@@ -163,10 +196,11 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
     // default to last (most recent) survey
     const surveyHighlightedId = this.state.surveyHighlightedId
       || (surveys ? surveys.last().get('survey_id') : null);
-
+    // check if all data is available
     const ready = focusAreaIndicators && subjects && surveys && surveyHighlightedId !== null;
-
+    // the current subject
     const subjectSelected = ready && subjects.find((item) => quasiEquals(item.get('subject_id'), subjectSelectedId));
+    // the current reference subject if other than default subject is selected
     const subjectReference = ready && subjectSelectedId !== DEFAULT_SUBJECT_ID
       ? subjects.find((item) => quasiEquals(item.get('subject_id'), DEFAULT_SUBJECT_ID))
       : null;
@@ -243,7 +277,7 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
                     surveys={surveys}
                     subject={subjectSelected}
                     referenceSubject={subjectReference}
-                    onSelectReference={() => subjectReference ? this.onSelectReference(subjectReference.get('subject_id')) : null}
+                    onSelectReference={() => subjectReference ? this.onSubjectChange(subjectReference.get('subject_id')) : null}
                     surveyHighlightedId={surveyHighlightedId}
                     onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
                     onFAMouseEnter={subjects.size === 1 ? () => this.onFAMouseEnter(focusArea) : null}
@@ -262,11 +296,17 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
 }
 
 PathFocusAreas.propTypes = {
+  /** list of focus area indicators joined with outcomes from state */
   focusAreaIndicators: PropTypes.instanceOf(List),
+  /** list of all surveys from state */
   surveys: PropTypes.instanceOf(List),
+  /** list of all subjects/agencies from state */
   subjects: PropTypes.instanceOf(List),
-  nav: PropTypes.func,
+  /** Navigation action */
+  nav: PropTypes.func.isRequired,
+  /** selected survey id from state */
   subjectSelectedId: PropTypes.string.isRequired,
+  /** selected focuas area id from state */
 };
 
 /**

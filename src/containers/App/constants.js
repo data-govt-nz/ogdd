@@ -1,5 +1,11 @@
 /**
-  * Description
+  * Global application constants, including
+  * - redux action identifiers
+  * - data sources that require loading
+  * - navigation items
+  * - indicators
+  * - indicator icons
+  * - theme
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
@@ -22,19 +28,26 @@ import iconFA4white from 'assets/fa4-white.svg';
 import iconFA5white from 'assets/fa5-white.svg';
 import iconFA6white from 'assets/fa6-white.svg';
 
-// App actions
+// App action identifiers
 // update location in store
 export const LOCATION_UPDATE = 'action.LOCATION_UPDATE';
 // update location in URL
 export const NAVIGATE = 'action.NAVIGATE';
+// announce occured navigation
 export const NAVIGATION_OCCURED = 'action.NAVIGATION_OCCURED';
+// load data
 export const LOAD_DATA = 'action.LOAD_DATA';
+// mark data load started
 export const DATA_REQUESTED = 'action.DATA_REQUESTED';
+// mark data load completed
 export const DATA_LOADED = 'action.DATA_LOADED';
+// mark data load failed
 export const LOAD_ERROR = 'action.LOAD_ERROR';
 
 // App data sources
+// the API path
 const API_PATH = 'https://uat.data.govt.nz/api/3/action/datastore_search';
+// load data from API (provide resource id) or locally for testing (path)
 const API = true;
 export const DATA = API
 ? {
@@ -111,21 +124,27 @@ export const DATA = API
     filename: 'outcomes.csv',
   },   // id,survey_id,subject_id,indicator_id,value,answer,answer_text
 };
-// values
+
+// global values and indicators
+// value for default subject "All of Government"
 export const DEFAULT_SUBJECT_ID = 'all';
+// identifiers for the 6 focus area indicators
 export const FOCUSAREA_INDICATOR_IDS = [
   'fa1', 'fa2', 'fa3', 'fa4', 'fa5', 'fa6',
 ];
+// identifiers for the 3 services indicators
 export const SERVICES_INDICATOR_ID_MAP = {
   HOW_ID: 'q03',
   STANDARDS_ID: 'q05',
   SERVICES_ID: 'q04',
 };
+// identifiers for the 3 assets indicators
 export const ASSETS_INDICATOR_ID_MAP = {
   ASSETS_ID: 'assets',
   MACHINEREADABLE_ID: 'assets_machinereadable',
   NZGOAL_ID: 'assets_nzgoal',
 };
+// common answers to survey question indicators
 export const ANSWERS = [
   'yes',
   'developing',
@@ -136,13 +155,13 @@ export const ANSWERS = [
   'not_stated',
 ];
 
-// config
-// header
+// configuration
+// header navigation items
 export const NAVITEMS = [
   {
     path: '',
     label: 'component.focus-areas.nav',
-    activePaths: ['focusarea'],
+    activePaths: ['focus-area'],
   },
   {
     path: 'insights',
@@ -159,6 +178,7 @@ export const NAVITEMS = [
 ];
 
 // assets
+// focus area icons, coloured
 export const FOCUSAREA_ICONS = {
   fa1: iconFA1,
   fa2: iconFA2,
@@ -167,6 +187,7 @@ export const FOCUSAREA_ICONS = {
   fa5: iconFA5,
   fa6: iconFA6,
 };
+// focus area icons, black
 export const FOCUSAREA_DARKICONS = {
   fa1: iconFA1dark,
   fa2: iconFA2dark,
@@ -175,6 +196,7 @@ export const FOCUSAREA_DARKICONS = {
   fa5: iconFA5dark,
   fa6: iconFA6dark,
 };
+// focus area icons, white
 export const FOCUSAREA_WHITEICONS = {
   fa1: iconFA1white,
   fa2: iconFA2white,
@@ -184,12 +206,13 @@ export const FOCUSAREA_WHITEICONS = {
   fa6: iconFA6white,
 };
 
-// theme
+// theme breakpoints
 export const BREAKPOINTS = {
   SMALL: 0,
   MEDIUM: 1,
   LARGE: 2,
 };
+// theme defining breakpoints, colors, sizes, grid gutters
 // breakpoints:
 // < 720px (45em): extra-small (mobile)
 // > XXXpx (63em): small (tablet portrait)
