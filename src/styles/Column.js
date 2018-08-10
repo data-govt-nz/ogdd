@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import React from 'react';
 import { Box } from 'grid-styled';
 import styled from 'styled-components';
@@ -11,7 +16,7 @@ const Column = styled(Box)`
     padding-right:${(props) => props.theme.gutter[1]};
     padding-left:${(props) => props.theme.gutter[1]};
   }
-  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {    
+  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
     padding-right:${(props) => props.theme.gutter[2]}
     padding-left:${(props) => props.theme.gutter[2]}
   }

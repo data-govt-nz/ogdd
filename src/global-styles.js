@@ -1,3 +1,9 @@
+/**
+  * Global application styles, including normalize.css for styled components
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
+
 import styledNormalize from 'styled-normalize';
 import { injectGlobal } from 'styled-components';
 

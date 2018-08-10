@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import { call, takeEvery, select, put } from 'redux-saga/effects';
 import { route, getHash, getHashParameters } from 'react-hash-route';
 import { csvParse } from 'd3-dsv';

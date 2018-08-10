@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,7 +13,7 @@ import { List } from 'immutable';
 
 // utils
 import getLabel from 'utils/get-label';
-import attributesEqual from 'utils/attributes-equal';
+import quasiEquals from 'utils/quasi-equals';
 
 // containers, app selectors, metaDescription
 import {
@@ -120,19 +125,19 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
     const ready = focusAreaIndicators && faSelectedId && subjects && surveys && surveyHighlightedId !== null;
 
     const focusArea = ready && (faSelectedId
-      ? focusAreaIndicators.find((item) => attributesEqual(item.get('indicator_id'), faSelectedId))
+      ? focusAreaIndicators.find((item) => quasiEquals(item.get('indicator_id'), faSelectedId))
       : focusAreaIndicators.first()
     );
 
     const subjectSelected = ready && subjects.find((item) =>
-      attributesEqual(item.get('subject_id'), subjectSelectedId)
+      quasiEquals(item.get('subject_id'), subjectSelectedId)
     );
     const subjectsOther = ready && subjects.filter((item) =>
-      !attributesEqual(item.get('subject_id'), subjectSelectedId)
-      && !attributesEqual(item.get('subject_id'), DEFAULT_SUBJECT_ID)
+      !quasiEquals(item.get('subject_id'), subjectSelectedId)
+      && !quasiEquals(item.get('subject_id'), DEFAULT_SUBJECT_ID)
     );
     const subjectReference = ready && subjectSelectedId !== DEFAULT_SUBJECT_ID
-      ? subjects.find((item) => attributesEqual(item.get('subject_id'), DEFAULT_SUBJECT_ID))
+      ? subjects.find((item) => quasiEquals(item.get('subject_id'), DEFAULT_SUBJECT_ID))
       : null;
 
     return (
@@ -227,6 +232,12 @@ PathFocusAreaSingle.propTypes = {
   faSelectedId: PropTypes.string,
 };
 
+/**
+ * Mapping redux state to component props
+ *
+ * @param {object} state application store
+ * @return {object} object of selected store content
+ */
 const mapStateToProps = (state) => ({
   focusAreaIndicators: selectFocusAreaIndicatorsWithOutcomes(state),
   surveys: selectSurveys(state),
@@ -235,6 +246,12 @@ const mapStateToProps = (state) => ({
   faSelectedId: selectFocusAreaIdFromLocation(state),
 });
 
+/**
+ * Mapping redux dispatch function to component props
+ *
+ * @param {function} dispatch redux dispatch function for dispatching actions
+ * @return {object} object of functions for dispatching actions
+ */
 const mapDispatchToProps = (dispatch) => ({
   // navigate to location
   nav: (location) => {

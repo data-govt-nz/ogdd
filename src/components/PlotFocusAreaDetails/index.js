@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
@@ -15,7 +20,7 @@ import {
 } from 'react-vis';
 import { timeFormat } from 'd3-time-format';
 
-import attributesEqual from 'utils/attributes-equal';
+import quasiEquals from 'utils/quasi-equals';
 import formatValue from 'utils/format-value';
 import getLabel from 'utils/get-label';
 
@@ -69,9 +74,9 @@ const Dismiss = styled.div`
 const prepareData = (subject, { focusArea, surveys }) =>
   focusArea
     .get('outcomes') // we are shoing outcomes
-    .filter((outcome) => attributesEqual(outcome.get('subject_id'), subject.get('subject_id'))) // for the current subject
+    .filter((outcome) => quasiEquals(outcome.get('subject_id'), subject.get('subject_id'))) // for the current subject
     .reduce((memo, outcome) => {
-      const survey = surveys.find((item) => attributesEqual(outcome.get('survey_id'), item.get('survey_id')));
+      const survey = surveys.find((item) => quasiEquals(outcome.get('survey_id'), item.get('survey_id')));
       // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
       return survey
         ? memo.concat([{
@@ -133,13 +138,13 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
     const hintValue =
       !subjectHighlightedId
       || subjectHighlightedId === subject.get('subject_id')
-        ? data.find((d) => attributesEqual(d.column, surveyHighlightedId))
+        ? data.find((d) => quasiEquals(d.column, surveyHighlightedId))
         : null;
     // set hint value for current subject and highlighted survey
     const labelHintValue =
       !subjectHighlightedId
       || subjectHighlightedId === subject.get('subject_id')
-        ? data.find((d) => attributesEqual(d.column, surveys.last().get('survey_id')))
+        ? data.find((d) => quasiEquals(d.column, surveys.last().get('survey_id')))
         : null;
 
     // set hint value for reference subject and highlighted survey
@@ -147,21 +152,21 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
       && ((referenceData && !subjectHighlightedId)
         || (referenceSubject && subjectHighlightedId === referenceSubject.get('subject_id'))
       )
-        ? referenceData.find((d) => attributesEqual(d.column, surveyHighlightedId))
+        ? referenceData.find((d) => quasiEquals(d.column, surveyHighlightedId))
         : null;
 
     const labelHintReference = referenceData
       && referenceSubject
       && subjectHighlightedId === referenceSubject.get('subject_id')
-        ? referenceData.find((d) => attributesEqual(d.column, surveys.last().get('survey_id')))
+        ? referenceData.find((d) => quasiEquals(d.column, surveys.last().get('survey_id')))
         : null;
 
     // set hint value for other highlighted subject and highlighted survey
     const hintOther = otherData && subjectHighlightedId && otherDataHighlighted
-      ? otherDataHighlighted.find((d) => attributesEqual(d.column, surveyHighlightedId))
+      ? otherDataHighlighted.find((d) => quasiEquals(d.column, surveyHighlightedId))
       : null;
     const labelHintOther = otherData && subjectHighlightedId && otherDataHighlighted
-      ? otherDataHighlighted.find((d) => attributesEqual(d.column, surveys.last().get('survey_id')))
+      ? otherDataHighlighted.find((d) => quasiEquals(d.column, surveys.last().get('survey_id')))
       : null;
 
     // axis ranges
@@ -174,7 +179,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
     // dummy data to force the area plot from 0 to 100%
     const dataForceYRange = [{ x: xAxisRange[0], y: yAxisRange[0] }, { x: xAxisRange[0], y: yAxisRange[1] }];
 
-    const surveyHighlighted = surveys.find((item) => attributesEqual(item.get('survey_id'), surveyHighlightedId));
+    const surveyHighlighted = surveys.find((item) => quasiEquals(item.get('survey_id'), surveyHighlightedId));
     if (surveyHighlighted && xAxisRange.indexOf(new Date(surveyHighlighted.get('date')).getTime()) < 0) {
       xAxisRange = [new Date(surveyHighlighted.get('date')).getTime()];
     }

@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -74,10 +79,22 @@ Menu.propTypes = {
   hiddenMin: PropTypes.number,
 };
 
+/**
+ * Mapping redux state to component props
+ *
+ * @param {object} state application store
+ * @return {object} object of selected store content
+ */
 const mapStateToProps = (state) => ({
   location: selectLocation(state),
 });
 
+/**
+ * Mapping redux dispatch function to component props
+ *
+ * @param {function} dispatch redux dispatch function for dispatching actions
+ * @return {object} object of functions for dispatching actions
+ */
 const mapDispatchToProps = (dispatch) => ({
   // navigate to location
   nav: (location, args) => {

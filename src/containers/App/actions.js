@@ -1,4 +1,8 @@
-
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import {
   LOCATION_UPDATE,
   NAVIGATE,

@@ -1,5 +1,10 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import { createSelector } from 'reselect';
-import attributesEqual from 'utils/attributes-equal';
+import quasiEquals from 'utils/quasi-equals';
 
 import {
   FOCUSAREA_INDICATOR_IDS,
@@ -47,7 +52,7 @@ export const selectSurveys = createSelector(
 export const selectSurvey = createSelector(
   selectSurveys,
   (state, args) => args, // { key, value }
-  (data, args) => data && data.find((item) => attributesEqual(item.get(args.key), args.value))
+  (data, args) => data && data.find((item) => quasiEquals(item.get(args.key), args.value))
 );
 
 export const selectAgencyCount = createSelector(
@@ -67,7 +72,7 @@ export const selectSubjects = createSelector(
 export const selectSubject = createSelector(
   selectSubjects,
   (state, args) => args, // { key, value }
-  (data, args) => data && data.find((item) => attributesEqual(item.get(args.key), args.value))
+  (data, args) => data && data.find((item) => quasiEquals(item.get(args.key), args.value))
 );
 
 export const selectSubjectIdFromLocation = createSelector(
@@ -89,7 +94,7 @@ export const selectIndicators = createSelector(
 export const selectIndicator = createSelector(
   selectIndicators,
   (state, args) => args, // { key, value }
-  (data, args) => data && data.find((item) => attributesEqual(item.get(args.key), args.value))
+  (data, args) => data && data.find((item) => quasiEquals(item.get(args.key), args.value))
 );
 
 export const selectFocusAreaIndicators = createSelector(
@@ -121,7 +126,7 @@ export const selectFocusAreaIndicatorsWithOutcomes = createSelector(
   selectOutcomes,
   (indicators, outcomes) => indicators && outcomes && indicators.map((item) => item.set(
     'outcomes',
-    outcomes.filter((outcome) => attributesEqual(outcome.get('indicator_id'), item.get('indicator_id')))
+    outcomes.filter((outcome) => quasiEquals(outcome.get('indicator_id'), item.get('indicator_id')))
   ))
 );
 
@@ -130,6 +135,6 @@ export const selectIndicatorsWithOutcomes = createSelector(
   selectOutcomes,
   (indicators, outcomes) => indicators && outcomes && indicators.map((item) => item.set(
     'outcomes',
-    outcomes.filter((outcome) => attributesEqual(outcome.get('indicator_id'), item.get('indicator_id')))
+    outcomes.filter((outcome) => quasiEquals(outcome.get('indicator_id'), item.get('indicator_id')))
   ))
 );

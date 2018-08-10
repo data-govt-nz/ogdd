@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,7 +13,7 @@ import { List } from 'immutable';
 
 // utils
 import getLabel from 'utils/get-label';
-import attributesEqual from 'utils/attributes-equal';
+import quasiEquals from 'utils/quasi-equals';
 
 // containers, app selectors, metaDescription
 import {
@@ -103,9 +108,9 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
 
     const ready = indicators && surveys && surveyHighlightedId !== null;
 
-    const howIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.HOW_ID));
-    const standardsIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.STANDARDS_ID));
-    const servicesIndicator = ready && indicators.find((item) => attributesEqual(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.SERVICES_ID));
+    const howIndicator = ready && indicators.find((item) => quasiEquals(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.HOW_ID));
+    const standardsIndicator = ready && indicators.find((item) => quasiEquals(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.STANDARDS_ID));
+    const servicesIndicator = ready && indicators.find((item) => quasiEquals(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.SERVICES_ID));
 
     return (
       <PageContainer>
@@ -189,6 +194,12 @@ PathServices.propTypes = {
   surveys: PropTypes.instanceOf(List),
 };
 
+/**
+ * Mapping redux state to component props
+ *
+ * @param {object} state application store
+ * @return {object} object of selected store content
+ */
 const mapStateToProps = (state) => ({
   indicators: selectIndicatorsWithOutcomes(state),
   surveys: selectSurveys(state),

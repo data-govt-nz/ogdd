@@ -1,3 +1,8 @@
+/**
+  * Set up the application store
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { fromJS } from 'immutable';

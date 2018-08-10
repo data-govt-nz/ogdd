@@ -1,24 +1,27 @@
+/**
+  * Kick off the React application
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
+
 /* eslint-disable import/no-extraneous-dependencies */
 /*
-  issue with and react-hot-loader
-  even tho only used in development
-  eslint has no way to tell that and outputs an error
+  issue with react-hot-loader:
+  even tho only used in development eslint has no way to tell that and outputs an error
 */
 
-// react deps
+// vendor
 import React from 'react';
 import ReactDOM from 'react-dom';
-// hot reload for development
 import { AppContainer } from 'react-hot-loader';
-// redux deps
 import { Provider } from 'react-redux';
-// simple hash router: react-hash-route
 import { routeSetup, getHash, getHashParameters } from 'react-hash-route';
-// Theme provider
 import { ThemeProvider } from 'styled-components';
 
+// store
 import configureStore from 'store';
 
+// containers
 import App from 'containers/App';
 import PathFocusAreas from 'containers/PathFocusAreas';
 import PathFocusAreaSingle from 'containers/PathFocusAreaSingle';
@@ -27,30 +30,24 @@ import PathServices from 'containers/PathServices';
 import PathAssets from 'containers/PathAssets';
 import PathAbout from 'containers/PathAbout';
 import PathNotFound from 'containers/PathNotFound';
-
 import { updateLocation } from 'containers/App/actions';
 import { THEME } from 'containers/App/constants';
 
+// utils
 import { queryObject } from 'utils/queries';
 
+// Styles
 // import react-vis styles
 import 'react-vis/dist/styles/legends.scss';
 import 'react-vis/dist/styles/plot.scss';
-
-// Import CSS reset and Global Styles
+// global application styles & resets
 import './global-styles';
 
 
+// configure app store
 const store = configureStore();
 
-// [
-//   {
-//     source: 'json',
-//     filename:
-//   },
-// ]
-
-// map hash path to react component
+// Map hash path to react component
 // see also containers/App/constants NAVITEMS
 const pathComponentMap = {
   '': <PathFocusAreas />, // focus areas
@@ -62,6 +59,11 @@ const pathComponentMap = {
   'not-found': <PathNotFound />,
 };
 
+/**
+ * Render React application and attach to 'root' element
+ * Also records current location in store
+ * @param {object} Component main react component
+ */
 const render = (Component) => {
   // remember current hash location in store
   store.dispatch(updateLocation({
@@ -85,9 +87,8 @@ const render = (Component) => {
   );
 };
 
-// start the application with route setup, component and messages
+// start the application with route setup, and component
 const start = () => routeSetup(() => render(App));
-
 start();
 
 if (module.hot) {

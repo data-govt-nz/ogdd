@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import find from 'lodash/find';

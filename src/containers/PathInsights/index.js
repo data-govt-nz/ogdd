@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -9,7 +14,7 @@ import styled from 'styled-components';
 import { timeFormat } from 'd3-time-format';
 
 import getLabel from 'utils/get-label';
-import attributesEqual from 'utils/attributes-equal';
+import quasiEquals from 'utils/quasi-equals';
 
 // containers, app selectors, metaDescription
 import {
@@ -113,21 +118,21 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
 
     const surveyID = surveySelectedId || (ready && surveys.last().get('survey_id'));
 
-    const survey = ready && surveys.find((item) => attributesEqual(item.get('survey_id'), surveyID));
+    const survey = ready && surveys.find((item) => quasiEquals(item.get('survey_id'), surveyID));
 
     const relevantInsights = ready && insights
-      .filter((insight) => attributesEqual(insight.get('survey_id'), surveyID))
+      .filter((insight) => quasiEquals(insight.get('survey_id'), surveyID))
       .map((insight) => insight.set('indicator', indicators.find((indicator) =>
-        attributesEqual(insight.get('indicator_id'), indicator.get('indicator_id'))
+        quasiEquals(insight.get('indicator_id'), indicator.get('indicator_id'))
       )))
       .sortBy((insight) => insight.getIn(['indicator', 'parent_indicator_id']));
 
     const relevantFocusAreas = ready && relevantInsights
       .reduce((memo, insight) => {
         const faID = insight.getIn(['indicator', 'parent_indicator_id']);
-        return memo.find((item) => attributesEqual(item.get('indicator_id'), faID))
+        return memo.find((item) => quasiEquals(item.get('indicator_id'), faID))
           ? memo
-          : memo.push(indicators.find((item) => attributesEqual(item.get('indicator_id'), faID)));
+          : memo.push(indicators.find((item) => quasiEquals(item.get('indicator_id'), faID)));
       }, List());
 
     return (
@@ -188,13 +193,13 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
                     insight={insight.set(
                       'outcomes',
                       outcomes.filter((outcome) =>
-                        attributesEqual(outcome.get('survey_id'), surveyID)
-                        && attributesEqual(outcome.get('indicator_id'), insight.get('indicator_id'))
+                        quasiEquals(outcome.get('survey_id'), surveyID)
+                        && quasiEquals(outcome.get('indicator_id'), insight.get('indicator_id'))
                       )
                     )}
                     agenciesTotal={parseInt(survey.get('agencies_total'), 10)}
                     focusArea={indicators.find((item) =>
-                        attributesEqual(
+                        quasiEquals(
                           item.get('indicator_id'),
                           insight.getIn(['indicator', 'parent_indicator_id'])
                         )
@@ -220,6 +225,12 @@ PathInsights.propTypes = {
   surveySelectedId: PropTypes.string,
 };
 
+/**
+ * Mapping redux state to component props
+ *
+ * @param {object} state application store
+ * @return {object} object of selected store content
+ */
 const mapStateToProps = (state) => ({
   indicators: selectIndicators(state),
   outcomes: selectOutcomes(state),
@@ -228,6 +239,12 @@ const mapStateToProps = (state) => ({
   surveySelectedId: selectSurveyIdFromLocation(state),
 });
 
+/**
+ * Mapping redux dispatch function to component props
+ *
+ * @param {function} dispatch redux dispatch function for dispatching actions
+ * @return {object} object of functions for dispatching actions
+ */
 const mapDispatchToProps = (dispatch) => ({
   // navigate to location
   nav: (location) => {

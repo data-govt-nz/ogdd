@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import PropTypes from 'prop-types';
 
 import getLabel from 'utils/get-label';

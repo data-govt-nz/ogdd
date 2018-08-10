@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,7 +13,7 @@ import { List } from 'immutable';
 
 // utils
 import getLabel from 'utils/get-label';
-import attributesEqual from 'utils/attributes-equal';
+import quasiEquals from 'utils/quasi-equals';
 
 // containers, app selectors, metaDescription
 import {
@@ -100,11 +105,11 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
     const ready = indicators && surveys && surveyHighlightedId !== null;
 
     const machineReadableIndicator = ready &&
-      indicators.find((item) => attributesEqual(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.MACHINEREADABLE_ID));
+      indicators.find((item) => quasiEquals(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.MACHINEREADABLE_ID));
     const nzgoalIndicator = ready &&
-      indicators.find((item) => attributesEqual(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.NZGOAL_ID));
+      indicators.find((item) => quasiEquals(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.NZGOAL_ID));
     const assetsIndicator = ready &&
-      indicators.find((item) => attributesEqual(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.ASSETS_ID));
+      indicators.find((item) => quasiEquals(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.ASSETS_ID));
 
     return (
       <PageContainer>
@@ -180,6 +185,12 @@ PathAssets.propTypes = {
   surveys: PropTypes.instanceOf(List),
 };
 
+/**
+ * Mapping redux state to component props
+ *
+ * @param {object} state application store
+ * @return {object} object of selected store content
+ */
 const mapStateToProps = (state) => ({
   indicators: selectIndicatorsWithOutcomes(state),
   surveys: selectSurveys(state),

@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 

@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
@@ -16,7 +21,7 @@ import {
 import { timeFormat } from 'd3-time-format';
 
 import getLabel from 'utils/get-label';
-import attributesEqual from 'utils/attributes-equal';
+import quasiEquals from 'utils/quasi-equals';
 import formatValue from 'utils/format-value';
 
 import CardTitle from 'components/CardTitle';
@@ -42,9 +47,9 @@ const ReferenceHint = styled.div`
 const prepareData = (subject, { focusArea, surveys }) =>
   focusArea
     .get('outcomes') // we are shoing outcomes
-    .filter((outcome) => attributesEqual(outcome.get('subject_id'), subject.get('subject_id'))) // for the current subject
+    .filter((outcome) => quasiEquals(outcome.get('subject_id'), subject.get('subject_id'))) // for the current subject
     .reduce((memo, outcome) => {
-      const survey = surveys.find((item) => attributesEqual(outcome.get('survey_id'), item.get('survey_id')));
+      const survey = surveys.find((item) => quasiEquals(outcome.get('survey_id'), item.get('survey_id')));
       // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
       return survey
         ? memo.concat([{
@@ -92,8 +97,8 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
 
     // set hint value from highlighted survey
     const hintValue = refHighlightedId && referenceData
-      ? referenceData.find((d) => attributesEqual(d.column, surveyHighlightedId) && attributesEqual(d.row, refHighlightedId))
-      : data.find((d) => attributesEqual(d.column, surveyHighlightedId));
+      ? referenceData.find((d) => quasiEquals(d.column, surveyHighlightedId) && quasiEquals(d.row, refHighlightedId))
+      : data.find((d) => quasiEquals(d.column, surveyHighlightedId));
 
     // axis ranges
     let xAxisRange = [
@@ -101,7 +106,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
       new Date(surveys.last().get('date')).getTime(),
     ];
 
-    const surveyHighlighted = surveys.find((item) => attributesEqual(item.get('survey_id'), surveyHighlightedId));
+    const surveyHighlighted = surveys.find((item) => quasiEquals(item.get('survey_id'), surveyHighlightedId));
     if (surveyHighlighted && xAxisRange.indexOf(new Date(surveyHighlighted.get('date')).getTime()) < 0) {
       xAxisRange = xAxisRange.concat([new Date(surveyHighlighted.get('date')).getTime()]);
     }

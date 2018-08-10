@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
@@ -15,7 +20,7 @@ import {
 import { timeFormat } from 'd3-time-format';
 
 import getLabel from 'utils/get-label';
-import attributesEqual from 'utils/attributes-equal';
+import quasiEquals from 'utils/quasi-equals';
 import formatValue from 'utils/format-value';
 import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
@@ -31,7 +36,7 @@ import WrapPlot from 'styles/WrapPlot';
 const prepareData = (outcomes, { surveys }) =>
   outcomes
     .reduce((memo, outcome) => {
-      const survey = surveys.find((item) => attributesEqual(outcome.get('survey_id'), item.get('survey_id')));
+      const survey = surveys.find((item) => quasiEquals(outcome.get('survey_id'), item.get('survey_id')));
       // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
       return survey
         ? memo.concat([{
@@ -57,7 +62,7 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
     // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
     const groups = indicator
       .get('outcomes')
-      .filter((outcome) => attributesEqual(outcome.get('subject_id'), DEFAULT_SUBJECT_ID))
+      .filter((outcome) => quasiEquals(outcome.get('subject_id'), DEFAULT_SUBJECT_ID))
       .groupBy((outcome) => outcome.get('answer'));
 
     const data = groups
@@ -75,7 +80,7 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
 
     // set hint value from highlighted survey
     const hintValues = data.reduce((memo, series) => memo.concat([{
-      value: series.data.find((d) => attributesEqual(d.column, surveyHighlightedId)),
+      value: series.data.find((d) => quasiEquals(d.column, surveyHighlightedId)),
       id: series.id,
     }]), []);
 
@@ -88,7 +93,7 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
       new Date(surveys.first().get('date')).getTime(),
       new Date(surveys.last().get('date')).getTime(),
     ];
-    const surveyHighlighted = surveys.find((item) => attributesEqual(item.get('survey_id'), surveyHighlightedId));
+    const surveyHighlighted = surveys.find((item) => quasiEquals(item.get('survey_id'), surveyHighlightedId));
     if (surveyHighlighted && xAxisRange.indexOf(new Date(surveyHighlighted.get('date')).getTime()) < 0) {
       xAxisRange = xAxisRange.concat(new Date(surveyHighlighted.get('date')).getTime());
     }

@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme, css } from 'styled-components';

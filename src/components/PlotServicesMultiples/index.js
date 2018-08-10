@@ -1,8 +1,13 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Map, List } from 'immutable';
 
-import attributesEqual from 'utils/attributes-equal';
+import quasiEquals from 'utils/quasi-equals';
 import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
 
 import PlotServicesSmall from 'components/PlotServicesSmall';
@@ -24,7 +29,7 @@ class PlotServicesMultiples extends React.PureComponent { // eslint-disable-line
     // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
     const groups = indicator
       .get('outcomes')
-      .filter((outcome) => attributesEqual(outcome.get('subject_id'), DEFAULT_SUBJECT_ID))
+      .filter((outcome) => quasiEquals(outcome.get('subject_id'), DEFAULT_SUBJECT_ID))
       .groupBy((outcome) => outcome.get('answer'));
 
     return (

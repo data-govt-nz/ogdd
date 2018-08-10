@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import styled, { css } from 'styled-components';
 import { BREAKPOINTS } from 'containers/App/constants';
 import Button from 'styles/Button';

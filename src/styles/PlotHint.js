@@ -1,9 +1,11 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 import styled, { css } from 'styled-components';
 
 export default styled.div`
-
-
-
   ${(props) => props.secondary
     ? css`
         color: ${() => props.theme.colors[props.color]};

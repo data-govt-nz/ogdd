@@ -1,5 +1,10 @@
-import styled from 'styled-components';
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 
+import styled from 'styled-components';
 import Button from 'styles/Button';
 
 export default styled(Button)`

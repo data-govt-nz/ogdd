@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -102,16 +107,26 @@ App.propTypes = {
   loadData: PropTypes.func.isRequired,
 };
 
+/**
+ * Mapping redux state to component props
+ *
+ * @param {object} state application store
+ * @return {object} object of selected store content
+ */
 const mapStateToProps = (state) => ({
   announcement: selectAnnouncement(state),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadData: () => {
-      Object.keys(DATA).forEach((key) => dispatch(loadData(key, DATA[key])));
-    },
-  };
-}
+/**
+ * Mapping redux dispatch function to component props
+ *
+ * @param {function} dispatch redux dispatch function for dispatching actions
+ * @return {object} object of functions for dispatching actions
+ */
+const mapDispatchToProps = (dispatch) => ({
+  loadData: () => {
+    Object.keys(DATA).forEach((key) => dispatch(loadData(key, DATA[key])));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

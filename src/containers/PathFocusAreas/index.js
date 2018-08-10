@@ -1,3 +1,8 @@
+/**
+  * Description
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,7 +13,7 @@ import { List } from 'immutable';
 
 // utils
 import getLabel from 'utils/get-label';
-import attributesEqual from 'utils/attributes-equal';
+import quasiEquals from 'utils/quasi-equals';
 
 // containers, app selectors, metaDescription
 import {
@@ -161,9 +166,9 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
 
     const ready = focusAreaIndicators && subjects && surveys && surveyHighlightedId !== null;
 
-    const subjectSelected = ready && subjects.find((item) => attributesEqual(item.get('subject_id'), subjectSelectedId));
+    const subjectSelected = ready && subjects.find((item) => quasiEquals(item.get('subject_id'), subjectSelectedId));
     const subjectReference = ready && subjectSelectedId !== DEFAULT_SUBJECT_ID
-      ? subjects.find((item) => attributesEqual(item.get('subject_id'), DEFAULT_SUBJECT_ID))
+      ? subjects.find((item) => quasiEquals(item.get('subject_id'), DEFAULT_SUBJECT_ID))
       : null;
 
     return (
@@ -264,6 +269,12 @@ PathFocusAreas.propTypes = {
   subjectSelectedId: PropTypes.string.isRequired,
 };
 
+/**
+ * Mapping redux state to component props
+ *
+ * @param {object} state application store
+ * @return {object} object of selected store content
+ */
 const mapStateToProps = (state) => ({
   focusAreaIndicators: selectFocusAreaIndicatorsWithOutcomes(state),
   surveys: selectSurveys(state),
@@ -271,6 +282,12 @@ const mapStateToProps = (state) => ({
   subjectSelectedId: selectSubjectIdFromLocation(state),
 });
 
+/**
+ * Mapping redux dispatch function to component props
+ *
+ * @param {function} dispatch redux dispatch function for dispatching actions
+ * @return {object} object of functions for dispatching actions
+ */
 const mapDispatchToProps = (dispatch) => ({
   // navigate to location
   nav: (location) => {
