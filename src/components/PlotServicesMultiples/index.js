@@ -1,20 +1,23 @@
 /**
-  * Description
+  * Card for 3rd services indicator, one plot for every indicator answer
   *
+  * @return {Component} Small multiples card
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Map, List } from 'immutable';
-
+// utils
 import quasiEquals from 'utils/quasi-equals';
+// containers
 import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
-
+// components
 import PlotServicesSmall from 'components/PlotServicesSmall';
-
+import Card from 'components/Card';
+// styles
 import Row from 'styles/Row';
 import Column from 'styles/Column';
-import Card from 'components/Card';
 import CardBody from 'styles/CardBody';
 
 class PlotServicesMultiples extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -26,16 +29,14 @@ class PlotServicesMultiples extends React.PureComponent { // eslint-disable-line
       onHighlightSurvey,
       onCardMouseLeave,
     } = this.props;
-    // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
+    // get indicator outcomes and group data by answer
     const groups = indicator
       .get('outcomes')
       .filter((outcome) => quasiEquals(outcome.get('subject_id'), DEFAULT_SUBJECT_ID))
       .groupBy((outcome) => outcome.get('answer'));
 
     return (
-      <Card
-        onMouseLeave={onCardMouseLeave}
-      >
+      <Card onMouseLeave={onCardMouseLeave} >
         <CardBody withoutTitle>
           <Row>
             { groups.toList().map((group) => (
@@ -59,12 +60,16 @@ class PlotServicesMultiples extends React.PureComponent { // eslint-disable-line
   }
 }
 
-// indicator={indicator}
 PlotServicesMultiples.propTypes = {
+  /** the indicator */
   indicator: PropTypes.instanceOf(Map).isRequired,
+  /** currently highlighted survey */
   surveyHighlightedId: PropTypes.string.isRequired,
+  /** all surveys */
   surveys: PropTypes.instanceOf(List).isRequired,
+  /** survey highlight handler */
   onHighlightSurvey: PropTypes.func.isRequired,
+  /** mouse leave handler */
   onCardMouseLeave: PropTypes.func.isRequired,
 };
 

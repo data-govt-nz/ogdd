@@ -51,7 +51,7 @@ import AbovePlots from 'styles/AbovePlots';
 import titleIcon from 'assets/focus-areas.svg';
 import description from 'text/focus-areas.md'; // loaded as HTML from markdown
 
-// own styles
+// component styles
 const ReferenceHint = styled.div`
   color: ${(props) => props.theme.colors.referenceLabel};
   font-size: 13px;

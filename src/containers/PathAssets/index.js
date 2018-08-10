@@ -42,7 +42,7 @@ import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import titleIcon from 'assets/data-assets.svg';
 import description from 'text/data-assets.md'; // loaded as HTML from markdown
 
-// own styles
+// component styles
 const PlotTitle = styled.div`
   margin-bottom: 15px;
   font-weight: 600;

@@ -1,13 +1,17 @@
 /**
-  * Description
+  * Overview timeseries area or line graph for single focus area, uses react-vis
+  * When a refernce subject is present, subject plotted as line and reference is plotted as area
+  * Otherwise single subject plotted as area
+  * Card is either clickable or 'hoverable' depending on number of subjects
   *
+  * @return {Component} Mixed timeseries graph for one or two subjects
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
 import { Map, List } from 'immutable';
-
 import {
   FlexibleWidthXYPlot,
   XAxis,
@@ -19,21 +23,23 @@ import {
   Hint,
 } from 'react-vis';
 import { timeFormat } from 'd3-time-format';
-
+// utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
+import preparePlotData from 'utils/prepare-plot-data';
 import formatValue from 'utils/format-value';
-
+// components
 import CardTitle from 'components/CardTitle';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 import Card from 'components/Card';
-
+// styles
 import CardBody from 'styles/CardBody';
 import CardHeader from 'styles/CardHeader';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 import PlotHint from 'styles/PlotHint';
 import WrapPlot from 'styles/WrapPlot';
 
+// component styles
 const ReferenceHint = styled.div`
   position: absolute;
   bottom: 35px;
@@ -43,31 +49,33 @@ const ReferenceHint = styled.div`
   color: ${(props) => props.theme.colors.referenceLabel}
   font-size: ${(props) => props.theme.sizes[0]}
 `;
-
-const prepareData = (subject, { focusArea, surveys }) =>
-  focusArea
-    .get('outcomes') // we are shoing outcomes
-    .filter((outcome) => quasiEquals(outcome.get('subject_id'), subject.get('subject_id'))) // for the current subject
-    .reduce((memo, outcome) => {
-      const survey = surveys.find((item) => quasiEquals(outcome.get('survey_id'), item.get('survey_id')));
-      // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
-      return survey
-        ? memo.concat([{
-          x: new Date(survey.get('date')).getTime(),
-          y: outcome.get('value'),
-          column: survey.get('survey_id'),
-          row: subject.get('subject_id'),
-        }])
-        : memo;
-    }, [])
-;
+/**
+  * prepare data for plot
+  * @param {object} subject the current subject
+  * @param {object} focusArea the current focusArea
+  * @param {object} surveys the surveys
+  */
+const prepareData = (subject, focusArea, surveys) => {
+  const outcomes = focusArea
+    .get('outcomes') // we are showing outcomes
+    .filter((outcome) => quasiEquals(outcome.get('subject_id'), subject.get('subject_id')));
+    // for the current subject
+  return preparePlotData(outcomes, surveys, subject.get('subject_id'));
+};
 
 class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  /**
+    * Component constructor, sets initial state
+    * @param {object} props component props
+    */
   constructor(props) {
     super(props);
     this.state = { refHighlightedId: null };
   }
-
+  /**
+    * 'Highlight survey' handler - highlights survey in plot
+    * @param {string} surveyHighlightedId the survey to highlight
+    */
   onHighlightReference(refHighlightedId) {
     this.setState({ refHighlightedId: refHighlightedId || null });
   }
@@ -92,8 +100,8 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
     const { refHighlightedId } = this.state;
 
     // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
-    const data = prepareData(subject, this.props);
-    const referenceData = referenceSubject && prepareData(referenceSubject, this.props);
+    const data = prepareData(subject, focusArea, surveys);
+    const referenceData = referenceSubject && prepareData(referenceSubject, focusArea, surveys);
 
     // set hint value from highlighted survey
     const hintValue = refHighlightedId && referenceData
@@ -244,18 +252,31 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
 }
 
 PlotFocusArea.propTypes = {
+  /** the focus area joined with outcomes */
   focusArea: PropTypes.instanceOf(Map).isRequired,
-  focusAreaIcon: PropTypes.string.isRequired,
+  /** highlighted survey id */
   surveyHighlightedId: PropTypes.string.isRequired,
+  /** list of surveys */
   surveys: PropTypes.instanceOf(List).isRequired,
+  /** the current subject */
   subject: PropTypes.instanceOf(Map).isRequired,
+  /** the reference subject if other subject selected */
   referenceSubject: PropTypes.instanceOf(Map),
+  /** highlight survey handler */
   onHighlightSurvey: PropTypes.func.isRequired,
+  /** on mouse enter handler */
   onFAMouseEnter: PropTypes.func,
+  /** on mouse leave handler */
   onFAMouseLeave: PropTypes.func,
+  /** on touch handler */
   onFATouch: PropTypes.func,
+  /** on click handler */
   onFAClick: PropTypes.func,
+  /** on reference subject select handler */
   onSelectReference: PropTypes.func.isRequired,
+  /** focus area icon */
+  focusAreaIcon: PropTypes.string.isRequired,
+  /** global theme */
   theme: PropTypes.object.isRequired,
 };
 

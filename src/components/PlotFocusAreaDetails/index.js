@@ -1,13 +1,15 @@
 /**
-  * Description
+  * Detailed timeseries line graph for single focus area, uses react-vis
+  * Can plot multiple timeseries and marks reference and active timeseries
   *
+  * @return {Component} Timeseries line graph for many subjects
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
 import { Map, List } from 'immutable';
-
 import {
   FlexibleWidthXYPlot,
   XAxis,
@@ -19,23 +21,26 @@ import {
   Hint,
 } from 'react-vis';
 import { timeFormat } from 'd3-time-format';
-
+// utils
 import quasiEquals from 'utils/quasi-equals';
+import preparePlotData from 'utils/prepare-plot-data';
 import formatValue from 'utils/format-value';
 import getLabel from 'utils/get-label';
-
+// components
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 import KeyEntry from 'components/KeyEntry';
 import CardTitle from 'components/CardTitle';
 import Close from 'components/Close';
-
-import Key from 'styles/Key';
 import Card from 'components/Card';
+
+// styles
+import Key from 'styles/Key';
 import CardHeader from 'styles/CardHeader';
 import CardBody from 'styles/CardBody';
 import PlotHint from 'styles/PlotHint';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 
+// component styles
 const PlotHintLabel = styled.div`
   color: ${(props) => props.reference
     ? props.theme.colors.dark
@@ -51,7 +56,6 @@ const PlotHintLabel = styled.div`
     left: 10px;
   }
 `;
-
 const WrapPlot = styled.div`
   padding-top: 30px;
   padding-left: 0px;
@@ -71,30 +75,34 @@ const Dismiss = styled.div`
     top: 0;
   }
 `;
-const prepareData = (subject, { focusArea, surveys }) =>
-  focusArea
-    .get('outcomes') // we are shoing outcomes
-    .filter((outcome) => quasiEquals(outcome.get('subject_id'), subject.get('subject_id'))) // for the current subject
-    .reduce((memo, outcome) => {
-      const survey = surveys.find((item) => quasiEquals(outcome.get('survey_id'), item.get('survey_id')));
-      // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
-      return survey
-        ? memo.concat([{
-          x: new Date(survey.get('date')).getTime(),
-          y: outcome.get('value'),
-          column: survey.get('survey_id'),
-          row: subject.get('subject_id'),
-        }])
-        : memo;
-    }, [])
-;
+
+/**
+  * prepare data for plot
+  * @param {object} subject the current subject
+  * @param {object} focusArea the current focusArea
+  * @param {object} surveys the surveys
+  */
+const prepareData = (subject, focusArea, surveys) => {
+  // get relevant outcomes for current subject
+  const outcomes = focusArea
+    .get('outcomes')
+    .filter((outcome) => quasiEquals(outcome.get('subject_id'), subject.get('subject_id')));
+  return preparePlotData(outcomes, surveys, subject.get('subject_id'));
+};
 
 class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  /**
+    * Component constructor, sets initial state
+    * @param {object} props component props
+    */
   constructor(props) {
     super(props);
     this.state = { subjectHighlightedId: null };
   }
-
+  /**
+    * 'Highlight survey' handler - highlights survey in plot
+    * @param {string} surveyHighlightedId the survey to highlight
+    */
   onHighlightSubject(subjectHighlightedId) {
     this.setState({ subjectHighlightedId: subjectHighlightedId || null });
   }
@@ -117,9 +125,9 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
     const { subjectHighlightedId } = this.state;
 
     // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
-    const data = prepareData(subject, this.props);
+    const data = prepareData(subject, focusArea, surveys);
 
-    const referenceData = referenceSubject && prepareData(referenceSubject, this.props);
+    const referenceData = referenceSubject && prepareData(referenceSubject, focusArea, surveys);
 
     const otherData = otherSubjects && otherSubjects.reduce((memo, item) =>
       item.get('subject_id') === subjectHighlightedId
@@ -438,16 +446,27 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
 }
 
 PlotFocusAreaDetails.propTypes = {
+  /** the focus area joined with outcomes */
   focusArea: PropTypes.instanceOf(Map).isRequired,
+  /** highlighted survey id */
   surveyHighlightedId: PropTypes.string.isRequired,
+  /** list of surveys */
   surveys: PropTypes.instanceOf(List).isRequired,
+  /** the current subject */
   subject: PropTypes.instanceOf(Map).isRequired,
+  /** the reference subject if other subject selected */
   referenceSubject: PropTypes.instanceOf(Map),
+  /** list of other subjects */
   otherSubjects: PropTypes.instanceOf(List),
+  /** highlight survey handler */
   onHighlightSurvey: PropTypes.func.isRequired,
+  /** subject select handler */
   onSelectSubject: PropTypes.func.isRequired,
+  /** close view handler */
   onDismiss: PropTypes.func.isRequired,
+  /** focus area icon */
   focusAreaIcon: PropTypes.string.isRequired,
+  /** global theme */
   theme: PropTypes.object.isRequired,
 };
 

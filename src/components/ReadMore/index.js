@@ -1,15 +1,19 @@
 /**
-  * Description
+  * Read more link
   *
+  * @return {Component} Read more link
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+// components
 import Label from 'components/Label';
+// styles
 import Link from 'styles/Link';
 
+// component styles
 const Styled = styled(Link)``;
 
 const ReadMore = ({ onClick }) => (
@@ -19,6 +23,7 @@ const ReadMore = ({ onClick }) => (
 );
 
 ReadMore.propTypes = {
+  /** click handler */
   onClick: PropTypes.func.isRequired,
 };
 

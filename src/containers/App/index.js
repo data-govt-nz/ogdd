@@ -24,7 +24,7 @@ import { loadData } from './actions';
 import { selectAnnouncement } from './selectors';
 import { NAVITEMS, DATA } from './constants';
 
-// own styles
+// component styles
 const Styled = styled.div`
   &:focus { outline: none; }
 `;

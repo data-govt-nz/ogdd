@@ -21,7 +21,7 @@ import { BREAKPOINTS } from 'containers/App/constants';
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 import NavLink from 'styles/NavLink';
 
-// own styles
+// component styles
 const Styled = styled.nav`
   display: inline-block;
   padding-top: 0.5em;

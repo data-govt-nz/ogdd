@@ -1,17 +1,19 @@
 /**
-  * Description
+  * Wrapper for plot select options
   *
+  * @return {Component} Select Wrapper component
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { List } from 'immutable';
-
+// components
 import Label from 'components/Label';
 
+// component styles
 const Styled = styled.div``;
-
 const Select = styled.select`
   text-decoration: underline;
   @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
@@ -19,7 +21,6 @@ const Select = styled.select`
   }
 `;
 
-/* eslint-disable react/no-danger */
 const SelectWrapper = ({ labelID, value, options, onChange, valueKey, formatOption }) => (
   <Styled>
     <label htmlFor="ogdd-plot-option-select" >
@@ -38,14 +39,19 @@ const SelectWrapper = ({ labelID, value, options, onChange, valueKey, formatOpti
     </Select>
   </Styled>
 );
-/* eslint-enable react/no-danger */
 
 SelectWrapper.propTypes = {
+  /** select label id */
   labelID: PropTypes.string,
+  /** select current value */
   value: PropTypes.string,
+  /** select options list */
   options: PropTypes.instanceOf(List),
+  /** on select change handler */
   onChange: PropTypes.func,
+  /** option formatter */
   formatOption: PropTypes.func,
+  /** key to select value from option */
   valueKey: PropTypes.string,
 };
 

@@ -22,7 +22,7 @@ import Label from 'components/Label';
 // styles
 import Link from 'styles/Link';
 
-// own styles
+// component styles
 const Styled = styled.div`
   margin-top: 30px;
 `;

@@ -24,7 +24,7 @@ import NavLink from 'styles/NavLink';
 // assets
 import logo from 'assets/logo.svg';
 
-// own styles
+// component styles
 const Styled = styled.header`
   height: 100px;
   text-align: center;

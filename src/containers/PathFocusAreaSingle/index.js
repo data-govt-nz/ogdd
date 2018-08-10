@@ -47,7 +47,7 @@ import AbovePlots from 'styles/AbovePlots';
 // assets
 import titleIcon from 'assets/focus-areas.svg';
 
-// own styles
+// component styles
 const NonSelectWrapper = styled.div``;
 
 // initial component state

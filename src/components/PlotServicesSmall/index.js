@@ -1,13 +1,15 @@
 /**
-  * Description
+  * Small timeseries area plot for one variable
+  * Used for 3rd services indicator, uses react-vis
   *
+  * @return {Component} Small area plot for one variable
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
 import { List } from 'immutable';
-
 import {
   FlexibleWidthXYPlot,
   XAxis,
@@ -18,41 +20,26 @@ import {
   Hint,
 } from 'react-vis';
 import { timeFormat } from 'd3-time-format';
-
+// utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
+import preparePlotData from 'utils/prepare-plot-data';
 import formatValue from 'utils/format-value';
-
+// components
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
-
+// styles
 import PlotHint from 'styles/PlotHint';
 import WrapPlot from 'styles/WrapPlot';
 
+// component styles
 const Styled = styled.div`
   padding: 0 15px 30px;
 `;
-
 const Caption = styled.div`
   text-align: center;
   padding-left: 40px;
   padding-right: 40px;
 `;
-
-const prepareData = (outcomes, { surveys }) =>
-  outcomes
-    .reduce((memo, outcome) => {
-      const survey = surveys.find((item) => quasiEquals(outcome.get('survey_id'), item.get('survey_id')));
-      // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
-      return survey
-        ? memo.concat([{
-          x: new Date(survey.get('date')).getTime(),
-          y: outcome.get('value'),
-          column: survey.get('survey_id'),
-          row: outcome.get('answer'),
-        }])
-        : memo;
-    }, [])
-;
 
 class PlotServicesSmall extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -66,23 +53,24 @@ class PlotServicesSmall extends React.PureComponent { // eslint-disable-line rea
     } = this.props;
 
     // arrange data to be consumable for AreaSeries and ScreenReaderDataTable
-    const data = prepareData(outcomes, this.props);
+    const data = preparePlotData(outcomes, surveys);
 
-    //
-    //
-    // // set hint value from highlighted survey
+    // set hint value from highlighted survey
     const hintValue = data.find((d) => quasiEquals(d.column, surveyHighlightedId));
-    //
+
     // axis ranges
     let xAxisRange = [
       new Date(surveys.first().get('date')).getTime(),
       new Date(surveys.last().get('date')).getTime(),
     ];
+
+    // the highlighted survey
     const surveyHighlighted = surveys.find((item) => quasiEquals(item.get('survey_id'), surveyHighlightedId));
     if (surveyHighlighted && xAxisRange.indexOf(new Date(surveyHighlighted.get('date')).getTime()) < 0) {
       xAxisRange = xAxisRange.concat(new Date(surveyHighlighted.get('date')).getTime());
     }
 
+    // full y range 0-100%
     const yAxisRange = [0, 100];
 
     // dummy data to force the area plot from 0 to 100%
@@ -173,11 +161,17 @@ class PlotServicesSmall extends React.PureComponent { // eslint-disable-line rea
 }
 
 PlotServicesSmall.propTypes = {
+  /** data points */
   outcomes: PropTypes.instanceOf(List).isRequired,
+  /** currently highlighted survey */
   surveyHighlightedId: PropTypes.string.isRequired,
+  /** all surveys */
   surveys: PropTypes.instanceOf(List).isRequired,
+  /** survey highlight handler */
   onHighlightSurvey: PropTypes.func.isRequired,
+  /** type of indicator */
   indicatorType: PropTypes.string.isRequired,
+  /** the global app theme */
   theme: PropTypes.object.isRequired,
 };
 

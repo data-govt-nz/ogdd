@@ -1,13 +1,14 @@
 /**
-  * Description
+  * Principal timeseries line graph for services indicators, uses react-vis
   *
+  * @return {Component} Timeseries line graph for two variables
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import { Map, List } from 'immutable';
-
 import {
   FlexibleWidthXYPlot,
   XAxis,
@@ -18,36 +19,22 @@ import {
   Hint,
 } from 'react-vis';
 import { timeFormat } from 'd3-time-format';
-
+// utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
+import preparePlotData from 'utils/prepare-plot-data';
 import formatValue from 'utils/format-value';
+// constants
 import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
+// components
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
-
 import KeyEntry from 'components/KeyEntry';
-
 import Card from 'components/Card';
+// styles
 import CardBody from 'styles/CardBody';
 import PlotHint from 'styles/PlotHint';
 import Key from 'styles/Key';
 import WrapPlot from 'styles/WrapPlot';
-
-const prepareData = (outcomes, { surveys }) =>
-  outcomes
-    .reduce((memo, outcome) => {
-      const survey = surveys.find((item) => quasiEquals(outcome.get('survey_id'), item.get('survey_id')));
-      // AreaSeries requires x and y coordinates, ScreenReaderDataTable requires column and row identifiers
-      return survey
-        ? memo.concat([{
-          x: new Date(survey.get('date')).getTime(),
-          y: outcome.get('value'),
-          column: survey.get('survey_id'),
-          row: outcome.get('answer'),
-        }])
-        : memo;
-    }, [])
-;
 
 class PlotServices extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -68,7 +55,7 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
     const data = groups
       .toList()
       .reduce((memo, group) => memo.concat({
-        data: prepareData(group, this.props),
+        data: preparePlotData(group, surveys),
         title: group.first().get('answer_text'),
         id: group.first().get('answer'),
       }), []);
@@ -212,11 +199,17 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
 }
 
 PlotServices.propTypes = {
+  /** the indicator */
   indicator: PropTypes.instanceOf(Map).isRequired,
+  /** currently highlighted survey */
   surveyHighlightedId: PropTypes.string.isRequired,
+  /** all surveys */
   surveys: PropTypes.instanceOf(List).isRequired,
+  /** survey highlight handler */
   onHighlightSurvey: PropTypes.func.isRequired,
+  /** mouse leave handler */
   onCardMouseLeave: PropTypes.func.isRequired,
+  /** global theme */
   theme: PropTypes.object.isRequired,
 };
 

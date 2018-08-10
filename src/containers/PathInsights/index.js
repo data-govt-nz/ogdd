@@ -51,7 +51,7 @@ import AbovePlots from 'styles/AbovePlots';
 import titleIcon from 'assets/key-insights.svg';
 import description from 'text/insights.md'; // loaded as HTML from markdown
 
-// own styles
+// component styles
 const FAKey = styled.div``;
 
 // initial component state
