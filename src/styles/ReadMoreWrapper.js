@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Wrapper for "read more" links
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

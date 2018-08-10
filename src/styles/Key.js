@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Basic key wrapper for plots
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

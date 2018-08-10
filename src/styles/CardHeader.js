@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Card header wrapper
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

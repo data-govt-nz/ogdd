@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Principal page title
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

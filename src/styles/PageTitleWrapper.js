@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Wrapper for PageTitle Component
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

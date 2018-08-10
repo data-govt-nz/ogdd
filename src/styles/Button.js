@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Basic unstyled button
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

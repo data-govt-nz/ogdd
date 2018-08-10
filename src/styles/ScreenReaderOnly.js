@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Present only for screenreaders
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

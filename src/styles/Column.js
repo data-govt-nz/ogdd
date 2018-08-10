@@ -1,5 +1,6 @@
 /**
-  * Description
+  * Custom column for grid
+  * Note: React component and not just a simple styled component
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

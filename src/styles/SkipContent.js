@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Skip to main content button for keyboard and screenreader support. Hidden unless focused
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

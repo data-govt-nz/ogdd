@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Header menu link
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

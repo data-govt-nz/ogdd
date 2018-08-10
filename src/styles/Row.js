@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Customised row for grid
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

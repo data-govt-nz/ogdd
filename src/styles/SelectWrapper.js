@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Wrapper for plot select options
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

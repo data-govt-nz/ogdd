@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Page container to wrap page content
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */

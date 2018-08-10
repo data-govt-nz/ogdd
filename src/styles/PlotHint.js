@@ -1,5 +1,5 @@
 /**
-  * Description
+  * Plot hint for displaying chart values
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
