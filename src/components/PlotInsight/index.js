@@ -1,10 +1,3 @@
-/**
-  * Key insight component shoing key insight and associated indicator as stacked bar
-  * highlights relevant answers
-  *
-  * @return {Component} Key insight component
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -21,6 +14,10 @@ import KeyEntry from 'components/KeyEntry';
 import Card from 'components/Card';
 // styles
 import CardBody from 'styles/CardBody';
+
+// component utils
+import hasOutline from './has-outline';
+import getColorValue from './get-color-value';
 
 // component styles
 const InsightValue = styled.div`
@@ -69,30 +66,12 @@ const OutcomeBar = styled.div`
 const IndicatorOutcomes = styled.div``;
 
 /**
-  * 'not stated' answers should have outline
-  * @param {string} answer value of answer_text
-  * @return {boolean} has outline
+  * Key insight component shoing key insight and associated indicator as stacked bar
+  * highlights relevant answers
+  *
+  * @return {Component} Key insight component
+  * @author [tmfrnz](https://github.com/tmfrnz)
   */
-const hasOutline = (answer) => answer === ANSWERS[6]; // not stated
-/**
-  * get color value for answer and focus area
-  * yes: full color
-  * other: as specified in theme
-  * @param {string} answer value of answer_text
-  * @param {string} focusAreaID focus area indicator id
-  * @param {object} theme global theme
-  * @return {string} color value
-  */
-const getColorValue = (answer, focusAreaID, theme) => {
-  if (answer === ANSWERS[0]) { // yes
-    return theme.colors[focusAreaID];
-  }
-  if (typeof theme.colors[answer] === 'string') {
-    return theme.colors[answer];
-  }
-  return theme.colors[answer][focusAreaID];
-};
-
 class PlotInsight extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     const { insight, focusArea, theme, agenciesTotal } = this.props;

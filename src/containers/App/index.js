@@ -1,11 +1,3 @@
-/**
-  * Principal App component
-  * - wraps path dependent container components
-  * - notifies screenreader about navigation events
-  *
-  * @return {Component} react base component
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -39,6 +31,14 @@ const Main = styled.main`
   }
 `;
 
+/**
+  * Principal App component
+  * - wraps path dependent container components
+  * - notifies screenreader about navigation events
+  *
+  * @return {Component} react base component
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class App extends React.Component {
   /**
     * Component constructor, sets initial state,

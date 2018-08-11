@@ -1,9 +1,3 @@
-/**
-  * The 'key insights' component.
-  * Shows description and key insights, including associated survey question indicators
-  *
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -59,6 +53,12 @@ const INITIAL_STATE = {
   showModal: false, // show/hide modal
 };
 
+/**
+  * The 'key insights' component.
+  * Shows description and key insights, including associated survey question indicators
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class PathInsights extends React.Component { // eslint-disable-line react/prefer-stateless-function
   /**
     * Component constructor, sets initial state

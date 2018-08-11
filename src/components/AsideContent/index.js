@@ -1,11 +1,3 @@
-/**
-  * Sidebar content. Requires a title component or string. Can optionally be passed
-  * - plain text
-  * - html (eg as parsed form markdown text)
-  * - child components
-  *
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -18,12 +10,21 @@ const Styled = styled.div`
   padding: 10px;
 `;
 
-/* eslint-disable react/no-danger */
+/**
+  * Sidebar content. Requires a title component or string. Can optionally be passed
+  * - plain text
+  * - html (eg as parsed form markdown text)
+  * - child components
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const AsideContent = ({ title, html, text, children }) => (
   <Styled>
     { title }
     { html &&
+      /* eslint-disable react/no-danger */
       <div dangerouslySetInnerHTML={{ __html: setLinkTarget(html) }} />
+      /* eslint-enable react/no-danger */
     }
     { text &&
       <p>{text}</p>
@@ -31,7 +32,6 @@ const AsideContent = ({ title, html, text, children }) => (
     { children }
   </Styled>
 );
-/* eslint-enable react/no-danger */
 
 AsideContent.propTypes = {
   /** title component or text */

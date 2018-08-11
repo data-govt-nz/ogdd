@@ -1,11 +1,11 @@
+import styled from 'styled-components';
+import { Flex } from 'grid-styled';
+
 /**
   * Customised row for grid
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
-import styled from 'styled-components';
-import { Flex } from 'grid-styled';
-
 export default styled(Flex)`
   flex-wrap: wrap;
   margin: 0 -${(props) => props.theme.gutter[0]}

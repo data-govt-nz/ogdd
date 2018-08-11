@@ -1,9 +1,3 @@
-/**
-  * Card for 3rd services indicator, one plot for every indicator answer
-  *
-  * @return {Component} Small multiples card
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -20,6 +14,12 @@ import Row from 'styles/Row';
 import Column from 'styles/Column';
 import CardBody from 'styles/CardBody';
 
+/**
+  * Card for 3rd services indicator, one plot for every indicator answer
+  *
+  * @return {Component} Small multiples card
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class PlotServicesMultiples extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     const {

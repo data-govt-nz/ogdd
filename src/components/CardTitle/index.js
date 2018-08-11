@@ -1,9 +1,3 @@
-/**
-  * Card title component to display card titles with icon or icon only
-  *
-  * @return {Component} Card title
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -36,6 +30,12 @@ const Icon = styled.img`
   height: 38px;
 `;
 
+/**
+  * Card title component to display card titles with icon or icon only
+  *
+  * @return {Component} Card title
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const CardTitle = ({ iconSrc, title, altTitle }) => (
   <Styled hasTitle={title !== ''}>
     <IconCell>

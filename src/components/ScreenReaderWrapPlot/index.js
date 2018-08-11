@@ -1,9 +1,3 @@
-/**
-  * Screen reader wrapper that provides a readable fallback data table for data visualisations
-  *
-  * @return {Component} Screen reader plot wrapper component
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -19,6 +13,12 @@ const Styled = styled.figure`
   margin: 0;
 `;
 
+/**
+  * Screen reader wrapper that provides a readable fallback data table for data visualisations
+  *
+  * @return {Component} Screen reader plot wrapper component
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const ScreenReaderWrapPlot = ({
   figCaption,
   tableCaption,

@@ -1,13 +1,9 @@
-/**
-  * Custom column for grid
-  * Note: React component and not just a simple styled component
-  *
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
+// vendor
 import React from 'react';
 import { Box } from 'grid-styled';
 import styled from 'styled-components';
 
+// component styles
 const Column = styled(Box)`
   padding-top:${(props) => props.paddingtop || 0}px;
   padding-right:${(props) => props.theme.gutter[0]};
@@ -24,6 +20,12 @@ const Column = styled(Box)`
   position: relative;
 `;
 
+/**
+  * Custom column for grid
+  * Note: React component and not just a simple styled component
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 export default (props) => (
   <Column
     {...props}

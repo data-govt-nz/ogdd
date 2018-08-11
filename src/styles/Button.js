@@ -1,10 +1,10 @@
+import styled from 'styled-components';
+
 /**
   * Basic unstyled button
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
-import styled from 'styled-components';
-
 export default styled.button`
   border: none;
   margin: 0;

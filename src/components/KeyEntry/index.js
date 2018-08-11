@@ -1,12 +1,3 @@
-/**
-  * Key item component for plots - should be placed inside styles/Key
-  * A key item consists of a label and a symbol that can either be a circle (default) or a line
-  * - circles (dots) can be solid (default) or outlined
-  * - lines can be continuous (default) or dashed
-  *
-  * @return {Component} Key entry
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -61,6 +52,15 @@ const Dot = styled.div`
   };
 `;
 
+/**
+  * Key item component for plots - should be placed inside styles/Key
+  * A key item consists of a label and a symbol that can either be a circle (default) or a line
+  * - circles (dots) can be solid (default) or outlined
+  * - lines can be continuous (default) or dashed
+  *
+  * @return {Component} Key entry
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const KeyEntry = ({
   color,
   colorValue,

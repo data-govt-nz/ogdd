@@ -1,10 +1,3 @@
-/**
-  * Page title with icon as used in sidebar
-  * Requires either title as displayed or label id
-  *
-  * @return {Component} Page title with icon
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -50,6 +43,13 @@ const Icon = styled.img`
   }
 `;
 
+/**
+  * Page title with icon as used in sidebar
+  * Requires either title as displayed or label id
+  *
+  * @return {Component} Page title with icon
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const PageTitle = ({ labelId, iconSrc, title }) => (
   <Styled>
     <IconCell>

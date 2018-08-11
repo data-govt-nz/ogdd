@@ -1,9 +1,3 @@
-/**
-  * Key item component with icon - used for focus areas in insights sidebar
-  * Icons are placed inside colored dot
-  * @return {Component} Key entry with icon
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -40,6 +34,13 @@ const Icon = styled.img`
   top: 5px;
 `;
 
+/**
+  * Key item component with icon - used for focus areas in insights sidebar
+  * Icons are placed inside colored dot
+  *
+  * @return {Component} Key entry with icon
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const KeyEntryIcon = ({ color, title, iconSrc }) => (
   <Styled>
     <DotCell>

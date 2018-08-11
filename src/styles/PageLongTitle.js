@@ -1,10 +1,10 @@
+import styled from 'styled-components';
+
 /**
   * Principal page title
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
-import styled from 'styled-components';
-
 export default styled.h1`
   font-weight: normal
   font-size: ${(props) => props.theme.sizes[2]};

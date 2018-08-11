@@ -1,12 +1,14 @@
+// vendor
+import styled, { css } from 'styled-components';
+import { BREAKPOINTS } from 'containers/App/constants';
+// styles
+import Button from 'styles/Button';
+
 /**
   * Header menu link
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
-import styled, { css } from 'styled-components';
-import { BREAKPOINTS } from 'containers/App/constants';
-import Button from 'styles/Button';
-
 export default styled(Button)`
   display: inline-block;
   padding: 3px 10px;

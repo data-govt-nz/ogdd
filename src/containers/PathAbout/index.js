@@ -1,9 +1,3 @@
-/**
-  * Simple about page component for displaying markdown content
-  * Not actually a container (not connected to redux store).
-  *
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import { Helmet } from 'react-helmet';
@@ -35,6 +29,12 @@ const INITIAL_STATE = {
   showModal: false,
 };
 
+/**
+  * Simple about page component for displaying markdown content
+  * Not actually a container (not connected to redux store).
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class PathAbout extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
     * Component constructor, sets initial state

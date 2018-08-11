@@ -1,9 +1,3 @@
-/**
-  * Read more link
-  *
-  * @return {Component} Read more link
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,6 +10,12 @@ import Link from 'styles/Link';
 // component styles
 const Styled = styled(Link)``;
 
+/**
+  * Read more link
+  *
+  * @return {Component} Read more link
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const ReadMore = ({ onClick }) => (
   <Styled onClick={onClick}>
     <Label id="button.readMore" />

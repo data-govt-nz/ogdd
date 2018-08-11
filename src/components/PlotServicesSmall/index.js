@@ -1,11 +1,3 @@
-/**
-  * Small timeseries area plot for one variable
-  * Used for 3rd services indicator, uses react-vis
-  * Creates dot/mark graph if data is only present for 1 survey
-  *
-  * @return {Component} Small area plot for one variable
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -42,6 +34,14 @@ const Caption = styled.div`
   padding-right: 40px;
 `;
 
+/**
+  * Small timeseries area plot for one variable
+  * Used for 3rd services indicator, uses react-vis
+  * Creates dot/mark graph if data is only present for 1 survey
+  *
+  * @return {Component} Small area plot for one variable
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class PlotServicesSmall extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     const {

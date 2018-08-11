@@ -1,16 +1,15 @@
-/**
-  * Screen reader fallback data table for data visualisations
-  *
-  * @return {Component} Screen reader table fallback
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
-
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 // styles
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 
+/**
+  * Screen reader fallback data table for data visualisations
+  *
+  * @return {Component} Screen reader table fallback
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const ScreenReaderDataTable = ({ data, caption, rows, columns, formatDatum }) => (
   <ScreenReaderOnly>
     <table>

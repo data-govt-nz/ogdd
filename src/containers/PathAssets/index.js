@@ -1,11 +1,3 @@
-/**
-  * The 'data assets' component
-  * Shows compenet description and displays plots for assets indicators:
-  * - Data assets published in machine readable formats vs all assets
-  * - Data assets published using NZGOAL vs all assets
-  *
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -54,6 +46,14 @@ const INITIAL_STATE = {
   surveyHighlightedId: null, // highlighted survey
 };
 
+/**
+  * The 'data assets' component
+  * Shows compenet description and displays plots for assets indicators:
+  * - Data assets published in machine readable formats vs all assets
+  * - Data assets published using NZGOAL vs all assets
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class PathAssets extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
     * Component constructor, sets initial state

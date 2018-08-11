@@ -3,11 +3,11 @@ import quasiEquals from 'utils/quasi-equals';
   * Prepare data for time series plots (react-vis) and ScreenReaderDataTable
   * - react-vis requires x and y coordinates
   * - ScreenReaderDataTable requires column and row identifiers
+  *
   * @param {object} data the data
   * @param {object} surveys the different dates
   * @param {object} [rowID] row identifier
   * @return the modified HTML string
-  *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
 export default function preparePlotData(data, surveys, rowID) {

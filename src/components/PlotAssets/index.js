@@ -1,9 +1,3 @@
-/**
-  * Overview timeseries area graph for asset indicators, uses react-vis
-  *
-  * @return {Component} Timeseries area graph for primary and reference variables
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -20,10 +14,7 @@ import { timeFormat } from 'd3-time-format';
 // utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
-import preparePlotData from 'utils/prepare-plot-data';
 import formatValue from 'utils/format-value';
-// constants
-import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
 // components
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 import KeyEntry from 'components/KeyEntry';
@@ -34,33 +25,16 @@ import CardBody from 'styles/CardBody';
 import PlotHint from 'styles/PlotHint';
 import WrapPlot from 'styles/WrapPlot';
 
-/**
-  * calculate maximum y axis value based on maximum data value
-  * axis should have a relative buffer of 2+ according (relative to order of magnitude)
-  * @param {number} maximum y axis value
-  */
-const getYAxisMax = (yMax) => {
-  // order of magnitude
-  const order = Math.floor((Math.log(yMax) / Math.LN10) + 0.000000001);
-  // order of magnitude factor
-  const factor = 10 ** order;
-  // relative buffer of 2+
-  return ((2 * Math.ceil(Math.floor(yMax / factor) / 2)) + 2) * factor;
-};
+// component utils
+import prepareData from './prepare-data';
+import getYAxisMax from './get-y-axis-max';
 
 /**
-  * prepare data for plot
-  * @param {object} indicator the indicator
-  * @param {object} surveys the surveys
+  * Overview timeseries area graph for asset indicators, uses react-vis
+  *
+  * @return {Component} Timeseries area graph for primary and reference variables
+  * @author [tmfrnz](https://github.com/tmfrnz)
   */
-const prepareData = (indicator, surveys) => {
-  const outcomes = indicator
-    .get('outcomes') // we are shoing outcomes
-    .filter((outcome) => quasiEquals(outcome.get('subject_id'), DEFAULT_SUBJECT_ID));
-    // for the current subject
-  return preparePlotData(outcomes, surveys, indicator.get('indicator_id'));
-};
-
 class PlotAssets extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     const {

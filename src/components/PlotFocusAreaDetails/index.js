@@ -1,10 +1,3 @@
-/**
-  * Detailed timeseries line graph for single focus area, uses react-vis
-  * Can plot multiple timeseries and marks reference and active timeseries
-  *
-  * @return {Component} Timeseries line graph for many subjects
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -23,9 +16,9 @@ import {
 import { timeFormat } from 'd3-time-format';
 // utils
 import quasiEquals from 'utils/quasi-equals';
-import preparePlotData from 'utils/prepare-plot-data';
 import formatValue from 'utils/format-value';
 import getLabel from 'utils/get-label';
+import prepareData from 'utils/prepare-plot-data-focus-area';
 // components
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 import KeyEntry from 'components/KeyEntry';
@@ -77,19 +70,12 @@ const Dismiss = styled.div`
 `;
 
 /**
-  * prepare data for plot
-  * @param {object} subject the current subject
-  * @param {object} focusArea the current focusArea
-  * @param {object} surveys the surveys
+  * Detailed timeseries line graph for single focus area, uses react-vis
+  * Can plot multiple timeseries and marks reference and active timeseries
+  *
+  * @return {Component} Timeseries line graph for many subjects
+  * @author [tmfrnz](https://github.com/tmfrnz)
   */
-const prepareData = (subject, focusArea, surveys) => {
-  // get relevant outcomes for current subject
-  const outcomes = focusArea
-    .get('outcomes')
-    .filter((outcome) => quasiEquals(outcome.get('subject_id'), subject.get('subject_id')));
-  return preparePlotData(outcomes, surveys, subject.get('subject_id'));
-};
-
 class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
     * Component constructor, sets initial state
@@ -132,7 +118,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
     const otherData = otherSubjects && otherSubjects.reduce((memo, item) =>
       item.get('subject_id') === subjectHighlightedId
       ? memo
-      : memo.concat([prepareData(item, this.props)])
+      : memo.concat([prepareData(item, focusArea, surveys)])
     , []);
 
     const otherSubjectHighlighted = subjectHighlightedId
@@ -140,7 +126,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
       && (!referenceSubject || referenceSubject.get('subject_id') !== subjectHighlightedId)
         ? otherSubjects.find((item) => item.get('subject_id') === subjectHighlightedId)
         : null;
-    const otherDataHighlighted = otherSubjectHighlighted && prepareData(otherSubjectHighlighted, this.props);
+    const otherDataHighlighted = otherSubjectHighlighted && prepareData(otherSubjectHighlighted, focusArea, surveys);
 
     // set hint value for current subject and highlighted survey
     const hintValue =

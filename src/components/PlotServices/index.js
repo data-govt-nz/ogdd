@@ -1,10 +1,3 @@
-/**
-  * Principal timeseries line graph for services indicators, uses react-vis
-  * Creates dot/mark graph if data is only present for 1 survey
-  *
-  * @return {Component} Timeseries line graph for two variables
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -37,6 +30,13 @@ import PlotHint from 'styles/PlotHint';
 import Key from 'styles/Key';
 import WrapPlot from 'styles/WrapPlot';
 
+/**
+  * Principal timeseries line graph for services indicators, uses react-vis
+  * Creates dot/mark graph if data is only present for 1 survey
+  *
+  * @return {Component} Timeseries line graph for two variables
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class PlotServices extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     const {

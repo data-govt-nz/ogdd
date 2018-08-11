@@ -1,8 +1,3 @@
-/**
-  * The single focus area component - only available when results for multiple agencies published
-  *
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -56,6 +51,11 @@ const INITIAL_STATE = {
   surveyHighlightedId: null, // highlighted survey
 };
 
+/**
+  * The single focus area component - only available when results for multiple agencies published
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
     * Component constructor, sets initial state

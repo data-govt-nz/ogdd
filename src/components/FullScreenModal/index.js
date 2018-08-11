@@ -1,9 +1,3 @@
-/**
-  * Dismissable full screen modal - used for additional page content on small screens only
-  *
-  * @return {Component} Full screen modal
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -31,6 +25,12 @@ const Dismiss = styled.div`
   top: 0;
 `;
 
+/**
+  * Dismissable full screen modal - used for additional page content on small screens only
+  *
+  * @return {Component} Full screen modal
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const FullScreenModal = ({ dismiss, children }) => (
   <Styled>
     <PageContainer>

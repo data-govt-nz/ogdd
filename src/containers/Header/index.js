@@ -1,8 +1,3 @@
-/**
-  * The application header for showing brand and menu
-  *
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -71,6 +66,11 @@ const AboutLink = styled(NavLink)`
   }
 `;
 
+/**
+  * The application header for showing brand and menu
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const Header = ({ navItems, location, nav }) => (
   <Styled role="banner">
     <NavBar>

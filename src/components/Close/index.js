@@ -1,9 +1,3 @@
-/**
-  * Close/dismiss icon component
-  *
-  * @return {Component} Close/dismiss icon component
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -37,6 +31,12 @@ const Icon = styled.img`
   left: 11px;
 `;
 
+/**
+  * Close/dismiss icon component
+  *
+  * @return {Component} Close/dismiss icon component
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const Close = ({ altTitle, onClick }) => (
   <Styled onClick={onClick}>
     <Icon alt={altTitle} src={iconSrc} />

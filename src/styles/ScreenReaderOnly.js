@@ -1,10 +1,10 @@
+import styled from 'styled-components';
+
 /**
   * Present only for screenreaders
   *
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
-import styled from 'styled-components';
-
 export default styled.span`
   position: absolute;
   height: 1px;

@@ -1,12 +1,4 @@
-/**
-  * Format number with thousand separator ','
-  * @param {number|string} x a number
-  * @return {string} a number with thousand separator
-  *
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
-const numberWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
+import numberSeparated from './number-separated';
 /**
   * Format values according to type e.g. for display in axis and graph labels
   *
@@ -25,10 +17,10 @@ export default function formatValue(value, type, inThousands = false) {
     case 'absolute' :
       if (inThousands) {
         // value in thousands
-        return value === 0 ? value : `${numberWithCommas(Math.round(value / 1000))}k`;
+        return value === 0 ? value : `${numberSeparated(Math.round(value / 1000))}k`;
       }
       // value with thousands separator
-      return numberWithCommas(value);
+      return numberSeparated(value);
     default:
       return value;
   }

@@ -1,12 +1,3 @@
-/**
-  * Overview timeseries area or line graph for single focus area, uses react-vis
-  * When a refernce subject is present, subject plotted as line and reference is plotted as area
-  * Otherwise single subject plotted as area
-  * Card is either clickable or 'hoverable' depending on number of subjects
-  *
-  * @return {Component} Mixed timeseries graph for one or two subjects
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -26,8 +17,8 @@ import { timeFormat } from 'd3-time-format';
 // utils
 import getLabel from 'utils/get-label';
 import quasiEquals from 'utils/quasi-equals';
-import preparePlotData from 'utils/prepare-plot-data';
 import formatValue from 'utils/format-value';
+import prepareData from 'utils/prepare-plot-data-focus-area';
 // components
 import CardTitle from 'components/CardTitle';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
@@ -49,20 +40,16 @@ const ReferenceHint = styled.div`
   color: ${(props) => props.theme.colors.referenceLabel}
   font-size: ${(props) => props.theme.sizes[0]}
 `;
-/**
-  * prepare data for plot
-  * @param {object} subject the current subject
-  * @param {object} focusArea the current focusArea
-  * @param {object} surveys the surveys
-  */
-const prepareData = (subject, focusArea, surveys) => {
-  const outcomes = focusArea
-    .get('outcomes') // we are showing outcomes
-    .filter((outcome) => quasiEquals(outcome.get('subject_id'), subject.get('subject_id')));
-    // for the current subject
-  return preparePlotData(outcomes, surveys, subject.get('subject_id'));
-};
 
+/**
+  * Overview timeseries area or line graph for single focus area, uses react-vis
+  * When a refernce subject is present, subject plotted as line and reference is plotted as area
+  * Otherwise single subject plotted as area
+  * Card is either clickable or 'hoverable' depending on number of subjects
+  *
+  * @return {Component} Mixed timeseries graph for one or two subjects
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
     * Component constructor, sets initial state

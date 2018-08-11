@@ -1,10 +1,3 @@
-/**
-  * 'All focus areas' overview component
-  * Shows focus area details on hover when only 1 subject (all of governemnt present) -
-  * otherwise allows selecting focus area for detailed view
-  *
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -74,6 +67,13 @@ const INITIAL_STATE = {
   surveyHighlightedId: null, // highlighted survey
 };
 
+/**
+  * 'All focus areas' overview component
+  * Shows focus area details on hover when only 1 subject (all of governemnt present) -
+  * otherwise allows selecting focus area for detailed view
+  *
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
     * Component constructor, sets initial state

@@ -1,9 +1,3 @@
-/**
-  * Displays survey information (used for sidebar)
-  *
-  * @return {Component} Survey Information component
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -33,6 +27,12 @@ const CurrentSurveyInfo = styled.div``;
 const AboutLinkWrapper = styled.div``;
 const AboutLink = styled(Link)``;
 
+/**
+  * Displays survey information (used for sidebar)
+  *
+  * @return {Component} Survey Information component
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 const SurveyInformation = ({ surveys, surveySelectedId, nav }) => {
   const firstSurvey = surveys && surveys.first();
   const lastSurvey = surveys && surveys.last();

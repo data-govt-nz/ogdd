@@ -1,13 +1,3 @@
-/**
-  * The 'data services' component.
-  * Shows description and displays plots for services indicators:
-  * - How are assets published?
-  * - Is API open standards based?
-  * - What API services are used?
-  *
-  * @return {Component} Data services component
-  * @author [tmfrnz](https://github.com/tmfrnz)
-  */
 // vendor
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -58,6 +48,16 @@ const INITIAL_STATE = {
   surveyHighlightedId: null, // highlighted survey
 };
 
+/**
+  * The 'data services' component.
+  * Shows description and displays plots for services indicators:
+  * - How are assets published?
+  * - Is API open standards based?
+  * - What API services are used?
+  *
+  * @return {Component} Data services component
+  * @author [tmfrnz](https://github.com/tmfrnz)
+  */
 class PathServices extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
     * Component constructor, sets initial state
