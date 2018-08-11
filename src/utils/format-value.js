@@ -7,7 +7,7 @@ import numberSeparated from './number-separated';
   * @param {bool} [inThousands=false] if value should be shortened to thousands, appending 'k'
   * @return {string} formatted number
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default function formatValue(value, type, inThousands = false) {
   switch (type) {

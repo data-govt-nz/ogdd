@@ -39,7 +39,7 @@ const Icon = styled.img`
   * Icons are placed inside colored dot
   *
   * @return {Component} Key entry with icon
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const KeyEntryIcon = ({ color, title, iconSrc }) => (
   <Styled>

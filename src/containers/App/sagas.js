@@ -1,7 +1,7 @@
 /**
   * Application sagas to trigger side effects in repsonse to actions
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  * @ignore
   */
 // vendor
 import { call, takeEvery, select, put } from 'redux-saga/effects';

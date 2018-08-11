@@ -19,7 +19,7 @@ const Select = styled.select`
   * Wrapper for plot select options
   *
   * @return {Component} Select Wrapper component
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const SelectWrapper = ({ labelID, value, options, onChange, valueKey, formatOption }) => (
   <Styled>

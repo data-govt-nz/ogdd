@@ -74,7 +74,7 @@ const Dismiss = styled.div`
   * Can plot multiple timeseries and marks reference and active timeseries
   *
   * @return {Component} Timeseries line graph for many subjects
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**

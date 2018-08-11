@@ -70,7 +70,7 @@ const IndicatorOutcomes = styled.div``;
   * highlights relevant answers
   *
   * @return {Component} Key insight component
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class PlotInsight extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {

@@ -1,7 +1,7 @@
 /**
   * Set up the application store
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  * @ignore
   */
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';

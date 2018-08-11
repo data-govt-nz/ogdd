@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 /**
+  * @component
   * Basic unstyled button
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled.button`
   border: none;

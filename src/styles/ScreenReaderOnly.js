@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 /**
+  * @component
   * Present only for screenreaders
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled.span`
   position: absolute;

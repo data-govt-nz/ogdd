@@ -6,8 +6,8 @@
   * - indicators
   * - indicator icons
   * - theme
+  * @ignore
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
   */
 import iconFA1 from 'assets/fa1.svg';
 import iconFA2 from 'assets/fa2.svg';

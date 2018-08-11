@@ -29,7 +29,7 @@ const Dismiss = styled.div`
   * Dismissable full screen modal - used for additional page content on small screens only
   *
   * @return {Component} Full screen modal
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const FullScreenModal = ({ dismiss, children }) => (
   <Styled>

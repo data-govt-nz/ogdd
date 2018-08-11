@@ -44,7 +44,7 @@ const Link = styled(NavLink)``;
 /**
   * The main header menu for navigating between principal application components
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const Menu = ({ nav, navItems, location, visibleMin, hiddenMin }) => (
   <Styled role="menu" visibleMin={visibleMin} hiddenMin={hiddenMin}>

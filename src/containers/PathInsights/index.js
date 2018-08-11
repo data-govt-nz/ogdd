@@ -57,7 +57,7 @@ const INITIAL_STATE = {
   * The 'key insights' component.
   * Shows description and key insights, including associated survey question indicators
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class PathInsights extends React.Component { // eslint-disable-line react/prefer-stateless-function
   /**

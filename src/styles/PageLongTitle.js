@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 /**
+  * @component
   * Principal page title
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled.h1`
   font-weight: normal

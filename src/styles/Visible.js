@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 /**
+  * @component
   * Only visible when viewport wider than given breakpoint as defined in theme
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled.span`
   display: none;

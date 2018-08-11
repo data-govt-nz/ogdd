@@ -1,7 +1,7 @@
 /**
   * Application actions
+  * @ignore
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
   */
 import {
   LOCATION_UPDATE,

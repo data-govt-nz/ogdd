@@ -35,7 +35,7 @@ const Icon = styled.img`
   * Close/dismiss icon component
   *
   * @return {Component} Close/dismiss icon component
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const Close = ({ altTitle, onClick }) => (
   <Styled onClick={onClick}>

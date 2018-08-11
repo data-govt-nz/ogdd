@@ -1,7 +1,7 @@
 /**
   * Kick off the React application
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  * @ignore
   */
 
 /* eslint-disable import/no-extraneous-dependencies */
@@ -60,10 +60,10 @@ const pathComponentMap = {
 };
 
 /**
- * Render React application and attach to 'root' element
- * Also records current location in store
- * @param {object} Component main react component
- */
+  * Render React application and attach to 'root' element.
+  * Also records current location in store
+  * @param {Component} Component main react component
+  */
 const render = (Component) => {
   // remember current hash location in store
   store.dispatch(updateLocation({
