@@ -32,10 +32,10 @@ import SurveyInformation from 'containers/SurveyInformation';
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
 import ReadMore from 'components/ReadMore';
-import FSModal from 'components/FSModal';
+import FullScreenModal from 'components/FullScreenModal';
 import AsideContent from 'components/AsideContent';
 import PlotInsight from 'components/PlotInsight';
-import FAKeyEntry from 'components/FAKeyEntry';
+import KeyEntryIcon from 'components/KeyEntryIcon';
 import SelectWrapper from 'components/SelectWrapper';
 // simple styles (styled components)
 import Row from 'styles/Row';
@@ -52,7 +52,7 @@ import titleIcon from 'assets/key-insights.svg';
 import description from 'text/insights.md'; // loaded as HTML from markdown
 
 // component styles
-const FAKey = styled.div``;
+const KeyIcons = styled.div``;
 
 // initial component state
 const INITIAL_STATE = {
@@ -78,7 +78,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
   /**
     * 'Modal dismiss' button handler - hides modal
     */
-  onFSModalDismiss() {
+  onModalDismiss() {
     this.setState({
       showModal: false,
     });
@@ -111,10 +111,10 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
         title={this.renderPageTitle()}
         html={description}
       >
-        <FAKey role="presentation">
+        <KeyIcons role="presentation">
           {
             focusAreas && focusAreas.map((fa) => (
-              <FAKeyEntry
+              <KeyEntryIcon
                 key={fa.get('indicator_id')}
                 title={fa.get('title')}
                 color={fa.get('indicator_id')}
@@ -122,7 +122,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
               />
             ))
           }
-        </FAKey>
+        </KeyIcons>
         { surveyID &&
           <SurveyInformation surveySelectedId={surveyID} />
         }
@@ -175,9 +175,9 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
           </PageTitleWrapper>
         </Hidden>
         { this.state.showModal &&
-          <FSModal dismiss={() => this.onFSModalDismiss()}>
+          <FullScreenModal dismiss={() => this.onModalDismiss()}>
             { this.renderAsideContent(relevantFocusAreas, surveyID) }
-          </FSModal>
+          </FullScreenModal>
         }
         <PageLongTitle id="pageTitle">
           <Label id="component.insights.longTitle" />

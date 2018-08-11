@@ -26,7 +26,7 @@ import { ASSETS_INDICATOR_ID_MAP } from 'containers/App/constants';
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
 import ReadMore from 'components/ReadMore';
-import FSModal from 'components/FSModal';
+import FullScreenModal from 'components/FullScreenModal';
 import AsideContent from 'components/AsideContent';
 import PlotAssets from 'components/PlotAssets';
 // simple styles (styled components)
@@ -73,7 +73,7 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
   /**
     * 'Modal dismiss' button handler - hides modal
     */
-  onFSModalDismiss() {
+  onModalDismiss() {
     this.setState({
       showModal: false,
     });
@@ -151,9 +151,9 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
           </PageTitleWrapper>
         </Hidden>
         { this.state.showModal &&
-          <FSModal dismiss={() => this.onFSModalDismiss()}>
+          <FullScreenModal dismiss={() => this.onModalDismiss()}>
             { this.renderAsideContent() }
-          </FSModal>
+          </FullScreenModal>
         }
         <PageLongTitle id="pageTitle">
           <Label id="component.assets.longTitle" />

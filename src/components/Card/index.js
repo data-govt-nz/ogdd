@@ -1,13 +1,17 @@
 /**
-  * Description
+  * Card component - renders as button if onClick handler present or hoverable div
   *
+  * @return {Component} Card
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+// styles
 import Button from 'styles/Button';
 
+// component styles
 const Styled = styled(Button)`
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   margin: 5px 5px 25px;
@@ -21,7 +25,6 @@ const Styled = styled(Button)`
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.6);
   }
 `;
-
 const StyledDiv = Styled.withComponent('div').extend`
   cursor: auto;
 `;
@@ -51,11 +54,17 @@ const Card = ({ onMouseEnter, onMouseLeave, onTouchStart, onClick, children, tit
 ;
 
 Card.propTypes = {
+  /** mouse enter handler */
   onMouseEnter: PropTypes.func,
+  /** mouse leave handler */
   onMouseLeave: PropTypes.func,
+  /** touch handler */
   onTouchStart: PropTypes.func,
+  /** click handler */
   onClick: PropTypes.func,
+  /** button title */
   title: PropTypes.string,
+  /** card content */
   children: PropTypes.node.isRequired,
 };
 

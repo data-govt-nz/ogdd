@@ -1,14 +1,18 @@
 /**
-  * Description
+  * Page title with icon as used in sidebar
+  * Requires either title as displayed or label id
   *
+  * @return {Component} Page title with icon
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+// components
 import Label from 'components/Label';
 
+// component styles
 const Styled = styled.div`
   display: table;
   table-layout: fixed;
@@ -16,7 +20,6 @@ const Styled = styled.div`
   line-height: 20px;
   height: 40px;
 `;
-
 const Cell = styled.div`
   display: table-cell;
   vertical-align: top;
@@ -28,7 +31,6 @@ const Cell = styled.div`
     padding-top: 8px;
   }
 `;
-
 const IconCell = styled.div`
   display: table-cell;
   vertical-align: top;
@@ -37,7 +39,6 @@ const IconCell = styled.div`
     width: 42px;
   }
 `;
-
 const Icon = styled.img`
   position: relative;
   left: 0;
@@ -55,7 +56,9 @@ const PageTitle = ({ labelId, iconSrc, title }) => (
       <Icon alt="" src={iconSrc} role="presentation" />
     </IconCell>
     <Cell>
-      { title }
+      { title &&
+        <span>{title}</span>
+      }
       { labelId &&
         <Label id={labelId} />
       }
@@ -64,13 +67,12 @@ const PageTitle = ({ labelId, iconSrc, title }) => (
 );
 
 PageTitle.propTypes = {
+  /** title as displayed */
   title: PropTypes.string,
+  /** title by label id */
   labelId: PropTypes.string,
+  /** icon source */
   iconSrc: PropTypes.string,
-};
-
-PageTitle.defaultProps = {
-  title: '',
 };
 
 export default PageTitle;

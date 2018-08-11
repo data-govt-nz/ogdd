@@ -1,17 +1,17 @@
 /**
-  * Description
+  * Dismissable full screen modal - used for additional page content on small screens only
   *
+  * @return {Component} Full screen modal
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 // utils
 import getLabel from 'utils/get-label';
-
+// components
 import Close from 'components/Close';
-
 // simple styles
 import PageContainer from 'styles/PageContainer';
 
@@ -25,14 +25,13 @@ const Styled = styled.div`
   background-color: #fff;
   z-index: 99999;
 `;
-
 const Dismiss = styled.div`
   position: absolute;
   right: 0;
   top: 0;
 `;
 
-const FSModal = ({ dismiss, children }) => (
+const FullScreenModal = ({ dismiss, children }) => (
   <Styled>
     <PageContainer>
       <Dismiss>
@@ -46,9 +45,11 @@ const FSModal = ({ dismiss, children }) => (
   </Styled>
 );
 
-FSModal.propTypes = {
+FullScreenModal.propTypes = {
+  /** dismiss handler */
   dismiss: PropTypes.func.isRequired,
+  /** modal content */
   children: PropTypes.node.isRequired,
 };
 
-export default FSModal;
+export default FullScreenModal;

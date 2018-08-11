@@ -1,5 +1,6 @@
 /**
   * Principal timeseries line graph for services indicators, uses react-vis
+  * Creates dot/mark graph if data is only present for 1 survey
   *
   * @return {Component} Timeseries line graph for two variables
   * @author [tmfrnz](https://github.com/tmfrnz)

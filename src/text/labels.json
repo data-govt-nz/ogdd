@@ -2,6 +2,7 @@
   "app.title": "Open Data Maturity Dashboard",
   "button.readMore": "Read more",
   "answers.not_stated": "Not stated",
+  "labelNotFound": "Error: label undefined",
   "component.about.nav": "About",
   "component.about.title": "About",
   "component.about.metaDescription": "About page",

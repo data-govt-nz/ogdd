@@ -29,7 +29,7 @@ import SurveyInformation from 'containers/SurveyInformation';
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
 import ReadMore from 'components/ReadMore';
-import FSModal from 'components/FSModal';
+import FullScreenModal from 'components/FullScreenModal';
 import AsideContent from 'components/AsideContent';
 import PlotServices from 'components/PlotServices';
 import PlotServicesMultiples from 'components/PlotServicesMultiples';
@@ -77,7 +77,7 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
   /**
     * 'Modal dismiss' button handler - hides modal
     */
-  onFSModalDismiss() {
+  onModalDismiss() {
     this.setState({ showModal: false });
   }
   /**
@@ -155,9 +155,9 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
           </PageTitleWrapper>
         </Hidden>
         { this.state.showModal &&
-          <FSModal dismiss={() => this.onFSModalDismiss()}>
+          <FullScreenModal dismiss={() => this.onModalDismiss()}>
             { this.renderAsideContent() }
-          </FSModal>
+          </FullScreenModal>
         }
         <PageLongTitle id="pageTitle">
           <Label id="component.services.longTitle" />

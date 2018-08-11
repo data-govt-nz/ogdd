@@ -33,7 +33,7 @@ import {
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
 import ReadMore from 'components/ReadMore';
-import FSModal from 'components/FSModal';
+import FullScreenModal from 'components/FullScreenModal';
 import AsideContent from 'components/AsideContent';
 import PlotFocusArea from 'components/PlotFocusArea';
 import SelectWrapper from 'components/SelectWrapper';
@@ -93,7 +93,7 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
   /**
     * 'Modal dismiss' button handler - hides modal
     */
-  onFSModalDismiss() {
+  onModalDismiss() {
     this.setState({
       focusAreaSelected: null,
       showModal: false,
@@ -223,9 +223,9 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
           </PageTitleWrapper>
         </Hidden>
         { this.state.showModal &&
-          <FSModal dismiss={() => this.onFSModalDismiss()}>
+          <FullScreenModal dismiss={() => this.onModalDismiss()}>
             { this.renderAsideContent() }
-          </FSModal>
+          </FullScreenModal>
         }
         <PageLongTitle id="pageTitle">
           <Label id="component.focus-areas.longTitle" />

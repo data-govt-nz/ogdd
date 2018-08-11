@@ -1,16 +1,19 @@
 /**
-  * Description
+  * Close/dismiss icon component
   *
+  * @return {Component} Close/dismiss icon component
   * @author [tmfrnz](https://github.com/tmfrnz)
   */
+// vendor
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+// styles
 import Button from 'styles/Button';
-
+// assets
 import iconSrc from 'assets/close.svg';
 
+// component styles
 const Styled = styled(Button)`
   height: 40px
   width: 40px;
@@ -26,11 +29,6 @@ const Styled = styled(Button)`
     background-color: ${(props) => props.theme.colors.dark};
   }
 `;
-
-// @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-//   height: 60px
-//   width: 60px;
-// }
 const Icon = styled.img`
   height: 18px;
   width: 18px;
@@ -38,12 +36,6 @@ const Icon = styled.img`
   top: 11px;
   left: 11px;
 `;
-// @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-//   height: 26px;
-//   width: 26px;
-//   top: 17px;
-//   left: 17px;
-// }
 
 const Close = ({ altTitle, onClick }) => (
   <Styled onClick={onClick}>
@@ -52,7 +44,9 @@ const Close = ({ altTitle, onClick }) => (
 );
 
 Close.propTypes = {
+  /** the alt attribute */
   altTitle: PropTypes.string,
+  /** on click handler */
   onClick: PropTypes.func.isRequired,
 };
 
