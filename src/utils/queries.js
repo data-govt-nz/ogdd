@@ -1,7 +1,7 @@
 /**
   * A collection of helper functions for dealing with hash path and query objects and strings
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 import reduce from 'lodash/reduce';
 import find from 'lodash/find';

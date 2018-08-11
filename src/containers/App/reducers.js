@@ -1,7 +1,7 @@
 /**
   * Application reducers to update application store in repsonse to actions
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  * @ignore
   */
 // vendor
 import { combineReducers } from 'redux-immutable';

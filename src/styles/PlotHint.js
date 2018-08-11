@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
 
 /**
+  * @component
   * Plot hint for displaying chart values
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled.div`
   ${(props) => props.secondary

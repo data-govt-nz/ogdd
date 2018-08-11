@@ -48,7 +48,7 @@ const ReferenceHint = styled.div`
   * Card is either clickable or 'hoverable' depending on number of subjects
   *
   * @return {Component} Mixed timeseries graph for one or two subjects
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**

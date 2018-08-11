@@ -33,7 +33,7 @@ import getYAxisMax from './get-y-axis-max';
   * Overview timeseries area graph for asset indicators, uses react-vis
   *
   * @return {Component} Timeseries area graph for primary and reference variables
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class PlotAssets extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {

@@ -40,7 +40,7 @@ const Caption = styled.div`
   * Creates dot/mark graph if data is only present for 1 survey
   *
   * @return {Component} Small area plot for one variable
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class PlotServicesSmall extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {

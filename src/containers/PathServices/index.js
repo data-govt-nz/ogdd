@@ -56,7 +56,7 @@ const INITIAL_STATE = {
   * - What API services are used?
   *
   * @return {Component} Data services component
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class PathServices extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**

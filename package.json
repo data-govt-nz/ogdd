@@ -1,37 +1,26 @@
 {
   "name": "ogdd",
   "version": "0.0.1",
-  "description": "",
+  "description": "Web application for displaying results from New Zealands Open Data Maturity Surveys",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server -d",
     "build": "cross-env NODE_ENV=production webpack -p",
-    "test": "jest",
-    "stats": "cross-env NODE_ENV=production webpack -p --profile --json > stats.json"
+    "stats": "cross-env NODE_ENV=production webpack -p --profile --json > stats.json",
+    "doc-index": "mkdir -p docs && ./node_modules/.bin/documentation build src/index.js -f md -o docs/index.md --markdown-toc false",
+    "doc-store": "mkdir -p docs && ./node_modules/.bin/documentation build src/store.js -f md -o docs/store.md --markdown-toc false",
+    "doc-utils": "mkdir -p docs && ./node_modules/.bin/documentation build src/utils/* -f md -o docs/utils.md --markdown-toc false",
+    "doc-actions": "mkdir -p docs && ./node_modules/.bin/documentation build src/containers/App/actions.js -f md -o docs/App_actions.md --markdown-toc false",
+    "doc-reducers": "mkdir -p docs && ./node_modules/.bin/documentation build src/containers/App/reducers.js -f md -o docs/App_reducers.md --markdown-toc false",
+    "doc-selectors": "mkdir -p docs && ./node_modules/.bin/documentation build src/containers/App/selectors.js -f md -o docs/App_selectors.md --markdown-toc false",
+    "doc-sagas": "mkdir -p docs && ./node_modules/.bin/documentation build src/containers/App/sagas.js -f md -o docs/App_sagas.md --markdown-toc false",
+    "doc-all": "mkdir -p docs && npm run doc-index && npm run doc-store && npm run doc-utils && npm run doc-actions && npm run doc-reducers && npm run doc-selectors && npm run doc-sagas",
+    "styleguide": "./node_modules/.bin/styleguidist build",
+    "doc": "npm run doc-all && npm run styleguide && rm -rf docs"
   },
   "keywords": [],
-  "author": "",
+  "author": "Timo Franz, Unfold Data",
   "license": "ISC",
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "setupFiles": [
-      "<rootDir>/src/tests/setup.js"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|styl|less|sass|scss)$": "identity-obj-proxy"
-    },
-    "transform": {
-      "^.+\\.js$": "babel-jest",
-      "^.+\\.jsx$": "babel-jest",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/tests/__mock__/fileTransformer.js"
-    }
-  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
@@ -46,6 +35,7 @@
     "babel-preset-react": "^6.24.1",
     "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
+    "documentation": "^8.1.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^3.19.0",
@@ -58,13 +48,12 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^2.30.1",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^22.4.4",
-    "jest-babel": "^1.0.1",
     "lodash-webpack-plugin": "^0.11.5",
     "markdown-loader": "^3.0.0",
     "marked": "^0.4.0",
     "node-sass": "^4.9.0",
     "react-hot-loader": "^3.0.0-beta.6",
+    "react-styleguidist": "^7.2.1",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.18.2",
     "url-loader": "^1.0.1",

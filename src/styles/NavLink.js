@@ -5,9 +5,10 @@ import { BREAKPOINTS } from 'containers/App/constants';
 import Button from 'styles/Button';
 
 /**
+  * @component
   * Header menu link
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled(Button)`
   display: inline-block;

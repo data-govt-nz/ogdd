@@ -14,7 +14,7 @@ const Styled = styled(Link)``;
   * Read more link
   *
   * @return {Component} Read more link
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const ReadMore = ({ onClick }) => (
   <Styled onClick={onClick}>

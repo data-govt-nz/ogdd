@@ -13,7 +13,7 @@ import PageContainer from 'styles/PageContainer';
   * Simple path not found component.
   * Not actually a container (not connected to redux store).
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class PathNotFound extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {

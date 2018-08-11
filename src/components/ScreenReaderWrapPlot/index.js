@@ -17,7 +17,7 @@ const Styled = styled.figure`
   * Screen reader wrapper that provides a readable fallback data table for data visualisations
   *
   * @return {Component} Screen reader plot wrapper component
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const ScreenReaderWrapPlot = ({
   figCaption,

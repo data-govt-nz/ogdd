@@ -37,7 +37,7 @@ const Main = styled.main`
   * - notifies screenreader about navigation events
   *
   * @return {Component} react base component
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class App extends React.Component {
   /**

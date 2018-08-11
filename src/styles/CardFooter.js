@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 /**
+  * @component
   * Card footer wrapper
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled.div``;

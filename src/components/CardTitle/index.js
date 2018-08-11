@@ -34,7 +34,7 @@ const Icon = styled.img`
   * Card title component to display card titles with icon or icon only
   *
   * @return {Component} Card title
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const CardTitle = ({ iconSrc, title, altTitle }) => (
   <Styled hasTitle={title !== ''}>

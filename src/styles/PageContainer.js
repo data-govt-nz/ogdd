@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 /**
+  * @component
   * Page container to wrap page content
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled.div`
   max-width: 1000px;

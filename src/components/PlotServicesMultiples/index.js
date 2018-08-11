@@ -18,7 +18,7 @@ import CardBody from 'styles/CardBody';
   * Card for 3rd services indicator, one plot for every indicator answer
   *
   * @return {Component} Small multiples card
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class PlotServicesMultiples extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {

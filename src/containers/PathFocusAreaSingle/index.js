@@ -54,7 +54,7 @@ const INITIAL_STATE = {
 /**
   * The single focus area component - only available when results for multiple agencies published
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**

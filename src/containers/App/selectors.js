@@ -1,7 +1,7 @@
 /**
   * Application store selectors
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  * @ignore
   */
 // vendor
 import { createSelector } from 'reselect';

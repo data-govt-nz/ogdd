@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 /**
+  * @component
   * Card header wrapper
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled.div`
   position: relative;

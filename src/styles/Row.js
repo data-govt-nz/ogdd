@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 
 /**
+  * @component
   * Customised row for grid
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled(Flex)`
   flex-wrap: wrap;

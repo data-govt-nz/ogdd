@@ -69,7 +69,7 @@ const AboutLink = styled(NavLink)`
 /**
   * The application header for showing brand and menu
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const Header = ({ navItems, location, nav }) => (
   <Styled role="banner">

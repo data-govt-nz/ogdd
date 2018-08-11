@@ -16,7 +16,7 @@ const Styled = styled.div`
   * - html (eg as parsed form markdown text)
   * - child components
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const AsideContent = ({ title, html, text, children }) => (
   <Styled>

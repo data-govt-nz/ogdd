@@ -48,7 +48,7 @@ const Icon = styled.img`
   * Requires either title as displayed or label id
   *
   * @return {Component} Page title with icon
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const PageTitle = ({ labelId, iconSrc, title }) => (
   <Styled>

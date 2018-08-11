@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import Button from 'styles/Button';
 
 /**
+  * @component
   * Skip to main content button for keyboard and screenreader support. Hidden unless focused
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled(Button)`
   position: absolute;

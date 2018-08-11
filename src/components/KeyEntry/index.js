@@ -59,7 +59,7 @@ const Dot = styled.div`
   * - lines can be continuous (default) or dashed
   *
   * @return {Component} Key entry
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 const KeyEntry = ({
   color,

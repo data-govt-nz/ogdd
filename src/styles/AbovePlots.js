@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 /**
+  * @component
   * Wrapper for items displayed above plots, e.g. plot options
   *
-  * @author [tmfrnz](https://github.com/tmfrnz)
+  *
   */
 export default styled.div`
   min-height: 40px;
