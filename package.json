@@ -1,25 +1,26 @@
 {
-  "name": "ogdd",
+  "name": "OpenGovernmentDataDashboard",
   "version": "0.0.1",
-  "description": "",
+  "description": "Web application for displaying results from New Zealands Open Data Maturity Surveys",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server -d",
     "build": "cross-env NODE_ENV=production webpack -p",
     "test": "jest",
     "stats": "cross-env NODE_ENV=production webpack -p --profile --json > stats.json",
-    "doc-index": "./node_modules/.bin/documentation build src/index.js -f md -o docs/index.md --markdown-toc false",
-    "doc-store": "./node_modules/.bin/documentation build src/store.js -f md -o docs/store.md --markdown-toc false",
-    "doc-utils": "./node_modules/.bin/documentation build src/utils/* -f md -o docs/utils.md --markdown-toc false",
-    "doc-actions": "./node_modules/.bin/documentation build src/containers/App/actions.js -f md -o docs/App_actions.md --markdown-toc false",
-    "doc-reducers": "./node_modules/.bin/documentation build src/containers/App/reducers.js -f md -o docs/App_reducers.md --markdown-toc false",
-    "doc-selectors": "./node_modules/.bin/documentation build src/containers/App/selectors.js -f md -o docs/App_selectors.md --markdown-toc false",
-    "doc-sagas": "./node_modules/.bin/documentation build src/containers/App/sagas.js -f md -o docs/App_sagas.md --markdown-toc false",
+    "doc-index": "mkdir -p docs && ./node_modules/.bin/documentation build src/index.js -f md -o docs/index.md --markdown-toc false",
+    "doc-store": "mkdir -p docs && ./node_modules/.bin/documentation build src/store.js -f md -o docs/store.md --markdown-toc false",
+    "doc-utils": "mkdir -p docs && ./node_modules/.bin/documentation build src/utils/* -f md -o docs/utils.md --markdown-toc false",
+    "doc-actions": "mkdir -p docs && ./node_modules/.bin/documentation build src/containers/App/actions.js -f md -o docs/App_actions.md --markdown-toc false",
+    "doc-reducers": "mkdir -p docs && ./node_modules/.bin/documentation build src/containers/App/reducers.js -f md -o docs/App_reducers.md --markdown-toc false",
+    "doc-selectors": "mkdir -p docs && ./node_modules/.bin/documentation build src/containers/App/selectors.js -f md -o docs/App_selectors.md --markdown-toc false",
+    "doc-sagas": "mkdir -p docs && ./node_modules/.bin/documentation build src/containers/App/sagas.js -f md -o docs/App_sagas.md --markdown-toc false",
+    "doc-all": "mkdir -p docs && npm run doc-index && npm run doc-store && npm run doc-utils && npm run doc-actions && npm run doc-reducers && npm run doc-selectors && npm run doc-sagas",
     "styleguide": "./node_modules/.bin/styleguidist build",
-    "doc": "npm run doc-index && npm run doc-store && npm run doc-utils && npm run doc-actions && npm run doc-reducers && npm run doc-selectors && npm run doc-sagas && npm run styleguide"
+    "doc": "npm run doc-all && npm run styleguide && rm -rf docs"
   },
   "keywords": [],
-  "author": "",
+  "author": "Timo Franz, Unfold Data",
   "license": "ISC",
   "jest": {
     "moduleFileExtensions": [
