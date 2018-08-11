@@ -1,12 +1,11 @@
 {
-  "name": "OpenGovernmentDataDashboard",
+  "name": "ogdd",
   "version": "0.0.1",
   "description": "Web application for displaying results from New Zealands Open Data Maturity Surveys",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server -d",
     "build": "cross-env NODE_ENV=production webpack -p",
-    "test": "jest",
     "stats": "cross-env NODE_ENV=production webpack -p --profile --json > stats.json",
     "doc-index": "mkdir -p docs && ./node_modules/.bin/documentation build src/index.js -f md -o docs/index.md --markdown-toc false",
     "doc-store": "mkdir -p docs && ./node_modules/.bin/documentation build src/store.js -f md -o docs/store.md --markdown-toc false",
@@ -22,26 +21,6 @@
   "keywords": [],
   "author": "Timo Franz, Unfold Data",
   "license": "ISC",
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "setupFiles": [
-      "<rootDir>/src/tests/setup.js"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|styl|less|sass|scss)$": "identity-obj-proxy"
-    },
-    "transform": {
-      "^.+\\.js$": "babel-jest",
-      "^.+\\.jsx$": "babel-jest",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/tests/__mock__/fileTransformer.js"
-    }
-  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
@@ -69,8 +48,6 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^2.30.1",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^22.4.4",
-    "jest-babel": "^1.0.1",
     "lodash-webpack-plugin": "^0.11.5",
     "markdown-loader": "^3.0.0",
     "marked": "^0.4.0",
