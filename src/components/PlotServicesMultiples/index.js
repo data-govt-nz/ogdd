@@ -11,7 +11,7 @@ import PlotServicesSmall from 'components/PlotServicesSmall';
 import Card from 'components/Card';
 // styles
 import Row from 'styles/Row';
-import Column from 'styles/Column';
+import Column from 'components/Column';
 import CardBody from 'styles/CardBody';
 
 /**

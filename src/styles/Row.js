@@ -5,7 +5,6 @@ import { Flex } from 'grid-styled';
   * @component
   * Customised row for grid
   *
-  *
   */
 export default styled(Flex)`
   flex-wrap: wrap;

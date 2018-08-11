@@ -33,7 +33,7 @@ import KeyEntryIcon from 'components/KeyEntryIcon';
 import SelectWrapper from 'components/SelectWrapper';
 // simple styles (styled components)
 import Row from 'styles/Row';
-import Column from 'styles/Column';
+import Column from 'components/Column';
 import PageLongTitle from 'styles/PageLongTitle';
 import PageContainer from 'styles/PageContainer';
 import Hidden from 'styles/Hidden';
