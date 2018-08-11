@@ -44,7 +44,7 @@ module.exports = {
         {
           name: 'Reducers',
           description: 'Update application store in response to actions',
-          content: 'docs/App_sagas.md',
+          content: 'docs/App_reducers.md',
         },
         {
           name: 'Store',

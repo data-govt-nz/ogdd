@@ -1,7 +1,7 @@
 /**
   * A collection of helper functions for dealing with hash path and query objects and strings
   *
-  *
+  * @ignore
   */
 import reduce from 'lodash/reduce';
 import find from 'lodash/find';
