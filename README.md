@@ -1,8 +1,8 @@
-# Open Government Data Dashboard (OGDD)
+# Open Government Data Dashboard
 
 ## About
 
-The Open Government Data Dashboard is a web application for providing dynamic visualisations of the New Zealand Open Data Maturity Survey results that are based on the [Open Data Maturity Model](https://theodi.org/article/open-data-maturity-model-2) developed by the [Open Data Institute](https://theodi.org).
+The Open Government Data Dashboard (OGDD) is a web application for providing dynamic visualisations of the New Zealand Open Data Maturity Survey results that are based on the [Open Data Maturity Model](https://theodi.org/article/open-data-maturity-model-2) developed by the [Open Data Institute](https://theodi.org).
 
 The survey results and insights this application visualises will be made available on New Zealand's open data portal [data.govt.nz](//data.govt.nz), which is also where this application will be integrated and published. The application URL is yet to be determined at the time of writing.
 
