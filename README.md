@@ -1,7 +1,5 @@
-# Open Government Data Dashboard (OGDD)
-
+## Open Government Data Dashboard (OGDD)
+ 
 Open Data Maturity Surveys
 
-[Wiki](https://github.com/unfolddata/ogdd/wiki)
-
-[Wiki](../../wiki)
+Please refer to the [Wiki](../../wiki) for project documentation and further information
