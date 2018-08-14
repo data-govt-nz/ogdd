@@ -4,4 +4,4 @@ Open Data Maturity Surveys
 
 [Wiki](https://github.com/unfolddata/ogdd/wiki)
 
-[Wiki](ogdd/wiki)
+[Wiki](wiki)
