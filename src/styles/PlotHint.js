@@ -27,6 +27,7 @@ export default styled.div`
       margin: ${() => props.bottom ? '8px 0 0' : '0 0 8px'};
       font-size: ${() => props.theme.sizes[2]};
       box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+      font-weight: bold;
       &:after {
         content: '';
         position: absolute;
