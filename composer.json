@@ -1,0 +1,10 @@
+{
+	"name": "data-govt-nz/ogdd",
+	"type": "silverstripe-module",
+	"description": "Open data dashboard single page app",
+	"license": "MIT",
+	"keywords": ["opendata", "dashboard"],
+	"require": {
+        "silverstripe/cms": "^3.6"
+	}
+}
