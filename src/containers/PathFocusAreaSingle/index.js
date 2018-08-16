@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { List } from 'immutable';
 // utils
 import getLabel from 'utils/get-label';
@@ -44,9 +43,6 @@ import PrintOnly from 'styles/PrintOnly';
 
 // assets
 import titleIcon from 'assets/focus-areas.svg';
-
-// component styles
-const NonSelectWrapper = styled.div``;
 
 // initial component state
 const INITIAL_STATE = {
