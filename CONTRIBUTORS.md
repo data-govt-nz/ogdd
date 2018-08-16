@@ -1,7 +1,8 @@
-### OGDD
+### Open Government Data Dashboard
 
-* tmfrnz
+* [tmfrnz](https://github.com/tmfrnz) (concept, code, text, documentation)
+* [enotsluap](https://github.com/enotsluap) (data, text)
 
 ### Kornil/simple-redux-app
 
-* Kornil
+* [Kornil](https://github.com/Kornil) (bootstrap redux app)
