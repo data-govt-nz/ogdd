@@ -32,6 +32,9 @@ const Caption = styled.div`
   text-align: center;
   padding-left: 40px;
   padding-right: 40px;
+  @media print {
+    text-align: left;
+  }
 `;
 
 /**

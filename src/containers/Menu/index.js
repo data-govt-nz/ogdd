@@ -38,6 +38,9 @@ const Styled = styled.nav`
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.LARGE]}) {
     margin-left: 0;
   }
+  @media print {
+    display: none;
+  }
 `;
 const Link = styled(NavLink)``;
 

@@ -24,7 +24,11 @@ const Title = styled.div`
   font-weight: bold;
 `;
 const CurrentSurveyInfo = styled.div``;
-const AboutLinkWrapper = styled.div``;
+const AboutLinkWrapper = styled.div`
+  @media print {
+    display: none;
+  }
+`;
 const AboutLink = styled(Link)``;
 
 /**

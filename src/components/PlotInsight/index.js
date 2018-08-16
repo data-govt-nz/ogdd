@@ -42,7 +42,7 @@ const IndicatorBar = styled.div`
 const OutcomeBar = styled.div`
   float: left;
   height: 30px;
-  background-color: ${(props) => props.outline ? 'transparent' : props.colorValue};
+  background-color: ${(props) => props.outline ? 'transparent' : props.colorValue} !important;
   width: ${(props) => props.value}%;
   margin: 0 -1px;
   border: 1px solid;
@@ -62,6 +62,10 @@ const OutcomeBar = styled.div`
       display: block;
     }
   `}
+  @media print {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 `;
 const IndicatorOutcomes = styled.div``;
 

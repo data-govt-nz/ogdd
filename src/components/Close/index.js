@@ -22,6 +22,9 @@ const Styled = styled(Button)`
     outline: 0;
     background-color: ${(props) => props.theme.colors.dark};
   }
+  @media print {
+    display: none;
+  }
 `;
 const Icon = styled.img`
   height: 18px;

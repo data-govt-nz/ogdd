@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 /**
   * @component
@@ -9,5 +9,10 @@ import styled from 'styled-components';
 export default styled.span`
   @media (min-width: ${(props) => props.min ? props.theme.breakpoints[props.min] : 0}) {
     display: none;
+  }
+  @media print {
+    ${(props) => props.print && css`
+      display: inline-block;
+    `}
   }
 `;

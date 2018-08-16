@@ -23,13 +23,14 @@ import AsideContent from 'components/AsideContent';
 import PlotAssets from 'components/PlotAssets';
 // simple styles (styled components)
 import Row from 'styles/Row';
-import Column from 'components/Column';
+import Column from 'styles/Column';
 import PageLongTitle from 'styles/PageLongTitle';
 import PageContainer from 'styles/PageContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
+import PrintOnly from 'styles/PrintOnly';
 // assets
 import titleIcon from 'assets/data-assets.svg';
 import description from 'text/data-assets.md'; // loaded as HTML from markdown
@@ -155,12 +156,15 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
             { this.renderAsideContent() }
           </FullScreenModal>
         }
+        <PrintOnly>
+          { this.renderAsideContent() }
+        </PrintOnly>
         <PageLongTitle id="pageTitle">
           <Label id="component.assets.longTitle" />
         </PageLongTitle>
         <Row>
           <Column width={[1, 1 / 4]} order={2} paddingtop={10}>
-            <Visible min={0} >
+            <Visible min={0} print="false" >
               { this.renderAsideContent() }
             </Visible>
           </Column>

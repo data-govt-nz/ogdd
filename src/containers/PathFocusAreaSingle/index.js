@@ -29,9 +29,10 @@ import FullScreenModal from 'components/FullScreenModal';
 import AsideContent from 'components/AsideContent';
 import PlotFocusAreaDetails from 'components/PlotFocusAreaDetails';
 import SelectWrapper from 'components/SelectWrapper';
+import SelectSingleWrapper from 'components/SelectSingleWrapper';
 // simple styles (styled components)
 import Row from 'styles/Row';
-import Column from 'components/Column';
+import Column from 'styles/Column';
 import PageLongTitle from 'styles/PageLongTitle';
 import PageContainer from 'styles/PageContainer';
 import Hidden from 'styles/Hidden';
@@ -39,6 +40,8 @@ import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import AbovePlots from 'styles/AbovePlots';
+import PrintOnly from 'styles/PrintOnly';
+
 // assets
 import titleIcon from 'assets/focus-areas.svg';
 
@@ -183,6 +186,9 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
             { this.renderAsideContent(ready && focusArea) }
           </FullScreenModal>
         }
+        <PrintOnly>
+          { this.renderAsideContent(ready && focusArea) }
+        </PrintOnly>
         {ready &&
           <PageLongTitle id="pageTitle">
             <Label id="component.focus-areas.longTitle" />
@@ -202,17 +208,17 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
                 />
               }
               { ready && subjects.size === 0 &&
-                <NonSelectWrapper>
-                  <Label id="component.focus-areas.selectSubjectLabel" />
-                  { subjectSelected.get('title')}
-                </NonSelectWrapper>
+                <SelectSingleWrapper
+                  labelID="component.focus-areas.selectSubjectLabel"
+                  title={subjectSelected.get('title')}
+                />
               }
             </AbovePlots>
           </Column>
         </Row>
         <Row>
           <Column width={[1, 1 / 4]} order={2}>
-            <Visible min={0} >
+            <Visible min={0} print="false">
               { this.renderAsideContent(ready && focusArea) }
             </Visible>
           </Column>

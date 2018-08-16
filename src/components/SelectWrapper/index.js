@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { List } from 'immutable';
 // components
 import Label from 'components/Label';
+import SelectedSingle from 'styles/SelectedSingle';
+import PrintOnly from 'styles/PrintOnly';
 
 // component styles
 const Styled = styled.div``;
@@ -12,6 +14,9 @@ const Select = styled.select`
   text-decoration: underline;
   @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
     text-decoration: none;
+  }
+  @media print {
+    display: none;
   }
 `;
 
@@ -21,7 +26,7 @@ const Select = styled.select`
   * @return {Component} Select Wrapper component
   *
   */
-const SelectWrapper = ({ labelID, value, options, onChange, valueKey, formatOption }) => (
+const SelectWrapper = ({ labelID, value, title, options, onChange, valueKey, formatOption }) => (
   <Styled>
     <label htmlFor="ogdd-plot-option-select" >
       <Label id={labelID} />
@@ -37,14 +42,19 @@ const SelectWrapper = ({ labelID, value, options, onChange, valueKey, formatOpti
         </option>
       ))}
     </Select>
+    <PrintOnly>
+      <SelectedSingle>{ title }</SelectedSingle>
+    </PrintOnly>
   </Styled>
 );
 
 SelectWrapper.propTypes = {
   /** select label id */
   labelID: PropTypes.string,
-  /** select current value */
+  /** current value */
   value: PropTypes.string,
+  /** current title */
+  title: PropTypes.string,
   /** select options list */
   options: PropTypes.instanceOf(List),
   /** on select change handler */

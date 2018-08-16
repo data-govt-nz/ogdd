@@ -26,6 +26,9 @@ const Styled = styled.header`
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     height: 70px;
   }
+  @media print {
+    height: 70px;
+  }
 `;
 const Brand = styled(Button)`
   position: absolute;
@@ -40,12 +43,18 @@ const Logo = styled.img`
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     height: 70px;
   }
+  @media print {
+    height: 70px;
+  }
 `;
 const NavBar = styled.div`
   position: relative;
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
   height: 50px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
+    height: 70px;
+  }
+  @media print {
     height: 70px;
   }
 `;
@@ -63,6 +72,9 @@ const AboutLink = styled(NavLink)`
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     top: 20px;
+  }
+  @media print {
+    display: none;
   }
 `;
 

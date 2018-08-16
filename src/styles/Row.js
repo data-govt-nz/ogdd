@@ -12,7 +12,7 @@ export default styled(Flex)`
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
     margin: 0 -${(props) => props.theme.gutter[1]};
   }
-  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+  @media print and (min-width: ${(props) => props.theme.breakpoints[1]}) {
     margin: 0 -${(props) => props.theme.gutter[2]};
   }
 `;

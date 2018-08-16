@@ -13,4 +13,7 @@ export default styled.div`
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
     top: 8px;
   }
+  @media print {
+    display: none;
+  }
 `;

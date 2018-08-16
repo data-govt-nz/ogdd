@@ -33,7 +33,7 @@ import KeyEntryIcon from 'components/KeyEntryIcon';
 import SelectWrapper from 'components/SelectWrapper';
 // simple styles (styled components)
 import Row from 'styles/Row';
-import Column from 'components/Column';
+import Column from 'styles/Column';
 import PageLongTitle from 'styles/PageLongTitle';
 import PageContainer from 'styles/PageContainer';
 import Hidden from 'styles/Hidden';
@@ -41,6 +41,8 @@ import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import AbovePlots from 'styles/AbovePlots';
+import PrintOnly from 'styles/PrintOnly';
+
 // assets
 import titleIcon from 'assets/key-insights.svg';
 import description from 'text/insights.md'; // loaded as HTML from markdown
@@ -179,6 +181,9 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
             { this.renderAsideContent(relevantFocusAreas, surveyID) }
           </FullScreenModal>
         }
+        <PrintOnly>
+          { this.renderAsideContent(relevantFocusAreas, surveyID) }
+        </PrintOnly>
         <PageLongTitle id="pageTitle">
           <Label id="component.insights.longTitle" />
         </PageLongTitle>
@@ -200,7 +205,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
         </Row>
         <Row>
           <Column width={[1, 1 / 4]} order={2}>
-            <Visible min={0} >
+            <Visible min={0} print="false">
               { this.renderAsideContent(relevantFocusAreas, surveyID) }
             </Visible>
           </Column>
@@ -209,6 +214,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
               { ready && relevantInsights.map((insight) => (
                 <Column
                   width={[1, 1 / 2, 1 / 3]}
+                  printwidth={1 / 2}
                   key={insight.get('insight_id')}
                 >
                   <PlotInsight

@@ -44,12 +44,16 @@ const Dot = styled.div`
     return props.colorValue
       ? props.colorValue
       : props.theme.colors[props.color];
-  }};
+  }} !important;
   border: 1px solid;
   border-color: ${(props) => props.colorValue
     ? props.colorValue
     : props.theme.colors[props.color]
   };
+  @media print {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 `;
 
 /**

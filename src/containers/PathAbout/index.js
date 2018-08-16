@@ -1,6 +1,8 @@
 // vendor
 import React from 'react';
 import { Helmet } from 'react-helmet';
+
+
 // utils
 import getLabel from 'utils/get-label';
 import setLinkTarget from 'utils/set-link-target';
@@ -12,13 +14,15 @@ import FullScreenModal from 'components/FullScreenModal';
 import AsideContent from 'components/AsideContent';
 // simple styles (styled components)
 import Row from 'styles/Row';
-import Column from 'components/Column';
+import Column from 'styles/Column';
 import PageLongTitle from 'styles/PageLongTitle';
 import PageContainer from 'styles/PageContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
+import PrintOnly from 'styles/PrintOnly';
+import HTMLWrapper from 'styles/HTMLWrapper';
 // assets
 import titleIcon from 'assets/about.svg';
 import main from 'text/about.md'; // loaded as HTML from markdown
@@ -106,17 +110,20 @@ class PathAbout extends React.PureComponent { // eslint-disable-line react/prefe
             { this.renderAsideContent() }
           </FullScreenModal>
         }
+        <PrintOnly>
+          { this.renderAsideContent() }
+        </PrintOnly>
         <PageLongTitle id="pageTitle">
           <Label id="component.about.longTitle" />
         </PageLongTitle>
         <Row>
           <Column width={[1, 1 / 4]} order={2}>
-            <Visible min={0} >
+            <Visible min={0} print="false">
               { this.renderAsideContent() }
             </Visible>
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
-            <div dangerouslySetInnerHTML={{ __html: setLinkTarget(main) }} />
+            <HTMLWrapper printURL dangerouslySetInnerHTML={{ __html: setLinkTarget(main) }} />
           </Column>
         </Row>
       </PageContainer>

@@ -24,8 +24,12 @@ const Dot = styled.div`
   width: 34px;
   height: 34px;
   border-radius: 9999px;
-  background-color: ${(props) => props.color ? props.theme.colors[props.color] : props.theme.colors.black};
+  background-color: ${(props) => props.color ? props.theme.colors[props.color] : props.theme.colors.black} !important;
   text-align: center;
+  @media print {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 `;
 const Icon = styled.img`
   position: relative;

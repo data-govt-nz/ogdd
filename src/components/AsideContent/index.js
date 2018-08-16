@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // utils
 import setLinkTarget from 'utils/set-link-target';
+// styles
+import HTMLWrapper from 'styles/HTMLWrapper';
 
 // component styles
 const Styled = styled.div`
   padding: 10px;
+  margin-bottom: 50px;
 `;
 
 /**
@@ -23,7 +26,7 @@ const AsideContent = ({ title, html, text, children }) => (
     { title }
     { html &&
       /* eslint-disable react/no-danger */
-      <div dangerouslySetInnerHTML={{ __html: setLinkTarget(html) }} />
+      <HTMLWrapper printURL dangerouslySetInnerHTML={{ __html: setLinkTarget(html) }} />
       /* eslint-enable react/no-danger */
     }
     { text &&
