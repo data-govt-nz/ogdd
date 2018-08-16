@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
 
+/**
+  * @component
+  * Wrap HTML text, allow printing link URLs
+  */
 export default styled.div`
   ${(props) => props.printURL && css`
     @media print{
