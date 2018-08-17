@@ -83,7 +83,7 @@ const render = (Component) => {
         </ThemeProvider>
       </Provider>
     </AppContainer>,
-    document.getElementById('root'),
+    document.getElementById('ogdd-root'),
   );
 };
 

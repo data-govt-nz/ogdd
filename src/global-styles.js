@@ -12,16 +12,12 @@ injectGlobal`
   ${styledNormalize};
 
   @import url('https://fonts.googleapis.com/css?family=Barlow:300,400,600,700');
-  body {
-    height: 100%;
-    width: 100%;
-    color: #202326;
-    font-size: 14px;
-  }
-  #root {
+  #ogdd-root {
     font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    color: #202326;
   }
-  a {
+  #ogdd-root a {
     text-decoration: underline;
     color: #202326;
     &:hover{
