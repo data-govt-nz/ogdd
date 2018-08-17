@@ -12,14 +12,14 @@ import PrintOnly from 'styles/PrintOnly';
 const Styled = styled.div``;
 const Select = styled.select`
   text-decoration: underline;
-  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
-    text-decoration: none;
-  }
+  font-weight: 600;
+  margin-left: -5px;
   @media print {
     display: none;
   }
 `;
 
+// text-decoration: none;
 /**
   * Wrapper for plot select options
   *
