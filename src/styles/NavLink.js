@@ -45,8 +45,17 @@ export default styled(Button)`
     outline: 0;
     color: ${(props) => props.theme.colors.white};
     background-color: ${(props) => props.theme.colors.dark};
+    border-radius: 99999px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2) !important;
   }
   &:hover:focus{
     background-color: ${(props) => props.theme.colors.black};
+  }
+  &:active{
+    color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.black};
+  }
+  &:active:hover{
+    cursor: auto;
   }
 `;
