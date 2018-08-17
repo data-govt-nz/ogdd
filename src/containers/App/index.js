@@ -21,14 +21,15 @@ const Styled = styled.div`
   &:focus { outline: none; }
 `;
 const Main = styled.main`
-  &:focus { outline: none; }
   padding-top: 10px;
+  min-height: 90vH;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
     padding-top: 20px;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
     padding-top: 40px;
   }
+  &:focus { outline: none; }
 `;
 
 /**
