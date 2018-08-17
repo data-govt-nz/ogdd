@@ -55,6 +55,9 @@ export function* navigateSaga({ location, args }) {
   // combine path and query if present
   yield call(route, routeString(path, query));
   yield put(navigationOccured(path, query));
+  if (path !== hash) {
+    yield call(window.scrollTo, 0, 0);
+  }
 }
 /**
  * Load data from API or files
