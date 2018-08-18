@@ -49,6 +49,7 @@ const Card = ({ onMouseEnter, onMouseLeave, onTouchStart, onClick, children, tit
   </Styled>
 )
 : <StyledDiv
+  hover
   onMouseEnter={onMouseEnter || (() => true)}
   onMouseLeave={onMouseLeave}
   onTouchStart={onTouchStart}
