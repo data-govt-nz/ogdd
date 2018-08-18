@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // components
 import Label from 'components/Label';
+import Icon from 'components/Icon';
 
 // component styles
 const Styled = styled.div`
@@ -32,16 +33,16 @@ const IconCell = styled.div`
     width: 42px;
   }
 `;
-const Icon = styled.img`
-  position: relative;
-  left: 0;
-  height: 24px;
-  width: 24px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    height: 38px;
-    width: 38px;
-  }
-`;
+// const Icon = styled.img`
+//   position: relative;
+//   left: 0;
+//   height: 24px;
+//   width: 24px;
+//   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+//     height: 38px;
+//     width: 38px;
+//   }
+// `;
 
 /**
   * Page title with icon as used in sidebar
@@ -50,10 +51,10 @@ const Icon = styled.img`
   * @return {Component} Page title with icon
   *
   */
-const PageTitle = ({ labelId, iconSrc, title }) => (
+const PageTitle = ({ labelId, icon, title }) => (
   <Styled>
     <IconCell>
-      <Icon alt="" src={iconSrc} role="presentation" />
+      <Icon name={icon} />
     </IconCell>
     <Cell>
       { title &&
@@ -71,8 +72,8 @@ PageTitle.propTypes = {
   title: PropTypes.string,
   /** title by label id */
   labelId: PropTypes.string,
-  /** icon source */
-  iconSrc: PropTypes.string,
+  /** icon id */
+  icon: PropTypes.string,
 };
 
 export default PageTitle;

@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Icon from 'components/Icon';
 
 // component styles
 const Styled = styled.div`
@@ -31,12 +32,12 @@ const Dot = styled.div`
     print-color-adjust: exact !important;
   }
 `;
-const Icon = styled.img`
-  position: relative;
-  height: 24px;
-  width: 24px;
-  top: 5px;
-`;
+// const Icon = styled.img`
+//   position: relative;
+//   height: 24px;
+//   width: 24px;
+//   top: 5px;
+// `;
 
 /**
   * Key item component with icon - used for focus areas in insights sidebar
@@ -45,11 +46,11 @@ const Icon = styled.img`
   * @return {Component} Key entry with icon
   *
   */
-const KeyEntryIcon = ({ color, title, iconSrc }) => (
+const KeyEntryIcon = ({ color, title, icon }) => (
   <Styled>
     <DotCell>
       <Dot color={color} >
-        <Icon alt="" src={iconSrc} role="presentation" />
+        <Icon name={icon} themeColor="white" />
       </Dot>
     </DotCell>
     <Cell>
@@ -64,7 +65,7 @@ KeyEntryIcon.propTypes = {
   /** the key label as displayed */
   title: PropTypes.string.isRequired,
   /** the icon source */
-  iconSrc: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
 };
 
 export default KeyEntryIcon;

@@ -35,7 +35,6 @@ import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import PrintOnly from 'styles/PrintOnly';
 
 // assets: icon and description
-import titleIcon from 'assets/data-services.svg';
 import description from 'text/data-services.md'; // loaded as HTML from markdown
 
 // component styles
@@ -101,7 +100,7 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
     */
   renderPageTitle() {
     return (
-      <PageTitle labelId="component.services.title" iconSrc={titleIcon} />
+      <PageTitle labelId="component.services.title" icon="services" />
     );
   }
   /**

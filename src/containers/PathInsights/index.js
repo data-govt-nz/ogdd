@@ -18,9 +18,6 @@ import {
   selectSurveyIdFromLocation,
 } from 'containers/App/selectors';
 import { navigate } from 'containers/App/actions';
-import {
-  FOCUSAREA_WHITEICONS,
-} from 'containers/App/constants';
 import SurveyInformation from 'containers/SurveyInformation';
 // components
 import Label from 'components/Label';
@@ -44,7 +41,6 @@ import AbovePlots from 'styles/AbovePlots';
 import PrintOnly from 'styles/PrintOnly';
 
 // assets
-import titleIcon from 'assets/key-insights.svg';
 import description from 'text/insights.md'; // loaded as HTML from markdown
 
 // component styles
@@ -98,7 +94,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
     */
   renderPageTitle() {
     return (
-      <PageTitle labelId="component.insights.title" iconSrc={titleIcon} />
+      <PageTitle labelId="component.insights.title" icon="insights" />
     );
   }
   /**
@@ -120,7 +116,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
                 key={fa.get('indicator_id')}
                 title={fa.get('title')}
                 color={fa.get('indicator_id')}
-                iconSrc={FOCUSAREA_WHITEICONS[fa.get('indicator_id')]}
+                icon={fa.get('indicator_id')}
               />
             ))
           }

@@ -17,7 +17,7 @@ import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 import Button from 'styles/Button';
 import NavLink from 'styles/NavLink';
 // assets
-import logo from 'assets/logo.svg';
+import LogoSVG from 'assets/logo.svg';
 
 // component styles
 const Styled = styled.header`
@@ -36,9 +36,11 @@ const Brand = styled(Button)`
   left: 0;
   text-align: left;
 `;
-const Logo = styled.img`
+const LogoWrapper = styled.div`
   display: inline-block;
   vertical-align: middle;
+`;
+const Logo = styled(LogoSVG)`
   height: 50px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     height: 70px;
@@ -87,7 +89,9 @@ const Header = ({ navItems, location, nav }) => (
   <Styled role="banner">
     <NavBar>
       <Brand onClick={() => nav('')} title={getLabel('screenreader.header.homeLink')}>
-        <Logo alt={getLabel('app.title')} src={logo} />
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
       </Brand>
       <Menu navItems={navItems} visibleMin={BREAKPOINTS.MEDIUM} />
       <AboutLink

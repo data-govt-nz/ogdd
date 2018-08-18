@@ -2,10 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+import Icon from 'components/Icon';
 // styles
 import Button from 'styles/Button';
-// assets
-import iconSrc from 'assets/close.svg';
 
 // component styles
 const Styled = styled(Button)`
@@ -17,21 +17,16 @@ const Styled = styled(Button)`
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   &:hover{
     background-color: ${(props) => props.theme.colors.dark};
+    border-radius: 99999px;
   }
   &:focus{
     outline: 0;
     background-color: ${(props) => props.theme.colors.dark};
+    border-radius: 99999px;
   }
   @media print {
     display: none;
   }
-`;
-const Icon = styled.img`
-  height: 18px;
-  width: 18px;
-  position: absolute;
-  top: 11px;
-  left: 11px;
 `;
 
 /**
@@ -42,7 +37,7 @@ const Icon = styled.img`
   */
 const Close = ({ altTitle, onClick }) => (
   <Styled onClick={onClick}>
-    <Icon alt={altTitle} src={iconSrc} />
+    <Icon title={altTitle} name="close" themeColor="white" iconSize={10} />
   </Styled>
 );
 
