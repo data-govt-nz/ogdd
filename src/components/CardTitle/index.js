@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Icon from 'components/Icon';
+
 // component styles
 const Styled = styled.div`
   display: table;
@@ -24,9 +26,9 @@ const IconCell = styled.div`
   width: 38px;
 `;
 
-const Icon = styled.img`
+const IconStyled = styled(Icon)`
   position: relative;
-  left: -5px
+  left: -5px;
   height: 38px;
 `;
 
@@ -36,10 +38,10 @@ const Icon = styled.img`
   * @return {Component} Card title
   *
   */
-const CardTitle = ({ iconSrc, title, altTitle }) => (
+const CardTitle = ({ title, icon, altTitle }) => (
   <Styled hasTitle={title !== ''}>
     <IconCell>
-      <Icon alt={altTitle || ''} src={iconSrc} role={altTitle ? null : 'presentation'} />
+      <IconStyled name={icon} title={altTitle} themeColor={icon} />
     </IconCell>
     <Cell>
       { title }
@@ -52,8 +54,7 @@ CardTitle.propTypes = {
   title: PropTypes.string,
   /** the optional alt attribute title - should be provided if title ommitted */
   altTitle: PropTypes.string,
-  /** the icon source */
-  iconSrc: PropTypes.string.isRequired,
+  icon: PropTypes.node,
 };
 
 CardTitle.defaultProps = {

@@ -24,7 +24,6 @@ import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import PrintOnly from 'styles/PrintOnly';
 import HTMLWrapper from 'styles/HTMLWrapper';
 // assets
-import titleIcon from 'assets/about.svg';
 import main from 'text/about.md'; // loaded as HTML from markdown
 import description from 'text/about-aside.md'; // loaded as HTML from markdown
 
@@ -69,7 +68,7 @@ class PathAbout extends React.PureComponent { // eslint-disable-line react/prefe
     */
   renderPageTitle() {
     return (
-      <PageTitle labelId="component.about.title" iconSrc={titleIcon} />
+      <PageTitle labelId="component.about.title" icon="about" />
     );
   }
   /**

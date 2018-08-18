@@ -125,7 +125,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
           <ScreenReaderOnly>
             {getLabel('component.focus-areas.focus-area')}
           </ScreenReaderOnly>
-          <CardTitle title={focusArea.get('title')} iconSrc={focusAreaIcon} />
+          <CardTitle title={focusArea.get('title')} icon={focusAreaIcon} />
           <ScreenReaderOnly>
             {focusArea.get('description')}
           </ScreenReaderOnly>
@@ -262,7 +262,7 @@ PlotFocusArea.propTypes = {
   /** on reference subject select handler */
   onSelectReference: PropTypes.func.isRequired,
   /** focus area icon */
-  focusAreaIcon: PropTypes.string.isRequired,
+  focusAreaIcon: PropTypes.node.isRequired,
   /** global theme */
   theme: PropTypes.object.isRequired,
 };

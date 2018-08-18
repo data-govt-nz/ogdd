@@ -32,7 +32,6 @@ import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import PrintOnly from 'styles/PrintOnly';
 // assets
-import titleIcon from 'assets/data-assets.svg';
 import description from 'text/data-assets.md'; // loaded as HTML from markdown
 
 // component styles
@@ -100,7 +99,7 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
     */
   renderPageTitle() {
     return (
-      <PageTitle labelId="component.assets.title" iconSrc={titleIcon} />
+      <PageTitle labelId="component.assets.title" icon="assets" />
     );
   }
   /**

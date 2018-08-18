@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 166 70">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-logo-pattern);
+      }
+
+      .cls-2 {
+        fill: #b4e1ea;
+      }
+
+      .cls-14, .cls-3 {
+        fill: #2956d1;
+      }
+
+      .cls-4 {
+        fill: #ad9300;
+      }
+
+      .cls-5 {
+        fill: #491c8b;
+      }
+
+      .cls-6 {
+        fill: #624093;
+      }
+
+      .cls-7 {
+        fill: #199f8b;
+      }
+
+      .cls-8 {
+        fill: #32b8ab;
+      }
+
+      .cls-9 {
+        fill: #feb8a9;
+      }
+
+      .cls-10 {
+        fill: #faf5d5;
+      }
+
+      .cls-11 {
+        fill: #14bee1;
+      }
+
+      .cls-12 {
+        fill: #fb6128;
+      }
+
+      .cls-13 {
+        fill: #fb8153;
+      }
+
+      .cls-14 {
+        opacity: 0.662;
+      }
+    </style>
+    <clipPath id="clip-logo-pattern">
+      <rect width="166" height="70"/>
+    </clipPath>
+  </defs>
+  <g id="logo-pattern" class="cls-1">
+    <rect id="Screen_Shot_2018-06-15_at_2.21.08_PM" data-name="Screen Shot 2018-06-15 at 2.21.08 PM" class="cls-2" width="35" height="35"/>
+    <path id="Path_599" data-name="Path 599" class="cls-3" d="M92.7,6.836c-19.25,0-35,15.22-35,34v1h21v-1c0-7.683,6.125-13,14-13Z" transform="translate(-6.836 127.699) rotate(-90)"/>
+    <rect id="Screen_Shot_2018-06-15_at_2.21.08_PM-2" data-name="Screen Shot 2018-06-15 at 2.21.08 PM" class="cls-4" width="35" height="35" transform="translate(35)"/>
+    <rect id="Screen_Shot_2018-06-15_at_2.21.08_PM-3" data-name="Screen Shot 2018-06-15 at 2.21.08 PM" class="cls-5" width="24" height="35" transform="translate(94 70) rotate(180)"/>
+    <rect id="Screen_Shot_2018-06-15_at_2.21.08_PM-4" data-name="Screen Shot 2018-06-15 at 2.21.08 PM" class="cls-6" width="24" height="35" transform="translate(94 35) rotate(180)"/>
+    <path id="Path_600" data-name="Path 600" class="cls-7" d="M55.129,24.4a35.012,35.012,0,0,1-35,35v-35" transform="translate(94.372 14.871) rotate(90)"/>
+    <path id="Path_601" data-name="Path 601" class="cls-8" d="M55.1,24.4a35.012,35.012,0,0,1-35,35v-35" transform="translate(10.6 55.1) rotate(-90)"/>
+    <rect id="Screen_Shot_2018-06-15_at_2.21.08_PM-5" data-name="Screen Shot 2018-06-15 at 2.21.08 PM" class="cls-9" width="35" height="35" transform="translate(94 35)"/>
+    <path id="Screen_Shot_2018-06-15_at_2.21.08_PM-6" data-name="Screen Shot 2018-06-15 at 2.21.08 PM" class="cls-10" d="M35.43-.433l-35,35h35Z" transform="translate(163.567 34.57) rotate(90)"/>
+    <path id="Path_603" data-name="Path 603" class="cls-11" d="M92.7,6.836c-19.25,0-35,15.22-35,34v1h21v-1c0-7.683,6.125-13,14-13Z" transform="translate(-57.7 -6.836)"/>
+    <path id="Path_663" data-name="Path 663" class="cls-12" d="M92.7,6.836c-19.25,0-35,15.22-35,34v1h21v-1c0-7.683,6.125-13,14-13Z" transform="translate(186.7 76.836) rotate(180)"/>
+    <path id="Path_662" data-name="Path 662" class="cls-13" d="M92.7,6.836c-19.25,0-35,15.22-35,34v1h21v-1c0-7.683,6.125-13,14-13Z" transform="translate(135.836 -57.699) rotate(90)"/>
+    <path id="Path_664" data-name="Path 664" class="cls-14" d="M55.129,24.4a35.012,35.012,0,0,1-35,35v-35" transform="translate(-24.401 90.129) rotate(-90)"/>
+  </g>
+</svg>

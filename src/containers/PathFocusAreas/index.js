@@ -19,8 +19,6 @@ import { navigate } from 'containers/App/actions';
 import SurveyInformation from 'containers/SurveyInformation';
 import {
   DEFAULT_SUBJECT_ID,
-  FOCUSAREA_ICONS,
-  FOCUSAREA_DARKICONS,
 } from 'containers/App/constants';
 // components
 import Label from 'components/Label';
@@ -43,7 +41,6 @@ import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import AbovePlots from 'styles/AbovePlots';
 import PrintOnly from 'styles/PrintOnly';
 // assets
-import titleIcon from 'assets/focus-areas.svg';
 import description from 'text/focus-areas.md'; // loaded as HTML from markdown
 
 // component styles
@@ -161,7 +158,7 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
     */
   renderPageTitle() {
     return (
-      <PageTitle labelId="component.focus-areas.title" iconSrc={titleIcon} />
+      <PageTitle labelId="component.focus-areas.title" icon="focusAreas" />
     );
   }
   /**
@@ -174,7 +171,7 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
           title={
             <PageTitle
               title={this.state.focusAreaSelected.get('title')}
-              iconSrc={FOCUSAREA_DARKICONS[this.state.focusAreaSelected.get('indicator_id')]}
+              icon={this.state.focusAreaSelected.get('indicator_id')}
             />
           }
           text={this.state.focusAreaSelected.get('description')}
@@ -278,7 +275,7 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
                 >
                   <PlotFocusArea
                     focusArea={focusArea}
-                    focusAreaIcon={FOCUSAREA_ICONS[focusArea.get('indicator_id')]}
+                    focusAreaIcon={focusArea.get('indicator_id')}
                     surveys={surveys}
                     subject={subjectSelected}
                     referenceSubject={subjectReference}

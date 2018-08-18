@@ -7,7 +7,7 @@ import { fromJS, Map } from 'immutable';
 import getLabel from 'utils/get-label';
 import formatValue from 'utils/format-value';
 // constants
-import { ANSWERS, FOCUSAREA_ICONS } from 'containers/App/constants';
+import { ANSWERS } from 'containers/App/constants';
 // components
 import CardTitle from 'components/CardTitle';
 import KeyEntry from 'components/KeyEntry';
@@ -117,7 +117,7 @@ class PlotInsight extends React.PureComponent { // eslint-disable-line react/pre
       <Card>
         <div>
           <CardTitle
-            iconSrc={FOCUSAREA_ICONS[focusArea.get('indicator_id')]}
+            icon={focusArea.get('indicator_id')}
             altTitle={`${getLabel('screenreader.insights.focus-area-label')} ${focusArea.get('title')}`}
           />
         </div>

@@ -186,7 +186,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
           <ScreenReaderOnly>
             {getLabel('component.focus-areas.focus-area')}
           </ScreenReaderOnly>
-          <CardTitle title={focusArea.get('title')} iconSrc={focusAreaIcon} />
+          <CardTitle title={focusArea.get('title')} icon={focusAreaIcon} />
           <Dismiss>
             <Close
               onClick={onDismiss}

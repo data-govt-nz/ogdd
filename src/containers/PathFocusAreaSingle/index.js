@@ -16,10 +16,7 @@ import {
   selectFocusAreaIdFromLocation,
 } from 'containers/App/selectors';
 import { navigate } from 'containers/App/actions';
-import {
-  DEFAULT_SUBJECT_ID,
-  FOCUSAREA_ICONS,
-} from 'containers/App/constants';
+import { DEFAULT_SUBJECT_ID } from 'containers/App/constants';
 // components
 import Label from 'components/Label';
 import PageTitle from 'components/PageTitle';
@@ -40,9 +37,6 @@ import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import AbovePlots from 'styles/AbovePlots';
 import PrintOnly from 'styles/PrintOnly';
-
-// assets
-import titleIcon from 'assets/focus-areas.svg';
 
 // initial component state
 const INITIAL_STATE = {
@@ -114,7 +108,7 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
     */
   renderPageTitle() {
     return (
-      <PageTitle labelId="component.focus-area.title" iconSrc={titleIcon} />
+      <PageTitle labelId="component.focus-area.title" icon="focusAreas" />
     );
   }
   /**
@@ -232,7 +226,7 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
                     surveyHighlightedId={surveyHighlightedId}
                     onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
                     onDismiss={() => this.onFAClose()}
-                    focusAreaIcon={FOCUSAREA_ICONS[faSelectedId]}
+                    focusAreaIcon={faSelectedId}
                   />
                 </Column>
               }
