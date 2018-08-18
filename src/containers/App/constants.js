@@ -226,6 +226,7 @@ export const THEME = {
     light: '#E7E9EB',
     dark: '#8B969D',
     black: '#202326',
+    hover: '#2956D1',
     fa1: '#491C8B',
     fa2: '#AD9300',
     fa3: '#00A2C7',

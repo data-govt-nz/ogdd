@@ -12,12 +12,14 @@ const Styled = styled(Button)`
   padding: 4px 10px 10px;
   text-align: left;
   max-width: 100%;
-    &:hover {
+  &:hover {
+    color: ${(props) => props.theme.colors.black};
     ${(props) => props.hover ? 'box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.6);' : ''}
   }
   &:focus{
     outline: 0;
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.6);
+    color: ${(props) => props.theme.colors.black};
   }
   @media print {
     box-shadow: none;

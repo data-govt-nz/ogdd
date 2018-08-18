@@ -17,27 +17,27 @@ export default styled.button`
   position: relative;
   font: inherit;
   display: inline;
-  color: #202326;
+  color: ${(props) => props.theme.colors.black};
   border-radius: 0;
   line-height: 1.15;
   font-size: ${(props) => props.theme.sizes[1]};
   &:hover{
-    color: #2956D1;
+    color: ${(props) => props.theme.colors.hover};
     background-color: transparent;
     opacity: 1;
   }
   &:active{
-    color: #2956D1;
+    color: ${(props) => props.theme.colors.hover};
     background-color: transparent;
   }
   &:visited{
-    color: #2956D1;
+    color: ${(props) => props.theme.colors.hover};
     background-color: transparent;
     opacity: 1;
   }
   &:focus{
-    color: #2956D1;
-    box-shadow: 0;
+    color: ${(props) => props.theme.colors.hover};
+    box-shadow: none;
     border-radius: 0;
   }
 `;

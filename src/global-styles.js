@@ -60,7 +60,7 @@ injectGlobal`
       outline: 0;
       color: #2956D1;
       outline: none;
-      box-shadow: 0;
+      box-shadow: none;
       border-radius: 0;
     }
   }
@@ -73,6 +73,17 @@ injectGlobal`
     border: 0;
     background-color: transparent;
     color: #202326;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    cursor: pointer;
+    &:focus {
+      font-size: 14px !important;
+      box-shadow: none;
+    }
   }
   #ogdd-root ::selection {
     color: #fff;
