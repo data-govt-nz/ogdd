@@ -10,7 +10,7 @@ const Styled = styled.div`
   display: table;
   table-layout: fixed;
   width: 100%;
-  line-height: 20px;
+  line-height: 16px;
   min-height: ${(props) => props.hasTitle ? '49px' : 0};
 `;
 const Cell = styled.div`

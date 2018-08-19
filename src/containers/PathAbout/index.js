@@ -16,7 +16,7 @@ import AsideContent from 'components/AsideContent';
 import Row from 'styles/Row';
 import Column from 'styles/Column';
 import PageLongTitle from 'styles/PageLongTitle';
-import PageContainer from 'styles/PageContainer';
+import ContentContainer from 'styles/ContentContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
@@ -88,7 +88,7 @@ class PathAbout extends React.PureComponent { // eslint-disable-line react/prefe
     /* eslint-disable react/no-danger */
     // required for setting inner HTML (from markdown content)
     return (
-      <PageContainer>
+      <ContentContainer>
         <Helmet>
           <title>{getLabel('component.about.title')}</title>
           <meta
@@ -125,7 +125,7 @@ class PathAbout extends React.PureComponent { // eslint-disable-line react/prefe
             <HTMLWrapper printURL dangerouslySetInnerHTML={{ __html: setLinkTarget(main) }} />
           </Column>
         </Row>
-      </PageContainer>
+      </ContentContainer>
     );
   }
   /* eslint-enable react/no-danger */

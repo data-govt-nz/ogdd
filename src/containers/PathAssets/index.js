@@ -25,7 +25,7 @@ import PlotAssets from 'components/PlotAssets';
 import Row from 'styles/Row';
 import Column from 'styles/Column';
 import PageLongTitle from 'styles/PageLongTitle';
-import PageContainer from 'styles/PageContainer';
+import ContentContainer from 'styles/ContentContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
@@ -134,7 +134,7 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
       indicators.find((item) => quasiEquals(item.get('indicator_id'), ASSETS_INDICATOR_ID_MAP.ASSETS_ID));
 
     return (
-      <PageContainer>
+      <ContentContainer>
         <Helmet>
           <title>{getLabel('component.assets.title')}</title>
           <meta
@@ -200,7 +200,7 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
             }
           </Column>
         </Row>
-      </PageContainer>
+      </ContentContainer>
     );
   }
 }

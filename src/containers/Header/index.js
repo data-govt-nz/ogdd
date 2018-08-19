@@ -13,11 +13,13 @@ import { BREAKPOINTS } from 'containers/App/constants';
 import Menu from 'containers/Menu';
 // components
 import Label from 'components/Label';
+import Icon from 'components/Icon';
+// styles
 import ScreenReaderOnly from 'styles/ScreenReaderOnly';
-import Button from 'styles/Button';
 import NavLink from 'styles/NavLink';
+import ContentContainer from 'styles/ContentContainer';
 // assets
-import LogoSVG from 'assets/logo.svg';
+import LogoSVG from 'assets/logo-pattern.svg';
 
 // component styles
 const Styled = styled.header`
@@ -30,16 +32,52 @@ const Styled = styled.header`
     height: 70px;
   }
 `;
-const Brand = styled(Button)`
+const Brand = styled(NavLink)`
   position: absolute;
-  top: 0;
-  left: 0;
-  text-align: left;
+  top: 5px;
+  left: 7px;
+  box-shadow: none;
+  min-width: 0;
+  max-width: none;
+  padding: 7px 10px;
+  margin: 0;
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
+    padding: 7px 20px;
+    margin: 0 5px;
+    left: 95px;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
+    top: 15px;
+    left: -16px;
+  }
+  @media print {
+    top: 15px;
+    left: -16px;
+  }
+  &:hover{
+    box-shadow: none !important;
+    color: ${(props) => props.theme.colors.hover};
+    background-color: ${(props) => props.theme.colors.white};
+  }
+  &:focus{
+    box-shadow: none !important;
+    color: ${(props) => props.theme.colors.hover};
+    background-color: ${(props) => props.theme.colors.white};
+  }
+  &:active{
+    color: ${(props) => props.theme.colors.hover};
+    background-color: ${(props) => props.theme.colors.white};
+  }
+  &:hover:focus{
+    background-color: ${(props) => props.theme.colors.white};
+  }
 `;
 const LogoWrapper = styled.div`
-  display: inline-block;
-  vertical-align: middle;
+  position: absolute;
+  left: 0;
+  top: 0;
 `;
+
 const Logo = styled(LogoSVG)`
   height: 50px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
@@ -62,15 +100,16 @@ const NavBar = styled.div`
 `;
 const AboutLink = styled(NavLink)`
   position: absolute;
-  top: 10px;
-  right: 30px;
+  top: 16px;
+  right: 5px;
   box-shadow: none;
   min-width: 0;
   ${(props) => props.active && css`
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   `}
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
-    right: 50px;
+    top: 10px;
+    right: 0;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     top: 20px;
@@ -88,24 +127,27 @@ const AboutLink = styled(NavLink)`
 const Header = ({ navItems, location, nav }) => (
   <Styled role="banner">
     <NavBar>
-      <Brand onClick={() => nav('')} title={getLabel('screenreader.header.homeLink')}>
-        <LogoWrapper>
-          <Logo />
-        </LogoWrapper>
-      </Brand>
-      <Menu navItems={navItems} visibleMin={BREAKPOINTS.MEDIUM} />
-      <AboutLink
-        active={location.get('path') === 'about'}
-        onClick={() => nav('about')}
-        title={getLabel('component.about.nav')}
-      >
-        <Label id="component.about.nav" />
-        { location.get('path') === 'about' &&
-          <ScreenReaderOnly id="currentItem">
-            <Label id="screenreader.navActive" />
-          </ScreenReaderOnly>
-        }
-      </AboutLink>
+      <LogoWrapper>
+        <Logo />
+      </LogoWrapper>
+      <ContentContainer>
+        <Brand onClick={() => nav('')} title={getLabel('screenreader.header.homeLink')}>
+          <Icon name="brand" title={getLabel('app.title')} />
+        </Brand>
+        <Menu navItems={navItems} visibleMin={BREAKPOINTS.MEDIUM} />
+        <AboutLink
+          active={location.get('path') === 'about'}
+          onClick={() => nav('about')}
+          title={getLabel('component.about.nav')}
+        >
+          <Label id="component.about.nav" />
+          { location.get('path') === 'about' &&
+            <ScreenReaderOnly id="currentItem">
+              <Label id="screenreader.navActive" />
+            </ScreenReaderOnly>
+          }
+        </AboutLink>
+      </ContentContainer>
     </NavBar>
     <Menu navItems={navItems} hiddenMin={BREAKPOINTS.MEDIUM} />
   </Styled>

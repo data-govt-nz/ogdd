@@ -9,7 +9,7 @@ const Styled = styled.div`
   display: table;
   table-layout: fixed;
   width: 100%;
-  line-height: 20px;
+  line-height: 16px;
   margin-bottom: 6px;
 `;
 const Cell = styled.div`
@@ -27,17 +27,12 @@ const Dot = styled.div`
   border-radius: 9999px;
   background-color: ${(props) => props.color ? props.theme.colors[props.color] : props.theme.colors.black} !important;
   text-align: center;
+  padding: 5px;
   @media print {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 `;
-// const Icon = styled.img`
-//   position: relative;
-//   height: 24px;
-//   width: 24px;
-//   top: 5px;
-// `;
 
 /**
   * Key item component with icon - used for focus areas in insights sidebar
@@ -50,7 +45,7 @@ const KeyEntryIcon = ({ color, title, icon }) => (
   <Styled>
     <DotCell>
       <Dot color={color} >
-        <Icon name={icon} themeColor="white" />
+        <Icon name={icon} themeColor="white" size={24} />
       </Dot>
     </DotCell>
     <Cell>

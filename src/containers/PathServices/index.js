@@ -27,7 +27,7 @@ import PlotServicesMultiples from 'components/PlotServicesMultiples';
 import Row from 'styles/Row';
 import Column from 'styles/Column';
 import PageLongTitle from 'styles/PageLongTitle';
-import PageContainer from 'styles/PageContainer';
+import ContentContainer from 'styles/ContentContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
@@ -139,7 +139,7 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
     const servicesIndicator = ready && indicators.find((item) => quasiEquals(item.get('indicator_id'), SERVICES_INDICATOR_ID_MAP.SERVICES_ID));
 
     return (
-      <PageContainer>
+      <ContentContainer>
         <Helmet>
           <title>{getLabel('component.services.title')}</title>
           <meta
@@ -213,7 +213,7 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
             }
           </Column>
         </Row>
-      </PageContainer>
+      </ContentContainer>
     );
   }
 }

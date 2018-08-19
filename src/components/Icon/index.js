@@ -7,23 +7,22 @@ import SVG from './SVG';
 
 class Icon extends React.PureComponent {
   render() {
-    const { name, title, size, sizes, color, iconSize, text, textRight, textLeft, stroke, themeColor } = this.props;
+    const { name, title, color, size, iconSize, themeColor } = this.props;
     const icon = ICONS[name];
     if (icon) {
-      const iSize = icon.size || iconSize;
+      const iSizeX = (icon.sizes && icon.sizes[0]) || icon.size || iconSize;
+      const iSizeY = (icon.sizes && icon.sizes[1]) || icon.size || iconSize;
       const iconPaths = icon.paths || icon.path || icon;
       return (
         <SVG
-          viewBox={`0 0 ${iSize} ${iSize}`}
+          viewBox={`0 0 ${iSizeX} ${iSizeY}`}
           preserveAspectRatio="xMidYMid meet"
-          size={size || `${iSize}px`}
+          sizes={{
+            width: `${size || iSizeX}px`,
+            height: `${size || iSizeY}px`,
+          }}
           color={color}
           themeColor={themeColor}
-          text={text}
-          textLeft={textLeft}
-          textRight={textRight}
-          stroke={stroke}
-          sizes={sizes}
           aria-hidden={title ? 'false' : 'true'}
           role={title ? 'img' : 'presentation'}
         >
@@ -39,21 +38,14 @@ class Icon extends React.PureComponent {
 Icon.propTypes = {
   name: PropTypes.string,
   title: PropTypes.string,
-  size: PropTypes.string,
   iconSize: PropTypes.number,
+  size: PropTypes.number,
   color: PropTypes.string,
   themeColor: PropTypes.string,
-  text: PropTypes.bool,
-  textLeft: PropTypes.bool,
-  textRight: PropTypes.bool,
-  stroke: PropTypes.bool,
-  sizes: PropTypes.object,
 };
 Icon.defaultProps = {
   name: 'placeholder',
-  iconSize: 24,
-  textLeft: false,
-  textRight: false,
+  iconSize: 38,
   title: '',
 };
 

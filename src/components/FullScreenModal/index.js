@@ -7,7 +7,7 @@ import getLabel from 'utils/get-label';
 // components
 import Close from 'components/Close';
 // simple styles
-import PageContainer from 'styles/PageContainer';
+import ContentContainer from 'styles/ContentContainer';
 
 // component styles
 const Styled = styled.div`
@@ -33,7 +33,7 @@ const Dismiss = styled.div`
   */
 const FullScreenModal = ({ dismiss, children }) => (
   <Styled>
-    <PageContainer>
+    <ContentContainer>
       <Dismiss>
         <Close
           onClick={dismiss}
@@ -41,7 +41,7 @@ const FullScreenModal = ({ dismiss, children }) => (
         />
       </Dismiss>
       { children }
-    </PageContainer>
+    </ContentContainer>
   </Styled>
 );
 

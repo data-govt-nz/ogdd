@@ -32,7 +32,7 @@ import SelectWrapper from 'components/SelectWrapper';
 import Row from 'styles/Row';
 import Column from 'styles/Column';
 import PageLongTitle from 'styles/PageLongTitle';
-import PageContainer from 'styles/PageContainer';
+import ContentContainer from 'styles/ContentContainer';
 import Hidden from 'styles/Hidden';
 import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
@@ -156,7 +156,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
       }, List());
 
     return (
-      <PageContainer>
+      <ContentContainer>
         <Helmet>
           <title>{getLabel('component.insights.title')}</title>
           <meta
@@ -235,7 +235,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
             </Row>
           </Column>
         </Row>
-      </PageContainer>
+      </ContentContainer>
     );
   }
 }

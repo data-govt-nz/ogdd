@@ -33,7 +33,6 @@ const Styled = styled.nav`
   `}
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     padding-top: 1.5em;
-    margin-left: 120px;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.LARGE]}) {
     margin-left: 0;
