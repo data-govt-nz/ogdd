@@ -21,6 +21,7 @@ import ReadMore from 'components/ReadMore';
 import FullScreenModal from 'components/FullScreenModal';
 import AsideContent from 'components/AsideContent';
 import PlotAssets from 'components/PlotAssets';
+import Loading from 'components/Loading';
 // simple styles (styled components)
 import Row from 'styles/Row';
 import Column from 'styles/Column';
@@ -168,6 +169,9 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
             </Visible>
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
+            { !ready &&
+              <Loading />
+            }
             { ready &&
               <Row>
                 <Column

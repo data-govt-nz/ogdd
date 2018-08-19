@@ -1,5 +1,6 @@
 {
   "app.title": "Open Data Maturity Dashboard",
+  "app.loading": "Loading...",
   "button.readMore": "Read more",
   "answers.not_stated": "Not stated",
   "labelNotFound": "Error: label undefined",

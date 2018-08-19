@@ -26,6 +26,7 @@ import AsideContent from 'components/AsideContent';
 import PlotFocusAreaDetails from 'components/PlotFocusAreaDetails';
 import SelectWrapper from 'components/SelectWrapper';
 import SelectSingleWrapper from 'components/SelectSingleWrapper';
+import Loading from 'components/Loading';
 // simple styles (styled components)
 import Row from 'styles/Row';
 import Column from 'styles/Column';
@@ -214,6 +215,9 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
             <Row>
+              { !ready &&
+                <Loading />
+              }
               { ready &&
                 <Column width={[1]}>
                   <PlotFocusAreaDetails

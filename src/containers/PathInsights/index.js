@@ -28,6 +28,7 @@ import AsideContent from 'components/AsideContent';
 import PlotInsight from 'components/PlotInsight';
 import KeyEntryIcon from 'components/KeyEntryIcon';
 import SelectWrapper from 'components/SelectWrapper';
+import Loading from 'components/Loading';
 // simple styles (styled components)
 import Row from 'styles/Row';
 import Column from 'styles/Column';
@@ -207,6 +208,9 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
             <Row>
+              { !ready &&
+                <Loading />
+              }
               { ready && relevantInsights.map((insight) => (
                 <Column
                   width={[1, 1 / 2, 1 / 3]}
