@@ -69,6 +69,12 @@ function announcementReducer(state = fromJS({ msg: '', path: '', query: '' }), a
     }
     return state;
   }
+  if (action.type === DATA_REQUESTED) {
+    return state.set('msg', getLabel('screenreader.dataRequested'));
+  }
+  if (action.type === DATA_LOADED) {
+    return state.set('msg', getLabel('screenreader.dataLoaded'));
+  }
   return state;
 }
 

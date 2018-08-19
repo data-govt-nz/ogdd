@@ -39,6 +39,8 @@
   "component.surveyInformation.aboutLink.before": "See ",
   "component.surveyInformation.aboutLink.after": " for details",
   "screenreader.navActive": "Currently selected page",
+  "screenreader.dataRequested": "Loading data",
+  "screenreader.dataLoaded": "Data loaded",
   "screenreader.navigationOccured": "Navigation occured",
   "screenreader.navigationQueryUpdated": "View updated",
   "screenreader.skipToContent": "Skip to main content",
