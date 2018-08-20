@@ -128,10 +128,14 @@ const Header = ({ navItems, location, nav }) => (
   <Styled role="banner">
     <NavBar>
       <LogoWrapper>
-        <Logo />
+        <Logo role="presentation" aria-hidden="true" />
       </LogoWrapper>
       <ContentContainer>
-        <Brand onClick={() => nav('')} title={getLabel('screenreader.header.homeLink')}>
+        <Brand
+          onClick={() => nav('')}
+          title={`${getLabel('app.title')}. ${getLabel('screenreader.header.homeLink')}`}
+          aria-label={`${getLabel('app.title')}. ${getLabel('screenreader.header.homeLink')}`}
+        >
           <Icon name="brand" title={getLabel('app.title')} />
         </Brand>
         <Menu navItems={navItems} visibleMin={BREAKPOINTS.MEDIUM} />

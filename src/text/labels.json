@@ -54,5 +54,5 @@
   "screenreader.services.chart-caption": "A time series chart showing how open data are made available ",
   "screenreader.services.chart-table-caption": "Table listing chart values",
   "screenreader.insights.focus-area-label": "Key insight for focus area: ",
-  "screenreader.header.homeLink": "Navigate to start page"
+  "screenreader.header.homeLink": "Select to navigate to start page"
 }

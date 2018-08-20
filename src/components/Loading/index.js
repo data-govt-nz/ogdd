@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactLoading from 'react-loading';
 import { withTheme } from 'styled-components';
 
-import Label from 'components/Label'
+import Label from 'components/Label';
 
 const Loading = ({ theme }) => (
   <div>
