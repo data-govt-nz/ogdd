@@ -118,6 +118,7 @@ class PlotServicesSmall extends React.PureComponent { // eslint-disable-line rea
                 style={{
                   ticks: { strokeWidth: 0 },
                 }}
+                tickPadding={2}
               />
               <YAxis
                 tickValues={yAxisRange}
@@ -127,6 +128,7 @@ class PlotServicesSmall extends React.PureComponent { // eslint-disable-line rea
                   ticks: { strokeWidth: 1 },
                 }}
                 tickSize={3}
+                tickPadding={2}
               />
               { data.length > 1
                 ? (

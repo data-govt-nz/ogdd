@@ -238,6 +238,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
                   style={{
                     ticks: { strokeWidth: 0 },
                   }}
+                  tickPadding={2}
                 />
                 <YAxis
                   tickValues={[0, 25, 50, 75, 100]}
@@ -247,6 +248,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
                     ticks: { strokeWidth: 1 },
                   }}
                   tickSize={3}
+                  tickPadding={2}
                 />
                 { otherSubjects && otherData.map((d) => d.length > 1
                   ? (

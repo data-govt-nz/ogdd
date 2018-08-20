@@ -172,6 +172,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                   style={{
                     strokeWidth: 0,
                   }}
+                  tickPadding={2}
                 />
                 <YAxis
                   tickValues={yAxisRange}
@@ -181,6 +182,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                     ticks: { strokeWidth: 1 },
                   }}
                   tickSize={3}
+                  tickPadding={2}
                 />
                 <AreaSeries
                   data={referenceSubject ? referenceData : data}
