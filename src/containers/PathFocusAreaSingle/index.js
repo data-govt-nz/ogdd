@@ -213,7 +213,7 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
               { this.renderAsideContent(ready && focusArea) }
             </Visible>
           </Column>
-          <Column width={[1, 3 / 4]} order={1}>
+          <Column width={[1, 3 / 4]} order={1} paddingvertical="true">
             { !ready &&
               <Loading />
             }

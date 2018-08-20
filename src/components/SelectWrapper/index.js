@@ -15,6 +15,7 @@ const SelectDiv = styled.span`
   margin: 0 2px;
   cursor: pointer;
   position: relative;
+  display: inline-block;
   &:hover {
     color: ${(props) => props.theme.colors.hover};
   }

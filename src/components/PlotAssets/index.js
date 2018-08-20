@@ -96,7 +96,7 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
                 onMouseLeave={() => {
                   onHighlightSurvey(surveys.last().get('survey_id'));
                 }}
-                margin={{ bottom: 30 }}
+                margin={{ bottom: 30, right: 13 }}
               >
                 <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
                 <XAxis

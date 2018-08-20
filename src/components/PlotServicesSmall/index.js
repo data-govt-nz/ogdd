@@ -109,7 +109,7 @@ class PlotServicesSmall extends React.PureComponent { // eslint-disable-line rea
               onMouseLeave={() => {
                 onHighlightSurvey(surveys.last().get('survey_id'));
               }}
-              margin={{ bottom: 25 }}
+              margin={{ bottom: 25, right: 13 }}
             >
               <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
               <GridLines

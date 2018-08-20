@@ -98,7 +98,7 @@ injectGlobal`
   }
 
   #ogdd-root .rv-xy-plot {
-    color: #8B969D;
+    color: #202326;
     font-weight: 600;
   }
   #ogdd-root .rv-xy-plot__axis__line {
@@ -112,7 +112,7 @@ injectGlobal`
     stroke: #E7E9EB;
   }
   #ogdd-root .rv-xy-plot__axis__tick__text {
-    fill: #8B969D;
+    fill: #202326;
   }
   #ogdd-root .rv-xy-plot__axis__tick__text::selection {
     fill: #fff;

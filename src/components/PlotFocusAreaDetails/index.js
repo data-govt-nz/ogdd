@@ -50,7 +50,6 @@ const PlotHintLabel = styled.div`
   }
 `;
 const WrapPlot = styled.div`
-  padding-top: 30px;
   padding-left: 0px;
   padding-right: 80px;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
@@ -60,11 +59,10 @@ const WrapPlot = styled.div`
 `;
 const Dismiss = styled.div`
   position: absolute;
-  right: 0;
-  top: 50px;
-  margin-top: 9px;
+  right: -7px;
+  top: -3px;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    margin-top: 0;
+    right: 0;
     top: 0;
   }
 `;
@@ -182,7 +180,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
       <Card
         onMouseLeave={() => this.onHighlightSubject(false)}
       >
-        <CardHeader>
+        <CardHeader dismissable>
           <ScreenReaderOnly>
             {getLabel('component.focus-areas.focus-area')}
           </ScreenReaderOnly>
@@ -230,7 +228,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
                   this.onHighlightSubject(false);
                   onHighlightSurvey(surveys.last().get('survey_id'));
                 }}
-                margin={{ bottom: 30 }}
+                margin={{ bottom: 30, right: 13 }}
               >
                 <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
                 <XAxis

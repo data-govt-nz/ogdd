@@ -33,12 +33,13 @@ import WrapPlot from 'styles/WrapPlot';
 // component styles
 const ReferenceHint = styled.div`
   position: absolute;
-  bottom: 35px;
+  bottom: 10px;
   left: 0;
   width: 100%;
   text-align: center;
-  color: ${(props) => props.theme.colors.referenceLabel}
-  font-size: ${(props) => props.theme.sizes[0]}
+  color: ${(props) => props.theme.colors.referenceLabel};
+  font-size: ${(props) => props.theme.sizes[0]};
+  font-weight: 600;
 `;
 
 /**
@@ -158,7 +159,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                 onMouseLeave={() => {
                   onHighlightSurvey(surveys.last().get('survey_id'));
                 }}
-                margin={{ bottom: 30 }}
+                margin={{ bottom: 30, right: 13 }}
               >
                 <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
                 <AreaSeries data={dataBackground} style={{ fill: theme.colors.faPlotBackground, strokeWidth: 0 }} />
