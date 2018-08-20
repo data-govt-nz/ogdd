@@ -8,18 +8,40 @@ import styled, { css } from 'styled-components';
   *
   */
 export default styled(Box)`
-  padding-top:${(props) => props.paddingtop || 0}px;
-  padding-right:${(props) => props.theme.gutter[0]};
-  padding-left:${(props) => props.theme.gutter[0]};
-  padding-bottom: 0;
   flex: 0 0 auto;
+  padding-right: ${(props) => props.theme.gutter[0]};
+  padding-left: ${(props) => props.theme.gutter[0]};
+  padding-top: ${(props) => props.paddingvertical
+    ? props.theme.gutter[0]
+    : 0
+  };
+  padding-bottom: ${(props) => props.paddingvertical
+    ? props.theme.gutter[0]
+    : 0
+  };
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    padding-right:${(props) => props.theme.gutter[1]};
-    padding-left:${(props) => props.theme.gutter[1]};
+    padding-right: ${(props) => props.theme.gutter[1]};
+    padding-left: ${(props) => props.theme.gutter[1]};
+    padding-top: ${(props) => props.paddingvertical
+      ? props.theme.gutter[1]
+      : 0
+    };
+    padding-bottom: ${(props) => props.paddingvertical
+      ? props.theme.gutter[1]
+      : 0
+    };
   }
   @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
-    padding-right:${(props) => props.theme.gutter[2]};
-    padding-left:${(props) => props.theme.gutter[2]};
+    padding-right: ${(props) => props.theme.gutter[2]};
+    padding-left: ${(props) => props.theme.gutter[2]};
+    padding-top: ${(props) => props.paddingvertical
+      ? props.theme.gutter[2]
+      : 0
+    };
+    padding-bottom: ${(props) => props.paddingvertical
+      ? props.theme.gutter[2]
+      : 0
+    };
   }
   position: relative;
   @media print {

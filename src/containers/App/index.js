@@ -21,13 +21,15 @@ const Styled = styled.div`
   &:focus { outline: none; }
 `;
 const Main = styled.main`
-  padding-top: 10px;
-  min-height: 90vH;
+  margin-top: -100px;
+  padding-top: 110px;
+  min-height: 100vH;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    padding-top: 20px;
+    padding-top: 120px;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
-    padding-top: 40px;
+    margin-top: -70px;
+    padding-top: 110px;
   }
   &:focus { outline: none; }
 `;

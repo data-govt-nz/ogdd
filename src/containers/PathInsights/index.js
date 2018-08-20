@@ -207,36 +207,39 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
             </Visible>
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
-            <Row>
-              { !ready &&
-                <Loading />
-              }
-              { ready && relevantInsights.map((insight) => (
-                <Column
-                  width={[1, 1 / 2, 1 / 3]}
-                  printwidth={1 / 2}
-                  key={insight.get('insight_id')}
-                >
-                  <PlotInsight
-                    insight={insight.set(
-                      'outcomes',
-                      outcomes.filter((outcome) =>
-                        quasiEquals(outcome.get('survey_id'), surveyID)
-                        && quasiEquals(outcome.get('indicator_id'), insight.get('indicator_id'))
-                      )
-                    )}
-                    agenciesTotal={parseInt(survey.get('agencies_total'), 10)}
-                    focusArea={indicators.find((item) =>
-                        quasiEquals(
-                          item.get('indicator_id'),
-                          insight.getIn(['indicator', 'parent_indicator_id'])
+            { !ready &&
+              <Loading />
+            }
+            { ready &&
+              <Row>
+                { relevantInsights.map((insight) => (
+                  <Column
+                    width={[1, 1 / 2, 1 / 3]}
+                    printwidth={1 / 2}
+                    key={insight.get('insight_id')}
+                    paddingvertical="true"
+                  >
+                    <PlotInsight
+                      insight={insight.set(
+                        'outcomes',
+                        outcomes.filter((outcome) =>
+                          quasiEquals(outcome.get('survey_id'), surveyID)
+                          && quasiEquals(outcome.get('indicator_id'), insight.get('indicator_id'))
                         )
-                      )
-                    }
-                  />
-                </Column>
-              ))}
-            </Row>
+                      )}
+                      agenciesTotal={parseInt(survey.get('agencies_total'), 10)}
+                      focusArea={indicators.find((item) =>
+                          quasiEquals(
+                            item.get('indicator_id'),
+                            insight.getIn(['indicator', 'parent_indicator_id'])
+                          )
+                        )
+                      }
+                    />
+                  </Column>
+                ))}
+              </Row>
+            }
           </Column>
         </Row>
       </ContentContainer>

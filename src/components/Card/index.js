@@ -8,7 +8,6 @@ import Button from 'styles/Button';
 // component styles
 const Styled = styled(Button)`
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-  margin: 5px 5px 25px;
   padding: 4px 10px 10px;
   text-align: left;
   max-width: 100%;

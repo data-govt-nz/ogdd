@@ -163,7 +163,7 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
           <Label id="component.assets.longTitle" />
         </PageLongTitle>
         <Row>
-          <Column width={[1, 1 / 4]} order={2} paddingtop={10}>
+          <Column width={[1, 1 / 4]} order={2} >
             <Visible min={0} print="false" >
               { this.renderAsideContent() }
             </Visible>
@@ -176,6 +176,7 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
               <Row>
                 <Column
                   width={[1, 1, 1 / 2]}
+                  paddingvertical="true"
                 >
                   <PlotTitle>{machineReadableIndicator.get('title')}</PlotTitle>
                   <PlotAssets
@@ -189,6 +190,7 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
                 </Column>
                 <Column
                   width={[1, 1, 1 / 2]}
+                  paddingvertical="true"
                 >
                   <PlotTitle>{nzgoalIndicator.get('title')}</PlotTitle>
                   <PlotAssets

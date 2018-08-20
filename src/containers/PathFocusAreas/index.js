@@ -268,32 +268,35 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
             </Visible>
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
-            <Row>
-              { !ready &&
-                <Loading />
-              }
-              { ready && focusAreaIndicators.map((focusArea) => (
-                <Column
-                  width={[1, 1 / 2, 1 / 3]}
-                  key={focusArea.get('indicator_id')}
-                >
-                  <PlotFocusArea
-                    focusArea={focusArea}
-                    focusAreaIcon={focusArea.get('indicator_id')}
-                    surveys={surveys}
-                    subject={subjectSelected}
-                    referenceSubject={subjectReference}
-                    onSelectReference={() => subjectReference ? this.onSubjectChange(subjectReference.get('subject_id')) : null}
-                    surveyHighlightedId={surveyHighlightedId}
-                    onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
-                    onFAMouseEnter={subjects.size === 1 ? () => this.onFAMouseEnter(focusArea) : null}
-                    onFAMouseLeave={subjects.size === 1 ? () => this.onFAMouseLeave() : null}
-                    onFATouch={subjects.size === 1 ? () => this.onFATouch(focusArea) : null}
-                    onFAClick={subjects.size > 1 ? () => this.onFAClick(focusArea.get('indicator_id')) : null}
-                  />
-                </Column>
-              ))}
-            </Row>
+            { !ready &&
+              <Loading />
+            }
+            { ready &&
+              <Row>
+                { focusAreaIndicators.map((focusArea) => (
+                  <Column
+                    width={[1, 1 / 2, 1 / 3]}
+                    key={focusArea.get('indicator_id')}
+                    paddingvertical="true"
+                  >
+                    <PlotFocusArea
+                      focusArea={focusArea}
+                      focusAreaIcon={focusArea.get('indicator_id')}
+                      surveys={surveys}
+                      subject={subjectSelected}
+                      referenceSubject={subjectReference}
+                      onSelectReference={() => subjectReference ? this.onSubjectChange(subjectReference.get('subject_id')) : null}
+                      surveyHighlightedId={surveyHighlightedId}
+                      onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
+                      onFAMouseEnter={subjects.size === 1 ? () => this.onFAMouseEnter(focusArea) : null}
+                      onFAMouseLeave={subjects.size === 1 ? () => this.onFAMouseLeave() : null}
+                      onFATouch={subjects.size === 1 ? () => this.onFATouch(focusArea) : null}
+                      onFAClick={subjects.size > 1 ? () => this.onFAClick(focusArea.get('indicator_id')) : null}
+                    />
+                  </Column>
+                ))}
+              </Row>
+            }
           </Column>
         </Row>
       </ContentContainer>

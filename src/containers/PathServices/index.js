@@ -168,7 +168,7 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
           <Label id="component.services.longTitle" />
         </PageLongTitle>
         <Row>
-          <Column width={[1, 1 / 4]} order={2} paddingtop={10}>
+          <Column width={[1, 1 / 4]} order={2} >
             <Visible min={0} print="false">
               { this.renderAsideContent() }
             </Visible>
@@ -179,7 +179,7 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
             }
             { ready &&
               <Row>
-                <Column width={[1, 1, 1 / 2]}>
+                <Column width={[1, 1, 1 / 2]} paddingvertical="true">
                   <PlotTitle>{howIndicator.get('title')}</PlotTitle>
                   <PlotServices
                     indicator={howIndicator}
@@ -189,7 +189,7 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
                     onCardMouseLeave={() => this.onCardMouseLeave()}
                   />
                 </Column>
-                <Column width={[1, 1, 1 / 2]}>
+                <Column width={[1, 1, 1 / 2]} paddingvertical="true">
                   <PlotTitle>{standardsIndicator.get('title')}</PlotTitle>
                   <PlotServices
                     indicator={standardsIndicator}
@@ -203,7 +203,7 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
             }
             { ready &&
               <Row>
-                <Column width={[1]}>
+                <Column width={[1]} paddingvertical="true">
                   <PlotTitle>{servicesIndicator.get('title')}</PlotTitle>
                   <PlotServicesMultiples
                     indicator={servicesIndicator}

@@ -214,11 +214,11 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
             </Visible>
           </Column>
           <Column width={[1, 3 / 4]} order={1}>
-            <Row>
-              { !ready &&
-                <Loading />
-              }
-              { ready &&
+            { !ready &&
+              <Loading />
+            }
+            { ready &&
+              <Row>
                 <Column width={[1]}>
                   <PlotFocusAreaDetails
                     focusArea={focusArea}
@@ -233,8 +233,8 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
                     focusAreaIcon={faSelectedId}
                   />
                 </Column>
-              }
-            </Row>
+              </Row>
+            }
           </Column>
         </Row>
       </ContentContainer>
