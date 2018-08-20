@@ -12,11 +12,11 @@ export default styled(Box)`
   padding-right: ${(props) => props.theme.gutter[0]};
   padding-left: ${(props) => props.theme.gutter[0]};
   padding-top: ${(props) => props.paddingvertical
-    ? props.theme.gutter[0]
+    ? props.theme.gutter[2]
     : 0
   };
   padding-bottom: ${(props) => props.paddingvertical
-    ? props.theme.gutter[0]
+    ? props.theme.gutter[2]
     : 0
   };
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
