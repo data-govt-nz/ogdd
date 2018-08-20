@@ -43,20 +43,20 @@ survey_id,subject_id,indicator_id,value,answer,answer_text
 2018,all,q19,74,no,Do not
 2018,all,q19,21,developing,Under development
 2017,all,q23,24,yes,Have
-2017,all,q23,36,not_sure,Are not sure
-2017,all,q23,36,no,Have not
+2017,all,q23,3,not_sure,Are not sure
+2017,all,q23,72,no,Have not
 2017,all,q26,72,yes,Work with others
-2017,all,q26,14,not_sure,Are not sure
-2017,all,q26,14,no,Do not
+2017,all,q26,7,not_sure,Are not sure
+2017,all,q26,21,no,Do not
 2017,all,q28,38,yes,Have
 2017,all,q28,31,not_sure,Are not sure
 2017,all,q28,31,no,Have not
 2017,all,q30,3,yes,Track
-2017,all,q30,43,not_sure,Are not sure
-2017,all,q30,43,no,Do not track
+2017,all,q30,7,not_sure,Are not sure
+2017,all,q30,90,no,Do not track
 2017,all,q33,28,yes,Tailor
-2017,all,q33,36,not_sure,Are not sure
-2017,all,q33,36,no,Do not tailor
+2017,all,q33,28,not_sure,Are not sure
+2017,all,q33,45,no,Do not tailor
 2018,all,q33,36,yes,Do
 2018,all,q33,38,no,Do not
 2018,all,q33,26,not_sure,Not sure
@@ -64,5 +64,5 @@ survey_id,subject_id,indicator_id,value,answer,answer_text
 2018,all,q34,41,no,Do not
 2017,all,q36,24,yes,Have
 2017,all,q36,41,developing,Under development
-2017,all,q36,3,like_to,Would like to
+2017,all,q36,31,like_to,Would like to
 2017,all,q36,3,not_warranted,Not warranted
