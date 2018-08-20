@@ -48,11 +48,11 @@ const Brand = styled(NavLink)`
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     top: 15px;
-    left: -16px;
+    left: -25px;
   }
   @media print {
     top: 15px;
-    left: -16px;
+    left: -25px;
   }
   &:hover{
     box-shadow: none !important;

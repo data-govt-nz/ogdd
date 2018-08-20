@@ -9,12 +9,12 @@ import styled from 'styled-components';
 export default styled.div`
   max-width: ${(props) => props.theme.maxWidth};
   margin: 0 auto;
-  padding: 0 ${(props) => props.theme.gutter[0]};
+  position: relative;
+  padding: 0 10px;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    padding: 0 ${(props) => props.theme.gutter[1]};
+    padding: 0 25px;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
-    padding: 0 ${(props) => props.theme.gutter[2]};
+    padding: 0;
   }
-  position: relative;
 `;
