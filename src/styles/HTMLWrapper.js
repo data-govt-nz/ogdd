@@ -10,7 +10,7 @@ export default styled.div`
       a:after{
         content:" (" attr(href) ") ";
         font-size: 0.8em;
-        font-weight: normal;
+        font-weight: 400;
       }
     }
     `

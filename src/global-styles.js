@@ -11,21 +11,24 @@ import { injectGlobal } from 'styled-components';
 injectGlobal`
   ${styledNormalize};
 
-  @import url('https://fonts.googleapis.com/css?family=Barlow:300,400,600,700');
+  @import url('https://fonts.googleapis.com/css?family=Barlow:400,500,600,700');
   #ogdd-root {
     font-family: 'Barlow', sans-serif;
     font-size: 14px;
     color: #202326;
-    font-weight: normal;
+    font-weight: 400;
     line-height: 1.15;
     -webkit-font-smoothing: antialiased;
+  }
+  #ogdd-root p {
+    font-family: 'Barlow', sans-serif;
+    line-height: 1.4;
   }
   #ogdd-root h1,
   #ogdd-root h2,
   #ogdd-root h3,
   #ogdd-root h4,
   #ogdd-root h5,
-  #ogdd-root p,
   #ogdd-root header,
   #ogdd-root footer,
   #ogdd-root section,

@@ -15,13 +15,14 @@ const Styled = styled.div`
   height: 50px;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
     height: 40px;
+    margin-bottom: 15px;
   }
 `;
 const Cell = styled.div`
   display: table-cell;
   vertical-align: middle;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
     vertical-align: top;

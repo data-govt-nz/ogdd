@@ -11,13 +11,13 @@ const Styled = styled.div`
   table-layout: fixed;
   width: 100%;
   line-height: 20px;
-  min-height: ${(props) => props.hasTitle ? '49px' : 0};
 `;
 const Cell = styled.div`
   display: table-cell;
   vertical-align: top;
   padding-top: 10px;
   font-size: 15px;
+  font-weight: 500;
 `;
 
 const IconCell = styled.div`
@@ -44,7 +44,7 @@ const IconWrap = styled.div`
   *
   */
 const CardTitle = ({ title, icon, altTitle }) => (
-  <Styled hasTitle={title !== ''}>
+  <Styled>
     <IconCell>
       <IconWrap>
         <Icon name={icon} title={altTitle} themeColor={icon} />

@@ -36,7 +36,7 @@ const SelectDiv = styled.span`
   }
 `;
 const Select = styled.select`
-  font-weight: 600;
+  font-weight: 700;
   padding-right: 10px !important;
   position: relative;
   z-index: 2;

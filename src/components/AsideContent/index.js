@@ -15,6 +15,7 @@ const Styled = styled.div`
     margin-top: ${(props) => props.isOffset ? 26 : 0}px;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+    padding: 4px 15px 10px;
     margin-top: ${(props) => props.isOffset ? 24 : 0}px;
   }
 `;

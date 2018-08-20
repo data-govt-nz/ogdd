@@ -121,7 +121,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
         onClick={onFAClick}
         title={focusArea.get('title')}
       >
-        <CardHeader>
+        <CardHeader hasMinHeight>
           <ScreenReaderOnly>
             {getLabel('component.focus-areas.focus-area')}
           </ScreenReaderOnly>

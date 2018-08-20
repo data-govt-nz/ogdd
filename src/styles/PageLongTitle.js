@@ -7,7 +7,7 @@ import styled from 'styled-components';
   *
   */
 export default styled.h1`
-  font-weight: normal
+  font-weight: 500;
   font-size: ${(props) => props.theme.sizes[2]};
   margin-top: 0;
   margin-bottom: 10px;

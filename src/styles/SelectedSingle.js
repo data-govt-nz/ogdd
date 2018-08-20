@@ -6,5 +6,5 @@ import styled from 'styled-components';
   *
   */
 export default styled.span`
-  font-weight: 600;
+  font-weight: 700;
 `;

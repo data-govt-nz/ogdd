@@ -19,23 +19,26 @@ import Link from 'styles/Link';
 // component styles
 const Styled = styled.div`
   margin-top: 30px;
+  font-size: 13px;
 `;
 const Title = styled.div`
-  font-weight: bold;
+  font-weight: 700;
 `;
 const TitleWrapper = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 const CurrentSurveyInfo = styled.p`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 const AboutLinkWrapper = styled.p`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   @media print {
     display: none;
   }
 `;
-const AboutLink = styled(Link)``;
+const AboutLink = styled(Link)`
+  font-size: 13px !important;
+`;
 
 /**
   * Displays survey information (used for sidebar)
