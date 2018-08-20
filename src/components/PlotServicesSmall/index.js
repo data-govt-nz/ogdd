@@ -26,7 +26,10 @@ import WrapPlot from 'styles/WrapPlot';
 
 // component styles
 const Styled = styled.div`
-  padding: 0 5px 30px;
+  padding: 0 5px 50px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    padding-bottom: 30px;
+  }
 `;
 const Caption = styled.div`
   text-align: center;

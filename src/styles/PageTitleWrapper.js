@@ -8,5 +8,8 @@ import styled from 'styled-components';
   */
 export default styled.div`
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    margin-bottom: 30px;
+  }
 `;
