@@ -1,6 +1,6 @@
 insight_id,survey_id,indicator_id,value,text,outcome_answers
 ki2017-01,2017,q02,90,have published open data,yes
-ki2017-02,2017,q26,72,work with orther organisations in their sector to promote the value of specific datasets or open data in general,yes
+ki2017-02,2017,q26,72,work with other organisations in their sector to promote the value of specific datasets or open data in general,yes
 ki2017-03,2017,q28,62,do not or are note sure they have a standard process to ensure they have the right to publish data provided by or derived from third parties,"no,not_sure"
 ki2017-04,2017,q14,34,would like to develop a process to act on feedback,like_to
 ki2017-05,2017,q33,72,do not or are not sure they tailor contracts or procurement activities to allow the data to be released openly,"no,not_sure"
