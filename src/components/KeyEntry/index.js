@@ -8,7 +8,7 @@ const Styled = styled.div`
   display: table;
   table-layout: fixed;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: ${(props) => props.small ? 2 : 5}px;;
 `;
 const Cell = styled.div`
   display: table-cell;
@@ -76,7 +76,7 @@ const KeyEntry = ({
   outline,
   area,
 }) => (
-  <Styled>
+  <Styled small>
     { line &&
       <LineCell>
         <Line small={small} color={color} colorValue={colorValue} dashed={dashed} role="presentation" />

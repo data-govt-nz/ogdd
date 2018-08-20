@@ -21,30 +21,32 @@ import getColorValue from './get-color-value';
 
 // component styles
 const InsightValue = styled.div`
-  font-weight: 600;
+  font-weight: 700;
   font-size: ${(props) => props.theme.sizes[3]};
   color: ${(props) => props.color
     ? props.theme.colors[props.color]
     : props.theme.colors.dark
   };
+  margin-top: 12px;
   margin-bottom: 10px;
 `;
 const InsightText = styled.div`
   font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
 `;
 const IndicatorPlot = styled.div``;
 const IndicatorBar = styled.div`
   width: 100%;
   height: 30px;
   position: relative;
-  margin: 30px 0 15px;
+  margin: 25px 0 10px;
 `;
 const OutcomeBar = styled.div`
   float: left;
   height: 30px;
   background-color: ${(props) => props.outline ? 'transparent' : props.colorValue} !important;
   width: ${(props) => props.value}%;
-  margin: 0 -1px;
   border: 1px solid;
   border-color: ${(props) => props.colorValue};
   position: relative;
@@ -53,10 +55,10 @@ const OutcomeBar = styled.div`
       content: '';
       position: absolute;
       left: -1px;
-      right: 1px;
-      border-top: 1px solid black;
-      border-left: ${() => props.markedFirst ? '1px solid' : 0};
-      border-right: ${() => props.markedLast ? '1px solid' : 0};
+      right: -1px;
+      border-top: 1px solid ${props.theme.colors.black};
+      border-left: ${props.markedFirst ? '1px solid' : 0};
+      border-right: ${props.markedLast ? '1px solid' : 0};
       top: -12px;
       height: 5px;
       display: block;
@@ -67,7 +69,10 @@ const OutcomeBar = styled.div`
     print-color-adjust: exact !important;
   }
 `;
-const IndicatorOutcomes = styled.div``;
+const IndicatorOutcomes = styled.div`
+  position: relative;
+  left: -2px;
+`;
 
 /**
   * Key insight component shoing key insight and associated indicator as stacked bar

@@ -156,8 +156,8 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
               </FlexibleWidthXYPlot>
             </WrapPlot>
             <Key>
-              <KeyEntry color="fa3" title={indicator.get('title')} area />
-              <KeyEntry color="assetReference" title={referenceIndicator.get('title')} area />
+              <KeyEntry color="fa3" title={indicator.get('title')} area small />
+              <KeyEntry color="assetReference" title={referenceIndicator.get('title')} area small />
             </Key>
           </ScreenReaderWrapPlot>
         </CardBody>

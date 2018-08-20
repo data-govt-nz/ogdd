@@ -191,6 +191,7 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
                     title={series.title}
                     dashed={index === 0}
                     line
+                    small
                   />
                 )
                 : (
@@ -199,6 +200,7 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
                     color="fa1"
                     title={series.title}
                     outline={index !== 0}
+                    small
                   />
                 )
               )}
