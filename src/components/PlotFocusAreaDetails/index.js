@@ -230,6 +230,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
                   this.onHighlightSubject(false);
                   onHighlightSurvey(surveys.last().get('survey_id'));
                 }}
+                margin={{ bottom: 30 }}
               >
                 <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
                 <XAxis

@@ -96,6 +96,7 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
                 onMouseLeave={() => {
                   onHighlightSurvey(surveys.last().get('survey_id'));
                 }}
+                margin={{ bottom: 30 }}
               >
                 <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
                 <XAxis
@@ -155,8 +156,8 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
               </FlexibleWidthXYPlot>
             </WrapPlot>
             <Key>
-              <KeyEntry color="fa3" title={indicator.get('title')} />
-              <KeyEntry color="assetReference" title={referenceIndicator.get('title')} />
+              <KeyEntry color="fa3" title={indicator.get('title')} area />
+              <KeyEntry color="assetReference" title={referenceIndicator.get('title')} area />
             </Key>
           </ScreenReaderWrapPlot>
         </CardBody>

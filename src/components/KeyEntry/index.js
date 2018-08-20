@@ -8,16 +8,17 @@ const Styled = styled.div`
   display: table;
   table-layout: fixed;
   width: 100%;
-  line-height: 20px;
+  margin-bottom: 5px;
 `;
 const Cell = styled.div`
   display: table-cell;
   vertical-align: ${(props) => props.dot ? 'middle' : 'top'};
   font-size: ${(props) => props.small ? props.theme.sizes[0] : props.theme.sizes[1]};
+  font-weight: 500;
 `;
 const DotCell = styled(Cell)`
   vertical-align: middle;
-  width: 14px;
+  width: 18px;
   padding: 5px 2px;
 `;
 const LineCell = styled(Cell)`
@@ -36,7 +37,7 @@ const Line = styled.div`
 const Dot = styled.div`
   width: ${(props) => props.small ? 8 : 10}px;
   height: ${(props) => props.small ? 8 : 10}px;
-  border-radius: 9999px;
+  border-radius: ${(props) => props.area ? 0 : 9999}px;
   background-color: ${(props) => {
     if (props.outline) {
       return 'transparent';
@@ -73,6 +74,7 @@ const KeyEntry = ({
   dashed,
   small,
   outline,
+  area,
 }) => (
   <Styled>
     { line &&
@@ -82,7 +84,7 @@ const KeyEntry = ({
     }
     { !line &&
       <DotCell small={small}>
-        <Dot color={color} colorValue={colorValue} outline={outline} role="presentation" />
+        <Dot color={color} colorValue={colorValue} outline={outline} role="presentation" area={area} />
       </DotCell>
     }
     <Cell small={small} dot={!line}>
@@ -106,6 +108,8 @@ KeyEntry.propTypes = {
   outline: PropTypes.bool,
   /** if key item is small */
   small: PropTypes.bool,
+  /** if key item is square */
+  area: PropTypes.bool,
 };
 
 export default KeyEntry;

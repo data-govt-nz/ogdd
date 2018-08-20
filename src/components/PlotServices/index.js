@@ -117,6 +117,7 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
                 onMouseLeave={() => {
                   onHighlightSurvey(surveys.last().get('survey_id'));
                 }}
+                margin={{ bottom: 30 }}
               >
                 <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
                 <XAxis

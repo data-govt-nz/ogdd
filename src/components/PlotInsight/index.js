@@ -154,6 +154,7 @@ class PlotInsight extends React.PureComponent { // eslint-disable-line react/pre
                 outcomesOrdered.map((item) => (
                   <KeyEntry
                     small
+                    area
                     key={item.get('answer')}
                     title={`${formatValue(item.get('value'), insight.getIn(['indicator', 'type']))} ${item.get('answer_text')}`}
                     outline={hasOutline(item.get('answer'))}

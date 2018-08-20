@@ -7,5 +7,5 @@ import styled from 'styled-components';
   *
   */
 export default styled.div`
-  padding-left: 40px;
+  padding-left: 36px;
 `;

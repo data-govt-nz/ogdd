@@ -26,7 +26,7 @@ import WrapPlot from 'styles/WrapPlot';
 
 // component styles
 const Styled = styled.div`
-  padding: 0 15px 30px;
+  padding: 0 5px 30px;
 `;
 const Caption = styled.div`
   text-align: center;
@@ -35,6 +35,7 @@ const Caption = styled.div`
   @media print {
     text-align: left;
   }
+  font-weight: 600;
 `;
 
 /**
@@ -100,11 +101,12 @@ class PlotServicesSmall extends React.PureComponent { // eslint-disable-line rea
         >
           <WrapPlot>
             <FlexibleWidthXYPlot
-              height={160}
+              height={140}
               xType="time"
               onMouseLeave={() => {
                 onHighlightSurvey(surveys.last().get('survey_id'));
               }}
+              margin={{ bottom: 25 }}
             >
               <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
               <GridLines

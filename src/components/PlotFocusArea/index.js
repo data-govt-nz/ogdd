@@ -158,6 +158,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                 onMouseLeave={() => {
                   onHighlightSurvey(surveys.last().get('survey_id'));
                 }}
+                margin={{ bottom: 30 }}
               >
                 <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
                 <AreaSeries data={dataBackground} style={{ fill: theme.colors.faPlotBackground, strokeWidth: 0 }} />

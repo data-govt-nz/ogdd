@@ -38,11 +38,12 @@ class PlotServicesMultiples extends React.PureComponent { // eslint-disable-line
     return (
       <Card onMouseLeave={onCardMouseLeave} >
         <CardBody withoutTitle>
-          <Row>
+          <Row withoutgutter="true">
             { groups.toList().map((group) => (
               <Column
                 width={[1, 1 / 2, 1 / 3]}
                 key={group.first().get('answer')}
+                withoutgutter="true"
               >
                 <PlotServicesSmall
                   indicatorType={indicator.get('type')}

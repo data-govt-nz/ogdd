@@ -9,8 +9,8 @@ import styled, { css } from 'styled-components';
   */
 export default styled(Box)`
   flex: 0 0 auto;
-  padding-right: ${(props) => props.theme.gutter[0]};
-  padding-left: ${(props) => props.theme.gutter[0]};
+  padding-right: ${(props) => props.withoutgutter ? 0 : props.theme.gutter[0]};
+  padding-left: ${(props) => props.withoutgutter ? 0 : props.theme.gutter[0]};
   padding-top: ${(props) => props.paddingvertical
     ? props.theme.gutter[2]
     : 0
@@ -20,8 +20,8 @@ export default styled(Box)`
     : 0
   };
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    padding-right: ${(props) => props.theme.gutter[1]};
-    padding-left: ${(props) => props.theme.gutter[1]};
+    padding-right: ${(props) => props.withoutgutter ? 0 : props.theme.gutter[1]};
+    padding-left: ${(props) => props.withoutgutter ? 0 : props.theme.gutter[1]};
     padding-top: ${(props) => props.paddingvertical
       ? props.theme.gutter[1]
       : 0
@@ -32,8 +32,8 @@ export default styled(Box)`
     };
   }
   @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
-    padding-right: ${(props) => props.theme.gutter[2]};
-    padding-left: ${(props) => props.theme.gutter[2]};
+    padding-right: ${(props) => props.withoutgutter ? 0 : props.theme.gutter[2]};
+    padding-left: ${(props) => props.withoutgutter ? 0 : props.theme.gutter[2]};
     padding-top: ${(props) => props.paddingvertical
       ? props.theme.gutter[2]
       : 0
@@ -51,8 +51,8 @@ export default styled(Box)`
       `
       : '100%'
     }
-    padding-right:${(props) => props.theme.gutter[2]};
-    padding-left:${(props) => props.theme.gutter[2]};
+    padding-right:${(props) => props.withoutgutter ? 0 : props.theme.gutter[2]};
+    padding-left:${(props) => props.withoutgutter ? 0 : props.theme.gutter[2]};
     page-break-inside: avoid;
   }
 `;
