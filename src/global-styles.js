@@ -96,5 +96,29 @@ injectGlobal`
     color: #fff;
     background-color: #2956D1; /* Gecko Browsers */
   }
+
+  #ogdd-root .rv-xy-plot {
+    color: #8B969D;
+    font-weight: 600;
+  }
+  #ogdd-root .rv-xy-plot__axis__line {
+    stroke-width: 1px;
+    stroke: #E7E9EB;
+  }
+  #ogdd-root .rv-xy-plot__axis__tick__line {
+    stroke: #E7E9EB;
+  }
+  #ogdd-root .rv-xy-plot__grid-lines__line {
+    stroke: #E7E9EB;
+  }
+  #ogdd-root .rv-xy-plot__axis__tick__text {
+    fill: #8B969D;
+  }
+  #ogdd-root .rv-xy-plot__axis__tick__text::selection {
+    fill: #fff;
+  }
+  #ogdd-root .rv-xy-plot__axis__tick__text::-moz-selection {
+    fill: #fff;
+  }
 `;
 // 'a' same as styles/Link

@@ -235,10 +235,18 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
                 <XAxis
                   tickValues={xAxisRange}
                   tickFormat={timeFormat('%Y')}
+                  style={{
+                    ticks: { strokeWidth: 0 },
+                  }}
                 />
                 <YAxis
                   tickValues={[0, 25, 50, 75, 100]}
                   tickFormat={(value) => formatValue(value, focusArea.get('type'))}
+                  style={{
+                    strokeWidth: 0,
+                    ticks: { strokeWidth: 1 },
+                  }}
+                  tickSize={3}
                 />
                 { otherSubjects && otherData.map((d) => d.length > 1
                   ? (

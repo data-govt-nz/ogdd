@@ -122,9 +122,17 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
                 <XAxis
                   tickValues={xAxisRange}
                   tickFormat={timeFormat('%Y')}
+                  style={{
+                    ticks: { strokeWidth: 0 },
+                  }}
                 />
                 <YAxis
                   tickFormat={(value) => formatValue(value, indicator.get('type'))}
+                  style={{
+                    strokeWidth: 0,
+                    ticks: { strokeWidth: 1 },
+                  }}
+                  tickSize={3}
                 />
                 { data && data.map((series, index) => series.data.length > 1
                   ? (

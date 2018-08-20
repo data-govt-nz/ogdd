@@ -115,10 +115,18 @@ class PlotServicesSmall extends React.PureComponent { // eslint-disable-line rea
               <XAxis
                 tickValues={xAxisRange}
                 tickFormat={timeFormat('%Y')}
+                style={{
+                  ticks: { strokeWidth: 0 },
+                }}
               />
               <YAxis
                 tickValues={yAxisRange}
                 tickFormat={(value) => formatValue(value, indicatorType)}
+                style={{
+                  strokeWidth: 0,
+                  ticks: { strokeWidth: 1 },
+                }}
+                tickSize={3}
               />
               { data.length > 1
                 ? (

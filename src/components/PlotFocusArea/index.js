@@ -164,15 +164,23 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                 <GridLines
                   direction="horizontal"
                   attr="y"
-                  tickValues={[50]}
+                  tickValues={[0, 50, 100]}
                 />
                 <XAxis
                   tickValues={xAxisRange}
                   tickFormat={timeFormat('%Y')}
+                  style={{
+                    strokeWidth: 0,
+                  }}
                 />
                 <YAxis
                   tickValues={yAxisRange}
                   tickFormat={(value) => formatValue(value, focusArea.get('type'))}
+                  style={{
+                    strokeWidth: 0,
+                    ticks: { strokeWidth: 1 },
+                  }}
+                  tickSize={3}
                 />
                 <AreaSeries
                   data={referenceSubject ? referenceData : data}

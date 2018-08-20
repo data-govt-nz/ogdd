@@ -101,9 +101,17 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
                 <XAxis
                   tickValues={xAxisRange}
                   tickFormat={timeFormat('%Y')}
+                  style={{
+                    ticks: { strokeWidth: 0 },
+                  }}
                 />
                 <YAxis
                   tickFormat={(value) => formatValue(value, indicator.get('type'), yAxisRange[1] > 10000)}
+                  style={{
+                    strokeWidth: 0,
+                    ticks: { strokeWidth: 1 },
+                  }}
+                  tickSize={3}
                 />
                 <AreaSeries
                   data={referenceData}
