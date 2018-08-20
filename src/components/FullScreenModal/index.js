@@ -23,6 +23,7 @@ const Dismiss = styled.div`
   position: absolute;
   right: 0;
   top: 0;
+  z-index: 1;
 `;
 
 /**
@@ -33,13 +34,13 @@ const Dismiss = styled.div`
   */
 const FullScreenModal = ({ dismiss, children }) => (
   <Styled>
+    <Dismiss>
+      <Close
+        onClick={dismiss}
+        altTitle={getLabel('screenreader.fsModal.button.dismiss')}
+      />
+    </Dismiss>
     <ContentContainer>
-      <Dismiss>
-        <Close
-          onClick={dismiss}
-          altTitle={getLabel('screenreader.fsModal.button.dismiss')}
-        />
-      </Dismiss>
       { children }
     </ContentContainer>
   </Styled>

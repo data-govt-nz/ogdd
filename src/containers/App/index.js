@@ -22,7 +22,7 @@ const Styled = styled.div`
 `;
 const Main = styled.main`
   margin-top: -100px;
-  padding-top: 110px;
+  padding-top: 100px;
   min-height: 100vH;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
     padding-top: 120px;

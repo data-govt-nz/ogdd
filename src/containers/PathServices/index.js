@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { List } from 'immutable';
 // utils
 import getLabel from 'utils/get-label';
@@ -34,15 +33,10 @@ import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import PrintOnly from 'styles/PrintOnly';
+import PlotTitle from 'styles/PlotTitle';
 
 // assets: icon and description
 import description from 'text/data-services.md'; // loaded as HTML from markdown
-
-// component styles
-const PlotTitle = styled.div`
-  margin-bottom: 15px;
-  font-weight: 600;
-`;
 
 // initial component state
 const INITIAL_STATE = {
@@ -113,6 +107,7 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
       <AsideContent
         title={this.renderPageTitle()}
         html={description}
+        isOffset
       >
         <SurveyInformation />
       </AsideContent>
@@ -168,7 +163,7 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
           <Label id="component.services.longTitle" />
         </PageLongTitle>
         <Row>
-          <Column width={[1, 1 / 4]} order={2} >
+          <Column width={[1, 1 / 4]} order={2} paddingvertical="true">
             <Visible min={0} print="false">
               { this.renderAsideContent() }
             </Visible>

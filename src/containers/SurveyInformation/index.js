@@ -23,8 +23,14 @@ const Styled = styled.div`
 const Title = styled.div`
   font-weight: bold;
 `;
-const CurrentSurveyInfo = styled.div``;
-const AboutLinkWrapper = styled.div`
+const TitleWrapper = styled.div`
+  margin-bottom: 10px;
+`;
+const CurrentSurveyInfo = styled.p`
+  margin-bottom: 10px;
+`;
+const AboutLinkWrapper = styled.p`
+  margin-bottom: 10px;
   @media print {
     display: none;
   }
@@ -47,17 +53,19 @@ const SurveyInformation = ({ surveys, surveySelectedId, nav }) => {
 
   return (
     <Styled>
-      <Title>
-        <Label id="component.surveyInformation.title" />
-      </Title>
-      <Title>
-        { surveys && `${
-            timeFormat('%Y')(new Date(firstSurvey.get('date')).getTime())
-          }-${
-            timeFormat('%Y')(new Date(lastSurvey.get('date')).getTime())
-          }`
-         }
-      </Title>
+      <TitleWrapper>
+        <Title>
+          <Label id="component.surveyInformation.title" />
+        </Title>
+        <Title>
+          { surveys && `${
+              timeFormat('%Y')(new Date(firstSurvey.get('date')).getTime())
+            }-${
+              timeFormat('%Y')(new Date(lastSurvey.get('date')).getTime())
+            }`
+           }
+        </Title>
+      </TitleWrapper>
       <CurrentSurveyInfo>
         { surveys && `${
             currentSurvey.get('agencies_total')

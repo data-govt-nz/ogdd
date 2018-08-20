@@ -262,7 +262,7 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
           </Column>
         </Row>
         <Row>
-          <Column width={[1, 1 / 4]} order={2}>
+          <Column width={[1, 1 / 4]} order={2} paddingvertical="true">
             <Visible min={0} print="false">
               { this.renderAsideContent() }
             </Visible>

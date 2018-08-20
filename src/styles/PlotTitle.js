@@ -1,14 +1,7 @@
 import styled from 'styled-components';
 
-/**
-  * @component
-  * Wrapper for items displayed above plots, e.g. plot options
-  *
-  *
-  */
 export default styled.div`
-  position: relative;
-  width: 100%;
+  font-weight: 600;
   margin-bottom: 8px;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
     margin-bottom: 10px;

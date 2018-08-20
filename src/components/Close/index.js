@@ -37,7 +37,7 @@ const Styled = styled(Button)`
   */
 const Close = ({ altTitle, onClick }) => (
   <Styled onClick={onClick}>
-    <Icon title={altTitle} name="close" themeColor="white" iconSize={10} />
+    <Icon title={altTitle} name="close" themeColor="white" size={20} />
   </Styled>
 );
 

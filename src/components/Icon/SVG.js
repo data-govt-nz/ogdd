@@ -9,6 +9,7 @@ const SVG = styled.svg`
   position: relative;
   display: inline-block;
   vertical-align: middle;
+  max-width: 100%;
   width: ${(props) => (props.sizes && props.sizes.width) ? props.sizes.width : props.size};
   height: ${(props) => (props.sizes && props.sizes.height) ? props.sizes.height : props.size};
 `;

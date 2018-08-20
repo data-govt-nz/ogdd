@@ -10,13 +10,13 @@ const Styled = styled.div`
   display: table;
   table-layout: fixed;
   width: 100%;
-  line-height: 16px;
+  line-height: 20px;
   min-height: ${(props) => props.hasTitle ? '49px' : 0};
 `;
 const Cell = styled.div`
   display: table-cell;
   vertical-align: top;
-  padding-top: 8px;
+  padding-top: 10px;
   font-size: 15px;
 `;
 
@@ -24,12 +24,17 @@ const IconCell = styled.div`
   display: table-cell;
   vertical-align: top;
   width: 38px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    width: 38px;
+  }
 `;
 
-const IconStyled = styled(Icon)`
+const IconWrap = styled.div`
   position: relative;
-  left: -5px;
-  height: 38px;
+  left: -3px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    left: -3px;
+  }
 `;
 
 /**
@@ -41,7 +46,9 @@ const IconStyled = styled(Icon)`
 const CardTitle = ({ title, icon, altTitle }) => (
   <Styled hasTitle={title !== ''}>
     <IconCell>
-      <IconStyled name={icon} title={altTitle} themeColor={icon} />
+      <IconWrap>
+        <Icon name={icon} title={altTitle} themeColor={icon} />
+      </IconWrap>
     </IconCell>
     <Cell>
       { title }

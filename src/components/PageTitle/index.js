@@ -12,37 +12,40 @@ const Styled = styled.div`
   table-layout: fixed;
   width: 100%;
   line-height: 20px;
-  height: 40px;
+  height: 50px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    height: 40px;
+  }
 `;
 const Cell = styled.div`
   display: table-cell;
-  vertical-align: top;
+  vertical-align: middle;
   font-size: 15px;
   font-weight: bold;
   text-transform: uppercase;
-  padding-top: 3px;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    padding-top: 8px;
+    vertical-align: top;
+    padding-top: 10px;
   }
 `;
 const IconCell = styled.div`
   display: table-cell;
-  vertical-align: top;
+  vertical-align: middle;
   width: 28px;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-    width: 42px;
+    vertical-align: top;
+    width: 40px;
   }
 `;
-// const Icon = styled.img`
-//   position: relative;
-//   left: 0;
-//   height: 24px;
-//   width: 24px;
-//   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
-//     height: 38px;
-//     width: 38px;
-//   }
-// `;
+const IconWrap = styled.div`
+  position: relative;
+  left: -2px;
+  padding-right: 4px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    padding-right: 2px;
+    left: -5px;
+  }
+`;
 
 /**
   * Page title with icon as used in sidebar
@@ -54,7 +57,9 @@ const IconCell = styled.div`
 const PageTitle = ({ labelId, icon, title }) => (
   <Styled>
     <IconCell>
-      <Icon name={icon} />
+      <IconWrap>
+        <Icon name={icon} />
+      </IconWrap>
     </IconCell>
     <Cell>
       { title &&

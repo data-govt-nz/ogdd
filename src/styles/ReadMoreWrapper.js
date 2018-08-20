@@ -9,7 +9,7 @@ import styled from 'styled-components';
 export default styled.div`
   position: absolute;
   right: 0;
-  top: 3px;
+  top: 0;
   @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
     top: 8px;
   }

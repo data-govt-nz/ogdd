@@ -9,8 +9,14 @@ import HTMLWrapper from 'styles/HTMLWrapper';
 
 // component styles
 const Styled = styled.div`
-  padding: 10px;
-  margin-bottom: 50px;
+  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+    padding: 4px 10px 10px;
+    margin-bottom: 50px;
+    margin-top: ${(props) => props.isOffset ? 26 : 0}px;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+    margin-top: ${(props) => props.isOffset ? 24 : 0}px;
+  }
 `;
 
 /**
@@ -21,8 +27,8 @@ const Styled = styled.div`
   *
   *
   */
-const AsideContent = ({ title, html, text, children }) => (
-  <Styled>
+const AsideContent = ({ title, html, text, children, isOffset }) => (
+  <Styled isOffset={isOffset}>
     { title }
     { html &&
       /* eslint-disable react/no-danger */
@@ -48,6 +54,7 @@ AsideContent.propTypes = {
   text: PropTypes.string,
   /** optional content as components */
   children: PropTypes.node,
+  isOffset: PropTypes.bool,
 };
 
 export default AsideContent;

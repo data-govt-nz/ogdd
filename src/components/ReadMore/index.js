@@ -8,7 +8,9 @@ import Label from 'components/Label';
 import Link from 'styles/Link';
 
 // component styles
-const Styled = styled(Link)``;
+const Styled = styled(Link)`
+  height: 50px;
+`;
 
 /**
   * Read more link

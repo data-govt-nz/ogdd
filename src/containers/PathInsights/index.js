@@ -201,7 +201,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
           </Column>
         </Row>
         <Row>
-          <Column width={[1, 1 / 4]} order={2}>
+          <Column width={[1, 1 / 4]} order={2} paddingvertical="true">
             <Visible min={0} print="false">
               { this.renderAsideContent(relevantFocusAreas, surveyID) }
             </Visible>

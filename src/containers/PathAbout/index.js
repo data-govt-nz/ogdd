@@ -116,12 +116,12 @@ class PathAbout extends React.PureComponent { // eslint-disable-line react/prefe
           <Label id="component.about.longTitle" />
         </PageLongTitle>
         <Row>
-          <Column width={[1, 1 / 4]} order={2}>
+          <Column width={[1, 1 / 4]} order={2} paddingvertical="true">
             <Visible min={0} print="false">
               { this.renderAsideContent() }
             </Visible>
           </Column>
-          <Column width={[1, 3 / 4]} order={1}>
+          <Column width={[1, 3 / 4]} order={1} paddingvertical="true">
             <HTMLWrapper printURL dangerouslySetInnerHTML={{ __html: setLinkTarget(main) }} />
           </Column>
         </Row>
