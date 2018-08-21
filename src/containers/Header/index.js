@@ -101,7 +101,7 @@ const NavBar = styled.div`
 `;
 const AboutLink = styled(NavLink)`
   position: absolute;
-  top: 16px;
+  top: 17px;
   right: 5px;
   box-shadow: none;
   min-width: 0;
@@ -109,11 +109,11 @@ const AboutLink = styled(NavLink)`
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   `}
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
-    top: 10px;
+    top: 11px;
     right: 0;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
-    top: 20px;
+    top: 17px;
   }
   @media print {
     display: none;
