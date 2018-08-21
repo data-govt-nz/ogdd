@@ -12,7 +12,7 @@ import PrintOnly from 'styles/PrintOnly';
 const Styled = styled.div``;
 const SelectDiv = styled.span`
   border-bottom: 1px solid;
-  margin: 0 2px;
+  margin: 0 2px -1px;
   cursor: pointer;
   position: relative;
   display: inline-block;

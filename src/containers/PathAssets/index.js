@@ -172,6 +172,7 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
                 <Column
                   width={[1, 1, 1 / 2]}
                   paddingvertical="true"
+                  padding={{ bottom: '30px' }}
                 >
                   <PlotTitle>{machineReadableIndicator.get('title')}</PlotTitle>
                   <PlotAssets
@@ -186,6 +187,7 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
                 <Column
                   width={[1, 1, 1 / 2]}
                   paddingvertical="true"
+                  padding={{ bottom: '30px' }}
                 >
                   <PlotTitle>{nzgoalIndicator.get('title')}</PlotTitle>
                   <PlotAssets

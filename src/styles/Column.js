@@ -1,6 +1,7 @@
 // vendor
 import { Box } from 'grid-styled';
 import styled, { css } from 'styled-components';
+import { BREAKPOINTS } from 'containers/App/constants';
 
 /**
   * @component
@@ -15,33 +16,45 @@ export default styled(Box)`
     ? props.theme.gutter[2]
     : 0
   };
-  padding-bottom: ${(props) => props.paddingvertical
-    ? props.theme.gutter[2]
-    : 0
-  };
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  padding-bottom: ${(props) => {
+    if (props.padding && props.padding.bottom) {
+      return props.padding.bottom;
+    }
+    return props.paddingvertical
+      ? props.theme.gutter[2]
+      : 0;
+  }};
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     padding-right: ${(props) => props.withoutgutter ? 0 : props.theme.gutter[1]};
     padding-left: ${(props) => props.withoutgutter ? 0 : props.theme.gutter[1]};
     padding-top: ${(props) => props.paddingvertical
       ? props.theme.gutter[1]
       : 0
     };
-    padding-bottom: ${(props) => props.paddingvertical
-      ? props.theme.gutter[1]
-      : 0
-    };
+    padding-bottom: ${(props) => {
+      if (props.padding && props.padding.bottom) {
+        return props.padding.bottom;
+      }
+      return props.paddingvertical
+        ? props.theme.gutter[1]
+        : 0;
+    }};
   }
-  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     padding-right: ${(props) => props.withoutgutter ? 0 : props.theme.gutter[2]};
     padding-left: ${(props) => props.withoutgutter ? 0 : props.theme.gutter[2]};
     padding-top: ${(props) => props.paddingvertical
       ? props.theme.gutter[2]
       : 0
     };
-    padding-bottom: ${(props) => props.paddingvertical
-      ? props.theme.gutter[2]
-      : 0
-    };
+    padding-bottom: ${(props) => {
+      if (props.padding && props.padding.bottom) {
+        return props.padding.bottom;
+      }
+      return props.paddingvertical
+        ? props.theme.gutter[2]
+        : 0;
+    }};
   }
   position: relative;
   @media print {

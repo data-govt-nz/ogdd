@@ -131,7 +131,7 @@ const Header = ({ navItems, location, nav }) => (
       <LogoWrapper>
         <Logo role="presentation" aria-hidden="true" />
       </LogoWrapper>
-      <ContentContainer>
+      <ContentContainer withoutmargin="true">
         <Brand
           onClick={() => nav('')}
           title={`${getLabel('app.title')}. ${getLabel('screenreader.header.homeLink')}`}

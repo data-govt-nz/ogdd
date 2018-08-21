@@ -174,7 +174,11 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
             }
             { ready &&
               <Row>
-                <Column width={[1, 1, 1 / 2]} paddingvertical="true">
+                <Column
+                  width={[1, 1, 1 / 2]}
+                  paddingvertical="true"
+                  padding={{ bottom: '30px' }}
+                >
                   <PlotTitle>{howIndicator.get('title')}</PlotTitle>
                   <PlotServices
                     indicator={howIndicator}
@@ -184,7 +188,11 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
                     onCardMouseLeave={() => this.onCardMouseLeave()}
                   />
                 </Column>
-                <Column width={[1, 1, 1 / 2]} paddingvertical="true">
+                <Column
+                  width={[1, 1, 1 / 2]}
+                  paddingvertical="true"
+                  padding={{ bottom: '30px' }}
+                >
                   <PlotTitle>{standardsIndicator.get('title')}</PlotTitle>
                   <PlotServices
                     indicator={standardsIndicator}
@@ -198,7 +206,11 @@ class PathServices extends React.PureComponent { // eslint-disable-line react/pr
             }
             { ready &&
               <Row>
-                <Column width={[1]} paddingvertical="true">
+                <Column
+                  width={[1]}
+                  paddingvertical="true"
+                  padding={{ bottom: '30px' }}
+                >
                   <PlotTitle>{servicesIndicator.get('title')}</PlotTitle>
                   <PlotServicesMultiples
                     indicator={servicesIndicator}
