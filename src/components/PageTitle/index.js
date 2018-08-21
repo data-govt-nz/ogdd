@@ -5,6 +5,7 @@ import styled from 'styled-components';
 // components
 import Label from 'components/Label';
 import Icon from 'components/Icon';
+import { BREAKPOINTS } from 'containers/App/constants';
 
 // component styles
 const Styled = styled.div`
@@ -13,7 +14,7 @@ const Styled = styled.div`
   width: 100%;
   line-height: 20px;
   height: 50px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     height: 40px;
     margin-bottom: 15px;
   }
@@ -24,7 +25,7 @@ const Cell = styled.div`
   font-size: 15px;
   font-weight: 700;
   text-transform: uppercase;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     vertical-align: top;
     padding-top: 10px;
   }
@@ -33,7 +34,7 @@ const IconCell = styled.div`
   display: table-cell;
   vertical-align: middle;
   width: 28px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     vertical-align: top;
     width: 40px;
   }
@@ -42,7 +43,7 @@ const IconWrap = styled.div`
   position: relative;
   left: -2px;
   padding-right: 4px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     padding-right: 2px;
     left: -5px;
   }

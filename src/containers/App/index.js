@@ -14,7 +14,7 @@ import SkipContent from 'styles/SkipContent';
 // App actions, selectors, constants
 import { loadData } from './actions';
 import { selectAnnouncement } from './selectors';
-import { NAVITEMS, DATA } from './constants';
+import { NAVITEMS, DATA, BREAKPOINTS } from './constants';
 
 // component styles
 const Styled = styled.div`
@@ -24,10 +24,10 @@ const Main = styled.main`
   margin-top: -100px;
   padding-top: 100px;
   min-height: 100vH;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     padding-top: 120px;
   }
-  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     margin-top: -70px;
     padding-top: 110px;
   }

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Icon from 'components/Icon';
+import { BREAKPOINTS } from 'containers/App/constants';
 
 // component styles
 const Styled = styled.div`
@@ -24,7 +25,7 @@ const IconCell = styled.div`
   display: table-cell;
   vertical-align: top;
   width: 38px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     width: 38px;
   }
 `;
@@ -32,7 +33,7 @@ const IconCell = styled.div`
 const IconWrap = styled.div`
   position: relative;
   left: -3px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     left: -3px;
   }
 `;

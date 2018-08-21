@@ -19,6 +19,7 @@ import { navigate } from 'containers/App/actions';
 import SurveyInformation from 'containers/SurveyInformation';
 import {
   DEFAULT_SUBJECT_ID,
+  BREAKPOINTS,
 } from 'containers/App/constants';
 // components
 import Label from 'components/Label';
@@ -50,7 +51,7 @@ const ReferenceHint = styled.div`
   font-size: 13px;
   margin-top: 10px;
   margin-bottom: 10px;
-  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     margin-top: 0;
     margin-bottom: 0;
     position: absolute;

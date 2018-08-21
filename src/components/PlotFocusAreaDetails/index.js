@@ -26,6 +26,8 @@ import CardTitle from 'components/CardTitle';
 import Close from 'components/Close';
 import Card from 'components/Card';
 
+import { BREAKPOINTS } from 'containers/App/constants';
+
 // styles
 import Key from 'styles/Key';
 import CardHeader from 'styles/CardHeader';
@@ -44,7 +46,7 @@ const PlotHintLabel = styled.div`
   width: 70px;
   position: absolute;
   font-size: ${(props) => props.theme.sizes[0]};
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     width: 110px;
     left: 10px;
   }
@@ -52,7 +54,7 @@ const PlotHintLabel = styled.div`
 const WrapPlot = styled.div`
   padding-left: 0px;
   padding-right: 80px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     padding-left: 100px;
     padding-right: 130px;
   }
@@ -61,7 +63,7 @@ const Dismiss = styled.div`
   position: absolute;
   right: -7px;
   top: -3px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     right: 0;
     top: 0;
   }

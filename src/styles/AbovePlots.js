@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BREAKPOINTS } from 'containers/App/constants';
 
 /**
   * @component
@@ -11,10 +12,10 @@ export default styled.div`
   width: 100%;
   margin-bottom: 8px;
   font-weight: 500;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     margin-bottom: 10px;
   }
-  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     margin-bottom: 8px;
   }
 `;

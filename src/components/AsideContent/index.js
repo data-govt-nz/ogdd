@@ -4,17 +4,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // utils
 import setLinkTarget from 'utils/set-link-target';
+import { BREAKPOINTS } from 'containers/App/constants';
 // styles
 import HTMLWrapper from 'styles/HTMLWrapper';
 
 // component styles
 const Styled = styled.div`
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     padding: 4px 10px 10px;
     margin-bottom: 50px;
     margin-top: ${(props) => props.isOffset ? 26 : 0}px;
   }
-  @media (min-width: ${(props) => props.theme.breakpoints[1]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     padding: 4px 15px 10px;
     margin-top: ${(props) => props.isOffset ? 24 : 0}px;
   }

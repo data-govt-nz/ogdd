@@ -19,6 +19,7 @@ import quasiEquals from 'utils/quasi-equals';
 import preparePlotData from 'utils/prepare-plot-data';
 import formatValue from 'utils/format-value';
 // components
+import { BREAKPOINTS } from 'containers/App/constants';
 import ScreenReaderWrapPlot from 'components/ScreenReaderWrapPlot';
 // styles
 import PlotHint from 'styles/PlotHint';
@@ -27,7 +28,7 @@ import WrapPlot from 'styles/WrapPlot';
 // component styles
 const Styled = styled.div`
   padding: 0 5px 50px;
-  @media (min-width: ${(props) => props.theme.breakpoints[0]}) {
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     padding-bottom: 30px;
   }
 `;
