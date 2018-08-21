@@ -8,6 +8,6 @@ import getLabel from 'utils/get-label';
   */
 export default function getPageMetaTitle(labelId) {
   return getLabel(labelId)
-    ? `${getLabel(labelId)} - ${getLabel('app.title')}: `
+    ? `${getLabel(labelId)} - ${getLabel('app.title')}`
     : getLabel('app.title');
 }
