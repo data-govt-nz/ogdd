@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { timeFormat } from 'd3-time-format';
 // utils
 import getLabel from 'utils/get-label';
+import getPageMetaTitle from 'utils/get-page-meta-title';
 import quasiEquals from 'utils/quasi-equals';
 // containers, app selectors, metaDescription
 import {
@@ -159,7 +160,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
     return (
       <ContentContainer>
         <Helmet>
-          <title>{getLabel('component.insights.title')}</title>
+          <title>{getPageMetaTitle('component.insights.title')}</title>
           <meta
             name="description"
             content={getLabel('component.insights.metaDescription')}

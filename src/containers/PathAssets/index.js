@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { List } from 'immutable';
 // utils
 import getLabel from 'utils/get-label';
+import getPageMetaTitle from 'utils/get-page-meta-title';
 import quasiEquals from 'utils/quasi-equals';
 // containers, app selectors, metaDescription
 import {
@@ -131,7 +132,7 @@ class PathAssets extends React.PureComponent { // eslint-disable-line react/pref
     return (
       <ContentContainer>
         <Helmet>
-          <title>{getLabel('component.assets.title')}</title>
+          <title>{getPageMetaTitle('component.assets.title')}</title>
           <meta
             name="description"
             content={getLabel('component.assets.metaDescription')}

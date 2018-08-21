@@ -3,6 +3,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 // utils
 import getLabel from 'utils/get-label';
+import getPageMetaTitle from 'utils/get-page-meta-title';
 // components
 import Label from 'components/Label';
 // simple styles
@@ -19,7 +20,7 @@ class PathNotFound extends React.PureComponent { // eslint-disable-line react/pr
     return (
       <ContentContainer>
         <Helmet>
-          <title>{getLabel('component.notFound.title')}</title>
+          <title>{getPageMetaTitle('component.notFound.title')}</title>
           <meta
             name="description"
             content={getLabel('component.notFound.metaDescription')}

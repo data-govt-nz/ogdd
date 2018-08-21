@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { List } from 'immutable';
 // utils
 import getLabel from 'utils/get-label';
+import getPageMetaTitle from 'utils/get-page-meta-title';
 import quasiEquals from 'utils/quasi-equals';
 // containers, app selectors, metaDescription
 import {
@@ -207,7 +208,7 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
     return (
       <ContentContainer>
         <Helmet>
-          <title>{getLabel('component.focus-areas.title')}</title>
+          <title>{getPageMetaTitle('component.focus-areas.title')}</title>
           <meta
             name="description"
             content={getLabel('component.focus-areas.metaDescription')}

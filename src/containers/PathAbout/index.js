@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 
 // utils
 import getLabel from 'utils/get-label';
+import getPageMetaTitle from 'utils/get-page-meta-title';
 import setLinkTarget from 'utils/set-link-target';
 // components
 import Label from 'components/Label';
@@ -90,7 +91,7 @@ class PathAbout extends React.PureComponent { // eslint-disable-line react/prefe
     return (
       <ContentContainer>
         <Helmet>
-          <title>{getLabel('component.about.title')}</title>
+          <title>{getPageMetaTitle('component.about.title')}</title>
           <meta
             name="description"
             content={getLabel('component.about.metaDescription')}
