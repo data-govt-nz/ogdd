@@ -28,7 +28,7 @@ export const LOAD_ERROR = 'action.LOAD_ERROR';
 
 // App data sources
 // the API path
-const API_PATH = 'https://uat.data.govt.nz/api/3/action/datastore_search';
+const API_PATH = 'https://catalogue.data.govt.nz/api/3/action/datastore_search';
 // load data from API (provide resource id) or locally for testing (path)
 const API = true;
 export const DATA = API
@@ -38,35 +38,35 @@ export const DATA = API
     requested: null,
     source: 'api',
     path: API_PATH,
-    resourceId: 'e964dae4-f912-4ad1-9c90-eeefed2d0168',
+    resourceId: '1578c5cc-fcfc-41ae-a61b-5f8f3467d437',
   },    // id,survey_id,date,agencies_total
   subjects: {
     data: null,
     requested: null,
     source: 'api',
     path: API_PATH,
-    resourceId: '178581f7-695f-4b77-8890-f8ed38f9f26b',
+    resourceId: 'b68a56bd-d9e4-4cca-bdf1-64d39539c604',
   },   // id,title
   indicators: {
     data: null,
     requested: null,
     source: 'api',
     path: API_PATH,
-    resourceId: '317118dc-be21-46d6-972c-1363512e7faa',
+    resourceId: 'cdef3156-b3c6-4f08-91cf-f0150a3c9a96',
   }, // id,indicator_id,type,question_no,title,description
   insights: {
     data: null,
     requested: null,
     source: 'api',
     path: API_PATH,
-    resourceId: 'b1ff7522-a783-45db-b802-bd270d95a889',
+    resourceId: '53118ce7-ff1c-4611-b66f-9922b5f3587f',
   },   // id,survey_id,value,text,indicator_id,outcome_answers
   outcomes: {
     data: null,
     requested: null,
     source: 'api',
     path: API_PATH,
-    resourceId: '668680cc-903c-4420-a6a7-60b150cb68c8',
+    resourceId: 'b61a611b-d8ce-45a0-8013-17efab85140c',
   },   // id,survey_id,subject_id,indicator_id,value,answer,answer_text
 }
 : {
