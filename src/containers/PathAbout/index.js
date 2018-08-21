@@ -22,7 +22,7 @@ import Visible from 'styles/Visible';
 import PageTitleWrapper from 'styles/PageTitleWrapper';
 import ReadMoreWrapper from 'styles/ReadMoreWrapper';
 import PrintOnly from 'styles/PrintOnly';
-import HTMLWrapper from 'styles/HTMLWrapper';
+import HTMLWrapper from 'components/HTMLWrapper';
 // assets
 import main from 'text/about.md'; // loaded as HTML from markdown
 import description from 'text/about-aside.md'; // loaded as HTML from markdown
@@ -85,8 +85,6 @@ class PathAbout extends React.PureComponent { // eslint-disable-line react/prefe
   }
 
   render() {
-    /* eslint-disable react/no-danger */
-    // required for setting inner HTML (from markdown content)
     return (
       <ContentContainer>
         <Helmet>
@@ -122,13 +120,12 @@ class PathAbout extends React.PureComponent { // eslint-disable-line react/prefe
             </Visible>
           </Column>
           <Column width={[1, 3 / 4]} order={1} paddingvertical="true">
-            <HTMLWrapper printURL dangerouslySetInnerHTML={{ __html: setLinkTarget(main) }} />
+            <HTMLWrapper printURL innerhtml={setLinkTarget(main)} />
           </Column>
         </Row>
       </ContentContainer>
     );
   }
-  /* eslint-enable react/no-danger */
 }
 
 export default PathAbout;

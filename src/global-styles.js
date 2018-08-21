@@ -24,6 +24,13 @@ injectGlobal`
     font-family: 'Barlow', sans-serif;
     line-height: 1.4;
   }
+  #ogdd-root .ogdd-html h1,
+  #ogdd-root .ogdd-html h2,
+  #ogdd-root .ogdd-html h3,
+  #ogdd-root .ogdd-html h4,
+  #ogdd-root .ogdd-html h5 {
+      margin: 1em 0 0.6em;
+  }
   #ogdd-root h1,
   #ogdd-root h2,
   #ogdd-root h3,

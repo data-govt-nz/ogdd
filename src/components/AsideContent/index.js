@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // utils
 import setLinkTarget from 'utils/set-link-target';
+// app constants
 import { BREAKPOINTS } from 'containers/App/constants';
-// styles
-import HTMLWrapper from 'styles/HTMLWrapper';
+// components
+import HTMLWrapper from 'components/HTMLWrapper';
 
 // component styles
 const Styled = styled.div`
@@ -33,9 +34,7 @@ const AsideContent = ({ title, html, text, children, isOffset }) => (
   <Styled isOffset={isOffset}>
     { title }
     { html &&
-      /* eslint-disable react/no-danger */
-      <HTMLWrapper printURL dangerouslySetInnerHTML={{ __html: setLinkTarget(html) }} />
-      /* eslint-enable react/no-danger */
+      <HTMLWrapper printURL innerhtml={setLinkTarget(html)} />
     }
     { text &&
       <p>{text}</p>
