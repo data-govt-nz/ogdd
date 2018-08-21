@@ -7,6 +7,8 @@
   * - renders app according to route
   * - remembers hash/route changes
   * - ties in global styles
+  *
+  * @ignore
   */
 
 /* eslint-disable import/no-extraneous-dependencies */
