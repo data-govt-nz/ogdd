@@ -72,7 +72,6 @@ const INITIAL_STATE = {
   * Shows focus area details on hover when only 1 subject (all of governemnt present) -
   * otherwise allows selecting focus area for detailed view
   *
-  *
   */
 class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**

@@ -5,7 +5,6 @@ import { BREAKPOINTS } from 'containers/App/constants';
   * @component
   * Principal page title
   *
-  *
   */
 export default styled.h1`
   font-weight: 500;

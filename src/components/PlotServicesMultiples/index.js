@@ -15,7 +15,7 @@ import Column from 'styles/Column';
 import CardBody from 'styles/CardBody';
 
 /**
-  * Card for 3rd services indicator, one plot for every indicator answer
+  * Wraps severel plots for every answer of single indicator
   *
   * @return {Component} Small multiples card
   *

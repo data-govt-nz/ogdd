@@ -71,7 +71,6 @@ const Option = styled.option`
   }
 `;
 
-// text-decoration: none;
 /**
   * Wrapper for plot select options
   *

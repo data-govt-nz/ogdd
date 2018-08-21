@@ -44,7 +44,6 @@ const AboutLink = styled(Link)`
   * Displays survey information (used for sidebar)
   *
   * @return {Component} Survey Information component
-  *
   */
 const SurveyInformation = ({ surveys, surveySelectedId, nav }) => {
   const firstSurvey = surveys && surveys.first();

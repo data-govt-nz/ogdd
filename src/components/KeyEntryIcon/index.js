@@ -25,7 +25,7 @@ const Dot = styled.div`
   width: 34px;
   height: 34px;
   border-radius: 9999px;
-  background-color: ${(props) => props.color ? props.theme.colors[props.color] : props.theme.colors.black} !important;
+  background-color: ${(props) => props.themeColor ? props.theme.colors[props.themeColor] : props.theme.colors.black} !important;
   text-align: center;
   padding: 5px;
   @media print {
@@ -35,16 +35,15 @@ const Dot = styled.div`
 `;
 
 /**
-  * Key item component with icon - used for focus areas in insights sidebar
+  * Key item component with icon - used in insights sidebar as focus area key
   * Icons are placed inside colored dot
   *
   * @return {Component} Key entry with icon
-  *
   */
-const KeyEntryIcon = ({ color, title, icon }) => (
+const KeyEntryIcon = ({ themeColor, title, icon }) => (
   <Styled>
     <DotCell>
-      <Dot color={color} >
+      <Dot themeColor={themeColor} >
         <Icon name={icon} themeColor="white" size={24} />
       </Dot>
     </DotCell>
@@ -56,7 +55,7 @@ const KeyEntryIcon = ({ color, title, icon }) => (
 
 KeyEntryIcon.propTypes = {
   /** the circle color, defaults to 'black' */
-  color: PropTypes.string,
+  themeColor: PropTypes.string,
   /** the key label as displayed */
   title: PropTypes.string.isRequired,
   /** the icon source */

@@ -37,7 +37,9 @@ const Main = styled.main`
 /**
   * Principal App component
   * - wraps path dependent container components
+  * - triggers loading application data
   * - notifies screenreader about navigation events
+  * - handles keyboard focus (eg for skip-to-content link)
   *
   * @return {Component} react base component
   *
@@ -52,9 +54,6 @@ class App extends React.Component {
     super(props);
     this.container = React.createRef();
     this.main = React.createRef();
-    this.state = {
-      windowWidth: window.innerWidth,
-    };
   }
   /**
     * Set focus when component mounts and trigger loading of all external data

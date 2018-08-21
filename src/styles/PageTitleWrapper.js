@@ -5,7 +5,6 @@ import { BREAKPOINTS } from 'containers/App/constants';
   * @component
   * Wrapper for PageTitle Component
   *
-  *
   */
 export default styled.div`
   position: relative;

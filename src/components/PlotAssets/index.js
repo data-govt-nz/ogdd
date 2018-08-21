@@ -30,7 +30,10 @@ import prepareData from './prepare-data';
 import getYAxisMax from './get-y-axis-max';
 
 /**
-  * Overview timeseries area graph for asset indicators, uses react-vis
+  * Produces a timeseries area graph with 2 indicators using react-vis.
+  * Graph shows principal indicator and a reference indicator for comparison in the background and
+  * thus assuming that the principal indicator is a subset of the reference indicator
+  * (Used for Data Assets Chart component)
   *
   * @return {Component} Timeseries area graph for primary and reference variables
   *
@@ -156,8 +159,8 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
               </FlexibleWidthXYPlot>
             </WrapPlot>
             <Key>
-              <KeyEntry color="fa3" title={indicator.get('title')} area small />
-              <KeyEntry color="assetReference" title={referenceIndicator.get('title')} area small />
+              <KeyEntry themeColor="fa3" title={indicator.get('title')} area small />
+              <KeyEntry themeColor="assetReference" title={referenceIndicator.get('title')} area small />
             </Key>
           </ScreenReaderWrapPlot>
         </CardBody>

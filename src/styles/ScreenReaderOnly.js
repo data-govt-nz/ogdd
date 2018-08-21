@@ -4,7 +4,6 @@ import styled from 'styled-components';
   * @component
   * Present only for screenreaders
   *
-  *
   */
 export default styled.span`
   position: absolute;

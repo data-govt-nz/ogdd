@@ -116,7 +116,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
               <KeyEntryIcon
                 key={fa.get('indicator_id')}
                 title={fa.get('title')}
-                color={fa.get('indicator_id')}
+                themeColor={fa.get('indicator_id')}
                 icon={fa.get('indicator_id')}
               />
             ))

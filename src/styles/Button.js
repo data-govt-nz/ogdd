@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 /**
   * @component
-  * Basic unstyled button
-  *
+  * Basic unstyled button (also including several resets for leaky data.govt styles)
   *
   */
 export default styled.button`

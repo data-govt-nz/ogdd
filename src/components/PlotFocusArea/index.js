@@ -43,10 +43,11 @@ const ReferenceHint = styled.div`
 `;
 
 /**
-  * Overview timeseries area or line graph for single focus area, uses react-vis
-  * When a refernce subject is present, subject plotted as line and reference is plotted as area
-  * Otherwise single subject plotted as area
-  * Card is either clickable or 'hoverable' depending on number of subjects
+  * Produces an overview timeseries area or line graph, uses react-vis.
+  * When a reference indicator is present, principal is plotted as a line and reference as area in the background for comparison.
+  * Otherwise single indicator plotted as area (no reference present).
+  * The card is either clickable or 'hoverable' depending on number of overall indicators present.
+  * (Used for Focus Areas Chart component)
   *
   * @return {Component} Mixed timeseries graph for one or two subjects
   *

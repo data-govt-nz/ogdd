@@ -3,8 +3,7 @@ import { BREAKPOINTS } from 'containers/App/constants';
 
 /**
   * @component
-  * Wrapper for "read more" links
-  *
+  * Wrapper for "read more" links (only used for small screens)
   *
   */
 export default styled.div`

@@ -5,6 +5,7 @@ import { BREAKPOINTS } from 'containers/App/constants';
 /**
   * @component
   * Customised row for grid
+  * - grid gutter is specified in app constants (unless `withoutgutter` is set)
   *
   */
 export default styled(Flex)`

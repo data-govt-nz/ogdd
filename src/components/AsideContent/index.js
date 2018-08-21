@@ -28,7 +28,7 @@ const Styled = styled.div`
   * - html (eg as parsed form markdown text)
   * - child components
   *
-  *
+  * @return {Component} AsideContent
   */
 const AsideContent = ({ title, html, text, children, isOffset }) => (
   <Styled isOffset={isOffset}>
@@ -55,6 +55,7 @@ AsideContent.propTypes = {
   text: PropTypes.string,
   /** optional content as components */
   children: PropTypes.node,
+  /** optionally allow to vertically offset component for alignment purposes */
   isOffset: PropTypes.bool,
 };
 

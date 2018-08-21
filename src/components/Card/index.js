@@ -32,7 +32,6 @@ const StyledDiv = Styled.withComponent('div').extend`
   * Card component - renders as button if onClick handler present or hoverable div
   *
   * @return {Component} Card
-  *
   */
 const Card = ({ onMouseEnter, onMouseLeave, onTouchStart, onClick, children, title }) => onClick
 ? (

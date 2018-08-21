@@ -18,7 +18,11 @@ import { selectRequestedAt } from './selectors';
 import { dataRequested, loadError, dataLoaded, navigationOccured } from './actions';
 
 /**
- * Navigate to location, calls router
+ * Navigate Saga:
+ * - Composes to new route string for location
+ * - Calls router
+ * - Also makes sure page is scrolled to top on hash change
+ *
  * @param {object} payload location: the new location, args: query arguments
  */
 export function* navigateSaga({ location, args }) {
@@ -60,7 +64,10 @@ export function* navigateSaga({ location, args }) {
   }
 }
 /**
- * Load data from API or files
+ * Load data saga:
+ * - Load data from API or files
+ * - Dispatch load event with loaded data
+ *
  * @param {object} payload key: data set key, value: data set definition
  */
 export function* loadDataSaga({ key, value }) {

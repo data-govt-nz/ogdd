@@ -33,9 +33,11 @@ const INITIAL_STATE = {
 };
 
 /**
-  * Simple about page component for displaying markdown content
-  * Not actually a container (not connected to redux store).
+  * Simple about page component for displaying markdown content:
+  * - /text/about.md: main text
+  * - /text/about-aside.md: sidebar text
   *
+  * Not actually a container (not connected to redux store).
   *
   */
 class PathAbout extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

@@ -43,9 +43,9 @@ const Caption = styled.div`
 `;
 
 /**
-  * Small timeseries area plot for one variable
-  * Used for 3rd services indicator, uses react-vis
-  * Creates dot/mark graph if data is only present for 1 survey
+  * Produces a small timeseries area plot for one indicator, uses react-vis.
+  * Creates dot/mark graph if data is only present for 1 survey.
+  * (Used for 3rd data services indicator)
   *
   * @return {Component} Small area plot for one variable
   *

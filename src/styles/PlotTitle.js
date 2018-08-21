@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { BREAKPOINTS } from 'containers/App/constants';
 
+/**
+  * @component
+  * Plot title shown above Chart
+  * - should occupy same space as /styles/AbovePlots
+  *
+  */
 export default styled.div`
   font-weight: 600;
   margin-top: -8px;

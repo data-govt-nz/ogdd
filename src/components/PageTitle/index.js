@@ -50,7 +50,7 @@ const IconWrap = styled.div`
 `;
 
 /**
-  * Page title with icon as used in sidebar
+  * Page title with icon as used in sidebar (or above content on mobile)
   * Requires either title as displayed or label id
   *
   * @return {Component} Page title with icon

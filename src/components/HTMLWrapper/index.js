@@ -16,7 +16,11 @@ const Styled = styled.div`
 `;
 
 /**
-  * Wrap HTML text, allow printing link URLs
+  * Wrap HTML text:
+  * - sets global class 'ogdd-html' to allow specifically targeting html markup
+  * - allow spelling out URLs in print mode
+  *
+  * @return {Component} HTMLWrapper
   */
 const HTMLWrapper = ({ printURL, innerhtml }) =>
 /* eslint-disable react/no-danger */
@@ -31,8 +35,10 @@ const HTMLWrapper = ({ printURL, innerhtml }) =>
 /* eslint-enable react/no-danger */
 
 HTMLWrapper.propTypes = {
+  /* the inner HTML text */
+  innerhtml: PropTypes.string.isRequired,
+  /* if URLs should be spelled out in print mode */
   printURL: PropTypes.bool,
-  innerhtml: PropTypes.string,
 };
 
 export default HTMLWrapper;

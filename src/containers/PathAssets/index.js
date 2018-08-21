@@ -47,7 +47,6 @@ const INITIAL_STATE = {
   * - Data assets published in machine readable formats vs all assets
   * - Data assets published using NZGOAL vs all assets
   *
-  *
   */
 class PathAssets extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**

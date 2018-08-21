@@ -6,8 +6,6 @@ import numberSeparated from './number-separated';
   * @param {string} type the type on of: percentage, absolute
   * @param {bool} [inThousands=false] if value should be shortened to thousands, appending 'k'
   * @return {string} formatted number
-  *
-  *
   */
 export default function formatValue(value, type, inThousands = false) {
   switch (type) {

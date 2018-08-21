@@ -75,8 +75,9 @@ const IndicatorOutcomes = styled.div`
 `;
 
 /**
-  * Key insight component shoing key insight and associated indicator as stacked bar
-  * highlights relevant answers
+  * Key insight component showing key insight and associated indicator as stacked bar.
+  * Highlights relevant answers.
+  * (Used for Key insight component)
   *
   * @return {Component} Key insight component
   *
@@ -163,7 +164,7 @@ class PlotInsight extends React.PureComponent { // eslint-disable-line react/pre
                     key={item.get('answer')}
                     title={`${formatValue(item.get('value'), insight.getIn(['indicator', 'type']))} ${item.get('answer_text')}`}
                     outline={hasOutline(item.get('answer'))}
-                    colorValue={getColorValue(item.get('answer'), insight.getIn(['indicator', 'parent_indicator_id']), theme)}
+                    color={getColorValue(item.get('answer'), insight.getIn(['indicator', 'parent_indicator_id']), theme)}
                   />
                 ))
               }

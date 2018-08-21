@@ -33,7 +33,6 @@ const Styled = styled(Button)`
   * Close/dismiss icon component
   *
   * @return {Component} Close/dismiss icon component
-  *
   */
 const Close = ({ altTitle, onClick }) => (
   <Styled onClick={onClick}>
@@ -43,7 +42,7 @@ const Close = ({ altTitle, onClick }) => (
 
 Close.propTypes = {
   /** the alt attribute */
-  altTitle: PropTypes.string,
+  altTitle: PropTypes.string.isRequired,
   /** on click handler */
   onClick: PropTypes.func.isRequired,
 };

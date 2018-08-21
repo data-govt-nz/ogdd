@@ -1,7 +1,12 @@
 /**
-  * Kick off the React application
+  * React application entry point
   *
-  * @ignore
+  * - starts application
+  * - configures app store
+  * - sets up app routes
+  * - renders app according to route
+  * - remembers hash/route changes
+  * - ties in global styles
   */
 
 /* eslint-disable import/no-extraneous-dependencies */
@@ -60,7 +65,7 @@ const pathComponentMap = {
 };
 
 /**
-  * Render React application and attach to 'root' element.
+  * Render React application and attach to 'ogdd-root' element.
   * Also records current location in store
   * @param {Component} Component main react component
   */

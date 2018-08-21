@@ -5,7 +5,6 @@ import { BREAKPOINTS } from 'containers/App/constants';
   * @component
   * Card header wrapper
   *
-  *
   */
 export default styled.div`
   position: relative;

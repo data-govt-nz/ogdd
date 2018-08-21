@@ -16,6 +16,7 @@
     "doc-sagas": "mkdir -p docs && ./node_modules/.bin/documentation build src/containers/App/sagas.js -f md -o docs/App_sagas.md --markdown-toc false --shallow",
     "doc-all": "mkdir -p docs && npm run doc-index && npm run doc-store && npm run doc-utils && npm run doc-actions && npm run doc-reducers && npm run doc-selectors && npm run doc-sagas",
     "styleguide": "./node_modules/.bin/styleguidist build",
+    "doc-server": "npm run doc-all && ./node_modules/.bin/styleguidist server",
     "doc": "npm run doc-all && npm run styleguide && rm -rf docs"
   },
   "keywords": [],
@@ -76,7 +77,6 @@
     "react-dom": "^16.4.1",
     "react-hash-route": "^1.1.0",
     "react-helmet": "^5.2.0",
-    "react-loading": "^2.0.3",
     "react-redux": "^5.0.7",
     "react-vis": "^1.10.4",
     "redux": "^3.7.2",

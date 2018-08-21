@@ -39,18 +39,20 @@ const IconWrap = styled.div`
 `;
 
 /**
-  * Card title component to display card titles with icon or icon only
+  * Card title component to display card titles and/or icons.
+  * When title is ommitted please provide an alternative title (altTitle) for accessibility
   *
   * @return {Component} Card title
-  *
   */
 const CardTitle = ({ title, icon, altTitle }) => (
   <Styled>
-    <IconCell>
-      <IconWrap>
-        <Icon name={icon} title={altTitle} themeColor={icon} />
-      </IconWrap>
-    </IconCell>
+    { icon &&
+      <IconCell>
+        <IconWrap>
+          <Icon name={icon} title={altTitle} themeColor={icon} />
+        </IconWrap>
+      </IconCell>
+    }
     <Cell>
       { title }
     </Cell>
@@ -62,6 +64,7 @@ CardTitle.propTypes = {
   title: PropTypes.string,
   /** the optional alt attribute title - should be provided if title ommitted */
   altTitle: PropTypes.string,
+  /** the optional icon name */
   icon: PropTypes.node,
 };
 

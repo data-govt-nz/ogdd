@@ -31,8 +31,9 @@ import Key from 'styles/Key';
 import WrapPlot from 'styles/WrapPlot';
 
 /**
-  * Principal timeseries line graph for services indicators, uses react-vis
-  * Creates dot/mark graph if data is only present for 1 survey
+  * Principal timeseries line graph for 2 answers of single indicators, uses react-vis.
+  * Creates dot/mark graph if data is only present for 1 answer.
+  * (Used for primary Data Services Chart components)
   *
   * @return {Component} Timeseries line graph for two variables
   *
@@ -187,7 +188,7 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
                 ? (
                   <KeyEntry
                     key={series.id}
-                    color="fa1"
+                    themeColor="fa1"
                     title={series.title}
                     dashed={index === 0}
                     line
@@ -197,7 +198,7 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
                 : (
                   <KeyEntry
                     key={series.id}
-                    color="fa1"
+                    themeColor="fa1"
                     title={series.title}
                     outline={index !== 0}
                     small

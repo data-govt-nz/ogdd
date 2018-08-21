@@ -29,9 +29,9 @@ const Line = styled.div`
   width: 100%;
   border-bottom-width: ${(props) => props.small ? 1 : 2}px;
   border-bottom-style: ${(props) => props.dashed ? 'dashed' : 'solid'};
-  border-bottom-color: ${(props) => props.colorValue
-    ? props.colorValue
-    : props.theme.colors[props.color]
+  border-bottom-color: ${(props) => props.color
+    ? props.color
+    : props.theme.colors[props.themeColor]
   };
 `;
 const Dot = styled.div`
@@ -42,14 +42,14 @@ const Dot = styled.div`
     if (props.outline) {
       return 'transparent';
     }
-    return props.colorValue
-      ? props.colorValue
-      : props.theme.colors[props.color];
+    return props.color
+      ? props.color
+      : props.theme.colors[props.themeColor];
   }} !important;
   border: 1px solid;
-  border-color: ${(props) => props.colorValue
-    ? props.colorValue
-    : props.theme.colors[props.color]
+  border-color: ${(props) => props.color
+    ? props.color
+    : props.theme.colors[props.themeColor]
   };
   @media print {
     -webkit-print-color-adjust: exact !important;
@@ -59,16 +59,15 @@ const Dot = styled.div`
 
 /**
   * Key item component for plots - should be placed inside styles/Key
-  * A key item consists of a label and a symbol that can either be a circle (default) or a line
-  * - circles (dots) can be solid (default) or outlined
+  * A key item consists of a label and a symbol that can either be a circle (default), square or a line
+  * - circles (dots) and squares (areas) can be solid (default) or outlined
   * - lines can be continuous (default) or dashed
   *
   * @return {Component} Key entry
-  *
   */
 const KeyEntry = ({
+  themeColor,
   color,
-  colorValue,
   title,
   line,
   dashed,
@@ -79,12 +78,12 @@ const KeyEntry = ({
   <Styled small>
     { line &&
       <LineCell>
-        <Line small={small} color={color} colorValue={colorValue} dashed={dashed} role="presentation" />
+        <Line small={small} themeColor={themeColor} color={color} dashed={dashed} role="presentation" />
       </LineCell>
     }
     { !line &&
       <DotCell small={small}>
-        <Dot color={color} colorValue={colorValue} outline={outline} role="presentation" area={area} />
+        <Dot themeColor={themeColor} color={color} outline={outline} role="presentation" area={area} />
       </DotCell>
     }
     <Cell small={small} dot={!line}>
@@ -95,9 +94,9 @@ const KeyEntry = ({
 
 KeyEntry.propTypes = {
   /** the color key as defined in global theme */
-  color: PropTypes.string,
+  themeColor: PropTypes.string,
   /** the raw color value */
-  colorValue: PropTypes.string,
+  color: PropTypes.string,
   /** the key label as displayed */
   title: PropTypes.string.isRequired,
   /** key style: if true style is "line", if false or null style is "circle" */

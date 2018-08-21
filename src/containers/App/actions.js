@@ -16,7 +16,7 @@ import {
 /**
  * remember location in store
  * @param {object} location new location
- * @return {object} type: action id, location: new location
+ * @return {object} `{type: action id, location: new location}`
  */
 export function updateLocation(location) {
   return {
@@ -29,7 +29,7 @@ export function updateLocation(location) {
  * navigate to new location
  * @param {object} location new location
  * @param {object} args navigation arguments
- * @return {object} type: action id, location: new location, args: navigation arguments
+   * @return {object} `{type: action id, location: new location, args: navigation arguments}`
  */
 export function navigate(location, args) {
   return {
@@ -42,7 +42,7 @@ export function navigate(location, args) {
  * navigation occured
  * @param {string} path new path
  * @param {string} query new query
- * @return {object} type: action id, path, query
+ * @return {object} `{type: action id, path, query}`
  */
 export function navigationOccured(path, query) {
   return {
@@ -56,7 +56,7 @@ export function navigationOccured(path, query) {
  * load data for table
  * @param {string} key key of data table to load
  * @param {object} value empty data object
- * @return {object} type: action id, key, value
+ * @return {object} `{type: action id, key, value}`
  */
 export function loadData(key, value) {
   return {
@@ -69,7 +69,7 @@ export function loadData(key, value) {
 /**
  * load error for table
  * @param {string} key key of data table failed loading
- * @return {object} type: action id, key
+ * @return {object} `{type: action id, key}`
  */
 export function loadError(key) {
   return {
@@ -82,7 +82,7 @@ export function loadError(key) {
  * request data for table
  * @param {string} key key of data table to load
  * @param {object} timestamp timestamp of request
- * @return {object} type: action id, key, timestamp
+ * @return {object} `{type: action id, key, timestamp}`
  */
 export function dataRequested(key, timestamp) {
   return {
@@ -96,7 +96,7 @@ export function dataRequested(key, timestamp) {
  * data loaded for table
  * @param {string} key key of data table to load
  * @param {object} data loaded data
- * @return {object} type: action id, key, data
+ * @return {object} `{type: action id, key, data}`
  */
 export function dataLoaded(key, data) {
   return {

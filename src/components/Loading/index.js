@@ -1,20 +1,34 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import ReactLoading from 'react-loading';
-import { withTheme } from 'styled-components';
-
+import styled from 'styled-components';
 import Label from 'components/Label';
 
-const Loading = ({ theme }) => (
-  <div>
+const Styled = styled.div`
+  animation: pulsate 1s ease-out;
+  animation-iteration-count: infinite;
+  opacity: 0.5;
+  @keyframes pulsate {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1.0;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+`;
+
+/**
+  * Simple text loader
+  *
+  * @return {Component} Loading
+  *
+  */
+const Loading = () => (
+  <Styled>
     <Label id="app.loading" />
-    <ReactLoading type="bubbles" color={theme.colors.hover} height={20} width={60} />
-  </div>
+  </Styled>
 );
 
-Loading.propTypes = {
-  /** global theme */
-  theme: PropTypes.object.isRequired,
-};
-
-export default withTheme(Loading);
+export default Loading;

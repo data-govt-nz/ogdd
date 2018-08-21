@@ -8,7 +8,6 @@ import Button from 'styles/Button';
   * @component
   * Header menu link
   *
-  *
   */
 export default styled(Button)`
   display: inline-block;

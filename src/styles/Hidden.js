@@ -3,8 +3,8 @@ import { BREAKPOINTS } from 'containers/App/constants';
 
 /**
   * @component
-  * Hidden when viewport wider than given breakpoint as defined in theme
-  *
+  * Responsive style: Hidden when viewport wider than given breakpoint as defined in theme.
+  * (See also /styles/Visible)
   *
   */
 export default styled.span`

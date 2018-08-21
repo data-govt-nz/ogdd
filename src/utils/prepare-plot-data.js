@@ -8,7 +8,6 @@ import quasiEquals from 'utils/quasi-equals';
   * @param {object} surveys the different dates
   * @param {object} [rowID] row identifier
   * @return the modified HTML string
-  *
   */
 export default function preparePlotData(data, surveys, rowID) {
   return data

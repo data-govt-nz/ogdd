@@ -3,8 +3,8 @@ import { BREAKPOINTS } from 'containers/App/constants';
 
 /**
   * @component
-  * Wrapper for items displayed above plots, e.g. plot options
-  *
+  * Wrapper for items displayed above plots, e.g. plot select options
+  * - should occupy same space as /styles/PlotTitle
   *
   */
 export default styled.div`

@@ -5,7 +5,10 @@ import { BREAKPOINTS } from 'containers/App/constants';
 
 /**
   * @component
-  * Column for grid. Use inside styles/Row
+  * Column for grid. Use inside /styles/Row.
+  * - grid gutter is specified in app constants (unless `withoutgutter` is set)
+  * - if `paddingvertical` is set will also include vertical spacing (according to grid)
+  * - if `padding.bottom` is set will also includ vertical spacing (according to value provided)
   *
   */
 export default styled(Box)`

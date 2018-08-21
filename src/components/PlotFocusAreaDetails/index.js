@@ -70,8 +70,9 @@ const Dismiss = styled.div`
 `;
 
 /**
-  * Detailed timeseries line graph for single focus area, uses react-vis
-  * Can plot multiple timeseries and marks reference and active timeseries
+  * Produces a detailed timeseries line graph with many indicators, uses react-vis.
+  * Primary and reference timeseries are highlighted.
+  * (Used for Single Focus Area Chart component)
   *
   * @return {Component} Timeseries line graph for many subjects
   *
@@ -429,7 +430,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
                   <KeyEntry
                     line
                     small
-                    color="black"
+                    themeColor="black"
                     title={referenceSubject.get('title')}
                   />
                 </Key>

@@ -13,7 +13,6 @@ import ContentContainer from 'styles/ContentContainer';
   * Simple path not found component.
   * Not actually a container (not connected to redux store).
   *
-  *
   */
 class PathNotFound extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
