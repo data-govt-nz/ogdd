@@ -31,8 +31,11 @@ const Styled = styled.nav`
       display: none;
     }
   `}
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
+    padding-top: 14px;
+  }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
-    padding-top: 1.5em;
+    padding-top: 17px;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.LARGE]}) {
     margin-left: 0;

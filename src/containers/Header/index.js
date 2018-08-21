@@ -33,25 +33,26 @@ const Styled = styled.header`
   }
 `;
 const Brand = styled(NavLink)`
-  position: absolute;
-  top: 5px;
-  left: 7px;
   box-shadow: none;
   min-width: 0;
-  max-width: none;
-  padding: 7px 10px;
+  max-width: 130px;
+  padding: 5px 10px;
   margin: 0;
+  position: absolute;
+  left: 100px;
+  top: 7px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
-    padding: 7px 20px;
-    margin: 0 5px;
     left: 95px;
+    max-width: none;
+    padding: 5px 20px;
+    margin: 0 5px;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
-    top: 15px;
+    top: 17px;
     left: -25px;
   }
   @media print {
-    top: 15px;
+    top: 17px;
     left: -25px;
   }
   &:hover{
