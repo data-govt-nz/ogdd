@@ -70,9 +70,9 @@ export const selectSurveys = createSelector(
   (state) => selectData(state, 'surveys'),
   (data) => {
     if (data) {
-      // assume YYYYMMDD and convert to YYYY-MM-DD (initially suggested date format)
+      // assume YYYYMMDD (initially suggested date format) and convert to YYYY-MM-DD
       return data.map((d) => {
-        if (isNaN(Date.parse(d.get('date')))) {
+        if (d.get('date').length === 8 && d.get('date').indexOf('-') === -1) {
           const updated = insertAt(insertAt(String(d.get('date')), '-', 6), '-', 4);
           return isNaN(Date.parse(updated)) ? d : d.set('date', updated);
         }
