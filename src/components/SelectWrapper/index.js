@@ -35,6 +35,9 @@ const SelectDiv = styled.span`
     right: 0;
     z-index: 1;
   }
+  @media print {
+    display: none;
+  }
 `;
 const Select = styled.select`
   font-weight: 700;
@@ -42,9 +45,6 @@ const Select = styled.select`
   position: relative;
   z-index: 2;
   bottom: -1px;
-  @media print {
-    display: none;
-  }
   &:hover {
     color: ${(props) => props.theme.colors.hover} !important;
   }

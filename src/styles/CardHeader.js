@@ -14,4 +14,7 @@ export default styled.div`
     padding-right: 0;
     min-height: ${(props) => props.hasMinHeight ? '66px' : 0};
   }
+  @media print {
+    min-height: 0;
+  }
 `;

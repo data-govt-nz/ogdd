@@ -20,6 +20,11 @@ const Styled = styled.div`
     padding: 4px 15px 10px;
     margin-top: ${(props) => props.isOffset ? 24 : 0}px;
   }
+  @media print {
+    padding: 4px 0 10px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
 `;
 
 /**

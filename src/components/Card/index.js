@@ -22,6 +22,8 @@ const Styled = styled(Button)`
   }
   @media print {
     box-shadow: none;
+    border-top: 1px solid ${(props) => props.theme.colors.light};
+    page-break-inside: avoid;
   }
 `;
 const StyledDiv = Styled.withComponent('div').extend`

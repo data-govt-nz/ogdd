@@ -195,6 +195,7 @@ class PathInsights extends React.Component { // eslint-disable-line react/prefer
                   options={surveys}
                   onChange={(newValue) => this.onSurveyChange(newValue)}
                   valueKey={'survey_id'}
+                  title={timeFormat('%Y')(new Date(survey.get('date')).getTime())}
                   formatOption={(option) => timeFormat('%Y')(new Date(option.get('date')).getTime())}
                 />
               }

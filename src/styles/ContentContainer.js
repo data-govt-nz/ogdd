@@ -16,4 +16,8 @@ export default styled.div`
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     padding: 0;
   }
+  @media print {
+    max-width: none;
+    padding: 0 10px;
+  }
 `;

@@ -18,6 +18,9 @@ export default styled(Flex)`
     margin: 0 -${(props) => props.withoutgutter ? 0 : props.theme.gutter[2]};
   }
   @media print {
+    flex-wrap: nowrap;
+    display: block;
+    width: 100%;
     margin: 0 -${(props) => props.withoutgutter ? 0 : props.theme.gutter[2]};
   }
 `;

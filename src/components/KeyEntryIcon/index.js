@@ -31,6 +31,11 @@ const Dot = styled.div`
   @media print {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    background-color: unset;
+    box-shadow: inset 0 0 0 1000px ${(props) => props.themeColor
+      ? props.theme.colors[props.themeColor]
+      : props.theme.colors.black
+    };
   }
 `;
 

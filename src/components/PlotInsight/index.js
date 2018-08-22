@@ -29,6 +29,10 @@ const InsightValue = styled.div`
   };
   margin-top: 12px;
   margin-bottom: 10px;
+  @media print {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 `;
 const InsightText = styled.div`
   font-size: 15px;
@@ -67,6 +71,8 @@ const OutcomeBar = styled.div`
   @media print {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    background-color: unset;
+    box-shadow: inset 0 0 0 1000px ${(props) => props.outline ? 'transparent' : props.colorValue};
   }
 `;
 const IndicatorOutcomes = styled.div`

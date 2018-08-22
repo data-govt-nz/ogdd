@@ -53,7 +53,8 @@ const Brand = styled(NavLink)`
   }
   @media print {
     top: 17px;
-    left: -25px;
+    left: 130px;
+    max-width: none;
   }
   &:hover{
     box-shadow: none !important;
@@ -96,7 +97,9 @@ const NavBar = styled.div`
     height: 70px;
   }
   @media print {
-    height: 70px;
+    height: 71px;
+    box-shadow: none;
+    border-bottom: 1px solid ${(props) => props.theme.colors.light};
   }
 `;
 const AboutLink = styled(NavLink)`

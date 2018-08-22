@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { BREAKPOINTS } from 'containers/App/constants';
 
 /**
@@ -15,8 +15,9 @@ export default styled.span`
     display: none;
   }
   @media print {
-    ${(props) => props.print && css`
-      display: inline-block;
-    `}
+    display: ${(props) => props.print
+      ? 'inline-block'
+      : 'none'
+    };
   }
 `;

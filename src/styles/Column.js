@@ -61,6 +61,8 @@ export default styled(Box)`
   }
   position: relative;
   @media print {
+    flex: 0 1 auto;
+    display: block;
     ${(props) => props.printwidth
       ? css`
         width: ${100 * props.printwidth}%;
@@ -69,6 +71,5 @@ export default styled(Box)`
     }
     padding-right:${(props) => props.withoutgutter ? 0 : props.theme.gutter[2]};
     padding-left:${(props) => props.withoutgutter ? 0 : props.theme.gutter[2]};
-    page-break-inside: avoid;
   }
 `;
