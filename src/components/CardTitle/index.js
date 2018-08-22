@@ -11,7 +11,7 @@ const Styled = styled.div`
   display: table;
   table-layout: fixed;
   width: 100%;
-  line-height: 20px;
+  line-height: 18px;
 `;
 const Cell = styled.div`
   display: table-cell;

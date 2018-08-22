@@ -36,7 +36,7 @@ class PlotServicesMultiples extends React.PureComponent { // eslint-disable-line
       .groupBy((outcome) => outcome.get('answer'));
 
     return (
-      <Card onMouseLeave={onCardMouseLeave} >
+      <Card onMouseLeave={onCardMouseLeave} withoutPaddingBottom>
         <CardBody withoutTitle>
           <Row withoutgutter="true">
             { groups.toList().map((group) => (

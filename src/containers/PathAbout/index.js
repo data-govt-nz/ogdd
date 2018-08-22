@@ -1,7 +1,9 @@
 // vendor
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
 
+import { BREAKPOINTS } from 'containers/App/constants';
 
 // utils
 import getLabel from 'utils/get-label';
@@ -27,6 +29,14 @@ import HTMLWrapper from 'components/HTMLWrapper';
 // assets
 import main from 'text/about.md'; // loaded as HTML from markdown
 import description from 'text/about-aside.md'; // loaded as HTML from markdown
+
+const AlignContent = styled.div`
+  margin-top: -35px;
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
+    padding-top: 3px;
+    margin-top: 0;
+  }
+`;
 
 // initial component state
 const INITIAL_STATE = {
@@ -83,6 +93,7 @@ class PathAbout extends React.PureComponent { // eslint-disable-line react/prefe
       <AsideContent
         title={this.renderPageTitle()}
         html={description}
+        isOffset
       />
     );
   }
@@ -123,7 +134,9 @@ class PathAbout extends React.PureComponent { // eslint-disable-line react/prefe
             </Visible>
           </Column>
           <Column width={[1, 3 / 4]} order={1} paddingvertical="true">
-            <HTMLWrapper printURL innerhtml={setLinkTarget(main)} />
+            <AlignContent>
+              <HTMLWrapper printURL innerhtml={setLinkTarget(main)} large />
+            </AlignContent>
           </Column>
         </Row>
       </ContentContainer>

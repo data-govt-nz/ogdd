@@ -29,7 +29,8 @@ injectGlobal`
   #ogdd-root .ogdd-html h3,
   #ogdd-root .ogdd-html h4,
   #ogdd-root .ogdd-html h5 {
-      margin: 1em 0 0.6em;
+      margin: 1.6em 0 0.6em;
+      font-size: 1.5em;
   }
   #ogdd-root h1,
   #ogdd-root h2,

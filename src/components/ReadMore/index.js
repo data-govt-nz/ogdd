@@ -10,6 +10,7 @@ import Link from 'styles/Link';
 // component styles
 const Styled = styled(Link)`
   height: 50px;
+  font-size: 13px !important;
 `;
 
 /**

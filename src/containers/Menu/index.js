@@ -19,7 +19,7 @@ import NavLink from 'styles/NavLink';
 // component styles
 const Styled = styled.nav`
   display: inline-block;
-  padding-top: 0.5em;
+  padding-top: 12px;
   ${(props) => props.visibleMin && css`
     display: none;
     @media (min-width: ${props.theme.breakpoints[props.visibleMin]}) {

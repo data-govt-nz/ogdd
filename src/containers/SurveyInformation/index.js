@@ -18,17 +18,17 @@ import Link from 'styles/Link';
 
 // component styles
 const Styled = styled.div`
-  margin-top: 30px;
-  font-size: 13px;
+  margin-top: 45px;
+  font-size: 12.5px;
 `;
 const Title = styled.div`
   font-weight: 700;
 `;
 const TitleWrapper = styled.div`
-  margin-bottom: 5px;
+  line-height: 1.4;
 `;
 const CurrentSurveyInfo = styled.p`
-  margin-bottom: 5px;
+  margin-bottom: 0;
 `;
 const AboutLinkWrapper = styled.p`
   margin-bottom: 5px;
@@ -37,7 +37,7 @@ const AboutLinkWrapper = styled.p`
   }
 `;
 const AboutLink = styled(Link)`
-  font-size: 13px !important;
+  font-size: 12.5px !important;
 `;
 
 /**
@@ -75,7 +75,7 @@ const SurveyInformation = ({ surveys, surveySelectedId, nav }) => {
             getLabel('component.surveyInformation.current')
           } ${
             timeFormat('%Y')(new Date(currentSurvey.get('date')).getTime())
-          }`
+          }.`
         }
       </CurrentSurveyInfo>
       <AboutLinkWrapper>

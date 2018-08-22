@@ -9,7 +9,7 @@ export default styled.div`
   max-width: ${(props) => props.theme.maxWidth};
   margin: 0 auto;
   position: relative;
-  padding: 0 10px ${(props) => props.withoutmargin ? 0 : 50}px;
+  padding: 0 20px ${(props) => props.withoutmargin ? 0 : 50}px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     padding-right: 25px;
     padding-left: 25px;

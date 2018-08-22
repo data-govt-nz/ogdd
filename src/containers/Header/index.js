@@ -42,14 +42,14 @@ const Brand = styled(NavLink)`
   left: 100px;
   top: 7px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
-    left: 95px;
+    left: 101px;
     max-width: none;
-    padding: 5px 20px;
+    padding: 5px 14px;
     margin: 0 5px;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     top: 17px;
-    left: -25px;
+    left: -19px;
   }
   @media print {
     top: 17px;

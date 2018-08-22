@@ -22,10 +22,11 @@ const Styled = styled.div`
 const Cell = styled.div`
   display: table-cell;
   vertical-align: middle;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
+    font-size: 15px;
     vertical-align: top;
     padding-top: 10px;
   }

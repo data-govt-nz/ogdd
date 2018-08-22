@@ -8,7 +8,6 @@ import { BREAKPOINTS } from 'containers/App/constants';
   */
 export default styled.div`
   position: relative;
-  margin-bottom: 5px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     margin-bottom: 30px;
   }

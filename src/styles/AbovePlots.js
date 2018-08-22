@@ -14,6 +14,7 @@ export default styled.div`
   font-weight: 500;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     margin-bottom: 10px;
+    font-size: 15px;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     margin-bottom: 8px;

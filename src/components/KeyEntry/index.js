@@ -35,8 +35,8 @@ const Line = styled.div`
   };
 `;
 const Dot = styled.div`
-  width: ${(props) => props.small ? 8 : 10}px;
-  height: ${(props) => props.small ? 8 : 10}px;
+  width: ${(props) => props.small ? 8 : 9}px;
+  height: ${(props) => props.small ? 8 : 9}px;
   border-radius: ${(props) => props.area ? 0 : 9999}px;
   background-color: ${(props) => {
     if (props.outline) {

@@ -8,7 +8,7 @@ import Button from 'styles/Button';
 // component styles
 const Styled = styled(Button)`
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-  padding: 4px 10px 10px;
+  padding: 4px 10px ${(props) => props.withoutPaddingBottom ? 0 : 10}px;
   text-align: left;
   max-width: 100%;
   &:hover {
@@ -35,7 +35,15 @@ const StyledDiv = Styled.withComponent('div').extend`
   *
   * @return {Component} Card
   */
-const Card = ({ onMouseEnter, onMouseLeave, onTouchStart, onClick, children, title }) => onClick
+const Card = ({
+  onMouseEnter,
+  onMouseLeave,
+  onTouchStart,
+  onClick,
+  children,
+  title,
+  withoutPaddingBottom,
+ }) => onClick
 ? (
   <Styled
     onMouseEnter={onMouseEnter || (() => true)}
@@ -46,6 +54,7 @@ const Card = ({ onMouseEnter, onMouseLeave, onTouchStart, onClick, children, tit
     role={onClick ? 'button' : null}
     title={onClick ? title : null}
     tabIndex={onClick ? 0 : null}
+    withoutPaddingBottom={withoutPaddingBottom}
   >
     {children}
   </Styled>
@@ -55,6 +64,7 @@ const Card = ({ onMouseEnter, onMouseLeave, onTouchStart, onClick, children, tit
   onMouseEnter={onMouseEnter || (() => true)}
   onMouseLeave={onMouseLeave}
   onTouchStart={onTouchStart}
+  withoutPaddingBottom={withoutPaddingBottom}
 >
   { children }
 </StyledDiv>
@@ -73,6 +83,8 @@ Card.propTypes = {
   title: PropTypes.string,
   /** card content */
   children: PropTypes.node.isRequired,
+  /** do not add bottom padding */
+  withoutPaddingBottom: PropTypes.bool,
 };
 
 export default Card;
