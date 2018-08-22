@@ -49,7 +49,7 @@ const KeyEntryIcon = ({ themeColor, title, icon }) => (
           <Icon name={icon} themeColor="white" size={24} />
         </PrintHidden>
         <PrintOnly>
-          <Icon name={icon} themeColor={themeColor} />
+          <Icon name={icon} themeColor={themeColor} size={24} />
         </PrintOnly>
       </Dot>
     </DotCell>
