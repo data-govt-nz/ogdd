@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Icon from 'components/Icon';
+import PrintOnly from 'styles/PrintOnly';
+import PrintHidden from 'styles/PrintHidden';
 
 // component styles
 const Styled = styled.div`
@@ -29,13 +31,7 @@ const Dot = styled.div`
   text-align: center;
   padding: 5px;
   @media print {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    background-color: unset;
-    box-shadow: inset 0 0 0 1000px ${(props) => props.themeColor
-      ? props.theme.colors[props.themeColor]
-      : props.theme.colors.black
-    };
+    background-color: transparent !important;
   }
 `;
 
@@ -49,7 +45,12 @@ const KeyEntryIcon = ({ themeColor, title, icon }) => (
   <Styled>
     <DotCell>
       <Dot themeColor={themeColor} >
-        <Icon name={icon} themeColor="white" size={24} />
+        <PrintHidden>
+          <Icon name={icon} themeColor="white" size={24} />
+        </PrintHidden>
+        <PrintOnly>
+          <Icon name={icon} themeColor={themeColor} size={24} />
+        </PrintOnly>
       </Dot>
     </DotCell>
     <Cell>

@@ -7,17 +7,19 @@ import { BREAKPOINTS } from 'containers/App/constants';
   */
 export default styled.div`
   max-width: ${(props) => props.theme.maxWidth};
-  margin: 0 auto ${(props) => props.withoutmargin ? 0 : 50}px;
+  margin: 0 auto;
   position: relative;
-  padding: 0 10px;
+  padding: 0 10px ${(props) => props.withoutmargin ? 0 : 50}px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
-    padding: 0 25px;
+    padding-right: 25px;
+    padding-left: 25px;
   }
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
-    padding: 0;
+    padding-right: 0;
+    padding-left: 0;
   }
   @media print {
     max-width: none;
-    padding: 0 10px;
+    padding: 0 10px ${(props) => props.withoutmargin ? 0 : 50}px;
   }
 `;
