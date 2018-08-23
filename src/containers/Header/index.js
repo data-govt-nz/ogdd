@@ -87,8 +87,10 @@ const LogoWrapper = styled.div`
 const Logo = styled.svg`
   position: relative;
   height: 50px;
+  width: 117.14px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     height: 70px;
+    width: 164px;
   }
   @media print {
     height: 70px;
