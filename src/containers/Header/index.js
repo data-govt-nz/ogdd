@@ -147,12 +147,14 @@ const Header = ({ navItems, location, nav }) => (
   <Styled role="banner">
     <NavBar>
       <LogoWrapper>
-        <Logo
-          {...logoSVG.attributes}
-          aria-hidden="true"
-          role="presentation"
-          dangerouslySetInnerHTML={{ __html: logoSVG.content }}
-        />
+        {logoSVG &&
+          <Logo
+            {...logoSVG.attributes}
+            aria-hidden="true"
+            role="presentation"
+            dangerouslySetInnerHTML={{ __html: logoSVG.content }}
+          />
+        }
       </LogoWrapper>
       <ContentContainer withoutmargin="true">
         <Brand
