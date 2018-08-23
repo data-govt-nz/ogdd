@@ -23,7 +23,7 @@ const DotCell = styled(Cell)`
 `;
 const LineCell = styled(Cell)`
   width: 14px;
-  padding: 10px 7px 5px 0px;
+  padding: 6px 7px 5px 0px;
 `;
 const Line = styled.div`
   width: 100%;
