@@ -9,14 +9,22 @@ import { BREAKPOINTS } from 'containers/App/constants';
 
 // component styles
 const Styled = styled.div`
+  width: 100%;
+  padding-right: 50px;
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
+    padding-right: 0;
+  }
+`;
+
+const Table = styled.div`
   display: table;
   table-layout: fixed;
   width: 100%;
-  line-height: 20px;
   height: 50px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
     height: 40px;
     margin-bottom: 15px;
+    line-height: 20px;
   }
 `;
 const Cell = styled.div`
@@ -59,19 +67,21 @@ const IconWrap = styled.div`
   */
 const PageTitle = ({ labelId, icon, title }) => (
   <Styled>
-    <IconCell>
-      <IconWrap>
-        <Icon name={icon} />
-      </IconWrap>
-    </IconCell>
-    <Cell>
-      { title &&
-        <span>{title}</span>
-      }
-      { labelId &&
-        <Label id={labelId} />
-      }
-    </Cell>
+    <Table>
+      <IconCell>
+        <IconWrap>
+          <Icon name={icon} />
+        </IconWrap>
+      </IconCell>
+      <Cell>
+        { title &&
+          <span>{title}</span>
+        }
+        { labelId &&
+          <Label id={labelId} />
+        }
+      </Cell>
+    </Table>
   </Styled>
 );
 

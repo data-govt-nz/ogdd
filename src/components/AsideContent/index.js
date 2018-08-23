@@ -12,7 +12,7 @@ import HTMLWrapper from 'components/HTMLWrapper';
 // component styles
 const Styled = styled.div`
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
-    padding: 4px 10px 10px;
+    padding: 4px 5px 10px;
     margin-bottom: 50px;
     margin-top: ${(props) => props.isOffset ? 26 : 0}px;
   }
