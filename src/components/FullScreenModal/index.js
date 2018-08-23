@@ -18,6 +18,7 @@ const Styled = styled.div`
   left: 0;
   background-color: #fff;
   z-index: 99999;
+  overflow-y: auto;
 `;
 const Dismiss = styled.div`
   position: absolute;
