@@ -171,7 +171,7 @@ class PlotServices extends React.PureComponent { // eslint-disable-line react/pr
                       vertical: parseFloat(hintValue.value.y, 10) === parseFloat(hintValueRange[0]) ? 'bottom' : 'top',
                       horizontal: 'left',
                     }}
-                    style={{ transform: 'translateX(50%)' }}
+                    style={{ transform: 'translateX(50%)', WebkitTransform: 'translateX(50%)', MsTransform: 'translateX(50%)' }}
                   >
                     <PlotHint
                       background={'fa1'}

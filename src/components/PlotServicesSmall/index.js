@@ -158,7 +158,7 @@ class PlotServicesSmall extends React.PureComponent { // eslint-disable-line rea
                 <Hint
                   value={hintValue}
                   align={{ vertical: 'top', horizontal: 'left' }}
-                  style={{ transform: 'translateX(50%)' }}
+                  style={{ transform: 'translateX(50%)', WebkitTransform: 'translateX(50%)', MsTransform: 'translateX(50%)' }}
                 >
                   <PlotHint background={'fa1'}>
                     { formatValue(hintValue.y, indicatorType) }

@@ -234,7 +234,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                   <Hint
                     value={hintValue}
                     align={{ vertical: 'top', horizontal: 'left' }}
-                    style={{ transform: 'translateX(50%)' }}
+                    style={{ transform: 'translateX(50%)', WebkitTransform: 'translateX(50%)', MsTransform: 'translateX(50%)' }}
                   >
                     <PlotHint background={focusArea.get('indicator_id')}>
                       { formatValue(hintValue.y, focusArea.get('type')) }

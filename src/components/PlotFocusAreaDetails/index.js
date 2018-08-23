@@ -395,7 +395,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
                   <Hint
                     value={hintValue}
                     align={{ vertical: 'top', horizontal: 'left' }}
-                    style={{ transform: 'translateX(50%)' }}
+                    style={{ transform: 'translateX(50%)', WebkitTransform: 'translateX(50%)', MsTransform: 'translateX(50%)' }}
                   >
                     <PlotHint background={focusArea.get('indicator_id')}>
                       { formatValue(hintValue.y, focusArea.get('type')) }
@@ -406,7 +406,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
                   <Hint
                     value={hintReference}
                     align={{ vertical: 'top', horizontal: 'left' }}
-                    style={{ transform: 'translateX(50%)' }}
+                    style={{ transform: 'translateX(50%)', WebkitTransform: 'translateX(50%)', MsTransform: 'translateX(50%)' }}
                   >
                     <PlotHint background={focusArea.get('indicator_id')}>
                       { formatValue(hintReference.y, focusArea.get('type')) }
@@ -417,7 +417,7 @@ class PlotFocusAreaDetails extends React.PureComponent { // eslint-disable-line 
                   <Hint
                     value={hintOther}
                     align={{ vertical: 'top', horizontal: 'left' }}
-                    style={{ transform: 'translateX(50%)' }}
+                    style={{ transform: 'translateX(50%)', WebkitTransform: 'translateX(50%)', MsTransform: 'translateX(50%)' }}
                   >
                     <PlotHint background={focusArea.get('indicator_id')}>
                       { formatValue(hintOther.y, focusArea.get('type')) }

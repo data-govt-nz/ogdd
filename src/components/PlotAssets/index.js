@@ -138,7 +138,7 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
                   <Hint
                     value={hintValue}
                     align={{ vertical: 'bottom', horizontal: 'left' }}
-                    style={{ transform: 'translateX(50%)' }}
+                    style={{ transform: 'translateX(50%)', WebkitTransform: 'translateX(50%)', MsTransform: 'translateX(50%)' }}
                   >
                     <PlotHint background={'fa3'} bottom>
                       { formatValue(hintValue.y, indicator.get('type')) }
@@ -149,7 +149,7 @@ class PlotAssets extends React.PureComponent { // eslint-disable-line react/pref
                   <Hint
                     value={hintReferenceValue}
                     align={{ vertical: 'top', horizontal: 'left' }}
-                    style={{ transform: 'translateX(50%)' }}
+                    style={{ transform: 'translateX(50%)', WebkitTransform: 'translateX(50%)', MsTransform: 'translateX(50%)' }}
                   >
                     <PlotHint background={'assetReferenceHint'}>
                       { formatValue(hintReferenceValue.y, indicator.get('type')) }
