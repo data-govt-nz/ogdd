@@ -10,7 +10,7 @@ import { BREAKPOINTS } from 'containers/App/constants';
 export default styled.span`
   @media (min-width: ${(props) => (props.min || props.min === BREAKPOINTS.SMALL)
     ? props.theme.breakpoints[props.min]
-    : BREAKPOINTS.SMALL
+    : props.theme.breakpoints[BREAKPOINTS.SMALL]
   }) {
     display: none;
   }
