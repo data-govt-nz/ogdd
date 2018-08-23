@@ -1,6 +1,6 @@
 {
   "name": "ogdd",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Web application for displaying results from New Zealands Open Data Maturity Surveys",
   "main": "index.js",
   "scripts": {
@@ -19,9 +19,9 @@
     "doc-server": "npm run doc-all && ./node_modules/.bin/styleguidist server",
     "doc": "npm run doc-all && npm run styleguide && rm -rf docs"
   },
-  "keywords": [],
-  "author": "Timo Franz, Unfold Data",
-  "license": "ISC",
+  "keywords": ["open data", "data visualisation", "react", "react-vis", "data-govt-nz", "stats-nz", "dumpark"],
+  "author": "Timo Franz, Dumpark",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
