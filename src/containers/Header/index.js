@@ -19,7 +19,7 @@ import ScreenReaderOnly from 'styles/ScreenReaderOnly';
 import NavLink from 'styles/NavLink';
 import ContentContainer from 'styles/ContentContainer';
 // assets
-import LogoSVG from 'assets/logo-pattern.svg';
+import logoSVG from 'assets/logo-pattern.svg';
 
 // component styles
 const Styled = styled.header`
@@ -80,7 +80,7 @@ const LogoWrapper = styled.div`
   top: 0;
 `;
 
-const Logo = styled(LogoSVG)`
+const Logo = styled.svg`
   height: 50px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     height: 70px;
@@ -132,7 +132,12 @@ const Header = ({ navItems, location, nav }) => (
   <Styled role="banner">
     <NavBar>
       <LogoWrapper>
-        <Logo role="presentation" aria-hidden="true" />
+        <Logo
+          {...logoSVG.attributes}
+          aria-hidden="true"
+          role="presentation"
+          dangerouslySetInnerHTML={{ __html: logoSVG.content }}
+        />
       </LogoWrapper>
       <ContentContainer withoutmargin="true">
         <Brand
