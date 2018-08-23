@@ -8,7 +8,7 @@ import { ICONS, ICON_SIZE } from 'containers/App/constants';
 import asArray from 'utils/as-array';
 
 // own style
-const SVG = styled.svg`
+const SVG = styled(({ color, themeColor, sizes, size, ...rest }) => <svg {...rest} />)`
   fill: ${(props) => {
     if (props.color) return props.color;
     if (props.themeColor) return props.theme.colors[props.themeColor];
