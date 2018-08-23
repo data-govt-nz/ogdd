@@ -78,9 +78,14 @@ const LogoWrapper = styled.div`
   position: absolute;
   left: 0;
   top: 0;
+  height: 50px;
+  @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
+    height: 70px;
+  }
 `;
 
 const Logo = styled.svg`
+  position: relative;
   height: 50px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     height: 70px;
@@ -134,6 +139,7 @@ const Header = ({ navItems, location, nav }) => (
       <LogoWrapper>
         <Logo
           {...logoSVG.attributes}
+          version="1.1"
           aria-hidden="true"
           role="presentation"
           dangerouslySetInnerHTML={{ __html: logoSVG.content }}
