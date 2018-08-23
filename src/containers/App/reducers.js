@@ -18,6 +18,7 @@ import {
   DATA,
   DATA_REQUESTED,
   DATA_LOADED,
+  LOAD_ERROR,
 } from './constants';
 
 // initial location state
@@ -75,6 +76,9 @@ function announcementReducer(state = fromJS({ msg: '', path: '', query: '' }), a
   if (action.type === DATA_LOADED) {
     return state.set('msg', getLabel('screenreader.dataLoaded'));
   }
+  if (action.type === LOAD_ERROR) {
+    return state.set('msg', getLabel('screenreader.dataLoadError'));
+  }
   return state;
 }
 
@@ -94,6 +98,12 @@ function convertToString(data) {
  */
 function dataReducer(state = fromJS(DATA), action) {
   switch (action.type) {
+    case LOAD_ERROR:
+      // remember request time
+      return state.setIn([action.key, 'error'], action.error && action.error.message
+        ? action.error.message
+        : 'error'
+    );
     case DATA_REQUESTED:
       // remember request time
       return state.setIn([action.key, 'requested'], action.timestamp);

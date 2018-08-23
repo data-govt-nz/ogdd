@@ -43,6 +43,16 @@ export const selectRequestedAt = createSelector(
   (data, key) => data.get(key) && data.getIn([key, 'requested'])
 );
 /**
+ * Select requested time for data table
+ * @param {object} state current state
+ * @param {string} key data table name
+ * @return {object} data table request time
+ */
+export const selectDataError = createSelector(
+  selectDataState,
+  (data) => data.filter((d) => d.get('error') !== null)
+);
+/**
  * Select data table content
  * @param {object} state current state
  * @param {string} key data table name

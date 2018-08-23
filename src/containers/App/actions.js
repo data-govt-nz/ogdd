@@ -71,10 +71,11 @@ export function loadData(key, value) {
  * @param {string} key key of data table failed loading
  * @return {object} `{type: action id, key}`
  */
-export function loadError(key) {
+export function loadError(key, error) {
   return {
     type: LOAD_ERROR,
     key,
+    error,
   };
 }
 

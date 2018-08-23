@@ -8,12 +8,13 @@ import styled from 'styled-components';
 import getLabel from 'utils/get-label';
 // components
 import Label from 'components/Label';
+import LoadErrors from 'components/LoadErrors';
 import Header from 'containers/Header';
 // simple styles
 import SkipContent from 'styles/SkipContent';
 // App actions, selectors, constants
 import { loadData } from './actions';
-import { selectAnnouncement } from './selectors';
+import { selectAnnouncement, selectDataError } from './selectors';
 import { NAVITEMS, DATA, BREAKPOINTS } from './constants';
 
 // component styles
@@ -83,7 +84,7 @@ class App extends React.Component {
     this.main.current.focus();
   }
   render() {
-    const { component, announcement } = this.props;
+    const { component, announcement, errors } = this.props;
     return (
       <Styled
         tabIndex="-1"
@@ -105,7 +106,10 @@ class App extends React.Component {
             tabIndex="-1"
             aria-labelledby="pageTitle"
           >
-            { component }
+            { errors && errors.size > 0
+              ? <LoadErrors errors={errors} />
+              : component
+            }
           </Main>
         </LiveAnnouncer>
       </Styled>
@@ -120,6 +124,7 @@ App.propTypes = {
   announcement: PropTypes.string,
   /** load data action */
   loadData: PropTypes.func.isRequired,
+  errors: PropTypes.object,
 };
 
 /**
@@ -130,6 +135,7 @@ App.propTypes = {
  */
 const mapStateToProps = (state) => ({
   announcement: selectAnnouncement(state),
+  errors: selectDataError(state),
 });
 
 /**

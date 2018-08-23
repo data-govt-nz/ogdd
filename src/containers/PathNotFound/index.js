@@ -1,6 +1,8 @@
 // vendor
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
+
 // utils
 import getLabel from 'utils/get-label';
 import getPageMetaTitle from 'utils/get-page-meta-title';
@@ -9,6 +11,10 @@ import Label from 'components/Label';
 // simple styles
 import PageLongTitle from 'styles/PageLongTitle';
 import ContentContainer from 'styles/ContentContainer';
+
+const StyledP = styled.p`
+  font-size: 16px;
+`;
 
 /**
   * Simple path not found component.
@@ -29,9 +35,9 @@ class PathNotFound extends React.PureComponent { // eslint-disable-line react/pr
         <PageLongTitle id="pageTitle">
           <Label id="component.notFound.title" />
         </PageLongTitle>
-        <p>
+        <StyledP>
           <Label id="component.notFound.text" />
-        </p>
+        </StyledP>
       </ContentContainer>
     );
   }

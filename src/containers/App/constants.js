@@ -39,6 +39,7 @@ export const DATA = API
     source: 'api',
     path: API_PATH,
     resourceId: '1578c5cc-fcfc-41ae-a61b-5f8f3467d437',
+    error: null,
   },    // id,survey_id,date,agencies_total
   subjects: {
     data: null,
@@ -46,6 +47,7 @@ export const DATA = API
     source: 'api',
     path: API_PATH,
     resourceId: 'b68a56bd-d9e4-4cca-bdf1-64d39539c604',
+    error: null,
   },   // id,title
   indicators: {
     data: null,
@@ -53,6 +55,7 @@ export const DATA = API
     source: 'api',
     path: API_PATH,
     resourceId: 'cdef3156-b3c6-4f08-91cf-f0150a3c9a96',
+    error: null,
   }, // id,indicator_id,type,question_no,title,description
   insights: {
     data: null,
@@ -60,6 +63,7 @@ export const DATA = API
     source: 'api',
     path: API_PATH,
     resourceId: '53118ce7-ff1c-4611-b66f-9922b5f3587f',
+    error: null,
   },   // id,survey_id,value,text,indicator_id,outcome_answers
   outcomes: {
     data: null,
@@ -67,6 +71,7 @@ export const DATA = API
     source: 'api',
     path: API_PATH,
     resourceId: 'b61a611b-d8ce-45a0-8013-17efab85140c',
+    error: null,
   },   // id,survey_id,subject_id,indicator_id,value,answer,answer_text
 }
 : {
@@ -76,6 +81,7 @@ export const DATA = API
     source: 'csv',
     path: 'data/',
     filename: 'surveys.csv',
+    error: null,
   },    // id,survey_id,date,agencies_total
   subjects: {
     data: null,
@@ -83,6 +89,7 @@ export const DATA = API
     source: 'csv',
     path: 'data/',
     filename: 'subjects.csv',
+    error: null,
   },   // id,title
   indicators: {
     data: null,
@@ -97,6 +104,7 @@ export const DATA = API
     source: 'csv',
     path: 'data/',
     filename: 'insights.csv',
+    error: null,
   },   // id,survey_id,value,text,indicator_id,outcome_answers
   outcomes: {
     data: null,
@@ -104,6 +112,7 @@ export const DATA = API
     source: 'csv',
     path: 'data/',
     filename: 'outcomes.csv',
+    error: null,
   },   // id,survey_id,subject_id,indicator_id,value,answer,answer_text
 };
 
