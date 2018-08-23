@@ -83,14 +83,22 @@ const LogoWrapper = styled.div`
     height: 70px;
   }
 `;
+// small helper function to figure out logo aspect ratio and infer display width from height
+// (width and height are needed to show SVG on iPhone 4
+const widthForViewBox = (viewBox, height) => {
+  const vB = viewBox.split(' ');
+  const w = vB.length > 3 ? vB[2] : 164;
+  const h = vB.length > 3 ? vB[3] : 70;
+  return (w / h) * height;
+};
 
 const Logo = styled.svg`
   position: relative;
   height: 50px;
-  width: 117.14px;
+  width: ${(props) => widthForViewBox(props.viewBox, 50)}px;
   @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.MEDIUM]}) {
     height: 70px;
-    width: 164px;
+    width: ${(props) => widthForViewBox(props.viewBox, 70)}px;
   }
   @media print {
     height: 70px;
@@ -141,7 +149,6 @@ const Header = ({ navItems, location, nav }) => (
       <LogoWrapper>
         <Logo
           {...logoSVG.attributes}
-          version="1.1"
           aria-hidden="true"
           role="presentation"
           dangerouslySetInnerHTML={{ __html: logoSVG.content }}
