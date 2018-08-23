@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { List } from 'immutable';
 // utils
 import getLabel from 'utils/get-label';
@@ -84,6 +84,19 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
     this.state = INITIAL_STATE;
   }
   /**
+    *  Remember viewport size and add resize eventlistener
+    */
+  componentDidMount() {
+    this.updateViewport();
+    window.addEventListener('resize', this.onResize);
+  }
+  /**
+    *  Remove resize eventlistener
+    */
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+  }
+  /**
     * 'Read more' button handler - shows/hides modal
     * @param {boolean} [showModal=true] show or hide modal
     */
@@ -112,32 +125,42 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
     * only available for single subject
     */
   onFAMouseLeave() {
-    this.setState({
-      focusAreaSelected: null,
-      surveyHighlightedId: null,
-    });
+    if (!this.state.showModal) {
+      this.setState({
+        focusAreaSelected: null,
+        surveyHighlightedId: null,
+      });
+    }
   }
   /**
-    * 'Focus area' touch handler - displays focus area information in modal
+    * 'Focus area' click handler - displays focus area information in modal
     * only available for single subject
     * @param {string} focusAreaSelected the focus area to highlight and show
     */
-  onFATouch(focusAreaSelected) {
-    this.setState({ focusAreaSelected, showModal: true });
+  onFAClickSingleMode(focusAreaSelected) {
+    if (this.state.viewport === BREAKPOINTS.MOBILE) {
+      this.setState({ focusAreaSelected, showModal: true });
+    }
   }
   /**
-    * 'Focus area' click handler - opens focus area detail view, retains current subject
-    * only available for multiple subjects
-    * @param {string} fa the focus area to navigate to
+    * 'Focus area' click handler
+    * - for multiple subject opens focus area detail view, retains current subject
+    * - for single subject && mobile screen opens focus area description in modal
+    * @param {object} focusArea the focus area to navigate to
     */
-  onFAClick(fa) {
-    this.props.nav({
-      path: 'focus-area',
-      query: {
-        fa,
-        subject: this.props.subjectSelectedId || DEFAULT_SUBJECT_ID,
-      },
-    });
+  onFAClick(focusArea) {
+    if (this.props.subjects.size > 1) {
+      this.props.nav({
+        path: 'focus-area',
+        query: {
+          fa: focusArea.get('indicator_id'),
+          subject: this.props.subjectSelectedId || DEFAULT_SUBJECT_ID,
+        },
+      });
+    }
+    if (this.props.subjects.size === 1 && this.state.viewport === BREAKPOINTS.MOBILE) {
+      this.setState({ focusAreaSelected: focusArea, showModal: true });
+    }
   }
   /**
     * 'Highlight survey' handler - highlights survey in plot
@@ -153,6 +176,28 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
     */
   onSubjectChange(subject) {
     this.props.nav({ query: { subject } });
+  }
+  /**
+    * resize handler
+    */
+  onResize = () => {
+    this.setState(INITIAL_STATE);
+    this.updateViewport();
+    this.forceUpdate();
+  };
+  /**
+    * Remember viewport size in state
+    */
+  updateViewport() {
+    let viewport = BREAKPOINTS.MOBILE;
+    if (window.innerWidth >= parseInt(this.props.theme.breakpoints[BREAKPOINTS.LARGE], 10)) {
+      viewport = BREAKPOINTS.LARGE;
+    } else if (window.innerWidth >= parseInt(this.props.theme.breakpoints[BREAKPOINTS.MEDIUM], 10)) {
+      viewport = BREAKPOINTS.MEDIUM;
+    } else if (window.innerWidth >= parseInt(this.props.theme.breakpoints[BREAKPOINTS.SMALL], 10)) {
+      viewport = BREAKPOINTS.SMALL;
+    }
+    this.setState({ viewport });
   }
   /**
     * Render page title
@@ -285,14 +330,14 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
                       focusAreaIcon={focusArea.get('indicator_id')}
                       surveys={surveys}
                       subject={subjectSelected}
+                      hasMultipleSubjects={subjects.size > 1}
                       referenceSubject={subjectReference}
                       onSelectReference={() => subjectReference ? this.onSubjectChange(subjectReference.get('subject_id')) : null}
                       surveyHighlightedId={surveyHighlightedId}
                       onHighlightSurvey={(surveyID) => this.onHighlightSurvey(surveyID)}
                       onFAMouseEnter={subjects.size === 1 ? () => this.onFAMouseEnter(focusArea) : null}
                       onFAMouseLeave={subjects.size === 1 ? () => this.onFAMouseLeave() : null}
-                      onFATouch={subjects.size === 1 ? () => this.onFATouch(focusArea) : null}
-                      onFAClick={subjects.size > 1 ? () => this.onFAClick(focusArea.get('indicator_id')) : null}
+                      onFAClick={() => this.onFAClick(focusArea)}
                     />
                   </Column>
                 ))}
@@ -316,7 +361,8 @@ PathFocusAreas.propTypes = {
   nav: PropTypes.func.isRequired,
   /** selected survey id from state */
   subjectSelectedId: PropTypes.string.isRequired,
-  /** selected focuas area id from state */
+  /** theme */
+  theme: PropTypes.object,
 };
 
 /**
@@ -345,4 +391,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PathFocusAreas);
+export default withTheme(connect(mapStateToProps, mapDispatchToProps)(PathFocusAreas));

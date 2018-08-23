@@ -31,39 +31,38 @@ const StyledDiv = Styled.withComponent('div').extend`
 `;
 
 /**
-  * Card component - renders as button if onClick handler present or hoverable div
+  * Card component - renders as button or hoverable div
   *
   * @return {Component} Card
   */
 const Card = ({
+  isButton,
   onMouseEnter,
   onMouseLeave,
-  onTouchStart,
   onClick,
   children,
   title,
   withoutPaddingBottom,
- }) => onClick
+ }) => isButton
 ? (
   <Styled
     onMouseEnter={onMouseEnter || (() => true)}
     hover={onMouseEnter || false}
     onMouseLeave={onMouseLeave}
-    onTouchStart={onTouchStart}
     onClick={onClick}
-    role={onClick ? 'button' : null}
-    title={onClick ? title : null}
-    tabIndex={onClick ? 0 : null}
+    role="button"
+    title={title}
+    tabIndex={0}
     withoutPaddingBottom={withoutPaddingBottom}
   >
     {children}
   </Styled>
 )
 : <StyledDiv
-  hover={onMouseEnter || false}
-  onMouseEnter={onMouseEnter || (() => true)}
+  hover={!!onMouseEnter || false}
+  onMouseEnter={onMouseEnter || (() => false)}
   onMouseLeave={onMouseLeave}
-  onTouchStart={onTouchStart}
+  onClick={onClick}
   withoutPaddingBottom={withoutPaddingBottom}
 >
   { children }
@@ -75,8 +74,6 @@ Card.propTypes = {
   onMouseEnter: PropTypes.func,
   /** mouse leave handler */
   onMouseLeave: PropTypes.func,
-  /** touch handler */
-  onTouchStart: PropTypes.func,
   /** click handler */
   onClick: PropTypes.func,
   /** button title */
@@ -85,6 +82,12 @@ Card.propTypes = {
   children: PropTypes.node.isRequired,
   /** do not add bottom padding */
   withoutPaddingBottom: PropTypes.bool,
+  /** if rendered as button */
+  isButton: PropTypes.bool,
+};
+
+Card.defaultProps = {
+  isButton: false,
 };
 
 export default Card;

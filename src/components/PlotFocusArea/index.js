@@ -80,7 +80,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
       onHighlightSurvey,
       onFAMouseEnter,
       onFAMouseLeave,
-      onFATouch,
+      hasMultipleSubjects,
       onFAClick,
       theme,
       onSelectReference,
@@ -119,8 +119,8 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
       <Card
         onMouseEnter={onFAMouseEnter || (() => true)}
         onMouseLeave={onFAMouseLeave}
-        onTouchStart={onFATouch}
         onClick={onFAClick}
+        isButton={hasMultipleSubjects}
         title={focusArea.get('title')}
       >
         <CardHeader hasMinHeight>
@@ -160,6 +160,10 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                 onMouseLeave={() => {
                   onHighlightSurvey(surveys.last().get('survey_id'));
                 }}
+                onClick={(event) => {
+                  // block click event here to prevent parent (Card) on click event from firing
+                  if (!hasMultipleSubjects && event && event.stopPropagation) event.stopPropagation();
+                }}
                 margin={{ bottom: 30, right: 13 }}
               >
                 <AreaSeries data={dataForceYRange} style={{ opacity: 0 }} />
@@ -196,7 +200,7 @@ class PlotFocusArea extends React.PureComponent { // eslint-disable-line react/p
                   }}
                   onSeriesClick={({ event }) => {
                     if (referenceSubject) {
-                      if (event) event.stopPropagation();
+                      if (event && event.stopPropagation) event.stopPropagation();
                       return onSelectReference(referenceSubject);
                     }
                     return false;
@@ -268,8 +272,6 @@ PlotFocusArea.propTypes = {
   onFAMouseEnter: PropTypes.func,
   /** on mouse leave handler */
   onFAMouseLeave: PropTypes.func,
-  /** on touch handler */
-  onFATouch: PropTypes.func,
   /** on click handler */
   onFAClick: PropTypes.func,
   /** on reference subject select handler */
@@ -278,6 +280,8 @@ PlotFocusArea.propTypes = {
   focusAreaIcon: PropTypes.node.isRequired,
   /** global theme */
   theme: PropTypes.object.isRequired,
+  /** if multiple subjects are present */
+  hasMultipleSubjects: PropTypes.bool,
 };
 
 export default withTheme(PlotFocusArea);

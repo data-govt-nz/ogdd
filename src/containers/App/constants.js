@@ -193,6 +193,7 @@ export const ICONS = {
 
 // theme breakpoints
 export const BREAKPOINTS = {
+  MOBILE: -1,
   SMALL: 0,
   MEDIUM: 1,
   LARGE: 2,
@@ -201,9 +202,9 @@ export const BREAKPOINTS = {
 // breakpoints:
 // < 720px (45em): extra-small (mobile)
 // > 960px (60em): small (tablet portrait)
-// >= 1152px (63em): medium (tablet landscape, desktop)
+// >= 1152px (72em): medium (tablet landscape, desktop)
 export const THEME = {
-  breakpoints: ['45em', '60em', '72em'],
+  breakpoints: ['720px', '960px', '1152px'],
   maxWidth: '940px',
   gutter: ['4px', '6px', '8px'],
   sizes: ['12px', '14px', '18.66px', '28px', '34px'],
