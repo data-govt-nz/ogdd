@@ -33,7 +33,7 @@ import WrapPlot from 'styles/WrapPlot';
 // component styles
 const ReferenceHint = styled.div`
   position: absolute;
-  bottom: 10px;
+  bottom: 16px;
   left: 0;
   width: 100%;
   text-align: center;
