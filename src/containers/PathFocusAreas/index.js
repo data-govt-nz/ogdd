@@ -244,11 +244,16 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
     // check if all data is available
     const ready = focusAreaIndicators && subjects && surveys && surveyHighlightedId !== null;
     // the current subject
-    const subjectSelected = ready && subjects.find((item) => quasiEquals(item.get('subject_id'), subjectSelectedId));
+    let subjectSelected = ready && subjects.find((item) => quasiEquals(item.get('subject_id'), subjectSelectedId));
     // the current reference subject if other than default subject is selected
-    const subjectReference = ready && subjectSelectedId !== DEFAULT_SUBJECT_ID
+    let subjectReference = ready && subjectSelectedId !== DEFAULT_SUBJECT_ID
       ? subjects.find((item) => quasiEquals(item.get('subject_id'), DEFAULT_SUBJECT_ID))
       : null;
+
+    if (!subjectSelected) {
+      subjectSelected = subjectReference;
+      subjectReference = null;
+    }
 
     return (
       <ContentContainer>
@@ -281,7 +286,7 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
         <Row>
           <Column width={[1, 3 / 4]}>
             <AbovePlots>
-              { ready && subjects.size > 1 &&
+              { ready && subjects.size > 1 && subjectSelected &&
                 <SelectWrapper
                   labelID="component.focus-areas.selectSubjectLabel"
                   value={subjectSelectedId}
@@ -292,7 +297,7 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
                   formatOption={(option) => option.get('title')}
                 />
               }
-              { ready && subjects.size === 1 &&
+              { ready && subjects.size === 1 && subjectSelected &&
                 <SelectSingleWrapper
                   labelID="component.focus-areas.selectSubjectLabel"
                   title={subjectSelected.get('title')}
@@ -317,7 +322,7 @@ class PathFocusAreas extends React.PureComponent { // eslint-disable-line react/
             { !ready &&
               <Loading />
             }
-            { ready &&
+            { ready && subjectSelected &&
               <Row>
                 { focusAreaIndicators.map((focusArea) => (
                   <Column

@@ -139,7 +139,7 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
       : focusAreaIndicators.first()
     );
     // find current subject/agency
-    const subjectSelected = ready && subjects.find((item) =>
+    let subjectSelected = ready && subjects.find((item) =>
       quasiEquals(item.get('subject_id'), subjectSelectedId)
     );
     // all other subjects/agencies for comparison
@@ -148,9 +148,14 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
       && !quasiEquals(item.get('subject_id'), DEFAULT_SUBJECT_ID)
     );
     // the reference subject "All of Government"
-    const subjectReference = ready && subjectSelectedId !== DEFAULT_SUBJECT_ID
+    let subjectReference = ready && subjectSelectedId !== DEFAULT_SUBJECT_ID
       ? subjects.find((item) => quasiEquals(item.get('subject_id'), DEFAULT_SUBJECT_ID))
       : null;
+
+    if (!subjectSelected) {
+      subjectSelected = subjectReference;
+      subjectReference = null;
+    }
 
     return (
       <ContentContainer>
@@ -197,7 +202,7 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
                   formatOption={(option) => option.get('title')}
                 />
               }
-              { ready && subjects.size === 0 &&
+              { ready && subjects.size === 0 && subjectSelected &&
                 <SelectSingleWrapper
                   labelID="component.focus-areas.selectSubjectLabel"
                   title={subjectSelected.get('title')}
@@ -216,7 +221,7 @@ class PathFocusAreaSingle extends React.PureComponent { // eslint-disable-line r
             { !ready &&
               <Loading />
             }
-            { ready &&
+            { ready && subjectSelected &&
               <Row>
                 <Column width={[1]}>
                   <PlotFocusAreaDetails
