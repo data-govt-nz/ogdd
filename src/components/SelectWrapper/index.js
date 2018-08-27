@@ -5,11 +5,13 @@ import styled from 'styled-components';
 import { List } from 'immutable';
 // components
 import Label from 'components/Label';
+// containers
+import { BREAKPOINTS } from 'containers/App/constants';
+// styles
 import SelectedSingle from 'styles/SelectedSingle';
 import PrintOnly from 'styles/PrintOnly';
 
 // component styles
-const Styled = styled.div``;
 const SelectDiv = styled.span`
   border-bottom: 1px solid;
   margin: 0 2px -1px;
@@ -40,28 +42,36 @@ const SelectDiv = styled.span`
   }
 `;
 const Select = styled.select`
-  font-weight: 700;
-  padding-right: 10px !important;
-  position: relative;
-  z-index: 2;
-  bottom: -1px;
-  &:hover {
-    color: ${(props) => props.theme.colors.hover} !important;
-  }
-  &:focus {
-    color: ${(props) => props.theme.colors.hover} !important;
-    outline: none !important;
-    &:-ms-value {
-      background-color: $input-bg;
-      color: $input-color;
+  #ogdd-root & {
+    font-weight: 700;
+    padding-right: 10px !important;
+    position: relative;
+    z-index: 2;
+    margin-bottom: -1px;
+    margin-top: -2px;
+    &:hover {
+      color: ${(props) => props.theme.colors.hover} !important;
     }
-  }
-  &:-moz-focus-inner {
-    outline: none !important;
-  }
-  &:-moz-focusring {
-    color: transparent;
-    text-shadow: 0 0 0 #000;
+    &:focus {
+      color: ${(props) => props.theme.colors.hover} !important;
+      outline: none !important;
+      &:-ms-value {
+        background-color: $input-bg;
+        color: $input-color;
+      }
+    }
+    &:-moz-focus-inner {
+      outline: none !important;
+    }
+    &:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 #000;
+    }
+    @media (min-width: ${(props) => props.theme.breakpoints[BREAKPOINTS.SMALL]}) {
+      &:focus {
+        font-size: 15px !important;
+      }
+    }
   }
 `;
 
@@ -78,7 +88,7 @@ const Option = styled.option`
   *
   */
 const SelectWrapper = ({ labelID, value, title, options, onChange, valueKey, formatOption }) => (
-  <Styled>
+  <div>
     <label htmlFor="ogdd-plot-option-select" >
       <Label id={labelID} />
     </label>
@@ -98,7 +108,7 @@ const SelectWrapper = ({ labelID, value, title, options, onChange, valueKey, for
     <PrintOnly>
       <SelectedSingle>{ title }</SelectedSingle>
     </PrintOnly>
-  </Styled>
+  </div>
 );
 
 SelectWrapper.propTypes = {
