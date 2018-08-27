@@ -2,15 +2,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// styles
-import Button from 'styles/Button';
 
 // component styles
-const Styled = styled(Button)`
+const Styled = styled.div`
+  cursor: pointer;
+  overflow: visible;
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   padding: 4px 10px ${(props) => props.withoutPaddingBottom ? 0 : 10}px;
   text-align: left;
   max-width: 100%;
+  font-size: ${(props) => props.theme.sizes[1]};
   &:hover {
     color: ${(props) => props.theme.colors.black};
     ${(props) => props.hover ? 'box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.6);' : ''}
@@ -26,12 +27,16 @@ const Styled = styled(Button)`
     page-break-inside: avoid;
   }
 `;
-const StyledDiv = Styled.withComponent('div').extend`
+const StyledDiv = styled(Styled)`
   cursor: auto;
 `;
 
+const KEY_ENTER = 13;
+const KEY_SPACE = 32;
+
 /**
   * Card component - renders as button or hoverable div
+  * - update: as Firefox does not pass events to button children buttons are rendered as clickable divs
   *
   * @return {Component} Card
   */
@@ -50,6 +55,13 @@ const Card = ({
     hover={onMouseEnter || false}
     onMouseLeave={onMouseLeave}
     onClick={onClick}
+    onKeyPress={(e) => {
+      const key = e.charCode || e.keyCode;
+      if (key === KEY_ENTER || key === KEY_SPACE) {
+        return onClick(e);
+      }
+      return false;
+    }}
     role="button"
     title={title}
     tabIndex={0}
