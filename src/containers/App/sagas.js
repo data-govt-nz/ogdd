@@ -112,9 +112,16 @@ function* loadDataSaga({ key, value }) {
         // limit parameter defaults to 100, setting high number to practically turn limits off - after 10 years we should not have more than 1000 rows
         const path = `${value.path}?resource_id=${value.resourceId}&limit=999999`;
         const response = yield fetchJsonp(path);
-        const responseBody = yield response.json();
-        if (responseBody) {
-          yield put(dataLoaded(key, responseBody.result.records));
+        const responseOk = yield response.ok;
+        if (responseOk && typeof response.json === 'function') {
+          const responseBody = yield response.json();
+          if (responseBody) {
+            yield put(dataLoaded(key, responseBody.result.records));
+          } else {
+            throw new Error(response.statusText);
+          }
+        } else {
+          throw new Error(response.statusText);
         }
       }
       // load from JSON file
@@ -126,9 +133,16 @@ function* loadDataSaga({ key, value }) {
           ? `${window.global.OGDD_JS_PATH}${path}`
           : path
         );
-        const responseBody = yield response.json();
-        if (responseBody) {
-          yield put(dataLoaded(key, responseBody));
+        const responseOk = yield response.ok;
+        if (responseOk && typeof response.json === 'function') {
+          const responseBody = yield response.json();
+          if (responseBody) {
+            yield put(dataLoaded(key, responseBody));
+          } else {
+            throw new Error(response.statusText);
+          }
+        } else {
+          throw new Error(response.statusText);
         }
       }
       // load from CSV file
@@ -139,9 +153,16 @@ function* loadDataSaga({ key, value }) {
           ? `${window.global.OGDD_JS_PATH}${path}`
           : path
         );
-        const responseBody = yield response.text();
-        if (responseBody) {
-          yield put(dataLoaded(key, csvParse(responseBody)));
+        const responseOk = yield response.ok;
+        if (responseOk && typeof response.text === 'function') {
+          const responseBody = yield response.text();
+          if (responseBody) {
+            yield put(dataLoaded(key, csvParse(responseBody)));
+          } else {
+            throw new Error(response.statusText);
+          }
+        } else {
+          throw new Error(response.statusText);
         }
       }
     } catch (err) {
